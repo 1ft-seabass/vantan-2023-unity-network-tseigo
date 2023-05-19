@@ -1,5 +1,3 @@
-# README
-
-## test
+# バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業
 
 README
