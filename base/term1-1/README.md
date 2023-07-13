@@ -15,7 +15,7 @@ GitHub Codespace で構築したサーバーとやり取りできる基礎サン
 
 ## 当日の流れ
 
-MM/DD 曜日　HH:MM-HH:MM
+2023/8/2 水曜日　HH:MM-HH:MM
 
 - HH:MM-HH:MM
   - はじめに
@@ -39,4 +39,4 @@ MM/DD 曜日　HH:MM-HH:MM
 
 ## はじめて行きましょう
 
-→ [全体の流れの共有](./00-chapter01.md)
+→ [スタート](./00-chapter01.md)
