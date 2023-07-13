@@ -645,12 +645,93 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="はじめに"><a name="はじめに" class="plugin-anchor" href="#はじめに"><i class="fa fa-link" aria-hidden="true"></i></a>はじめに</h1>
+                                <h1 id="環境構築・初動サンプル動作"><a name="環境構築・初動サンプル動作" class="plugin-anchor" href="#環境構築・初動サンプル動作"><i class="fa fa-link" aria-hidden="true"></i></a>環境構築・初動サンプル動作</h1>
 <p><img src="https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png" alt="9d2c38e6fe48e61528f6b2d34370768f"></p>
 <h2 id="この章で学ぶこと"><a name="この章で学ぶこと" class="plugin-anchor" href="#この章で学ぶこと"><i class="fa fa-link" aria-hidden="true"></i></a>この章で学ぶこと</h2>
 <p>環境構築や初動のサンプル動作を行います。</p>
 <h2 id="環境構築"><a name="環境構築" class="plugin-anchor" href="#環境構築"><i class="fa fa-link" aria-hidden="true"></i></a>環境構築</h2>
+<p>今回事前準備した Unity バージョンを確認しつつ、環境構築をしていきましょう。</p>
+<p><img src="https://i.gyazo.com/a22ec4c95524c34562414d6efe01f566.png" alt="a22ec4c95524c34562414d6efe01f566"></p>
+<p>Unity Hub を起動して、New Project ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/ddf49ef780c60063791bf3aabc75d45a.png" alt="ddf49ef780c60063791bf3aabc75d45a"></p>
+<p>Core &gt; 3D をクリックします。右エリアに PROJECT SETTING が表示されます。</p>
+<p><img src="https://i.gyazo.com/bc6e6c44a26e7040b70255bedbf9048d.png" alt="bc6e6c44a26e7040b70255bedbf9048d"></p>
+<p>Project name は <code>Unity-Network-Sample-01</code> で Location は、自分の普段の作業フォルダで行います。</p>
+<p>作業フォルダのおすすめ</p>
+<ul>
+<li>C ドライブ直下に、今回の授業名 vantan_unity_network で作る。</li>
+<li>ユーザーフォルダに自分の分かりやすいフォルダで作る</li>
+<li>C ドライブ直下に自分の分かりやすいフォルダで作る</li>
+</ul>
+<p>デスクトップ直下は、他のファイルも混ざってしまい混乱しやすいので避けましょう。</p>
+<p><img src="https://i.gyazo.com/195a89c3cb80a9c037b080f96fb8ae7e.png" alt="195a89c3cb80a9c037b080f96fb8ae7e"></p>
+<p>Project name と Location を設定したら、Create project ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/8693cc6b6be3c66765c28a159a0d5e4a.png" alt="8693cc6b6be3c66765c28a159a0d5e4a"></p>
+<p>プロジェクトの作成が始まります。</p>
+<p><img src="https://i.gyazo.com/b7ca8c2686c7f01a7d87fa04a4208499.png" alt="b7ca8c2686c7f01a7d87fa04a4208499"></p>
+<p>該当バージョンの Unity が開き、プロジェクトが準備されます。</p>
+<p><img src="https://i.gyazo.com/77b30f4a9da6debd2f94b28c769a5a12.png" alt="77b30f4a9da6debd2f94b28c769a5a12"></p>
+<p>プロジェクトが開きます。もし Build Setting が開いていたら閉じましょう。</p>
+<p><img src="https://i.gyazo.com/c35f9a277dc4ca526b241ccf02b88d68.png" alt="c35f9a277dc4ca526b241ccf02b88d68"></p>
+<p>これで準備完了です。</p>
 <h2 id="初動のサンプル動作"><a name="初動のサンプル動作" class="plugin-anchor" href="#初動のサンプル動作"><i class="fa fa-link" aria-hidden="true"></i></a>初動のサンプル動作</h2>
+<p><img src="https://i.gyazo.com/c35f9a277dc4ca526b241ccf02b88d68.png" alt="c35f9a277dc4ca526b241ccf02b88d68"></p>
+<p>ということで、ここからサンプルを作成していきます。</p>
+<h3 id="build-setting-確認"><a name="build-setting-確認" class="plugin-anchor" href="#build-setting-確認"><i class="fa fa-link" aria-hidden="true"></i></a>Build Setting 確認</h3>
+<p><img src="https://i.gyazo.com/1ef230a444b6d94461cc88d14923fb58.png" alt="1ef230a444b6d94461cc88d14923fb58"></p>
+<p>メニュー &gt; File &gt; Build Setting で Build Setting を開きます。</p>
+<p><img src="https://i.gyazo.com/c7a4e4da91fc04a649033e6cd165b0b7.png" alt="c7a4e4da91fc04a649033e6cd165b0b7"></p>
+<p>Platform が PC になっていれば OK です。</p>
+<h2 id="cube-配置"><a name="cube-配置" class="plugin-anchor" href="#cube-配置"><i class="fa fa-link" aria-hidden="true"></i></a>Cube 配置</h2>
+<p><img src="https://i.gyazo.com/9d5f314021661da71ed0128f9da22755.png" alt="9d5f314021661da71ed0128f9da22755"></p>
+<p>Hierarcy の＋ボタンをクリックして 3D Object &gt; Cube をクリックして Cube を配置します。</p>
+<h2 id="eventsystem-配置"><a name="eventsystem-配置" class="plugin-anchor" href="#eventsystem-配置"><i class="fa fa-link" aria-hidden="true"></i></a>EventSystem 配置</h2>
+<p><img src="https://i.gyazo.com/791062a03a48c41fe156ffddc9f6282c.png" alt="791062a03a48c41fe156ffddc9f6282c"></p>
+<p>Hierarcy の＋ボタンをクリックして UI &gt; EventSystem で EventSystem を配置します。</p>
+<h2 id="hierarcy-確認"><a name="hierarcy-確認" class="plugin-anchor" href="#hierarcy-確認"><i class="fa fa-link" aria-hidden="true"></i></a>Hierarcy 確認</h2>
+<p><img src="https://i.gyazo.com/e62df939e056f9b2a4c126fa49f6d4be.png" alt="e62df939e056f9b2a4c126fa49f6d4be"></p>
+<p>このような Hierarcy になります。</p>
+<h2 id="main-camera-にコンポーネント追加"><a name="main-camera-にコンポーネント追加" class="plugin-anchor" href="#main-camera-にコンポーネント追加"><i class="fa fa-link" aria-hidden="true"></i></a>Main Camera にコンポーネント追加</h2>
+<p><img src="https://i.gyazo.com/c190ea2def5824d7c2cd1cad1f342853.png" alt="c190ea2def5824d7c2cd1cad1f342853"></p>
+<p>Hierarcy で Main Camera を選択して Main Camera の Inspector を見ます。Add Component ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/73874f01b22f9d05427935db4551b8e3.png" alt="73874f01b22f9d05427935db4551b8e3"></p>
+<p>コンポーネント検索で Physics Raycaster を選択してコンポーネントを加えます。</p>
+<h2 id="assets-に-scripts-フォルダ作成"><a name="assets-に-scripts-フォルダ作成" class="plugin-anchor" href="#assets-に-scripts-フォルダ作成"><i class="fa fa-link" aria-hidden="true"></i></a>Assets に Scripts フォルダ作成</h2>
+<p><img src="https://i.gyazo.com/5d2428e4b832594b8232198419793c2a.png" alt="5d2428e4b832594b8232198419793c2a"></p>
+<p>Project タブで Assets を選択して、右クリックから Create &gt; Folder を選択して Scripts フォルダを作成します。Scenes フォルダと同じ階層です。</p>
+<h2 id="cubeevent-スクリプト"><a name="cubeevent-スクリプト" class="plugin-anchor" href="#cubeevent-スクリプト"><i class="fa fa-link" aria-hidden="true"></i></a>CubeEvent スクリプト</h2>
+<p><img src="https://i.gyazo.com/ac26279a81eb874c750bc60bfb4dd9f8.png" alt="ac26279a81eb874c750bc60bfb4dd9f8"></p>
+<p>Scripts フォルダの中に移動して、右クリックから Create &gt; C# Script で選択して CubeEvent というファイルを作成します。</p>
+<h2 id="cubeevent-スクリプト書き換え"><a name="cubeevent-スクリプト書き換え" class="plugin-anchor" href="#cubeevent-スクリプト書き換え"><i class="fa fa-link" aria-hidden="true"></i></a>CubeEvent スクリプト書き換え</h2>
+<p>CubeEvent をダブルクリックしてエディタで開きます。すべて選択して、以下のプログラムに書き換えます。</p>
+<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
+<span class="hljs-keyword">using</span> UnityEngine.EventSystems;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CubeEvent</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
+    {
+        <span class="hljs-comment">// マウスクリックイベント</span>
+        Debug.Log(<span class="hljs-string">$&quot;オブジェクト <span class="hljs-subst">{<span class="hljs-keyword">this</span>.name}</span> がクリックされたよ！&quot;</span>);
+    }
+}
+</code></pre>
+<p>書き換えたら保存しましょう。</p>
+<h2 id="cube-に-cubeevent-スクリプト割り当て"><a name="cube-に-cubeevent-スクリプト割り当て" class="plugin-anchor" href="#cube-に-cubeevent-スクリプト割り当て"><i class="fa fa-link" aria-hidden="true"></i></a>Cube に CubeEvent スクリプト割り当て</h2>
+<p><img src="https://i.gyazo.com/e37d75b91a946c35519711c87422d6d7.png" alt="e37d75b91a946c35519711c87422d6d7"></p>
+<p>Hierarcy で Cube を選択して Cube の Inspector を見ます。Add Component ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/2ae59cc631d5e1ea352717468369e5a3.png" alt="2ae59cc631d5e1ea352717468369e5a3"></p>
+<p>コンポーネント検索で CubeEvent を選択してコンポーネントを加えます。</p>
+<h2 id="シーン保存"><a name="シーン保存" class="plugin-anchor" href="#シーン保存"><i class="fa fa-link" aria-hidden="true"></i></a>シーン保存</h2>
+<p><img src="https://i.gyazo.com/172edf11c047e3cb48db6b6b131b7f40.png" alt="172edf11c047e3cb48db6b6b131b7f40"></p>
+<p>シーンをいったん保存しましょう。</p>
+<h2 id="動作確認"><a name="動作確認" class="plugin-anchor" href="#動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>動作確認</h2>
+<p><img src="https://i.gyazo.com/2fbea7338e0832c54e0b977c39f5dedd.png" alt="2fbea7338e0832c54e0b977c39f5dedd"></p>
+<p>Play ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/6044c7e49cf4a9d7af2d62b94476d854.png" alt="6044c7e49cf4a9d7af2d62b94476d854"></p>
+<p>Cube をマウスでクリックしてみましょう。</p>
+<p><img src="https://i.gyazo.com/cfe7587c4bb92695695695e3a2f291d4.png" alt="cfe7587c4bb92695695695e3a2f291d4"></p>
+<p>Console でこのようなログが出てくれば成功です！まずはマウスクリックが動きました。</p>
 
                                 
                                 </section>
@@ -694,7 +775,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"next":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},"previous":{"title":"全体の流れの共有","level":"2.1.1","depth":2,"path":"term1-1/00-chapter01.md","ref":"./term1-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter02.md","mtime":"2023-07-13T05:55:57.657Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-13T06:21:03.224Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"next":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},"previous":{"title":"全体の流れの共有","level":"2.1.1","depth":2,"path":"term1-1/00-chapter01.md","ref":"./term1-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter02.md","mtime":"2023-07-13T08:16:06.243Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-13T12:09:48.000Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
