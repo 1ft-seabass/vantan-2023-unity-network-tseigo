@@ -663,7 +663,76 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="事前準備"><a name="事前準備" class="plugin-anchor" href="#事前準備"><i class="fa fa-link" aria-hidden="true"></i></a>事前準備</h1>
-<p>（作成中）</p>
+<p><img src="https://i.gyazo.com/e9dd44a207adb9344320ce0f17fabf19.png" alt="e9dd44a207adb9344320ce0f17fabf19">
+本授業では以下の準備が必要です。</p>
+<ul>
+<li>Unity の特定バージョンをインストール</li>
+<li>Airtable アカウントを取得</li>
+<li>GitHub アカウント</li>
+<li>Slack アカウント＆授業チャンネルに入る</li>
+</ul>
+<h2 id="unity-2020348f-をインストール"><a name="unity-2020348f-をインストール" class="plugin-anchor" href="#unity-2020348f-をインストール"><i class="fa fa-link" aria-hidden="true"></i></a>Unity 2020.3.48f をインストール</h2>
+<p><img src="https://i.gyazo.com/5711e16c5c561b25df44d2bf72063db1.png" alt="5711e16c5c561b25df44d2bf72063db1"></p>
+<p>最新の Unity Hub がインストールされている前提で進めます。</p>
+<p><img src="https://i.gyazo.com/9bb813dfb2549bf95d728da1250d402a.png" alt="9bb813dfb2549bf95d728da1250d402a"></p>
+<p>左メニューから Installs をクリックして、右上の Install Editor ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/f27a7037d9a25e10ac255d445261e141.png" alt="f27a7037d9a25e10ac255d445261e141"></p>
+<p>Install Unity Editor の画面から Official releases &gt; LONG TERM SUPPORT (LTS) から <code>2020.3.48f</code> の Install ボタンをクリックします。</p>
+<p>もし　2020.3 台で新しい LTS のバージョンが出ていたら、そちらをクリックします。</p>
+<p><img src="https://i.gyazo.com/87c286f7c629f8c07ba65ac72e7442ee.jpg" alt="87c286f7c629f8c07ba65ac72e7442ee"></p>
+<p>Add modules では DEV TOOLS の Microsoft Visual Studio Community 2019 が、インストールされていれば、あとは何もチェックせず Install ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/ff923ad9f642fcf1332a558c92556f6c.png" alt="ff923ad9f642fcf1332a558c92556f6c"></p>
+<p>ダウンロードを待ちます。</p>
+<p><img src="https://i.gyazo.com/504c7b73bdc51e80c1bed8bdc09e886d.png" alt="504c7b73bdc51e80c1bed8bdc09e886d"></p>
+<p>ダウンロードが進むとインストールがはじまります。</p>
+<p>ユーザーアカウントの制御ウィンドウが出たら「はい」で許可をして、インストールを進めます。</p>
+<p><img src="https://i.gyazo.com/4b8e0e322a21477e91310e3ef1c797fc.png" alt="4b8e0e322a21477e91310e3ef1c797fc"></p>
+<p>しばらく待つとインストールが完了します。</p>
+<h2 id="airtable-アカウント"><a name="airtable-アカウント" class="plugin-anchor" href="#airtable-アカウント"><i class="fa fa-link" aria-hidden="true"></i></a>Airtable アカウント</h2>
+<p><img src="https://i.gyazo.com/2fa709857524e4f85423675808a883d4.png" alt="image"></p>
+<p>今回、Airtable アカウント が必要です。</p>
+<p><img src="https://i.gyazo.com/27bc22a09d269759ac5081a3dc31a51f.jpg" alt="27bc22a09d269759ac5081a3dc31a51f"></p>
+<p>スプレッドシートのような操作感でデータを管理できる <a href="https://www.airtable.com/product" target="_blank">Airtable</a> というサービスがあります。API も使いやすくデータの読み書きもしやすいです。</p>
+<p><a href="https://airtable.com/pricing" target="_blank">Pricing - Airtable</a> で AirTable の価格表をみてみても 2023/6 現在、</p>
+<p><img src="https://i.gyazo.com/a54430947683d3a47d381d37faadd06e.png" alt="a54430947683d3a47d381d37faadd06e"></p>
+<pre><code>無制限の Base
+Base あたり1,200レコード
+Base あたり2GBの添付ファイル
+</code></pre><p>が、無料枠で含まれるので、とりあえず触ってみても、基本的な機能を体験しやすいものになっています。今回は Airtable を使って、データの記録やデータの管理を行っていきます。</p>
+<h2 id="アカウント作成"><a name="アカウント作成" class="plugin-anchor" href="#アカウント作成"><i class="fa fa-link" aria-hidden="true"></i></a>アカウント作成</h2>
+<p><img src="https://i.gyazo.com/77f11ba87db1888e6953e5deb4408e46.png" alt="77f11ba87db1888e6953e5deb4408e46"></p>
+<p><a href="https://airtable.com/signup" target="_blank">サインアップ</a> から自分のメールアドレスでアカウント作成をすすめて準備をします。自分のメールアドレスを Work email に入力して Continue をクリックします。</p>
+<p><img src="https://i.gyazo.com/7d0e01ea62e400bb2698b57cc8d4f8e0.png" alt="7d0e01ea62e400bb2698b57cc8d4f8e0"></p>
+<p>Full name と Password を入力します。メールアドレスとパスワードはメモして控えておきましょう。</p>
+<p><img src="https://i.gyazo.com/02f763f36c7fe6e88eb58f406187835b.png" alt="02f763f36c7fe6e88eb58f406187835b"></p>
+<p>こちらは Skip ボタンをクリック。</p>
+<p><img src="https://i.gyazo.com/84664be8aae0fdb1f831c740220ed95b.png" alt="84664be8aae0fdb1f831c740220ed95b"></p>
+<p>こちらは Skip ボタンをクリック。</p>
+<p><img src="https://i.gyazo.com/9db04980955f37b065e7f86a9286785f.png" alt="9db04980955f37b065e7f86a9286785f"></p>
+<p>なにも選択せず Continue ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/d2ad23bd5159f9c96692f1f5ab437312.png" alt="d2ad23bd5159f9c96692f1f5ab437312"></p>
+<p>I&apos;m currently working on: の欄には my Unity project を入力して Continue をクリックします。</p>
+<p><img src="https://i.gyazo.com/0df467e4625322d6db656342c3f3456d.png" alt="0df467e4625322d6db656342c3f3456d"></p>
+<p>こちらは Add your own を選択したあと Continue ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/e05efe706e39d0f8a26dd318c56402d5.png" alt="e05efe706e39d0f8a26dd318c56402d5"></p>
+<p>こちらは Status を選択したあと Continue ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/482650a11e367daea6169c926f0b9182.png" alt="482650a11e367daea6169c926f0b9182"></p>
+<p>こちらは Create your own workflow later を選択したあと Continue ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/85663f5a1caf08fbe8899882ceefc31f.png" alt="85663f5a1caf08fbe8899882ceefc31f"></p>
+<p>こちらは Grid only を選択したあと Continue ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/c5bfb1ab41e036a4d3804a94bd04a315.png" alt="c5bfb1ab41e036a4d3804a94bd04a315"></p>
+<p>ローディングが進行します。</p>
+<p><img src="https://i.gyazo.com/bece43ffa56b4f28cd6ffa981fba6b7b.png" alt="bece43ffa56b4f28cd6ffa981fba6b7b"></p>
+<p>このような画面になれば作成成功です！</p>
+<h3 id="verify-my-email-もチェックしておきましょう"><a name="verify-my-email-もチェックしておきましょう" class="plugin-anchor" href="#verify-my-email-もチェックしておきましょう"><i class="fa fa-link" aria-hidden="true"></i></a>Verify my email もチェックしておきましょう</h3>
+<p><img src="https://i.gyazo.com/91b0725105e7b8d07e273c765b0a5f08.png" alt="91b0725105e7b8d07e273c765b0a5f08"></p>
+<p>登録したメールアドレスに確認メール（Verify my email）が届くので Verify my email ボタンをクリックして、確認完了しておきましょう。</p>
+<p><img src="https://i.gyazo.com/bd9ab490b7d8f3bd523ee1dc17d0ed80.png" alt="bd9ab490b7d8f3bd523ee1dc17d0ed80"></p>
+<p>Workspace に移動して Your email has been verified! と表示されたらチェック対応も OK です。</p>
+<h2 id="github-アカウント"><a name="github-アカウント" class="plugin-anchor" href="#github-アカウント"><i class="fa fa-link" aria-hidden="true"></i></a>GitHub アカウント</h2>
+<p>すでに取得済みと聞いていますが、念のためログインできるか確認しておきましょう。</p>
+<h2 id="slack-アカウント"><a name="slack-アカウント" class="plugin-anchor" href="#slack-アカウント"><i class="fa fa-link" aria-hidden="true"></i></a>Slack アカウント</h2>
+<p>すでに取得済みと聞いています。授業用の専用チャンネルができると聞いているので、入っておきましょう。</p>
 
                                 
                                 </section>
@@ -703,7 +772,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"事前準備","level":"1.2","depth":1,"next":{"title":"環境構築・初動サンプル動作","level":"2.1","depth":1,"ref":"","articles":[{"title":"全体の流れの共有","level":"2.1.1","depth":2,"path":"term1-1/00-chapter01.md","ref":"./term1-1/00-chapter01.md","articles":[]},{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"path":"term1-1/00-chapter02.md","ref":"./term1-1/00-chapter02.md","articles":[]},{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},{"title":"ゲームサンプルからサーバーの仕組みとの疎通","level":"2.1.4","depth":2,"path":"term1-1/00-chapter04.md","ref":"./term1-1/00-chapter04.md","articles":[]}]},"previous":{"title":"トップページ","level":"1.1","depth":1,"path":"README.md","ref":"./README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"00-preparation.md","mtime":"2023-05-23T07:41:04.202Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-13T01:56:11.207Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"事前準備","level":"1.2","depth":1,"next":{"title":"環境構築・初動サンプル動作","level":"2.1","depth":1,"ref":"","articles":[{"title":"全体の流れの共有","level":"2.1.1","depth":2,"path":"term1-1/00-chapter01.md","ref":"./term1-1/00-chapter01.md","articles":[]},{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"path":"term1-1/00-chapter02.md","ref":"./term1-1/00-chapter02.md","articles":[]},{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},{"title":"ゲームサンプルからサーバーの仕組みとの疎通","level":"2.1.4","depth":2,"path":"term1-1/00-chapter04.md","ref":"./term1-1/00-chapter04.md","articles":[]}]},"previous":{"title":"トップページ","level":"1.1","depth":1,"path":"README.md","ref":"./README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"00-preparation.md","mtime":"2023-07-13T02:07:19.394Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-13T02:07:23.713Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
