@@ -86,7 +86,7 @@ Full name と Password を入力します。メールアドレスとパスワー
 
 なにも選択せず Continue ボタンをクリックします。
 
-![d2ad23bd5159f9c96692f1f5ab437312](https://i.gyazo.com/d2ad23bd5159f9c96692f1f5ab437312.png)
+![0a040214e92c8d3dbdfc53529447fd73](https://i.gyazo.com/0a040214e92c8d3dbdfc53529447fd73.png)
 
 I'm currently working on: の欄には my Unity project を入力して Continue をクリックします。
 
@@ -128,6 +128,12 @@ Workspace に移動して Your email has been verified! と表示されたらチ
 
 すでに取得済みと聞いていますが、念のためログインできるか確認しておきましょう。
 
+https://github.com/login
+
+![53da69817a7edc3a5a3f1bf5aa9cac3b](https://i.gyazo.com/53da69817a7edc3a5a3f1bf5aa9cac3b.png)
+
 ## Slack アカウント
 
-すでに取得済みと聞いています。授業用の専用チャンネルができると聞いているので、入っておきましょう。
+![ca95f3ddf653ef69614b35a77bcee061](https://i.gyazo.com/ca95f3ddf653ef69614b35a77bcee061.png)
+
+すでに取得済みと聞いています。授業用の専用チャンネルができているので、入っておきましょう。

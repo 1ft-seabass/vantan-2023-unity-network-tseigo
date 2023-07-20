@@ -648,90 +648,235 @@
                                 <h1 id="環境構築・初動サンプル動作"><a name="環境構築・初動サンプル動作" class="plugin-anchor" href="#環境構築・初動サンプル動作"><i class="fa fa-link" aria-hidden="true"></i></a>環境構築・初動サンプル動作</h1>
 <p><img src="https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png" alt="9d2c38e6fe48e61528f6b2d34370768f"></p>
 <h2 id="この章で学ぶこと"><a name="この章で学ぶこと" class="plugin-anchor" href="#この章で学ぶこと"><i class="fa fa-link" aria-hidden="true"></i></a>この章で学ぶこと</h2>
-<p>環境構築や初動のサンプル動作を行います。</p>
-<h2 id="環境構築"><a name="環境構築" class="plugin-anchor" href="#環境構築"><i class="fa fa-link" aria-hidden="true"></i></a>環境構築</h2>
-<p>今回事前準備した Unity バージョンを確認しつつ、環境構築をしていきましょう。</p>
-<p><img src="https://i.gyazo.com/a22ec4c95524c34562414d6efe01f566.png" alt="a22ec4c95524c34562414d6efe01f566"></p>
-<p>Unity Hub を起動して、New Project ボタンをクリックします。</p>
-<p><img src="https://i.gyazo.com/ddf49ef780c60063791bf3aabc75d45a.png" alt="ddf49ef780c60063791bf3aabc75d45a"></p>
-<p>Core &gt; 3D をクリックします。右エリアに PROJECT SETTING が表示されます。</p>
-<p><img src="https://i.gyazo.com/bc6e6c44a26e7040b70255bedbf9048d.png" alt="bc6e6c44a26e7040b70255bedbf9048d"></p>
-<p>Project name は <code>Unity-Network-Sample-01</code> で Location は、自分の普段の作業フォルダで行います。</p>
-<p>作業フォルダのおすすめ</p>
+<p>環境構築や初動のサンプル動作を行います。（GitHub CodeSpaces）</p>
+<h2 id="github-codespaces-とは"><a name="github-codespaces-とは" class="plugin-anchor" href="#github-codespaces-とは"><i class="fa fa-link" aria-hidden="true"></i></a>GitHub Codespaces とは</h2>
+<p>GitHub Codespaces は、クラウド上に開発環境を提供することで環境設定の手間を省き、どこからでも安全に開発を行うことができる便利なツールです。</p>
+<p>今回は Unity から外部のサーバーや API にどうつなぐかを中心に伝えるので、サーバー側の仕組みはなるべく手軽に立ち上げられるように GitHub Codespaces を採用しています。</p>
+<p><img src="https://i.gyazo.com/df3b5938f05d8b487e6c73d496c21dd4.png" alt="df3b5938f05d8b487e6c73d496c21dd4"></p>
 <ul>
-<li>C ドライブ直下に、今回の授業名 vantan_unity_network で作る。</li>
-<li>ユーザーフォルダに自分の分かりやすいフォルダで作る</li>
-<li>C ドライブ直下に自分の分かりやすいフォルダで作る</li>
+<li>GitHub Codespaces の概要<ul>
+<li><a href="https://docs.github.com/ja/codespaces/overview" target="_blank">https://docs.github.com/ja/codespaces/overview</a></li>
 </ul>
-<p>デスクトップ直下は、他のファイルも混ざってしまい混乱しやすいので避けましょう。</p>
-<p><img src="https://i.gyazo.com/195a89c3cb80a9c037b080f96fb8ae7e.png" alt="195a89c3cb80a9c037b080f96fb8ae7e"></p>
-<p>Project name と Location を設定したら、Create project ボタンをクリックします。</p>
-<p><img src="https://i.gyazo.com/8693cc6b6be3c66765c28a159a0d5e4a.png" alt="8693cc6b6be3c66765c28a159a0d5e4a"></p>
-<p>プロジェクトの作成が始まります。</p>
-<p><img src="https://i.gyazo.com/b7ca8c2686c7f01a7d87fa04a4208499.png" alt="b7ca8c2686c7f01a7d87fa04a4208499"></p>
-<p>該当バージョンの Unity が開き、プロジェクトが準備されます。</p>
-<p><img src="https://i.gyazo.com/77b30f4a9da6debd2f94b28c769a5a12.png" alt="77b30f4a9da6debd2f94b28c769a5a12"></p>
-<p>プロジェクトが開きます。もし Build Setting が開いていたら閉じましょう。</p>
-<p><img src="https://i.gyazo.com/c35f9a277dc4ca526b241ccf02b88d68.png" alt="c35f9a277dc4ca526b241ccf02b88d68"></p>
-<p>これで準備完了です。</p>
-<h2 id="初動のサンプル動作"><a name="初動のサンプル動作" class="plugin-anchor" href="#初動のサンプル動作"><i class="fa fa-link" aria-hidden="true"></i></a>初動のサンプル動作</h2>
-<p><img src="https://i.gyazo.com/c35f9a277dc4ca526b241ccf02b88d68.png" alt="c35f9a277dc4ca526b241ccf02b88d68"></p>
-<p>ということで、ここからサンプルを作成していきます。</p>
-<h3 id="build-setting-確認"><a name="build-setting-確認" class="plugin-anchor" href="#build-setting-確認"><i class="fa fa-link" aria-hidden="true"></i></a>Build Setting 確認</h3>
-<p><img src="https://i.gyazo.com/1ef230a444b6d94461cc88d14923fb58.png" alt="1ef230a444b6d94461cc88d14923fb58"></p>
-<p>メニュー &gt; File &gt; Build Setting で Build Setting を開きます。</p>
-<p><img src="https://i.gyazo.com/c7a4e4da91fc04a649033e6cd165b0b7.png" alt="c7a4e4da91fc04a649033e6cd165b0b7"></p>
-<p>Platform が PC になっていれば OK です。</p>
-<h2 id="cube-配置"><a name="cube-配置" class="plugin-anchor" href="#cube-配置"><i class="fa fa-link" aria-hidden="true"></i></a>Cube 配置</h2>
-<p><img src="https://i.gyazo.com/9d5f314021661da71ed0128f9da22755.png" alt="9d5f314021661da71ed0128f9da22755"></p>
-<p>Hierarcy の＋ボタンをクリックして 3D Object &gt; Cube をクリックして Cube を配置します。</p>
-<h2 id="eventsystem-配置"><a name="eventsystem-配置" class="plugin-anchor" href="#eventsystem-配置"><i class="fa fa-link" aria-hidden="true"></i></a>EventSystem 配置</h2>
-<p><img src="https://i.gyazo.com/791062a03a48c41fe156ffddc9f6282c.png" alt="791062a03a48c41fe156ffddc9f6282c"></p>
-<p>Hierarcy の＋ボタンをクリックして UI &gt; EventSystem で EventSystem を配置します。</p>
-<h2 id="hierarcy-確認"><a name="hierarcy-確認" class="plugin-anchor" href="#hierarcy-確認"><i class="fa fa-link" aria-hidden="true"></i></a>Hierarcy 確認</h2>
-<p><img src="https://i.gyazo.com/e62df939e056f9b2a4c126fa49f6d4be.png" alt="e62df939e056f9b2a4c126fa49f6d4be"></p>
-<p>このような Hierarcy になります。</p>
-<h2 id="main-camera-にコンポーネント追加"><a name="main-camera-にコンポーネント追加" class="plugin-anchor" href="#main-camera-にコンポーネント追加"><i class="fa fa-link" aria-hidden="true"></i></a>Main Camera にコンポーネント追加</h2>
-<p><img src="https://i.gyazo.com/c190ea2def5824d7c2cd1cad1f342853.png" alt="c190ea2def5824d7c2cd1cad1f342853"></p>
-<p>Hierarcy で Main Camera を選択して Main Camera の Inspector を見ます。Add Component ボタンをクリックします。</p>
-<p><img src="https://i.gyazo.com/73874f01b22f9d05427935db4551b8e3.png" alt="73874f01b22f9d05427935db4551b8e3"></p>
-<p>コンポーネント検索で Physics Raycaster を選択してコンポーネントを加えます。</p>
-<h2 id="assets-に-scripts-フォルダ作成"><a name="assets-に-scripts-フォルダ作成" class="plugin-anchor" href="#assets-に-scripts-フォルダ作成"><i class="fa fa-link" aria-hidden="true"></i></a>Assets に Scripts フォルダ作成</h2>
-<p><img src="https://i.gyazo.com/5d2428e4b832594b8232198419793c2a.png" alt="5d2428e4b832594b8232198419793c2a"></p>
-<p>Project タブで Assets を選択して、右クリックから Create &gt; Folder を選択して Scripts フォルダを作成します。Scenes フォルダと同じ階層です。</p>
-<h2 id="cubeevent-スクリプト"><a name="cubeevent-スクリプト" class="plugin-anchor" href="#cubeevent-スクリプト"><i class="fa fa-link" aria-hidden="true"></i></a>CubeEvent スクリプト</h2>
-<p><img src="https://i.gyazo.com/ac26279a81eb874c750bc60bfb4dd9f8.png" alt="ac26279a81eb874c750bc60bfb4dd9f8"></p>
-<p>Scripts フォルダの中に移動して、右クリックから Create &gt; C# Script で選択して CubeEvent というファイルを作成します。</p>
-<h2 id="cubeevent-スクリプト書き換え"><a name="cubeevent-スクリプト書き換え" class="plugin-anchor" href="#cubeevent-スクリプト書き換え"><i class="fa fa-link" aria-hidden="true"></i></a>CubeEvent スクリプト書き換え</h2>
-<p>CubeEvent をダブルクリックしてエディタで開きます。すべて選択して、以下のプログラムに書き換えます。</p>
-<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
-<span class="hljs-keyword">using</span> UnityEngine.EventSystems;
-
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CubeEvent</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
-{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
-    {
-        <span class="hljs-comment">// マウスクリックイベント</span>
-        Debug.Log(<span class="hljs-string">$&quot;オブジェクト <span class="hljs-subst">{<span class="hljs-keyword">this</span>.name}</span> がクリックされたよ！&quot;</span>);
-    }
-}
+</li>
+</ul>
+<h3 id="個人アカウントの無料枠や使用量の確認"><a name="個人アカウントの無料枠や使用量の確認" class="plugin-anchor" href="#個人アカウントの無料枠や使用量の確認"><i class="fa fa-link" aria-hidden="true"></i></a>個人アカウントの無料枠や使用量の確認</h3>
+<p><img src="https://i.gyazo.com/8d4412849bd88c209424edd608476ffd.png" alt="8d4412849bd88c209424edd608476ffd"></p>
+<ul>
+<li>GitHub Codespaces の使用状況の表示 - GitHub Docs<ul>
+<li><a href="https://docs.github.com/ja/billing/managing-billing-for-github-codespaces/viewing-your-github-codespaces-usage" target="_blank">https://docs.github.com/ja/billing/managing-billing-for-github-codespaces/viewing-your-github-codespaces-usage</a></li>
+</ul>
+</li>
+<li>GitHub Codespaces の請求について - GitHub Docs<ul>
+<li><a href="https://docs.github.com/ja/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts" target="_blank">https://docs.github.com/ja/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts</a></li>
+<li>2023/7 現在、個人アカウントでは 1 ヵ月 120 時間使えます。</li>
+<li>授業で 40-50 時間使うとしても十分残っているはず</li>
+</ul>
+</li>
+</ul>
+<h2 id="今回の-github-codespaces-リポジトリにアクセス"><a name="今回の-github-codespaces-リポジトリにアクセス" class="plugin-anchor" href="#今回の-github-codespaces-リポジトリにアクセス"><i class="fa fa-link" aria-hidden="true"></i></a>今回の GitHub Codespaces リポジトリにアクセス</h2>
+<p>今回の GitHub Codespaces リポジトリに Chrome ブラウザでアクセスします。</p>
+<p><img src="https://i.gyazo.com/1d4fe9d0e6c86377c17828a2ff26fd0d.png" alt="1d4fe9d0e6c86377c17828a2ff26fd0d"></p>
+<p><a href="https://github.com/1ft-seabass/vantan-unity-network-server-base" target="_blank">https://github.com/1ft-seabass/vantan-unity-network-server-base</a> に Chrome ブラウザでアクセスします。それ以外のブラウザだと、うまく動作しない可能性があるので Chrome で動かしましょう。</p>
+<h2 id="github-codespaces-としてリポジトリを開く"><a name="github-codespaces-としてリポジトリを開く" class="plugin-anchor" href="#github-codespaces-としてリポジトリを開く"><i class="fa fa-link" aria-hidden="true"></i></a>GitHub Codespaces としてリポジトリを開く</h2>
+<p><img src="https://i.gyazo.com/6ebad95a052d8a2d37d889399e120424.png" alt="6ebad95a052d8a2d37d889399e120424"></p>
+<p>Code ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/8f6a286108378103ac8d30df6f811ef4.png" alt="8f6a286108378103ac8d30df6f811ef4"></p>
+<p>Codespaces タブをクリックします。Create codespace on main をクリックします。</p>
+<p><img src="https://i.gyazo.com/47b24d3be5b687f60383455a75898788.png" alt="47b24d3be5b687f60383455a75898788"></p>
+<p>Setting up your codespace という画面が出て構築されます。</p>
+<p><img src="https://i.gyazo.com/28ea2b9aece0957b5bb7292427889a10.png" alt="28ea2b9aece0957b5bb7292427889a10"></p>
+<p>ブラウザ上で Visual Studio Code が起動し、今回の仕組みを反映した環境が起動しました。</p>
+<h2 id="visual-studio-code-操作画面の紹介"><a name="visual-studio-code-操作画面の紹介" class="plugin-anchor" href="#visual-studio-code-操作画面の紹介"><i class="fa fa-link" aria-hidden="true"></i></a>Visual Studio Code 操作画面の紹介</h2>
+<ul>
+<li>参考 : Visual Studio Code User Interface<ul>
+<li><a href="https://code.visualstudio.com/docs/getstarted/userinterface" target="_blank">https://code.visualstudio.com/docs/getstarted/userinterface</a></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>VS Code には、フォルダーまたはプロジェクトの完全なコンテキストを参照してアクセスするための十分なスペースを確保しながら、エディターに提供されるスペースを最大化する、シンプルで直感的なレイアウトが付属しています。UI は 5 つの主要な領域に分かれています。</p>
+</blockquote>
+<p><img src="https://i.gyazo.com/15944e01b4a98ec52bc55931cd2cc250.png" alt="15944e01b4a98ec52bc55931cd2cc250"></p>
+<ul>
+<li>アクティビティバー<ul>
+<li>左側の端にあり、ビューを切り替えることができ、Git が有効になっている場合の発信変更の数など、追加のコンテキスト固有のインジケーターが表示されます。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.gyazo.com/4bfb8dfed081b246ea705113ae37760a.png" alt="4bfb8dfed081b246ea705113ae37760a"></p>
+<ul>
+<li>プライマリ サイド バー<ul>
+<li>プロジェクトでの作業を支援するエクスプローラーなどのさまざまなビューが含まれています。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.gyazo.com/d814cce244bfd173feea1a5a16d3384c.png" alt="d814cce244bfd173feea1a5a16d3384c"></p>
+<ul>
+<li>エディタ<ul>
+<li>ファイルを編集するためのメイン領域です。エディタは好きなだけ縦横に並べて開くことができます。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.gyazo.com/2967ec1e72381c1a16b92dfea6d84f7b.png" alt="2967ec1e72381c1a16b92dfea6d84f7b"></p>
+<ul>
+<li>パネル<ul>
+<li>エディター領域の下にあるビュー用の追加スペース。デフォルトでは、出力、デバッグ情報、エラーと警告、および統合ターミナルが格納されます。パネルを左右に移動して、垂直方向のスペースを増やすこともできます。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.gyazo.com/6a15e2237c2845012027e49843c613d9.png" alt="6a15e2237c2845012027e49843c613d9"></p>
+<ul>
+<li>ステータス バー<ul>
+<li>開いているプロジェクトと編集するファイルに関する情報。</li>
+</ul>
+</li>
+</ul>
+<p>✅ポイント</p>
+<ul>
+<li>機能を全部覚える必要はありません。気になる人がいたら、英語ですが <a href="https://code.visualstudio.com/docs" target="_blank">https://code.visualstudio.com/docs</a> でいろいろ使い方を調べて試してみましょう<ul>
+<li>テーマをダークにしたい人は多いかもなので <a href="https://code.visualstudio.com/docs/getstarted/themes" target="_blank">https://code.visualstudio.com/docs/getstarted/themes</a> を見てダークテーマに変更してみてもよいでしょう</li>
+</ul>
+</li>
+<li>今回は、エクスプローラでファイルを選択し→エディタで編集＆保存→パネルでターミナルから実行という流れで行います</li>
+</ul>
+<h2 id="プログラムは-nodejs-という仕組みで動いている"><a name="プログラムは-nodejs-という仕組みで動いている" class="plugin-anchor" href="#プログラムは-nodejs-という仕組みで動いている"><i class="fa fa-link" aria-hidden="true"></i></a>プログラムは Node.js という仕組みで動いている</h2>
+<p>エクスプローラを見てみましょう。今回のプログラム群は Node.js で作られています。</p>
+<p><img src="https://i.gyazo.com/8adc98dbfb57d79abbc6a5be5eefbad8.png" alt="8adc98dbfb57d79abbc6a5be5eefbad8"></p>
+<p>Node.js は、普段はブラウザで活用されていて、ネット上で文献の多い JavaScript 言語で、Unity でデータのやり取りをするサーバー側、つまりサーバーサイドのプログラムが作成することができます。</p>
+<ul>
+<li>Node.js® とは<ul>
+<li><a href="https://nodejs.org/ja/about" target="_blank">https://nodejs.org/ja/about</a></li>
+</ul>
+</li>
+</ul>
+<p>また、Node.js と一緒にインストールされる npm は、Node.jsのパッケージ管理ツールです。npmを使うことで、パッケージの依存関係や競合関係を管理してくれるので、パッケージを追加、更新する際は基本的に npm 経由で行うことになります。</p>
+<p>また、npm には、Node.js と一緒に入ってすぐ使える便利なライブラリがたくさん登録されています。今回は Express <a href="https://expressjs.com/" target="_blank">https://expressjs.com/</a> という便利なサーバー構築ライブラリがインストールされています。</p>
+<p>✅ポイント</p>
+<ul>
+<li>今回は、Node.js サーバー側のプログラムは、起動とちょっとした設定反映が中心です。</li>
+<li>もし、より知りたくなったら、ネット上でいろいろと調べてみましょう。<ul>
+<li>（余裕があれば、文献の検索実演）</li>
+</ul>
+</li>
+</ul>
+<h2 id="今回の環境の準備"><a name="今回の環境の準備" class="plugin-anchor" href="#今回の環境の準備"><i class="fa fa-link" aria-hidden="true"></i></a>今回の環境の準備</h2>
+<p>この環境はすでに以下の準備が Codespace によって準備済みです。</p>
+<ul>
+<li>GitHub Codespaces 上に今回の環境が用意されている</li>
+<li>Node.js がすぐ動くように構築されている</li>
+<li>package.json をベースにした npm によるライブラリのインストール<ul>
+<li>今回は Express <a href="https://expressjs.com/" target="_blank">https://expressjs.com/</a> という便利なサーバー構築ライブラリがインストールされています。</li>
+</ul>
+</li>
+<li>今回のリポジトリにあるコード群がすべて使える</li>
+<li>ブラウザ上の Visual Studio Code で今回のリポジトリにあるコードが編集・実行できる</li>
+</ul>
+<h2 id="サンプルをターミナルから実行"><a name="サンプルをターミナルから実行" class="plugin-anchor" href="#サンプルをターミナルから実行"><i class="fa fa-link" aria-hidden="true"></i></a>サンプルをターミナルから実行</h2>
+<p><code>app01.js</code> というプログラムを実行してみましょう。</p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;Hello! app01!&apos;</span>);
 </code></pre>
-<p>書き換えたら保存しましょう。</p>
-<h2 id="cube-に-cubeevent-スクリプト割り当て"><a name="cube-に-cubeevent-スクリプト割り当て" class="plugin-anchor" href="#cube-に-cubeevent-スクリプト割り当て"><i class="fa fa-link" aria-hidden="true"></i></a>Cube に CubeEvent スクリプト割り当て</h2>
-<p><img src="https://i.gyazo.com/e37d75b91a946c35519711c87422d6d7.png" alt="e37d75b91a946c35519711c87422d6d7"></p>
-<p>Hierarcy で Cube を選択して Cube の Inspector を見ます。Add Component ボタンをクリックします。</p>
-<p><img src="https://i.gyazo.com/2ae59cc631d5e1ea352717468369e5a3.png" alt="2ae59cc631d5e1ea352717468369e5a3"></p>
-<p>コンポーネント検索で CubeEvent を選択してコンポーネントを加えます。</p>
-<h2 id="シーン保存"><a name="シーン保存" class="plugin-anchor" href="#シーン保存"><i class="fa fa-link" aria-hidden="true"></i></a>シーン保存</h2>
-<p><img src="https://i.gyazo.com/172edf11c047e3cb48db6b6b131b7f40.png" alt="172edf11c047e3cb48db6b6b131b7f40"></p>
-<p>シーンをいったん保存しましょう。</p>
-<h2 id="動作確認"><a name="動作確認" class="plugin-anchor" href="#動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>動作確認</h2>
-<p><img src="https://i.gyazo.com/2fbea7338e0832c54e0b977c39f5dedd.png" alt="2fbea7338e0832c54e0b977c39f5dedd"></p>
-<p>Play ボタンをクリックします。</p>
-<p><img src="https://i.gyazo.com/6044c7e49cf4a9d7af2d62b94476d854.png" alt="6044c7e49cf4a9d7af2d62b94476d854"></p>
-<p>Cube をマウスでクリックしてみましょう。</p>
-<p><img src="https://i.gyazo.com/cfe7587c4bb92695695695e3a2f291d4.png" alt="cfe7587c4bb92695695695e3a2f291d4"></p>
-<p>Console でこのようなログが出てくれば成功です！まずはマウスクリックが動きました。</p>
+<p>JavaScript で、コンソールログに「Hello! app01!」と表示するプログラムです。</p>
+<p><img src="https://i.gyazo.com/2967ec1e72381c1a16b92dfea6d84f7b.png" alt="2967ec1e72381c1a16b92dfea6d84f7b"></p>
+<p>ターミナルでコマンドを実行します。パネルエリアに注目します。</p>
+<p><img src="https://i.gyazo.com/d1301375d265afe3f21076fad33192a8.png" alt="d1301375d265afe3f21076fad33192a8"></p>
+<p>ターミナルタブをクリックします。</p>
+<p><img src="https://i.gyazo.com/f7d059007e4397f355c11a09dce4b387.png" alt="f7d059007e4397f355c11a09dce4b387"></p>
+<p>このようにカーソルがありコマンドの入力待ちになっています。</p>
+<pre><code>node app01.js
+</code></pre><p>このコマンドを入力して Enter キーを押します。</p>
+<p>コマンドの意味は、以下の通りです。</p>
+<ul>
+<li><code>node</code><ul>
+<li>「Node.js でファイルを実行する」コマンド</li>
+</ul>
+</li>
+<li><code>app01.js</code><ul>
+<li>app01.js というファイルが対象という意味</li>
+<li><code>/workspaces/vantan-unity-network-server-base</code> というプロジェクト最上部にいるので、詳しくパスを打たなくても <code>app01.js</code> だけで名指しできます</li>
+</ul>
+</li>
+</ul>
+<p>すると、次の行に「Hello! app01!」とでてきたら成功です。</p>
+<p><img src="https://i.gyazo.com/b537857243d0aed0c58a93e7bd0380a7.png" alt="b537857243d0aed0c58a93e7bd0380a7"></p>
+<p>これでターミナル実行のウォームアップ完了です。</p>
+<h2 id="ターミナルからサーバーを起動"><a name="ターミナルからサーバーを起動" class="plugin-anchor" href="#ターミナルからサーバーを起動"><i class="fa fa-link" aria-hidden="true"></i></a>ターミナルからサーバーを起動</h2>
+<p><code>server01.js</code> というプログラムを実行してみましょう。</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;express&apos;</span>);
+<span class="hljs-keyword">const</span> app = express();
+
+app.use(express.static(__dirname + <span class="hljs-string">&apos;/public&apos;</span>));
+
+<span class="hljs-comment">// bodyParser</span>
+app.use(express.json())
+app.use(express.urlencoded({ <span class="hljs-attr">extended</span>: <span class="hljs-literal">true</span> }));
+
+app.get(<span class="hljs-string">&apos;/api/get/sample&apos;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.send(<span class="hljs-string">&apos;GET OK!&apos;</span>)
+});
+
+app.post(<span class="hljs-string">&apos;/api/post/sample&apos;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.send(<span class="hljs-string">&apos;POST OK!&apos;</span>)
+});
+
+app.listen(process.env.PORT || <span class="hljs-number">8080</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;server01 start!&quot;</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`app listening at http://localhost:<span class="hljs-subst">${process.env.PORT || <span class="hljs-number">8080</span>}</span>`</span>)
+})
+</code></pre>
+<p>Express というライブラリでサーバーを構築できるプログラムです。</p>
+<pre><code>node server01.js
+</code></pre><p>ターミナルで以下のコマンドを入力して Enter キーを押して実行します。</p>
+<pre><code>server01 start!
+app listening at http://localhost:8080
+</code></pre><p>というメッセージが次の行に出てくれば起動成功です。これで無事サーバーが起動できました。</p>
+<p>✅ポイント</p>
+<ul>
+<li>現在のプログラムは app01.js のように実行したらすぐに終わるプログラムではなく、サーバーとして動き続けています。</li>
+</ul>
+<h2 id="ブラウザからアクセスしてみる"><a name="ブラウザからアクセスしてみる" class="plugin-anchor" href="#ブラウザからアクセスしてみる"><i class="fa fa-link" aria-hidden="true"></i></a>ブラウザからアクセスしてみる</h2>
+<p>現在は、起動中の GitHub アカウントのみで構築されたサーバーが確認できます。</p>
+<p><img src="https://i.gyazo.com/2b7eb26ecba22ee6aa0154d986935251.png" alt="2b7eb26ecba22ee6aa0154d986935251"></p>
+<p>ターミナルで出力された <code>http://localhost:8080</code> にマウスを乗せます。</p>
+<p><img src="https://i.gyazo.com/9fdd7fbc69e3113ed32732845a6cb9d0.png" alt="9fdd7fbc69e3113ed32732845a6cb9d0"></p>
+<p>リンクにアクセスというメッセージが出てくるのでクリックします。すると、ブラウザの別のタブでアクセスされます。</p>
+<p><img src="https://i.gyazo.com/6e18a3f970632af493c0815256d34b11.png" alt="6e18a3f970632af493c0815256d34b11"></p>
+<p>Index というページが表示されます。</p>
+<p><img src="https://i.gyazo.com/4d336da902c362dbb0bfc5f289d0c7c5.png" alt="4d336da902c362dbb0bfc5f289d0c7c5"></p>
+<p>アドレスバーに書いてある URL は、今回の Codespace が構築されたサーバアドレスのトップページが表示されています。</p>
+<p>✅ポイント</p>
+<ul>
+<li>server01.js の <code>app.use(express.static(__dirname + &apos;/public&apos;));</code> によって、public フォルダの中身でトップページを示す <code>public/index.html</code> の内容が、今回起動したサーバーのトップページとして表示されています。</li>
+<li>現在は、起動中の GitHub アカウントのみで構築されたサーバーが確認でき、次の授業では、Unity からもアクセスできるよう、誰でも見れる公開する対応を行います。</li>
+</ul>
+<h2 id="プログラムの終了"><a name="プログラムの終了" class="plugin-anchor" href="#プログラムの終了"><i class="fa fa-link" aria-hidden="true"></i></a>プログラムの終了</h2>
+<p>現在のプログラムは app01.js のように実行したらすぐに終わるプログラムではなく、サーバーとして動き続けています。プログラムの終了をしてみましょう。</p>
+<p>ターミナル上で Ctrl + C を打ってプログラムを終了します。</p>
+<p><img src="https://i.gyazo.com/93a99bf90eb16a44806b5bc745cdc9ec.png" alt="93a99bf90eb16a44806b5bc745cdc9ec"></p>
+<p>このように <code>^C</code> 入力とともに、ターミナルの入力待ちになれば終了成功です。</p>
+<p><img src="https://i.gyazo.com/9ea2265a9d054bc697a822b8b0061bee.png" alt="9ea2265a9d054bc697a822b8b0061bee"></p>
+<p>サーバーが終了したので、さきほどの Index と書かれたページも再読み込みしてもアクセスできなくなります。</p>
+<h2 id="今回の-codespace-の終了"><a name="今回の-codespace-の終了" class="plugin-anchor" href="#今回の-codespace-の終了"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Codespace の終了</h2>
+<p>今回の Codespace の終了をします。Codespace はブラウザを閉じると自動で閉じることもありますが、確実に閉じたほうが、無料枠の制限時間も無駄に消費せずおススメです。</p>
+<blockquote>
+<p>コードスペースのライフサイクルを理解する<br><a href="https://docs.github.com/ja/codespaces/getting-started/understanding-the-codespace-lifecycle" target="_blank">https://docs.github.com/ja/codespaces/getting-started/understanding-the-codespace-lifecycle</a></p>
+<p>コードスペースを操作せずに実行したままにした場合、またはコードスペースを明示的に停止せずに終了した場合、コードスペースは非アクティブな時間が経過するとタイムアウトになり、実行が停止します。デフォルトでは、コードスペースは非アクティブ状態が 30 分間続くとタイムアウトしますが、作成する新しいコードスペースのタイムアウト期間をカスタマイズできます。</p>
+</blockquote>
+<p>いま起動している Codespace から終了してみましょう。</p>
+<p><img src="https://i.gyazo.com/270f2ad603d2c7aa6a984689f0ef6003.png" alt="270f2ad603d2c7aa6a984689f0ef6003"></p>
+<p>左下の <code>&gt;&lt; Codespaces</code> をクリックします。</p>
+<p><img src="https://i.gyazo.com/579e1da05534e8d00cfa81428042c216.png" alt="579e1da05534e8d00cfa81428042c216"></p>
+<p>上部にコマンドパレットが表示されます。 <code>Stop Current Codespace</code> をクリックします。</p>
+<p><img src="https://i.gyazo.com/6d77c1b267a243d5e43e7c6561bd5339.png" alt="6d77c1b267a243d5e43e7c6561bd5339"></p>
+<p>右下にステータスが表示されます。</p>
+<p><img src="https://i.gyazo.com/4e949f3c23eca5b3d6383905f97eed3e.png" alt="4e949f3c23eca5b3d6383905f97eed3e"></p>
+<p>しばらく待つと画面が切り替わり、このようになれば無事終了できました。</p>
+<p>その他に、以下のヘルプで、Codespace 一覧から停止する操作も確認できます。ちゃんと終了されたか確認するときにも役に立つでしょう。</p>
+<ul>
+<li>codespace の停止と開始 - GitHub Docs<ul>
+<li><a href="https://docs.github.com/ja/codespaces/developing-in-codespaces/stopping-and-starting-a-codespace" target="_blank">https://docs.github.com/ja/codespaces/developing-in-codespaces/stopping-and-starting-a-codespace</a></li>
+</ul>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -775,7 +920,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"next":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},"previous":{"title":"全体の流れの共有","level":"2.1.1","depth":2,"path":"term1-1/00-chapter01.md","ref":"./term1-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter02.md","mtime":"2023-07-13T08:16:06.243Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-13T12:09:48.000Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"next":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},"previous":{"title":"全体の流れの共有","level":"2.1.1","depth":2,"path":"term1-1/00-chapter01.md","ref":"./term1-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter02.md","mtime":"2023-07-20T09:38:29.150Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-20T09:38:58.490Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -4,153 +4,278 @@
 
 ## この章で学ぶこと
 
-環境構築や初動のサンプル動作を行います。
+環境構築や初動のサンプル動作を行います。（GitHub CodeSpaces）
 
-## 環境構築
+## GitHub Codespaces とは
 
-今回事前準備した Unity バージョンを確認しつつ、環境構築をしていきましょう。
+GitHub Codespaces は、クラウド上に開発環境を提供することで環境設定の手間を省き、どこからでも安全に開発を行うことができる便利なツールです。
 
-![a22ec4c95524c34562414d6efe01f566](https://i.gyazo.com/a22ec4c95524c34562414d6efe01f566.png)
+今回は Unity から外部のサーバーや API にどうつなぐかを中心に伝えるので、サーバー側の仕組みはなるべく手軽に立ち上げられるように GitHub Codespaces を採用しています。
 
-Unity Hub を起動して、New Project ボタンをクリックします。
+![df3b5938f05d8b487e6c73d496c21dd4](https://i.gyazo.com/df3b5938f05d8b487e6c73d496c21dd4.png)
 
-![ddf49ef780c60063791bf3aabc75d45a](https://i.gyazo.com/ddf49ef780c60063791bf3aabc75d45a.png)
+- GitHub Codespaces の概要
+  - https://docs.github.com/ja/codespaces/overview
 
-Core > 3D をクリックします。右エリアに PROJECT SETTING が表示されます。
+### 個人アカウントの無料枠や使用量の確認
 
-![bc6e6c44a26e7040b70255bedbf9048d](https://i.gyazo.com/bc6e6c44a26e7040b70255bedbf9048d.png)
+![8d4412849bd88c209424edd608476ffd](https://i.gyazo.com/8d4412849bd88c209424edd608476ffd.png)
 
-Project name は `Unity-Network-Sample-01` で Location は、自分の普段の作業フォルダで行います。
+- GitHub Codespaces の使用状況の表示 - GitHub Docs
+  - https://docs.github.com/ja/billing/managing-billing-for-github-codespaces/viewing-your-github-codespaces-usage
+- GitHub Codespaces の請求について - GitHub Docs
+  - https://docs.github.com/ja/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts
+  - 2023/7 現在、個人アカウントでは 1 ヵ月 120 時間使えます。
+  - 授業で 40-50 時間使うとしても十分残っているはず
 
-作業フォルダのおすすめ
-- C ドライブ直下に、今回の授業名 vantan_unity_network で作る。
-- ユーザーフォルダに自分の分かりやすいフォルダで作る
-- C ドライブ直下に自分の分かりやすいフォルダで作る
+## 今回の GitHub Codespaces リポジトリにアクセス
 
-デスクトップ直下は、他のファイルも混ざってしまい混乱しやすいので避けましょう。
+今回の GitHub Codespaces リポジトリに Chrome ブラウザでアクセスします。
 
-![195a89c3cb80a9c037b080f96fb8ae7e](https://i.gyazo.com/195a89c3cb80a9c037b080f96fb8ae7e.png)
+![1d4fe9d0e6c86377c17828a2ff26fd0d](https://i.gyazo.com/1d4fe9d0e6c86377c17828a2ff26fd0d.png)
 
-Project name と Location を設定したら、Create project ボタンをクリックします。
+https://github.com/1ft-seabass/vantan-unity-network-server-base に Chrome ブラウザでアクセスします。それ以外のブラウザだと、うまく動作しない可能性があるので Chrome で動かしましょう。
 
-![8693cc6b6be3c66765c28a159a0d5e4a](https://i.gyazo.com/8693cc6b6be3c66765c28a159a0d5e4a.png)
+## GitHub Codespaces としてリポジトリを開く
 
-プロジェクトの作成が始まります。
+![6ebad95a052d8a2d37d889399e120424](https://i.gyazo.com/6ebad95a052d8a2d37d889399e120424.png)
 
-![b7ca8c2686c7f01a7d87fa04a4208499](https://i.gyazo.com/b7ca8c2686c7f01a7d87fa04a4208499.png)
+Code ボタンをクリックします。
 
-該当バージョンの Unity が開き、プロジェクトが準備されます。
+![8f6a286108378103ac8d30df6f811ef4](https://i.gyazo.com/8f6a286108378103ac8d30df6f811ef4.png)
 
-![77b30f4a9da6debd2f94b28c769a5a12](https://i.gyazo.com/77b30f4a9da6debd2f94b28c769a5a12.png)
+Codespaces タブをクリックします。Create codespace on main をクリックします。
 
-プロジェクトが開きます。もし Build Setting が開いていたら閉じましょう。
+![47b24d3be5b687f60383455a75898788](https://i.gyazo.com/47b24d3be5b687f60383455a75898788.png)
 
-![c35f9a277dc4ca526b241ccf02b88d68](https://i.gyazo.com/c35f9a277dc4ca526b241ccf02b88d68.png)
+Setting up your codespace という画面が出て構築されます。
 
-これで準備完了です。
+![28ea2b9aece0957b5bb7292427889a10](https://i.gyazo.com/28ea2b9aece0957b5bb7292427889a10.png)
 
-## 初動のサンプル動作
+ブラウザ上で Visual Studio Code が起動し、今回の仕組みを反映した環境が起動しました。
 
-![c35f9a277dc4ca526b241ccf02b88d68](https://i.gyazo.com/c35f9a277dc4ca526b241ccf02b88d68.png)
+## Visual Studio Code 操作画面の紹介
 
-ということで、ここからサンプルを作成していきます。
+- 参考 : Visual Studio Code User Interface
+  - https://code.visualstudio.com/docs/getstarted/userinterface
 
-### Build Setting 確認
+> VS Code には、フォルダーまたはプロジェクトの完全なコンテキストを参照してアクセスするための十分なスペースを確保しながら、エディターに提供されるスペースを最大化する、シンプルで直感的なレイアウトが付属しています。UI は 5 つの主要な領域に分かれています。
 
-![1ef230a444b6d94461cc88d14923fb58](https://i.gyazo.com/1ef230a444b6d94461cc88d14923fb58.png)
+![15944e01b4a98ec52bc55931cd2cc250](https://i.gyazo.com/15944e01b4a98ec52bc55931cd2cc250.png)
 
-メニュー > File > Build Setting で Build Setting を開きます。
+- アクティビティバー
+  - 左側の端にあり、ビューを切り替えることができ、Git が有効になっている場合の発信変更の数など、追加のコンテキスト固有のインジケーターが表示されます。
 
-![c7a4e4da91fc04a649033e6cd165b0b7](https://i.gyazo.com/c7a4e4da91fc04a649033e6cd165b0b7.png)
+![4bfb8dfed081b246ea705113ae37760a](https://i.gyazo.com/4bfb8dfed081b246ea705113ae37760a.png)
 
-Platform が PC になっていれば OK です。
+- プライマリ サイド バー
+  - プロジェクトでの作業を支援するエクスプローラーなどのさまざまなビューが含まれています。
 
-## Cube 配置
+![d814cce244bfd173feea1a5a16d3384c](https://i.gyazo.com/d814cce244bfd173feea1a5a16d3384c.png)
 
-![9d5f314021661da71ed0128f9da22755](https://i.gyazo.com/9d5f314021661da71ed0128f9da22755.png)
+- エディタ
+  - ファイルを編集するためのメイン領域です。エディタは好きなだけ縦横に並べて開くことができます。
 
-Hierarcy の＋ボタンをクリックして 3D Object > Cube をクリックして Cube を配置します。
+![2967ec1e72381c1a16b92dfea6d84f7b](https://i.gyazo.com/2967ec1e72381c1a16b92dfea6d84f7b.png)
 
-## EventSystem 配置
+- パネル
+  - エディター領域の下にあるビュー用の追加スペース。デフォルトでは、出力、デバッグ情報、エラーと警告、および統合ターミナルが格納されます。パネルを左右に移動して、垂直方向のスペースを増やすこともできます。
 
-![791062a03a48c41fe156ffddc9f6282c](https://i.gyazo.com/791062a03a48c41fe156ffddc9f6282c.png)
+![6a15e2237c2845012027e49843c613d9](https://i.gyazo.com/6a15e2237c2845012027e49843c613d9.png)
 
-Hierarcy の＋ボタンをクリックして UI > EventSystem で EventSystem を配置します。
+- ステータス バー
+  - 開いているプロジェクトと編集するファイルに関する情報。
 
-## Hierarcy 確認
+✅ポイント
+- 機能を全部覚える必要はありません。気になる人がいたら、英語ですが https://code.visualstudio.com/docs でいろいろ使い方を調べて試してみましょう
+  - テーマをダークにしたい人は多いかもなので https://code.visualstudio.com/docs/getstarted/themes を見てダークテーマに変更してみてもよいでしょう
+- 今回は、エクスプローラでファイルを選択し→エディタで編集＆保存→パネルでターミナルから実行という流れで行います
 
-![e62df939e056f9b2a4c126fa49f6d4be](https://i.gyazo.com/e62df939e056f9b2a4c126fa49f6d4be.png)
+## プログラムは Node.js という仕組みで動いている
 
-このような Hierarcy になります。
+エクスプローラを見てみましょう。今回のプログラム群は Node.js で作られています。
 
-## Main Camera にコンポーネント追加
+![8adc98dbfb57d79abbc6a5be5eefbad8](https://i.gyazo.com/8adc98dbfb57d79abbc6a5be5eefbad8.png)
 
-![c190ea2def5824d7c2cd1cad1f342853](https://i.gyazo.com/c190ea2def5824d7c2cd1cad1f342853.png)
+Node.js は、普段はブラウザで活用されていて、ネット上で文献の多い JavaScript 言語で、Unity でデータのやり取りをするサーバー側、つまりサーバーサイドのプログラムが作成することができます。
 
-Hierarcy で Main Camera を選択して Main Camera の Inspector を見ます。Add Component ボタンをクリックします。
+- Node.js® とは
+  - https://nodejs.org/ja/about
 
-![73874f01b22f9d05427935db4551b8e3](https://i.gyazo.com/73874f01b22f9d05427935db4551b8e3.png)
+また、Node.js と一緒にインストールされる npm は、Node.jsのパッケージ管理ツールです。npmを使うことで、パッケージの依存関係や競合関係を管理してくれるので、パッケージを追加、更新する際は基本的に npm 経由で行うことになります。
 
-コンポーネント検索で Physics Raycaster を選択してコンポーネントを加えます。
+また、npm には、Node.js と一緒に入ってすぐ使える便利なライブラリがたくさん登録されています。今回は Express https://expressjs.com/ という便利なサーバー構築ライブラリがインストールされています。
 
-## Assets に Scripts フォルダ作成
+✅ポイント
+- 今回は、Node.js サーバー側のプログラムは、起動とちょっとした設定反映が中心です。
+- もし、より知りたくなったら、ネット上でいろいろと調べてみましょう。
+  - （余裕があれば、文献の検索実演）
 
-![5d2428e4b832594b8232198419793c2a](https://i.gyazo.com/5d2428e4b832594b8232198419793c2a.png)
+## 今回の環境の準備
 
-Project タブで Assets を選択して、右クリックから Create > Folder を選択して Scripts フォルダを作成します。Scenes フォルダと同じ階層です。
+この環境はすでに以下の準備が Codespace によって準備済みです。
 
-## CubeEvent スクリプト
+- GitHub Codespaces 上に今回の環境が用意されている
+- Node.js がすぐ動くように構築されている
+- package.json をベースにした npm によるライブラリのインストール
+  - 今回は Express https://expressjs.com/ という便利なサーバー構築ライブラリがインストールされています。
+- 今回のリポジトリにあるコード群がすべて使える
+- ブラウザ上の Visual Studio Code で今回のリポジトリにあるコードが編集・実行できる
 
-![ac26279a81eb874c750bc60bfb4dd9f8](https://i.gyazo.com/ac26279a81eb874c750bc60bfb4dd9f8.png)
+## サンプルをターミナルから実行
 
-Scripts フォルダの中に移動して、右クリックから Create > C# Script で選択して CubeEvent というファイルを作成します。
+`app01.js` というプログラムを実行してみましょう。
 
-## CubeEvent スクリプト書き換え
-
-CubeEvent をダブルクリックしてエディタで開きます。すべて選択して、以下のプログラムに書き換えます。
-
-```csharp
-using UnityEngine;
-using UnityEngine.EventSystems;
-
-public class CubeEvent : MonoBehaviour, IPointerClickHandler
-{
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        // マウスクリックイベント
-        Debug.Log($"オブジェクト {this.name} がクリックされたよ！");
-    }
-}
+```js
+console.log('Hello! app01!');
 ```
 
-書き換えたら保存しましょう。
+JavaScript で、コンソールログに「Hello! app01!」と表示するプログラムです。
 
-## Cube に CubeEvent スクリプト割り当て
+![2967ec1e72381c1a16b92dfea6d84f7b](https://i.gyazo.com/2967ec1e72381c1a16b92dfea6d84f7b.png)
 
-![e37d75b91a946c35519711c87422d6d7](https://i.gyazo.com/e37d75b91a946c35519711c87422d6d7.png)
+ターミナルでコマンドを実行します。パネルエリアに注目します。
 
-Hierarcy で Cube を選択して Cube の Inspector を見ます。Add Component ボタンをクリックします。
+![d1301375d265afe3f21076fad33192a8](https://i.gyazo.com/d1301375d265afe3f21076fad33192a8.png)
 
-![2ae59cc631d5e1ea352717468369e5a3](https://i.gyazo.com/2ae59cc631d5e1ea352717468369e5a3.png)
+ターミナルタブをクリックします。
 
-コンポーネント検索で CubeEvent を選択してコンポーネントを加えます。
+![f7d059007e4397f355c11a09dce4b387](https://i.gyazo.com/f7d059007e4397f355c11a09dce4b387.png)
 
-## シーン保存
+このようにカーソルがありコマンドの入力待ちになっています。
 
-![172edf11c047e3cb48db6b6b131b7f40](https://i.gyazo.com/172edf11c047e3cb48db6b6b131b7f40.png)
+```
+node app01.js
+```
 
-シーンをいったん保存しましょう。
+このコマンドを入力して Enter キーを押します。
 
-## 動作確認
+コマンドの意味は、以下の通りです。
 
-![2fbea7338e0832c54e0b977c39f5dedd](https://i.gyazo.com/2fbea7338e0832c54e0b977c39f5dedd.png)
+- `node`
+  - 「Node.js でファイルを実行する」コマンド
+- `app01.js`
+  - app01.js というファイルが対象という意味
+  - `/workspaces/vantan-unity-network-server-base` というプロジェクト最上部にいるので、詳しくパスを打たなくても `app01.js` だけで名指しできます
 
-Play ボタンをクリックします。
+すると、次の行に「Hello! app01!」とでてきたら成功です。
 
-![6044c7e49cf4a9d7af2d62b94476d854](https://i.gyazo.com/6044c7e49cf4a9d7af2d62b94476d854.png)
+![b537857243d0aed0c58a93e7bd0380a7](https://i.gyazo.com/b537857243d0aed0c58a93e7bd0380a7.png)
 
-Cube をマウスでクリックしてみましょう。
+これでターミナル実行のウォームアップ完了です。
 
-![cfe7587c4bb92695695695e3a2f291d4](https://i.gyazo.com/cfe7587c4bb92695695695e3a2f291d4.png)
+## ターミナルからサーバーを起動
 
-Console でこのようなログが出てくれば成功です！まずはマウスクリックが動きました。
+`server01.js` というプログラムを実行してみましょう。
+
+```js
+const express = require('express');
+const app = express();
+
+app.use(express.static(__dirname + '/public'));
+
+// bodyParser
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+
+app.get('/api/get/sample', (req, res) => {
+  res.send('GET OK!')
+});
+
+app.post('/api/post/sample', (req, res) => {
+  res.send('POST OK!')
+});
+
+app.listen(process.env.PORT || 8080, () => {
+  console.log("server01 start!");
+  console.log(`app listening at http://localhost:${process.env.PORT || 8080}`)
+})
+```
+
+Express というライブラリでサーバーを構築できるプログラムです。
+
+```
+node server01.js
+```
+
+ターミナルで以下のコマンドを入力して Enter キーを押して実行します。
+
+```
+server01 start!
+app listening at http://localhost:8080
+```
+
+というメッセージが次の行に出てくれば起動成功です。これで無事サーバーが起動できました。
+
+✅ポイント
+- 現在のプログラムは app01.js のように実行したらすぐに終わるプログラムではなく、サーバーとして動き続けています。
+
+## ブラウザからアクセスしてみる
+
+現在は、起動中の GitHub アカウントのみで構築されたサーバーが確認できます。
+
+![2b7eb26ecba22ee6aa0154d986935251](https://i.gyazo.com/2b7eb26ecba22ee6aa0154d986935251.png)
+
+ターミナルで出力された `http://localhost:8080` にマウスを乗せます。
+
+![9fdd7fbc69e3113ed32732845a6cb9d0](https://i.gyazo.com/9fdd7fbc69e3113ed32732845a6cb9d0.png)
+
+リンクにアクセスというメッセージが出てくるのでクリックします。すると、ブラウザの別のタブでアクセスされます。
+
+![6e18a3f970632af493c0815256d34b11](https://i.gyazo.com/6e18a3f970632af493c0815256d34b11.png)
+
+Index というページが表示されます。
+
+![4d336da902c362dbb0bfc5f289d0c7c5](https://i.gyazo.com/4d336da902c362dbb0bfc5f289d0c7c5.png)
+
+アドレスバーに書いてある URL は、今回の Codespace が構築されたサーバアドレスのトップページが表示されています。
+
+✅ポイント
+- server01.js の `app.use(express.static(__dirname + '/public'));` によって、public フォルダの中身でトップページを示す `public/index.html` の内容が、今回起動したサーバーのトップページとして表示されています。
+- 現在は、起動中の GitHub アカウントのみで構築されたサーバーが確認でき、次の授業では、Unity からもアクセスできるよう、誰でも見れる公開する対応を行います。
+
+## プログラムの終了
+
+現在のプログラムは app01.js のように実行したらすぐに終わるプログラムではなく、サーバーとして動き続けています。プログラムの終了をしてみましょう。
+
+ターミナル上で Ctrl + C を打ってプログラムを終了します。
+
+![93a99bf90eb16a44806b5bc745cdc9ec](https://i.gyazo.com/93a99bf90eb16a44806b5bc745cdc9ec.png)
+
+このように `^C` 入力とともに、ターミナルの入力待ちになれば終了成功です。
+
+![9ea2265a9d054bc697a822b8b0061bee](https://i.gyazo.com/9ea2265a9d054bc697a822b8b0061bee.png)
+
+サーバーが終了したので、さきほどの Index と書かれたページも再読み込みしてもアクセスできなくなります。
+
+## 今回の Codespace の終了
+
+今回の Codespace の終了をします。Codespace はブラウザを閉じると自動で閉じることもありますが、確実に閉じたほうが、無料枠の制限時間も無駄に消費せずおススメです。
+
+> コードスペースのライフサイクルを理解する  
+> https://docs.github.com/ja/codespaces/getting-started/understanding-the-codespace-lifecycle
+> 
+> コードスペースを操作せずに実行したままにした場合、またはコードスペースを明示的に停止せずに終了した場合、コードスペースは非アクティブな時間が経過するとタイムアウトになり、実行が停止します。デフォルトでは、コードスペースは非アクティブ状態が 30 分間続くとタイムアウトしますが、作成する新しいコードスペースのタイムアウト期間をカスタマイズできます。
+
+いま起動している Codespace から終了してみましょう。
+
+![270f2ad603d2c7aa6a984689f0ef6003](https://i.gyazo.com/270f2ad603d2c7aa6a984689f0ef6003.png)
+
+左下の `>< Codespaces` をクリックします。
+
+![579e1da05534e8d00cfa81428042c216](https://i.gyazo.com/579e1da05534e8d00cfa81428042c216.png)
+
+上部にコマンドパレットが表示されます。 `Stop Current Codespace` をクリックします。
+
+![6d77c1b267a243d5e43e7c6561bd5339](https://i.gyazo.com/6d77c1b267a243d5e43e7c6561bd5339.png)
+
+右下にステータスが表示されます。
+
+![4e949f3c23eca5b3d6383905f97eed3e](https://i.gyazo.com/4e949f3c23eca5b3d6383905f97eed3e.png)
+
+しばらく待つと画面が切り替わり、このようになれば無事終了できました。
+
+その他に、以下のヘルプで、Codespace 一覧から停止する操作も確認できます。ちゃんと終了されたか確認するときにも役に立つでしょう。
+
+- codespace の停止と開始 - GitHub Docs
+  - https://docs.github.com/ja/codespaces/developing-in-codespaces/stopping-and-starting-a-codespace
