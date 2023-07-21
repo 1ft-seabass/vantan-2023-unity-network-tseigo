@@ -667,7 +667,7 @@
 <p>→ <a href="00-preparation.md">事前準備</a></p>
 <h2 id="コミュニケーション"><a name="コミュニケーション" class="plugin-anchor" href="#コミュニケーション"><i class="fa fa-link" aria-hidden="true"></i></a>コミュニケーション</h2>
 <p><img src="https://i.gyazo.com/aae5fcbb30bf9d55b7249a6d6bd44697.png" alt="aae5fcbb30bf9d55b7249a6d6bd44697"></p>
-<p>現場では対面授業。Slack で質問を受け付けます。</p>
+<p>現場では対面授業。Slack でも質問を受け付けます。</p>
 <h2 id="講師のスキル"><a name="講師のスキル" class="plugin-anchor" href="#講師のスキル"><i class="fa fa-link" aria-hidden="true"></i></a>講師のスキル</h2>
 <p><img src="https://i.gyazo.com/13de54927bc6437f8b51d6a60e676a6a.png" alt="13de54927bc6437f8b51d6a60e676a6a"></p>
 <ul>
@@ -676,6 +676,101 @@
 <li>今回 Unity 側で使われる C# にはある程度の心得はあるので「ある程度」アドバイスができます。複雑な仕組みや自分固有の仕組みはできるところはサポートしますが、自分で頑張っていきましょう。</li>
 <li>今回サーバ側で使う Node.js の言語である JavaScript は得意としているので、ぜひ聞いてください。JavaScript の文献は、インターネットにもたくさんあるので、自分でも調べながら進めましょう。</li>
 </ul>
+<h2 id="作業フォルダの準備"><a name="作業フォルダの準備" class="plugin-anchor" href="#作業フォルダの準備"><i class="fa fa-link" aria-hidden="true"></i></a>作業フォルダの準備</h2>
+<p><img src="https://i.gyazo.com/b0cb6d5c90ea28c5508f3e37f711642a.png" alt="b0cb6d5c90ea28c5508f3e37f711642a"></p>
+<p>今回の授業の作業をフォルダを決めます。</p>
+<p>おすすめは C ドライブの直下に vantan_unity_network_study をつくる形です。</p>
+<p>もし、みなさんの PC で作業フォルダについて独自に管理をしている場合は、そのフォルダ内で vantan_unity_network_study をつくりましょう。</p>
+<p>できれば避けてほしいのは、デスクトップ直下に vantan_unity_network_study を置くことです。これは、デスクトップに他のファイルもある状況だと、授業ファイルが探しにくくなり作業開始や途中再開、復習などがしづらくなるので避けて下さい。</p>
+<p><img src="https://i.gyazo.com/9fdc73e5f97601e7d6f5a218e0683eff.png" alt="image"></p>
+<p>ということで、まず、わたし（田中）と API の話を軸にウォームアップしてきましょう。</p>
+<h2 id="わたしとネットワーク（＝web）"><a name="わたしとネットワーク（＝web）" class="plugin-anchor" href="#わたしとネットワーク（＝web）"><i class="fa fa-link" aria-hidden="true"></i></a>わたしとネットワーク（＝Web）</h2>
+<p><img src="https://i.gyazo.com/6ab447e3d815e9cc5c96514444ac143f.png" alt="image"></p>
+<p>最初の講師紹介でも軽くお伝えしましたが、わたしとネットワーク（＝Web）のことを話します。</p>
+<p><img src="https://i.gyazo.com/3ce88b118d93e7fe3b40cbe05082ad88.png" alt="image"></p>
+<p>まず、情報を扱うのが楽しいので Web 制作へすすみました。そして、会社員からフリーランスへ。</p>
+<p><img src="https://i.gyazo.com/d4aa11da85f6bc1226eff9f7aa64cd83.png" alt="image"></p>
+<p>伝える媒体が PC からスマホへ変化。</p>
+<p><img src="https://i.gyazo.com/50ca958c4fc68c504644d21b4aff6c2e.png" alt="image"></p>
+<p>その後、Web フロントエンドとして関わりながらも、現実世界にデータで触れるアプローチとして IoT や VR などにも関わって現在に至ります。</p>
+<h2 id="データをやり取りする-api-と出会った"><a name="データをやり取りする-api-と出会った" class="plugin-anchor" href="#データをやり取りする-api-と出会った"><i class="fa fa-link" aria-hidden="true"></i></a>データをやり取りする API と出会った</h2>
+<p><img src="https://i.gyazo.com/9a45d7f04c9ddc93a5231f7a4a0adc58.png" alt="9a45d7f04c9ddc93a5231f7a4a0adc58"></p>
+<p>ネットワークと制作を続けていくと、いろいろなデータとつないで作っていくことになります。</p>
+<p><img src="https://i.gyazo.com/050b06cb1b478dad95b4e52e31c930c4.png" alt="050b06cb1b478dad95b4e52e31c930c4"></p>
+<p>そして、このいろいろなデータやサービスにつながるものが API と呼ばれていることを知り、API を軸にして探していくと、作るうえでもプラスになることが見えてきました。</p>
+<h2 id="api-とは"><a name="api-とは" class="plugin-anchor" href="#api-とは"><i class="fa fa-link" aria-hidden="true"></i></a>API とは</h2>
+<p>さて、あらためて API とはこういうものです。</p>
+<p><img src="https://i.gyazo.com/3edbe1e460cdd4d53d5880f071a47d30.png" alt="image"></p>
+<p>参考資料 : <a href="http://e-words.jp/w/API.html" target="_blank">http://e-words.jp/w/API.html</a></p>
+<p><img src="https://i.gyazo.com/25273e2cadab797efc93ec8610253ea4.png" alt="image"></p>
+<p>API とは、 Application Programming Interface の頭文字です。データを提供したり、何かしらの機能を提供するソフトウェアの一部を、私たちのような外部の人間が扱えるように公開されている窓口です。HTTP プロトコルでやり取りしていることが多いです。</p>
+<p>たとえば、Web アプリケーションなどインターネットの様々な仕組みを構築するとき、 API からデータを取得して加工して表示することが多いです。データや機能を借り受けるということですね。</p>
+<p>✅ポイント</p>
+<ul>
+<li>現時点ではネットワークでデータをつなげる仕組みに「API」という仕組みがあると理解できてれば OK です</li>
+</ul>
+<h2 id="api-とクリエイティブ"><a name="api-とクリエイティブ" class="plugin-anchor" href="#api-とクリエイティブ"><i class="fa fa-link" aria-hidden="true"></i></a>API とクリエイティブ</h2>
+<p><img src="https://i.gyazo.com/0d0557a56626670b5768cc533f90b737.png" alt="image"></p>
+<p>みなさんの「つくる」視点からも API は大事な役割あります。それは「API は技術同士をつなげる良き接着剤」というポイントです。</p>
+<p>自分が API へつなげることで、自分だけでは用意できなかったデータや仕組みで制作物を面白くできたり、何かの API を存在を知ることで、自分の企画に新しい視点が生まれます。</p>
+<p><img src="https://i.gyazo.com/6ff6923d6ae5dee49fdf1bf1816b68ca.png" width="200"></p>
+<ul>
+<li>アイデアのつくり方<ul>
+<li>著 ジェームス W.ヤング</li>
+<li><a href="https://www.amazon.co.jp/gp/product/4484881047" target="_blank">https://www.amazon.co.jp/gp/product/4484881047</a></li>
+</ul>
+</li>
+<li>アイデアのつくり方 - Wikipedia<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%A4%E3%83%87%E3%82%A2%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A%E6%96%B9" target="_blank">https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%A4%E3%83%87%E3%82%A2%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A%E6%96%B9</a></li>
+</ul>
+</li>
+</ul>
+<p>何かをつくっていく上で、とても勉強になるクリエイティブの古典で「アイデアのつくり方」というジェームス W.ヤング氏の書かれた本があります。</p>
+<p><img src="https://i.gyazo.com/50eea765175a7d9a4d4c4a38636a8195.png" alt="image"></p>
+<p>この中で「アイデアは既存の要素の新しい組み合わせである」とあります。様々な技術とつながって新しい世界（データ）をみせてくれる API は、カジュアルに発想の組み合わせをしていく助けになります。</p>
+<p><img src="https://i.gyazo.com/ca62ef1b64e4d0b133bfe8491b36d000.png" alt="image"></p>
+<p>さて、こちらの図は、私が使ったことのある API や、まだ使ったことはないが知っている API をまとめてみたものです。</p>
+<p>みなさんもイチから仕組みを構築してシステムをつくることももちろん大事ですが、このように API を知ることで、データを用意出来たり、ひとりでは難しい仕組みを導入出来たり、API を通じて新しい技術に触れることができます。</p>
+<p>✅ポイント</p>
+<ul>
+<li>ネットワークでデータをつなげることで、自分の仕組みによりよくしていくことができます</li>
+<li>クリエイティブの目線から見ても、データをつなげることで発想を広げることができます</li>
+</ul>
+<h2 id="ネットワークと-unity"><a name="ネットワークと-unity" class="plugin-anchor" href="#ネットワークと-unity"><i class="fa fa-link" aria-hidden="true"></i></a>ネットワークと Unity</h2>
+<p><img src="https://i.gyazo.com/d486e556a0d145d472c3cfbf4e2ab2df.png" alt="d486e556a0d145d472c3cfbf4e2ab2df"></p>
+<p>さて、いよいよ、皆さんとのかかわりのある Unity および 3D との関わりの話。</p>
+<p>私は、現実世界をデータで関われる HoloLens 2 のような MR デバイスであったり、Oculus Quest のような VR での 3D データを介したコミュニケーションにとても可能性を感じていて Unity を触れるようになりました。</p>
+<p><img src="https://i.gyazo.com/99135f869c41ae774375fee900bb56bf.jpg" alt="image"></p>
+<ul>
+<li>HoloLens2 と Node-RED を WebSocket でやり取りするメモ – 1ft-seabass.jp.MEMO<ul>
+<li><a href="https://www.1ft-seabass.jp/memo/2020/07/22/hololens2-meets-nodered-using-websocket/" target="_blank">https://www.1ft-seabass.jp/memo/2020/07/22/hololens2-meets-nodered-using-websocket/</a></li>
+</ul>
+</li>
+</ul>
+<p>このような Web 技術（WebSocket）とつなげるようなプロトタイプや、</p>
+<p><img src="https://i.gyazo.com/0db6feaa9d5e50b4162547d552d766c5.jpg" alt="image"></p>
+<ul>
+<li>HoloLens 2 + M5Stack + CO2 センサー - YouTube<ul>
+<li><a href="https://www.youtube.com/watch?v=AbR6kklz8ps" target="_blank">https://www.youtube.com/watch?v=AbR6kklz8ps</a></li>
+</ul>
+</li>
+</ul>
+<p>このような IoT + 3D + デバイスなプロトタイプなどを日々作っています。</p>
+<p>ですので、Unity を知り尽くしたプロではないですし、もちろん、すごい 3D エフェクトや演出ができるようなスキルは弱めですが、Unity とは API ・ Web ・ IoT など、他の素敵な技術を組み合わせて、いろいろと自分でプロトタイプをつくりながら未来を感じつつ制作し続けています。</p>
+<h2 id="今回の授業は"><a name="今回の授業は" class="plugin-anchor" href="#今回の授業は"><i class="fa fa-link" aria-hidden="true"></i></a>今回の授業は</h2>
+<p><img src="https://i.gyazo.com/8f20e327f80b6184c2b631edf617ad79.png" alt="8f20e327f80b6184c2b631edf617ad79"></p>
+<p>ということで、ネットワークでデータでつなげることの良さや Unity や 3D にも活用できることを、初めにざっくり伝えました。</p>
+<p>今回の授業全体では、ネットワークでデータをつなげる基礎ということで、以下のようなことを学んでいく予定です。</p>
+<ul>
+<li>Unity でのネットワークのデータのつなぎ方を学ぶ</li>
+<li>Unity でのネットワークのデータのやりとりを学ぶ</li>
+<li>データのやり取りをするためのデバッグの方法やテクニックを学ぶ</li>
+<li>ネットワークのデータ側も自分で簡単な API サンプルで用意し、自分で Unity からつないで双方のやりとりを理解しやすくして学ぶ</li>
+<li>API でよく使われる HTTP プロトコルの基礎を学び Unity 側のプログラムに反映できる流れを学ぶ</li>
+<li>外部にある様々な API にもつないでみて Unity に読み込んで活用を学ぶ</li>
+<li>外部にあるデータ保存（Airtable）の仕組みにもつないでゲームのデータ保存を学ぶ</li>
+</ul>
+<p>よろしくお願いします！</p>
 
                                 
                                 </section>
@@ -719,7 +814,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"全体の流れの共有","level":"2.1.1","depth":2,"next":{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"path":"term1-1/00-chapter02.md","ref":"./term1-1/00-chapter02.md","articles":[]},"previous":{"title":"環境構築・初動サンプル動作","level":"2.1","depth":1,"path":"term1-1/README.md","ref":"./term1-1/README.md","articles":[{"title":"全体の流れの共有","level":"2.1.1","depth":2,"path":"term1-1/00-chapter01.md","ref":"./term1-1/00-chapter01.md","articles":[]},{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"path":"term1-1/00-chapter02.md","ref":"./term1-1/00-chapter02.md","articles":[]},{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},{"title":"ゲームサンプルからサーバーの仕組みとの疎通","level":"2.1.4","depth":2,"path":"term1-1/00-chapter04.md","ref":"./term1-1/00-chapter04.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter01.md","mtime":"2023-07-13T07:53:18.851Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-20T09:38:58.490Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"全体の流れの共有","level":"2.1.1","depth":2,"next":{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"path":"term1-1/00-chapter02.md","ref":"./term1-1/00-chapter02.md","articles":[]},"previous":{"title":"環境構築・初動サンプル動作","level":"2.1","depth":1,"path":"term1-1/README.md","ref":"./term1-1/README.md","articles":[{"title":"全体の流れの共有","level":"2.1.1","depth":2,"path":"term1-1/00-chapter01.md","ref":"./term1-1/00-chapter01.md","articles":[]},{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"path":"term1-1/00-chapter02.md","ref":"./term1-1/00-chapter02.md","articles":[]},{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},{"title":"ゲームサンプルからサーバーの仕組みとの疎通","level":"2.1.4","depth":2,"path":"term1-1/00-chapter04.md","ref":"./term1-1/00-chapter04.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter01.md","mtime":"2023-07-21T02:21:20.258Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-21T03:16:16.286Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

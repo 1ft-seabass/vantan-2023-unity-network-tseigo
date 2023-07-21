@@ -128,9 +128,27 @@ Workspace に移動して Your email has been verified! と表示されたらチ
 
 すでに取得済みと聞いていますが、念のためログインできるか確認しておきましょう。
 
-https://github.com/login
-
 ![53da69817a7edc3a5a3f1bf5aa9cac3b](https://i.gyazo.com/53da69817a7edc3a5a3f1bf5aa9cac3b.png)
+
+こちら https://github.com/login でログインします。
+
+![f76444af505af15fb7ac5be3c4c28890](https://i.gyazo.com/f76444af505af15fb7ac5be3c4c28890.png)
+
+ダッシュボードが表示されるか確認します。
+
+## GitHub Codespaces が使えるか確認
+
+![79bf89f9dff3c862a7d0d9bd8abc9d27](https://i.gyazo.com/79bf89f9dff3c862a7d0d9bd8abc9d27.png)
+
+GitHub にログインした状態で、右上のアカウントアイコンをクリックします。
+
+![bebde5c88ee494a91e73d8fc122f9080](https://i.gyazo.com/bebde5c88ee494a91e73d8fc122f9080.png)
+
+Your codespaces があるか確認して、クリックします。
+
+![0204be5a89e06f48c1c29b20cbdde83a](https://i.gyazo.com/0204be5a89e06f48c1c29b20cbdde83a.png)
+
+Codespaces ページ https://github.com/codespaces にアクセスしてこのような画面が出てくれば OK です。
 
 ## Slack アカウント
 
