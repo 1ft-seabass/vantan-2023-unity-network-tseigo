@@ -169,23 +169,16 @@ node app01.js
 `server01.js` というプログラムを実行してみましょう。
 
 ```js
+// Express ライブラリの呼び出し
 const express = require('express');
+// Express ライブラリからサーバーの仕組みを app 変数として呼び出す
 const app = express();
 
+// public フォルダ内にあるファイルはパスが一致していると呼びだせます
+// /index.html や / の場合は public フォルダ内の index.html が表示されます
 app.use(express.static(__dirname + '/public'));
 
-// bodyParser
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
-
-app.get('/api/get/sample', (req, res) => {
-  res.send('GET OK!')
-});
-
-app.post('/api/post/sample', (req, res) => {
-  res.send('POST OK!')
-});
-
+// サーバーを 8080 ポートで起動してログを出力
 app.listen(process.env.PORT || 8080, () => {
   console.log("server01 start!");
   console.log(`app listening at http://localhost:${process.env.PORT || 8080}`)
@@ -249,6 +242,8 @@ Index というページが表示されます。
 サーバーが終了したので、さきほどの Index と書かれたページも再読み込みしてもアクセスできなくなります。
 
 ## 今回の Codespace の終了
+
+![0a8b4cfb807e57ea1382292a757c6899](https://i.gyazo.com/0a8b4cfb807e57ea1382292a757c6899.png)
 
 今回の Codespace の終了をします。Codespace はブラウザを閉じると自動で閉じることもありますが、確実に閉じたほうが、無料枠の制限時間も無駄に消費せずおススメです。
 

@@ -801,23 +801,16 @@
 <p>これでターミナル実行のウォームアップ完了です。</p>
 <h2 id="ターミナルからサーバーを起動"><a name="ターミナルからサーバーを起動" class="plugin-anchor" href="#ターミナルからサーバーを起動"><i class="fa fa-link" aria-hidden="true"></i></a>ターミナルからサーバーを起動</h2>
 <p><code>server01.js</code> というプログラムを実行してみましょう。</p>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;express&apos;</span>);
+<pre><code class="lang-js"><span class="hljs-comment">// Express ライブラリの呼び出し</span>
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;express&apos;</span>);
+<span class="hljs-comment">// Express ライブラリからサーバーの仕組みを app 変数として呼び出す</span>
 <span class="hljs-keyword">const</span> app = express();
 
+<span class="hljs-comment">// public フォルダ内にあるファイルはパスが一致していると呼びだせます</span>
+<span class="hljs-comment">// /index.html や / の場合は public フォルダ内の index.html が表示されます</span>
 app.use(express.static(__dirname + <span class="hljs-string">&apos;/public&apos;</span>));
 
-<span class="hljs-comment">// bodyParser</span>
-app.use(express.json())
-app.use(express.urlencoded({ <span class="hljs-attr">extended</span>: <span class="hljs-literal">true</span> }));
-
-app.get(<span class="hljs-string">&apos;/api/get/sample&apos;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
-  res.send(<span class="hljs-string">&apos;GET OK!&apos;</span>)
-});
-
-app.post(<span class="hljs-string">&apos;/api/post/sample&apos;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
-  res.send(<span class="hljs-string">&apos;POST OK!&apos;</span>)
-});
-
+<span class="hljs-comment">// サーバーを 8080 ポートで起動してログを出力</span>
 app.listen(process.env.PORT || <span class="hljs-number">8080</span>, <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;server01 start!&quot;</span>);
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`app listening at http://localhost:<span class="hljs-subst">${process.env.PORT || <span class="hljs-number">8080</span>}</span>`</span>)
@@ -856,6 +849,7 @@ app listening at http://localhost:8080
 <p><img src="https://i.gyazo.com/9ea2265a9d054bc697a822b8b0061bee.png" alt="9ea2265a9d054bc697a822b8b0061bee"></p>
 <p>サーバーが終了したので、さきほどの Index と書かれたページも再読み込みしてもアクセスできなくなります。</p>
 <h2 id="今回の-codespace-の終了"><a name="今回の-codespace-の終了" class="plugin-anchor" href="#今回の-codespace-の終了"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Codespace の終了</h2>
+<p><img src="https://i.gyazo.com/0a8b4cfb807e57ea1382292a757c6899.png" alt="0a8b4cfb807e57ea1382292a757c6899"></p>
 <p>今回の Codespace の終了をします。Codespace はブラウザを閉じると自動で閉じることもありますが、確実に閉じたほうが、無料枠の制限時間も無駄に消費せずおススメです。</p>
 <blockquote>
 <p>コードスペースのライフサイクルを理解する<br><a href="https://docs.github.com/ja/codespaces/getting-started/understanding-the-codespace-lifecycle" target="_blank">https://docs.github.com/ja/codespaces/getting-started/understanding-the-codespace-lifecycle</a></p>
@@ -920,7 +914,7 @@ app listening at http://localhost:8080
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"next":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},"previous":{"title":"全体の流れの共有","level":"2.1.1","depth":2,"path":"term1-1/00-chapter01.md","ref":"./term1-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter02.md","mtime":"2023-07-20T09:38:29.150Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-21T03:16:16.286Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"next":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},"previous":{"title":"全体の流れの共有","level":"2.1.1","depth":2,"path":"term1-1/00-chapter01.md","ref":"./term1-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter02.md","mtime":"2023-07-26T07:34:48.214Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-26T07:58:12.929Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

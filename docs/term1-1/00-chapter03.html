@@ -649,19 +649,6 @@
 <p><img src="https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png" alt="9d2c38e6fe48e61528f6b2d34370768f"></p>
 <h2 id="この章で学ぶこと"><a name="この章で学ぶこと" class="plugin-anchor" href="#この章で学ぶこと"><i class="fa fa-link" aria-hidden="true"></i></a>この章で学ぶこと</h2>
 <p>基礎となるゲームサンプルの共有と動作確認を行います。</p>
-<h2 id="codespaced-の再起動"><a name="codespaced-の再起動" class="plugin-anchor" href="#codespaced-の再起動"><i class="fa fa-link" aria-hidden="true"></i></a>Codespaced の再起動</h2>
-<ul>
-<li>codespace の停止と開始 - GitHub Docs<ul>
-<li><a href="https://docs.github.com/ja/codespaces/developing-in-codespaces/stopping-and-starting-a-codespace" target="_blank">https://docs.github.com/ja/codespaces/developing-in-codespaces/stopping-and-starting-a-codespace</a></li>
-</ul>
-</li>
-</ul>
-<p>こちらを参考に再起動します。</p>
-<p>GitHub にログインした状態で <a href="https://github.com/codespaces" target="_blank">https://github.com/codespaces</a> にアクセスします。</p>
-<p><img src="https://i.gyazo.com/34de49185c6b28fb938519084d5b36fe.png" alt="34de49185c6b28fb938519084d5b36fe"></p>
-<p>Codespaces のページです。</p>
-<p><img src="https://i.gyazo.com/6be56b218c122cfa36b4518208104104.png" alt="6be56b218c122cfa36b4518208104104"></p>
-<p>さきほど使っていた Codespace をクリックして起動します。</p>
 <h2 id="unity-プロジェクトをダウンロード"><a name="unity-プロジェクトをダウンロード" class="plugin-anchor" href="#unity-プロジェクトをダウンロード"><i class="fa fa-link" aria-hidden="true"></i></a>Unity プロジェクトをダウンロード</h2>
 <p><img src="https://i.gyazo.com/d2e14eaab7e66332b09a2086fa5b767e.png" alt="d2e14eaab7e66332b09a2086fa5b767e"></p>
 <p>今回の教材の Unity プロジェクトを <a href="https://github.com/1ft-seabass/vantan-unity-network-project-01" target="_blank">https://github.com/1ft-seabass/vantan-unity-network-project-01</a> にブラウザからアクセスします。</p>
@@ -689,7 +676,7 @@
 <p><img src="https://i.gyazo.com/930d6df890c0e10f92ad28c4fc3e4987.png" alt="930d6df890c0e10f92ad28c4fc3e4987"></p>
 <p>コンソールでこのようなエラーが出るのも問題ないです。</p>
 <h2 id="シーンを開く"><a name="シーンを開く" class="plugin-anchor" href="#シーンを開く"><i class="fa fa-link" aria-hidden="true"></i></a>シーンを開く</h2>
-<p><img src="https://i.gyazo.com/9a668436222b881cbfa0f45be98bdf22.png" alt="9a668436222b881cbfa0f45be98bdf22"></p>
+<p><img src="https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png" alt="6049726527f3133083e8ca07d1e6261c"></p>
 <p>Project タブから Assets &gt; Scenes を選択します。Scene01 をダブルクリックして起動しましょう。</p>
 <p><img src="https://i.gyazo.com/d9b23dbbd1c785f79b1fb51278755eba.png" alt="d9b23dbbd1c785f79b1fb51278755eba"></p>
 <p>Cube が一つ配置されているシーンが表示されます。</p>
@@ -699,7 +686,81 @@
 <p><img src="https://i.gyazo.com/6044c7e49cf4a9d7af2d62b94476d854.png" alt="6044c7e49cf4a9d7af2d62b94476d854"></p>
 <p>Cube をマウスでクリックしてみましょう。</p>
 <p><img src="https://i.gyazo.com/cfe7587c4bb92695695695e3a2f291d4.png" alt="cfe7587c4bb92695695695e3a2f291d4"></p>
-<p>Console でこのようなログが出てくれば成功です！まずはマウスクリックが動きました。</p>
+<p>Console でこのようなログが出てくれば成功です！</p>
+<p>まずはマウスクリックが動きました。</p>
+<h2 id="シーンの仕組みの解説"><a name="シーンの仕組みの解説" class="plugin-anchor" href="#シーンの仕組みの解説"><i class="fa fa-link" aria-hidden="true"></i></a>シーンの仕組みの解説</h2>
+<p><img src="https://i.gyazo.com/ae6172228f962578c4c19763b03360d2.png" alt="ae6172228f962578c4c19763b03360d2"></p>
+<p>（時間があれば）シーンの仕組みを解説します。</p>
+<p>✅ポイント</p>
+<ul>
+<li>Cube には CubeEvent というスクリプトが関連づけられシンプルなクリックイベントが書かれています</li>
+<li>イベントまわりは Main Camera の Pyshics Raycaster と EventSystem の設置で対応しています</li>
+</ul>
+<h2 id="codespace-の再起動"><a name="codespace-の再起動" class="plugin-anchor" href="#codespace-の再起動"><i class="fa fa-link" aria-hidden="true"></i></a>Codespace の再起動</h2>
+<ul>
+<li>codespace の停止と開始 - GitHub Docs<ul>
+<li><a href="https://docs.github.com/ja/codespaces/developing-in-codespaces/stopping-and-starting-a-codespace" target="_blank">https://docs.github.com/ja/codespaces/developing-in-codespaces/stopping-and-starting-a-codespace</a></li>
+</ul>
+</li>
+</ul>
+<p>こちらを参考に再起動します。</p>
+<p>GitHub にログインした状態で <a href="https://github.com/codespaces" target="_blank">https://github.com/codespaces</a> にアクセスします。</p>
+<p><img src="https://i.gyazo.com/34de49185c6b28fb938519084d5b36fe.png" alt="34de49185c6b28fb938519084d5b36fe"></p>
+<p>Codespaces のページです。</p>
+<p><img src="https://i.gyazo.com/6be56b218c122cfa36b4518208104104.png" alt="6be56b218c122cfa36b4518208104104"></p>
+<p>さきほど使っていた Codespace をクリックして起動します。</p>
+<h2 id="サーバーの起動"><a name="サーバーの起動" class="plugin-anchor" href="#サーバーの起動"><i class="fa fa-link" aria-hidden="true"></i></a>サーバーの起動</h2>
+<pre><code>node server01.js
+</code></pre><p>ターミナルで以下のコマンドを入力して Enter キーを押して実行します。</p>
+<pre><code>server01 start!
+app listening at http://localhost:8080
+</code></pre><p>というメッセージが次の行に出てくれば起動成功です。これで無事サーバーが起動できました。</p>
+<h2 id="自分の-github-アカウントのみで見えることを確認"><a name="自分の-github-アカウントのみで見えることを確認" class="plugin-anchor" href="#自分の-github-アカウントのみで見えることを確認"><i class="fa fa-link" aria-hidden="true"></i></a>自分の GitHub アカウントのみで見えることを確認</h2>
+<p><img src="https://i.gyazo.com/ad43d16f32933e425e9818fafd1ee031.png" alt="ad43d16f32933e425e9818fafd1ee031"></p>
+<p>現在この Codespace でサーバー起動している状況はポートタブから確認できます。ターミナルタブのポートをクリックしてポートタブを表示します。</p>
+<p><img src="https://i.gyazo.com/55758bc0dc28422bc1dc42bd8c6ac725.png" alt="55758bc0dc28422bc1dc42bd8c6ac725"></p>
+<p>このように 8080 ポートで起動していることがわかり、表示範囲がまだ Private になっていることを確認します。</p>
+<p><img src="https://i.gyazo.com/5119ac8b2b9bc81ee2dc1a5a12d479e6.png" alt="5119ac8b2b9bc81ee2dc1a5a12d479e6"></p>
+<p>こちらの地球儀マークをクリックすると、現在のブラウザで新しいタブが開いてサーバーが確認できます。</p>
+<p><img src="https://i.gyazo.com/75ef12af4b9fa57857d6a5cc1e04e6bb.png" alt="75ef12af4b9fa57857d6a5cc1e04e6bb"></p>
+<p>Index というページが表示されます。</p>
+<p>これは server01.js の</p>
+<pre><code class="lang-js"><span class="hljs-comment">// public フォルダ内にあるファイルはパスが一致していると呼びだせます</span>
+<span class="hljs-comment">// /index.html や / の場合は public フォルダ内の index.html が表示されます</span>
+app.use(express.static(__dirname + <span class="hljs-string">&apos;/public&apos;</span>));
+</code></pre>
+<p>の、仕組みで public フォルダ内の index.html が表示されています。</p>
+<p>この Private 状態でも見える理由は、いまのブラウザで GitHub アカウントにログインしているので自分の GitHub アカウントのみで見える状況です。</p>
+<p><img src="https://i.gyazo.com/cec370c19d64e05d74af2bd84cab7aa1.png" alt="cec370c19d64e05d74af2bd84cab7aa1"></p>
+<p>今のままだと、Unity からはアクセスできません。</p>
+<h2 id="シークレットウィンドウで自分の-github-アカウント以外で見れないことを把握"><a name="シークレットウィンドウで自分の-github-アカウント以外で見れないことを把握" class="plugin-anchor" href="#シークレットウィンドウで自分の-github-アカウント以外で見れないことを把握"><i class="fa fa-link" aria-hidden="true"></i></a>シークレットウィンドウで自分の GitHub アカウント以外で見れないことを把握</h2>
+<p><img src="https://i.gyazo.com/364a7b4d7e0db1811b34739e6ecc50d4.png" alt="364a7b4d7e0db1811b34739e6ecc50d4"></p>
+<p>手軽にアカウントをログインしていない状態で見るなら Chrome のシークレットウィンドウ機能は便利です。</p>
+<p>右上のメニューから新しいシークレットウィンドウをクリックしてシークレットウィンドウを起動します。</p>
+<p><img src="https://i.gyazo.com/fb0b95a3e4ae0ba4e207e5c6813b9772.png" alt="fb0b95a3e4ae0ba4e207e5c6813b9772"></p>
+<p>新しいシークレットウィンドウが表示されました。</p>
+<p><img src="https://i.gyazo.com/09b0473d51bd8a7227a41b6c08b3c32a.png" alt="09b0473d51bd8a7227a41b6c08b3c32a"></p>
+<p>今回のサーバーの行のクリップボードマークをクリックして今回の URL をコピーしましょう。</p>
+<p>今回のシークレットウィンドウのアドレスバーに URL をコピーしてペーストしてアクセスしてみましょう。</p>
+<p><img src="https://i.gyazo.com/3a24e8de9f75efbab253cc776f46d4da.png" alt="3a24e8de9f75efbab253cc776f46d4da"></p>
+<p>このように GitHub のログインページになりアクセスできないことが分かります。なお、別の GitHub アカウントでログインして、今回の URL を見ようとしても 404 エラーになり、外部や別ユーザーから見れないことが分かります。</p>
+<p>なお、このシークレットウィンドウは、このあとの公開後に公開チェックをするので、閉じずにそのままにしておいてください。</p>
+<h2 id="サーバーの使っているポートを公開する"><a name="サーバーの使っているポートを公開する" class="plugin-anchor" href="#サーバーの使っているポートを公開する"><i class="fa fa-link" aria-hidden="true"></i></a>サーバーの使っているポートを公開する</h2>
+<p><img src="https://i.gyazo.com/55758bc0dc28422bc1dc42bd8c6ac725.png" alt="55758bc0dc28422bc1dc42bd8c6ac725"></p>
+<p>ポートタブに戻ります。</p>
+<p><img src="https://i.gyazo.com/d531dea56766a4a10b71457abf505531.png" alt="d531dea56766a4a10b71457abf505531"></p>
+<p>今回のサーバーが動いている 8080 の行を右クリックして、ポートの表示範囲 &gt; Private となっているところを Public に変更します。</p>
+<p><img src="https://i.gyazo.com/01482cb73eb19684ff0e0e564ccee505.png" alt="01482cb73eb19684ff0e0e564ccee505"></p>
+<p>公開範囲が Private から Public になります。これで公開は完了です。</p>
+<p><img src="https://i.gyazo.com/09b0473d51bd8a7227a41b6c08b3c32a.png" alt="09b0473d51bd8a7227a41b6c08b3c32a"></p>
+<p>今回のサーバーの行のクリップボードマークをクリックして今回の URL をコピーしましょう。</p>
+<p>今回のシークレットウィンドウのアドレスバーに URL をコピーしてペーストしてアクセスしてみましょう。公開ができていて Index が表示されるか確認しましょう。</p>
+<p><img src="https://i.gyazo.com/864f04a4ab4903aa57d39a7f41dc8b8b.png" alt="864f04a4ab4903aa57d39a7f41dc8b8b"></p>
+<p>これで Unity ともやり取りできるようになります。</p>
+<h2 id="今回の-codespace-の終了"><a name="今回の-codespace-の終了" class="plugin-anchor" href="#今回の-codespace-の終了"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Codespace の終了</h2>
+<p><img src="https://i.gyazo.com/0a8b4cfb807e57ea1382292a757c6899.png" alt="0a8b4cfb807e57ea1382292a757c6899"></p>
+<p>今回の Codespace 終了しておきましょう。</p>
+<p>Unity は起動しっぱなしで OK です。</p>
 
                                 
                                 </section>
@@ -743,7 +804,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"next":{"title":"ゲームサンプルからサーバーの仕組みとの疎通","level":"2.1.4","depth":2,"path":"term1-1/00-chapter04.md","ref":"./term1-1/00-chapter04.md","articles":[]},"previous":{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"path":"term1-1/00-chapter02.md","ref":"./term1-1/00-chapter02.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter03.md","mtime":"2023-07-21T03:16:12.011Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-21T03:16:16.286Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"next":{"title":"ゲームサンプルからサーバーの仕組みとの疎通","level":"2.1.4","depth":2,"path":"term1-1/00-chapter04.md","ref":"./term1-1/00-chapter04.md","articles":[]},"previous":{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"path":"term1-1/00-chapter02.md","ref":"./term1-1/00-chapter02.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter03.md","mtime":"2023-07-26T07:29:05.265Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-26T07:58:12.929Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
