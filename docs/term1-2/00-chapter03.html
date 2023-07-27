@@ -7,10 +7,10 @@
         <meta property="og:type" content="article">
         <meta property="og:url" content="term1-2/00-chapter03.html">
         <meta property="og:image" content="https://i.gyazo.com/a0ee48241d11602ddce592691e661d41.png">
-        <meta property="og:title" content="[バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業] 静的なデータを表示してみよう">
+        <meta property="og:title" content="[バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業] JSON データ取得について学ぼう">
         <meta property="og:description" content="バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。">
         <meta property="og:locale" content="ja">
-        <title>[バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業] 静的なデータを表示してみよう</title>
+        <title>[バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業] JSON データ取得について学ぼう</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。">
         <meta name="generator" content="HonKit 3.7.4">
@@ -229,7 +229,7 @@
                 <a href="00-chapter01.html">
             
                     
-                    静的なデータを取得してみよう
+                    サーバからデータを取得してみよう
             
                 </a>
             
@@ -242,7 +242,7 @@
                 <a href="00-chapter02.html">
             
                     
-                    JSON データ取得について学ぼう
+                    サーバから受け取ったデータを表示してみよう
             
                 </a>
             
@@ -255,7 +255,7 @@
                 <a href="00-chapter03.html">
             
                     
-                    静的なデータを表示してみよう
+                    JSON データ取得について学ぼう
             
                 </a>
             
@@ -630,7 +630,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >静的なデータを表示してみよう</a>
+        <a href=".." >JSON データ取得について学ぼう</a>
     </h1>
 </div>
 
@@ -645,10 +645,33 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="静的なデータを表示してみよう"><a name="静的なデータを表示してみよう" class="plugin-anchor" href="#静的なデータを表示してみよう"><i class="fa fa-link" aria-hidden="true"></i></a>静的なデータを表示してみよう</h1>
+                                <h1 id="json-データ取得について学ぼう"><a name="json-データ取得について学ぼう" class="plugin-anchor" href="#json-データ取得について学ぼう"><i class="fa fa-link" aria-hidden="true"></i></a>JSON データ取得について学ぼう</h1>
 <p><img src="https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png" alt="9d2c38e6fe48e61528f6b2d34370768f"></p>
 <h2 id="この章で学ぶこと"><a name="この章で学ぶこと" class="plugin-anchor" href="#この章で学ぶこと"><i class="fa fa-link" aria-hidden="true"></i></a>この章で学ぶこと</h2>
-<p>静的なデータを表示してみましょう。</p>
+<p>JSON データ取得について学びます。</p>
+<ul>
+<li>データを構造的に扱うのに JSON が便利</li>
+<li>Unity での JSON</li>
+</ul>
+<p>とほほのExpress入門 - とほほのWWW入門
+<a href="https://www.tohoho-web.com/ex/express.html#express.json" target="_blank">https://www.tohoho-web.com/ex/express.html#express.json</a></p>
+<h3 id="json-データの送信や受け取ったデータの-json-解析は-jsonutility"><a name="json-データの送信や受け取ったデータの-json-解析は-jsonutility" class="plugin-anchor" href="#json-データの送信や受け取ったデータの-json-解析は-jsonutility"><i class="fa fa-link" aria-hidden="true"></i></a>JSON データの送信や受け取ったデータの JSON 解析は JsonUtility</h3>
+<p><img src="https://i.gyazo.com/3a574ce27b737832c3f94c0f9ea9dc1b.png" alt="image"></p>
+<p>JSON データの送信や受け取ったデータの JSON 解析は、Unity でビルドインされている JsonUtility が便利です。</p>
+<ul>
+<li>JSON 形式にシリアライズ - Unity マニュアル<ul>
+<li><a href="https://docs.unity3d.com/ja/2018.4/Manual/JSONSerialization.html" target="_blank">https://docs.unity3d.com/ja/2018.4/Manual/JSONSerialization.html</a></li>
+</ul>
+</li>
+<li>JsonUtility-FromJson - Unity スクリプトリファレンス<ul>
+<li><a href="https://docs.unity3d.com/ja/2018.4/ScriptReference/JsonUtility.FromJson.html" target="_blank">https://docs.unity3d.com/ja/2018.4/ScriptReference/JsonUtility.FromJson.html</a></li>
+</ul>
+</li>
+<li>JsonUtility-ToJson - Unity スクリプトリファレンス<ul>
+<li><a href="https://docs.unity3d.com/ja/2018.4/ScriptReference/JsonUtility.ToJson.html" target="_blank">https://docs.unity3d.com/ja/2018.4/ScriptReference/JsonUtility.ToJson.html</a></li>
+</ul>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -676,7 +699,7 @@
 
             
                 
-                <a href="00-chapter02.html" class="navigation navigation-prev " aria-label="Previous page: JSON データ取得について学ぼう">
+                <a href="00-chapter02.html" class="navigation navigation-prev " aria-label="Previous page: サーバから受け取ったデータを表示してみよう">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -692,7 +715,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"静的なデータを表示してみよう","level":"3.1.3","depth":2,"next":{"title":"データ送信実践","level":"4.1","depth":1,"path":"term1-3/README.md","ref":"./term1-3/README.md","articles":[{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"path":"term1-3/00-chapter01.md","ref":"./term1-3/00-chapter01.md","articles":[]},{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"path":"term1-3/00-chapter02.md","ref":"./term1-3/00-chapter02.md","articles":[]}]},"previous":{"title":"JSON データ取得について学ぼう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-2/00-chapter03.md","mtime":"2023-07-13T06:19:58.303Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-27T02:00:12.624Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"JSON データ取得について学ぼう","level":"3.1.3","depth":2,"next":{"title":"データ送信実践","level":"4.1","depth":1,"path":"term1-3/README.md","ref":"./term1-3/README.md","articles":[{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"path":"term1-3/00-chapter01.md","ref":"./term1-3/00-chapter01.md","articles":[]},{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"path":"term1-3/00-chapter02.md","ref":"./term1-3/00-chapter02.md","articles":[]}]},"previous":{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-2/00-chapter03.md","mtime":"2023-07-27T05:26:00.904Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-27T05:28:20.411Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

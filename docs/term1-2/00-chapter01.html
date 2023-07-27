@@ -7,10 +7,10 @@
         <meta property="og:type" content="article">
         <meta property="og:url" content="term1-2/00-chapter01.html">
         <meta property="og:image" content="https://i.gyazo.com/a0ee48241d11602ddce592691e661d41.png">
-        <meta property="og:title" content="[バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業] 静的なデータを取得してみよう">
+        <meta property="og:title" content="[バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業] サーバからデータを取得してみよう">
         <meta property="og:description" content="バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。">
         <meta property="og:locale" content="ja">
-        <title>[バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業] 静的なデータを取得してみよう</title>
+        <title>[バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業] サーバからデータを取得してみよう</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。">
         <meta name="generator" content="HonKit 3.7.4">
@@ -229,7 +229,7 @@
                 <a href="00-chapter01.html">
             
                     
-                    静的なデータを取得してみよう
+                    サーバからデータを取得してみよう
             
                 </a>
             
@@ -242,7 +242,7 @@
                 <a href="00-chapter02.html">
             
                     
-                    JSON データ取得について学ぼう
+                    サーバから受け取ったデータを表示してみよう
             
                 </a>
             
@@ -255,7 +255,7 @@
                 <a href="00-chapter03.html">
             
                     
-                    静的なデータを表示してみよう
+                    JSON データ取得について学ぼう
             
                 </a>
             
@@ -630,7 +630,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >静的なデータを取得してみよう</a>
+        <a href=".." >サーバからデータを取得してみよう</a>
     </h1>
 </div>
 
@@ -648,7 +648,243 @@
                                 <h1 id="静的なデータを取得してみよう"><a name="静的なデータを取得してみよう" class="plugin-anchor" href="#静的なデータを取得してみよう"><i class="fa fa-link" aria-hidden="true"></i></a>静的なデータを取得してみよう</h1>
 <p><img src="https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png" alt="9d2c38e6fe48e61528f6b2d34370768f"></p>
 <h2 id="この章で学ぶこと"><a name="この章で学ぶこと" class="plugin-anchor" href="#この章で学ぶこと"><i class="fa fa-link" aria-hidden="true"></i></a>この章で学ぶこと</h2>
-<p>静的なデータを取得してみます。</p>
+<p>サーバからデータを取得してみます。</p>
+<h2 id="codespaced-の起動"><a name="codespaced-の起動" class="plugin-anchor" href="#codespaced-の起動"><i class="fa fa-link" aria-hidden="true"></i></a>Codespaced の起動</h2>
+<p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
+<p>GitHub にログインした状態で <a href="https://github.com/codespaces" target="_blank">https://github.com/codespaces</a> にアクセスします。</p>
+<p><img src="https://i.gyazo.com/34de49185c6b28fb938519084d5b36fe.png" alt="34de49185c6b28fb938519084d5b36fe"></p>
+<p>Codespaces のページです。さきほど使っていた Codespace をクリックして起動します。</p>
+<h2 id="サーバの起動"><a name="サーバの起動" class="plugin-anchor" href="#サーバの起動"><i class="fa fa-link" aria-hidden="true"></i></a>サーバの起動</h2>
+<p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
+<ul>
+<li>ターミナルで <code>node server02.js</code> をサーバ起動</li>
+<li>ポートタブで今回のサーバ起動を公開</li>
+<li>シークレットウィンドウで今回のサーバが公開されているか確認します</li>
+</ul>
+<p>こちらの手順を進めます。</p>
+<p>✅ポイント</p>
+<ul>
+<li>前回は public フォルダの中身を取ってくる仕組みだったが、今回は明確に特定のパスにアクセスすると特定の文言が返ってくる仕組みになっています。</li>
+<li>サーバー URL に <code>/api/get/sample</code> というパスを加わったときに、ブラウザや GET リクエストをすると <code>GET OK!</code> というテキストが取得できる</li>
+<li>サーバー URL に <code>/api/post/sample</code> というパスを加わったときに、POST リクエストをすると <code>POST OK!</code> というテキストが取得できる</li>
+</ul>
+<h2 id="今回の-unity-シーンを起動"><a name="今回の-unity-シーンを起動" class="plugin-anchor" href="#今回の-unity-シーンを起動"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Unity シーンを起動</h2>
+<p><img src="https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png" alt="6049726527f3133083e8ca07d1e6261c"></p>
+<p>Project タブから Assets &gt; Scenes を選択します。Scene03 をダブルクリックして起動しましょう。</p>
+<h2 id="シーンの仕組みの解説"><a name="シーンの仕組みの解説" class="plugin-anchor" href="#シーンの仕組みの解説"><i class="fa fa-link" aria-hidden="true"></i></a>シーンの仕組みの解説</h2>
+<p><img src="https://i.gyazo.com/ae6172228f962578c4c19763b03360d2.png" alt="ae6172228f962578c4c19763b03360d2"></p>
+<p>シーンの仕組みを解説します。</p>
+<p>✅ポイント</p>
+<ul>
+<li>GET リクエストと POST リクエストを試すものです</li>
+<li>GET リクエストは CubeGet オブジェクトに CubeEvent03_01.cs スクリプトがコンポーネントとして加わっています</li>
+<li>POST リクエストは CubePost オブジェクトに CubeEvent03_02.cs スクリプトがコンポーネントとして加わっています</li>
+</ul>
+<h2 id="サーバーの起動をチェック"><a name="サーバーの起動をチェック" class="plugin-anchor" href="#サーバーの起動をチェック"><i class="fa fa-link" aria-hidden="true"></i></a>サーバーの起動をチェック</h2>
+<p><img src="https://i.gyazo.com/60a04c04a43b5dbd23e17176d0da05db.png" alt="60a04c04a43b5dbd23e17176d0da05db"></p>
+<p>今回のサーバーの行のクリップボードマークをクリックして今回の URL をコピーしてブラウザで表示されるか確認しましょう。</p>
+<p>このサーバー URLを覚えておきましょう。</p>
+<h2 id="ブラウザで-get-リクエストでパスつきのアクセスを体験"><a name="ブラウザで-get-リクエストでパスつきのアクセスを体験" class="plugin-anchor" href="#ブラウザで-get-リクエストでパスつきのアクセスを体験"><i class="fa fa-link" aria-hidden="true"></i></a>ブラウザで GET リクエストでパスつきのアクセスを体験</h2>
+<p>今回は、サーバー側の以下のコードによって、先ほどアクセスしたサーバー URL に <code>/api/get/sample</code> というパスを加わったときに <code>GET OK!</code> というテキストが取得できる仕組みになっています。</p>
+<p>また、この仕組みが動作すると、サーバーが返答すると同時に <code>console.log(&apos;GET Response!&apos;);</code> というコードによってサーバー側のターミナルで <code>GET Response!</code> というログが残るのでアクセスしたことが分かりやすいです。</p>
+<pre><code class="lang-js"><span class="hljs-comment">// /api/get/sample というパスで GET リクエストでアクセスすると GET OK! が取得できます</span>
+<span class="hljs-comment">// GET リクエストなのでブラウザから見れます</span>
+app.get(<span class="hljs-string">&apos;/api/get/sample&apos;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;GET Response!&apos;</span>);
+  res.send(<span class="hljs-string">&apos;GET OK!&apos;</span>)
+});
+</code></pre>
+<p>ブラウザで、さきほどアクセスできた、サーバー URL に <code>/api/get/sample</code> というパスを加えてアクセスしてみましょう。</p>
+<p><img src="https://i.gyazo.com/de284f0eda8aef20c7605bb86ca8f84e.png" alt="de284f0eda8aef20c7605bb86ca8f84e"></p>
+<p>このように <code>GET OK!</code> とブラウザで表示されたら、正しくサーバーが動いています。</p>
+<h2 id="サーバー側でも-get-リクエストが反応していることを体験"><a name="サーバー側でも-get-リクエストが反応していることを体験" class="plugin-anchor" href="#サーバー側でも-get-リクエストが反応していることを体験"><i class="fa fa-link" aria-hidden="true"></i></a>サーバー側でも GET リクエストが反応していることを体験</h2>
+<p><img src="https://i.gyazo.com/c12bdf2a9458ddde8b630fa939b0128e.png" alt="c12bdf2a9458ddde8b630fa939b0128e"></p>
+<p>この仕組みが動作したのでサーバー側のターミナルで <code>GET Response!</code> というログが残ることも確認しましょう。</p>
+<h2 id="unity-で-get-リクエストでパスつきのアクセスを体験"><a name="unity-で-get-リクエストでパスつきのアクセスを体験" class="plugin-anchor" href="#unity-で-get-リクエストでパスつきのアクセスを体験"><i class="fa fa-link" aria-hidden="true"></i></a>Unity で GET リクエストでパスつきのアクセスを体験</h2>
+<p>Unity シーンでは GET リクエストは CubeGet オブジェクトに CubeEvent03_01.cs スクリプトがコンポーネントとして加わっています。</p>
+<p><code>Assets/Scripts/CubeEvent03_01.cs</code> をエディタで開きます。</p>
+<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
+<span class="hljs-keyword">using</span> UnityEngine.EventSystems;
+
+<span class="hljs-keyword">using</span> System.Collections;       <span class="hljs-comment">// IEnumerator のための参照</span>
+<span class="hljs-keyword">using</span> UnityEngine.Networking;   <span class="hljs-comment">// UnityWebRequest のための参照</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CubeEvent03_01</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
+{
+    <span class="hljs-comment">// アクセスする URL</span>
+    <span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
+    {
+        <span class="hljs-comment">// マウスクリックイベント</span>
+        <span class="hljs-comment">// Debug.Log($&quot;オブジェクト {this.name} がクリックされたよ！&quot;);</span>
+
+        <span class="hljs-comment">// HTTP GET リクエストを非同期処理を待つためコルーチンとして呼び出す</span>
+        StartCoroutine(<span class="hljs-string">&quot;GetGitHubData&quot;</span>);
+    }
+
+    <span class="hljs-comment">// GET リクエストする本体</span>
+    <span class="hljs-function">IEnumerator <span class="hljs-title">GetGitHubData</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// HTTP リクエストする(GET メソッド) UnityWebRequest を呼び出し</span>
+        <span class="hljs-comment">// アクセスする先は変数 urlGitHub で設定</span>
+        UnityWebRequest request = UnityWebRequest.Get(urlGitHub);
+
+        <span class="hljs-comment">// リクエスト開始</span>
+        <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> request.SendWebRequest();
+
+        <span class="hljs-comment">// 結果によって分岐</span>
+        <span class="hljs-keyword">switch</span> (request.result)
+        {
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.InProgress:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト中&quot;</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.Success:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト成功&quot;</span>);
+
+                <span class="hljs-comment">// コンソールに表示</span>
+                Debug.Log(<span class="hljs-string">$&quot;responseData: <span class="hljs-subst">{request.downloadHandler.text}</span>&quot;</span>);
+
+                <span class="hljs-keyword">break</span>;
+        }
+
+
+    }
+}
+</code></pre>
+<p>前章で習った仕組みと同じものです。</p>
+<pre><code class="lang-csharp">    <span class="hljs-comment">// アクセスする URL</span>
+    <span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
+</code></pre>
+<p>こちらを「ブラウザで GET リクエストでパスつきのリクエストを体験」でアクセスできた URL に変更して保存します。</p>
+<h2 id="unity-で-get-リクエストを動かしてみる"><a name="unity-で-get-リクエストを動かしてみる" class="plugin-anchor" href="#unity-で-get-リクエストを動かしてみる"><i class="fa fa-link" aria-hidden="true"></i></a>Unity で GET リクエストを動かしてみる</h2>
+<p><img src="https://i.gyazo.com/ad833d19086696f4841ff7d11828b4fb.png" alt="ad833d19086696f4841ff7d11828b4fb"></p>
+<p>Play ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/0a32f4ca5b5aec5a5660d3354ce63c3a.png" alt="0a32f4ca5b5aec5a5660d3354ce63c3a"></p>
+<p>CubeGet をマウスでクリックしてみましょう。先ほど設定した URL にアクセスします。</p>
+<p><img src="https://i.gyazo.com/22173618d1266819141729e1417e5e95.png" alt="22173618d1266819141729e1417e5e95"></p>
+<p>Console で <code>GET OK!</code> というログが出てくれば成功です！</p>
+<h2 id="サーバー側の-post-リクエストの仕組み"><a name="サーバー側の-post-リクエストの仕組み" class="plugin-anchor" href="#サーバー側の-post-リクエストの仕組み"><i class="fa fa-link" aria-hidden="true"></i></a>サーバー側の POST リクエストの仕組み</h2>
+<p>今回は、サーバー側の以下のコードによって、先ほどアクセスしたサーバー URL に <code>/api/post/sample</code> というパスを加わったときに <code>POST OK!</code> というテキストが取得できる仕組みになっています。</p>
+<p>また、この仕組みが動作すると、サーバーが返答すると同時に <code>console.log(&apos;POST Response!&apos;);</code> というコードによってサーバー側のターミナルで <code>POST Response!</code> というログが残るのでアクセスしたことが分かりやすいです。</p>
+<pre><code class="lang-js"><span class="hljs-comment">// /api/post/sample というパスで POST リクエストでアクセスすると POST OK! が取得できます</span>
+app.post(<span class="hljs-string">&apos;/api/post/sample&apos;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;POST Response!&apos;</span>);
+  res.send(<span class="hljs-string">&apos;POST OK!&apos;</span>)
+});
+</code></pre>
+<h2 id="ブラウザで-post-リクエストでパスつきのアクセスができないことを体験"><a name="ブラウザで-post-リクエストでパスつきのアクセスができないことを体験" class="plugin-anchor" href="#ブラウザで-post-リクエストでパスつきのアクセスができないことを体験"><i class="fa fa-link" aria-hidden="true"></i></a>ブラウザで POST リクエストでパスつきのアクセスができないことを体験</h2>
+<p>ブラウザでアクセスできるのは GET リクエストです。サーバー URL に <code>/api/post/sample</code> というパスを加えてアクセスしてみましょう。</p>
+<p><img src="https://i.gyazo.com/2748abd2644bed6899752f29c110d029.png" alt="2748abd2644bed6899752f29c110d029"></p>
+<p>このようにエラーになります。ただこれは「GET リクエストをブラウザでしてみたけど GET リクエストで返答できなかった」という意味で、正確には POST リクエストが失敗したわけではないです。</p>
+<p>POST リクエストはこのようにブラウザでアクセスして簡単に見ることができない点で、セキュリティ的には少し安全です。</p>
+<p>さらに、POST は GET とくらべてより多くのデータを仕込むこともできるので、ユーザーに紐づいたログインのやりとりなどを仕込めば、よりセキュリティを高めたやり取りができます。</p>
+<h2 id="unity-で-post-リクエストでパスつきのアクセスを体験"><a name="unity-で-post-リクエストでパスつきのアクセスを体験" class="plugin-anchor" href="#unity-で-post-リクエストでパスつきのアクセスを体験"><i class="fa fa-link" aria-hidden="true"></i></a>Unity で POST リクエストでパスつきのアクセスを体験</h2>
+<p>ブラウザでは直接アクセスできませんでしたが、Unity では UnityWebRequest で POST リクエストを行うことができます。</p>
+<p>Unity シーンでは POST リクエストは CubePost オブジェクトに CubeEvent03_02.cs スクリプトがコンポーネントとして加わっています。</p>
+<p><code>Assets/Scripts/CubeEvent03_02.cs</code> をエディタで開きます。</p>
+<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
+<span class="hljs-keyword">using</span> UnityEngine.EventSystems;
+
+<span class="hljs-keyword">using</span> System.Collections;       <span class="hljs-comment">// IEnumerator のための参照</span>
+<span class="hljs-keyword">using</span> UnityEngine.Networking;   <span class="hljs-comment">// UnityWebRequest のための参照</span>
+<span class="hljs-keyword">using</span> System.Text;              <span class="hljs-comment">// Encoding のための参照</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CubeEvent03_02</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
+{
+    <span class="hljs-comment">// アクセスする URL</span>
+    <span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
+    {
+        <span class="hljs-comment">// マウスクリックイベント</span>
+        <span class="hljs-comment">// Debug.Log($&quot;オブジェクト {this.name} がクリックされたよ！&quot;);</span>
+
+        <span class="hljs-comment">// HTTP リクエストを非同期処理を待つためコルーチンとして呼び出す</span>
+        StartCoroutine(<span class="hljs-string">&quot;PostGitHubData&quot;</span>);
+    }
+
+    <span class="hljs-comment">// リクエストする本体</span>
+    <span class="hljs-function">IEnumerator <span class="hljs-title">PostGitHubData</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// HTTP リクエストする(POST メソッド) UnityWebRequest を呼び出し</span>
+        <span class="hljs-comment">// アクセスする先は変数 urlGitHub で設定</span>
+        UnityWebRequest request = <span class="hljs-keyword">new</span> UnityWebRequest(urlGitHub, <span class="hljs-string">&quot;POST&quot;</span>);
+        <span class="hljs-comment">// 空ではやりとりできないので、今回は仮の dummy 文字を用意</span>
+        <span class="hljs-built_in">byte</span>[] bodyRaw = Encoding.UTF8.GetBytes(<span class="hljs-string">&quot;dummy&quot;</span>);
+        <span class="hljs-comment">// アップロード（Unity→サーバ）のハンドラを作成</span>
+        request.uploadHandler = <span class="hljs-keyword">new</span> UploadHandlerRaw(bodyRaw);
+        <span class="hljs-comment">// ダウンロード（サーバ→Unity）のハンドラを作成</span>
+        request.downloadHandler = <span class="hljs-keyword">new</span> DownloadHandlerBuffer();
+
+        <span class="hljs-comment">// リクエスト開始</span>
+        <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> request.SendWebRequest();
+
+        <span class="hljs-comment">// 結果によって分岐</span>
+        <span class="hljs-keyword">switch</span> (request.result)
+        {
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.InProgress:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト中&quot;</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.Success:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト成功&quot;</span>);
+
+                <span class="hljs-comment">// コンソールに表示</span>
+                Debug.Log(<span class="hljs-string">$&quot;responseData: <span class="hljs-subst">{request.downloadHandler.text}</span>&quot;</span>);
+
+                <span class="hljs-keyword">break</span>;
+        }
+
+
+    }
+}
+</code></pre>
+<p>このようなコードです。</p>
+<p>✅ポイント</p>
+<ul>
+<li><code>using System.Text;</code><ul>
+<li>今回の Encoding のための参照のために追加されています。</li>
+</ul>
+</li>
+<li><code>UnityWebRequest request = new UnityWebRequest(urlGitHub, &quot;POST&quot;);</code><ul>
+<li>HTTP リクエストする(POST メソッド) UnityWebRequest を呼び出し</li>
+<li>アクセスする URL は変数 urlGitHub で設定</li>
+</ul>
+</li>
+<li><code>byte[] bodyRaw = Encoding.UTF8.GetBytes(&quot;dummy&quot;);</code><ul>
+<li>空ではやりとりできないので、今回は仮の dummy 文字を用意</li>
+</ul>
+</li>
+<li><code>request.uploadHandler = new UploadHandlerRaw(bodyRaw);</code><ul>
+<li>アップロード（Unity→サーバ）のハンドラを作成</li>
+</ul>
+</li>
+<li><code>request.downloadHandler = new DownloadHandlerBuffer();</code><ul>
+<li>ダウンロード（サーバ→Unity）のハンドラを作成</li>
+</ul>
+</li>
+<li>リクエスト後の結果待ちの処理は GET リクエストの時と同じ</li>
+</ul>
+<pre><code class="lang-csharp">    <span class="hljs-comment">// アクセスする URL</span>
+    <span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
+</code></pre>
+<p>こちらをサーバー URL に <code>/api/post/sample</code> というパスを加えてアクセスしてみます。</p>
+<p>わたしの仕事でも POST リクエストでアクセスするケースは多いのですが GET リクエストと違いブラウザで一旦確認できず、Unity 側で試すことになるところが POST リクエストの少しハマりやすいところです。</p>
+<h2 id="unity-で-post-リクエストを動かしてみる"><a name="unity-で-post-リクエストを動かしてみる" class="plugin-anchor" href="#unity-で-post-リクエストを動かしてみる"><i class="fa fa-link" aria-hidden="true"></i></a>Unity で POST リクエストを動かしてみる</h2>
+<p><img src="https://i.gyazo.com/ad833d19086696f4841ff7d11828b4fb.png" alt="ad833d19086696f4841ff7d11828b4fb"></p>
+<p>Play ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/026abdb76fafe0c18fabe63e3edaab47.png" alt="026abdb76fafe0c18fabe63e3edaab47"></p>
+<p>CubePost をマウスでクリックしてみましょう。先ほど設定した URL にアクセスします。</p>
+<p><img src="https://i.gyazo.com/142cb5a953e095e5a4db36e2c8a53295.png" alt="142cb5a953e095e5a4db36e2c8a53295"></p>
+<p>Console で <code>POST OK!</code> というログが出てくれば成功です！</p>
+<h2 id="サーバー側でも-post-リクエストが反応していることを体験"><a name="サーバー側でも-post-リクエストが反応していることを体験" class="plugin-anchor" href="#サーバー側でも-post-リクエストが反応していることを体験"><i class="fa fa-link" aria-hidden="true"></i></a>サーバー側でも POST リクエストが反応していることを体験</h2>
+<p><img src="https://i.gyazo.com/8f97df0a60843b2b92ae32625eecddc3.png" alt="8f97df0a60843b2b92ae32625eecddc3"></p>
+<p>この仕組みが動作したのでサーバー側のターミナルで <code>POST Response!</code> というログが残ることも確認しましょう。</p>
+<h2 id="今回の-codespace-の終了"><a name="今回の-codespace-の終了" class="plugin-anchor" href="#今回の-codespace-の終了"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Codespace の終了</h2>
+<p><img src="https://i.gyazo.com/0a8b4cfb807e57ea1382292a757c6899.png" alt="0a8b4cfb807e57ea1382292a757c6899"></p>
+<p>今回の Codespace 終了しておきましょう。</p>
 
                                 
                                 </section>
@@ -681,7 +917,7 @@
                 </a>
                 
                 
-                <a href="00-chapter02.html" class="navigation navigation-next " aria-label="Next page: JSON データ取得について学ぼう">
+                <a href="00-chapter02.html" class="navigation navigation-next " aria-label="Next page: サーバから受け取ったデータを表示してみよう">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -692,7 +928,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"静的なデータを取得してみよう","level":"3.1.1","depth":2,"next":{"title":"JSON データ取得について学ぼう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},"previous":{"title":"データ取得実践","level":"3.1","depth":1,"path":"term1-2/README.md","ref":"./term1-2/README.md","articles":[{"title":"静的なデータを取得してみよう","level":"3.1.1","depth":2,"path":"term1-2/00-chapter01.md","ref":"./term1-2/00-chapter01.md","articles":[]},{"title":"JSON データ取得について学ぼう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},{"title":"静的なデータを表示してみよう","level":"3.1.3","depth":2,"path":"term1-2/00-chapter03.md","ref":"./term1-2/00-chapter03.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-2/00-chapter01.md","mtime":"2023-07-20T02:43:35.325Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-27T02:00:12.624Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"サーバからデータを取得してみよう","level":"3.1.1","depth":2,"next":{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},"previous":{"title":"データ取得実践","level":"3.1","depth":1,"path":"term1-2/README.md","ref":"./term1-2/README.md","articles":[{"title":"サーバからデータを取得してみよう","level":"3.1.1","depth":2,"path":"term1-2/00-chapter01.md","ref":"./term1-2/00-chapter01.md","articles":[]},{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},{"title":"JSON データ取得について学ぼう","level":"3.1.3","depth":2,"path":"term1-2/00-chapter03.md","ref":"./term1-2/00-chapter03.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-2/00-chapter01.md","mtime":"2023-07-27T05:25:40.010Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-27T05:28:20.411Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

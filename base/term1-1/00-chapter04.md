@@ -187,3 +187,8 @@ Cube をマウスでクリックしてみましょう。GitHub の URL にアク
 
 Console でこのようなログが出てくれば成功です！ブラウザで見ていた Index の HTML ファイルのデータを見ることができます。
 
+## 今回の Codespace の終了
+
+![0a8b4cfb807e57ea1382292a757c6899](https://i.gyazo.com/0a8b4cfb807e57ea1382292a757c6899.png)
+
+今回の Codespace 終了しておきましょう。
