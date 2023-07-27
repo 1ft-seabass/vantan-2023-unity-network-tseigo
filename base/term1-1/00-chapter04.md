@@ -110,7 +110,7 @@ POST リクエスト例
 
 Codespace で起動したサーバーに Unity からつなぎます。
 
-## Codespaced の起動
+## Codespace の起動
 
 ![0a3a35f3418068b7713ddaa729f2c660](https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png)
 
