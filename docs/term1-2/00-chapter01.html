@@ -657,7 +657,7 @@
 <h2 id="サーバの起動"><a name="サーバの起動" class="plugin-anchor" href="#サーバの起動"><i class="fa fa-link" aria-hidden="true"></i></a>サーバの起動</h2>
 <p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
 <ul>
-<li>ターミナルで <code>node server02.js</code> をサーバ起動</li>
+<li>ターミナルで <code>node term1-2-chapter01.js</code> をサーバ起動</li>
 <li>ポートタブで今回のサーバ起動を公開</li>
 <li>シークレットウィンドウで今回のサーバが公開されているか確認します</li>
 </ul>
@@ -670,7 +670,7 @@
 </ul>
 <h2 id="今回の-unity-シーンを起動"><a name="今回の-unity-シーンを起動" class="plugin-anchor" href="#今回の-unity-シーンを起動"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Unity シーンを起動</h2>
 <p><img src="https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png" alt="6049726527f3133083e8ca07d1e6261c"></p>
-<p>Project タブから Assets &gt; Scenes を選択します。Scene03 をダブルクリックして起動しましょう。</p>
+<p>Project タブから Assets &gt; Scenes を選択します。Scene-Term1-2-Chapter01 をダブルクリックして起動しましょう。</p>
 <h2 id="シーンの仕組みの解説"><a name="シーンの仕組みの解説" class="plugin-anchor" href="#シーンの仕組みの解説"><i class="fa fa-link" aria-hidden="true"></i></a>シーンの仕組みの解説</h2>
 <p><img src="https://i.gyazo.com/ae6172228f962578c4c19763b03360d2.png" alt="ae6172228f962578c4c19763b03360d2"></p>
 <p>シーンの仕組みを解説します。</p>
@@ -701,17 +701,18 @@ app.get(<span class="hljs-string">&apos;/api/get/sample&apos;</span>, <span clas
 <p><img src="https://i.gyazo.com/c12bdf2a9458ddde8b630fa939b0128e.png" alt="c12bdf2a9458ddde8b630fa939b0128e"></p>
 <p>この仕組みが動作したのでサーバー側のターミナルで <code>GET Response!</code> というログが残ることも確認しましょう。</p>
 <h2 id="unity-で-get-リクエストでパスつきのアクセスを体験"><a name="unity-で-get-リクエストでパスつきのアクセスを体験" class="plugin-anchor" href="#unity-で-get-リクエストでパスつきのアクセスを体験"><i class="fa fa-link" aria-hidden="true"></i></a>Unity で GET リクエストでパスつきのアクセスを体験</h2>
-<p>Unity シーンでは GET リクエストは CubeGet オブジェクトに CubeEvent03_01.cs スクリプトがコンポーネントとして加わっています。</p>
-<p><code>Assets/Scripts/CubeEvent03_01.cs</code> をエディタで開きます。</p>
+<p>Unity シーンでは GET リクエストは CubeGet オブジェクトに Term1_2_Chapter01_CubeEvent01.cs スクリプトがコンポーネントとして加わっています。</p>
+<p><code>Assets/Scripts/Term1_2_Chapter01_CubeEvent01.cs</code> をエディタで開きます。</p>
 <pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
 <span class="hljs-keyword">using</span> UnityEngine.EventSystems;
 
 <span class="hljs-keyword">using</span> System.Collections;       <span class="hljs-comment">// IEnumerator のための参照</span>
 <span class="hljs-keyword">using</span> UnityEngine.Networking;   <span class="hljs-comment">// UnityWebRequest のための参照</span>
 
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CubeEvent03_01</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Term1_2_Chapter01_CubeEvent01</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
 {
     <span class="hljs-comment">// アクセスする URL</span>
+    <span class="hljs-comment">// サーバー URL + /api/get/sample</span>
     <span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
@@ -755,6 +756,7 @@ app.get(<span class="hljs-string">&apos;/api/get/sample&apos;</span>, <span clas
 </code></pre>
 <p>前章で習った仕組みと同じものです。</p>
 <pre><code class="lang-csharp">    <span class="hljs-comment">// アクセスする URL</span>
+    <span class="hljs-comment">// サーバー URL + /api/get/sample</span>
     <span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
 </code></pre>
 <p>こちらを「ブラウザで GET リクエストでパスつきのリクエストを体験」でアクセスできた URL に変更して保存します。</p>
@@ -782,8 +784,8 @@ app.post(<span class="hljs-string">&apos;/api/post/sample&apos;</span>, <span cl
 <p>さらに、POST は GET とくらべてより多くのデータを仕込むこともできるので、ユーザーに紐づいたログインのやりとりなどを仕込めば、よりセキュリティを高めたやり取りができます。</p>
 <h2 id="unity-で-post-リクエストでパスつきのアクセスを体験"><a name="unity-で-post-リクエストでパスつきのアクセスを体験" class="plugin-anchor" href="#unity-で-post-リクエストでパスつきのアクセスを体験"><i class="fa fa-link" aria-hidden="true"></i></a>Unity で POST リクエストでパスつきのアクセスを体験</h2>
 <p>ブラウザでは直接アクセスできませんでしたが、Unity では UnityWebRequest で POST リクエストを行うことができます。</p>
-<p>Unity シーンでは POST リクエストは CubePost オブジェクトに CubeEvent03_02.cs スクリプトがコンポーネントとして加わっています。</p>
-<p><code>Assets/Scripts/CubeEvent03_02.cs</code> をエディタで開きます。</p>
+<p>Unity シーンでは POST リクエストは CubePost オブジェクトに Term1_2_Chapter01_CubeEvent02.cs スクリプトがコンポーネントとして加わっています。</p>
+<p><code>Assets/Scripts/Term1_2_Chapter01_CubeEvent02.cs</code> をエディタで開きます。</p>
 <pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
 <span class="hljs-keyword">using</span> UnityEngine.EventSystems;
 
@@ -791,9 +793,10 @@ app.post(<span class="hljs-string">&apos;/api/post/sample&apos;</span>, <span cl
 <span class="hljs-keyword">using</span> UnityEngine.Networking;   <span class="hljs-comment">// UnityWebRequest のための参照</span>
 <span class="hljs-keyword">using</span> System.Text;              <span class="hljs-comment">// Encoding のための参照</span>
 
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CubeEvent03_02</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Term1_2_Chapter01_CubeEvent02</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
 {
     <span class="hljs-comment">// アクセスする URL</span>
+    <span class="hljs-comment">// サーバー URL + /api/post/sample</span>
     <span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
@@ -868,6 +871,7 @@ app.post(<span class="hljs-string">&apos;/api/post/sample&apos;</span>, <span cl
 <li>リクエスト後の結果待ちの処理は GET リクエストの時と同じ</li>
 </ul>
 <pre><code class="lang-csharp">    <span class="hljs-comment">// アクセスする URL</span>
+    <span class="hljs-comment">// サーバー URL + /api/post/sample</span>
     <span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
 </code></pre>
 <p>こちらをサーバー URL に <code>/api/post/sample</code> というパスを加えてアクセスしてみます。</p>
@@ -928,7 +932,7 @@ app.post(<span class="hljs-string">&apos;/api/post/sample&apos;</span>, <span cl
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"サーバからデータを取得してみよう","level":"3.1.1","depth":2,"next":{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},"previous":{"title":"データ取得実践","level":"3.1","depth":1,"path":"term1-2/README.md","ref":"./term1-2/README.md","articles":[{"title":"サーバからデータを取得してみよう","level":"3.1.1","depth":2,"path":"term1-2/00-chapter01.md","ref":"./term1-2/00-chapter01.md","articles":[]},{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},{"title":"JSON データ取得について学ぼう","level":"3.1.3","depth":2,"path":"term1-2/00-chapter03.md","ref":"./term1-2/00-chapter03.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-2/00-chapter01.md","mtime":"2023-07-27T07:07:44.255Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-27T07:51:12.972Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"サーバからデータを取得してみよう","level":"3.1.1","depth":2,"next":{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},"previous":{"title":"データ取得実践","level":"3.1","depth":1,"path":"term1-2/README.md","ref":"./term1-2/README.md","articles":[{"title":"サーバからデータを取得してみよう","level":"3.1.1","depth":2,"path":"term1-2/00-chapter01.md","ref":"./term1-2/00-chapter01.md","articles":[]},{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},{"title":"JSON データ取得について学ぼう","level":"3.1.3","depth":2,"path":"term1-2/00-chapter03.md","ref":"./term1-2/00-chapter03.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-2/00-chapter01.md","mtime":"2023-07-31T13:37:04.078Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-31T14:04:03.411Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

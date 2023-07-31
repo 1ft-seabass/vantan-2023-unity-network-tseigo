@@ -62,7 +62,7 @@ Open ボタンをクリックします。
 
 ![6049726527f3133083e8ca07d1e6261c](https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png)
 
-Project タブから Assets > Scenes を選択します。Scene01 をダブルクリックして起動しましょう。
+Project タブから Assets > Scenes を選択します。Scene-Term1-1-Chapter03 をダブルクリックして起動しましょう。
 
 ![d9b23dbbd1c785f79b1fb51278755eba](https://i.gyazo.com/d9b23dbbd1c785f79b1fb51278755eba.png)
 

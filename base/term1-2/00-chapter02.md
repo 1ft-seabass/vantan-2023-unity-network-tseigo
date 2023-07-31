@@ -20,14 +20,14 @@ Codespaces のページです。さきほど使っていた Codespace をクリ�
 
 ![0a3a35f3418068b7713ddaa729f2c660](https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png)
 
-- ターミナルで `node server03.js` をサーバ起動
+- ターミナルで `node term1-2-chapter02.js` をサーバ起動
 - ポートタブで今回のサーバ起動を公開
 - シークレットウィンドウで今回のサーバが公開されているか確認します
 
 こちらの手順を進めます。
 
 ✅ポイント
-- `server03.js` の仕組みをベースにしています。
+- `term1-2-chapter01.js` の仕組みをベースにしています。
 - 今回は POST リクエストで 2 つの仕組みを作っています
 - `/api/post/title` というパスで POST リクエストでアクセスすると「こんにちは！ようこそ！」というテキストが取得できます
   - これをテキストとして扱ってシーンのテキストに反映します
@@ -38,7 +38,7 @@ Codespaces のページです。さきほど使っていた Codespace をクリ�
 
 ![6049726527f3133083e8ca07d1e6261c](https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png)
 
-Project タブから Assets > Scenes を選択します。Scene04 をダブルクリックして起動しましょう。
+Project タブから Assets > Scenes を選択します。Scene-Term1-2-Chapter02 をダブルクリックして起動しましょう。
 
 ## シーンの仕組みの解説
 
@@ -64,9 +64,9 @@ Project タブから Assets > Scenes を選択します。Scene04 をダブル�
 
 このサーバー URL を覚えておきましょう。
 
-## Scene04WelcomeMessage.cs 変更
+## Term1_2_Chapter02_WelcomeMessage.cs 変更
 
-`Assets/Scripts/Scene04WelcomeMessage.cs` をエディタで開きます。
+`Assets/Scripts/Term1_2_Chapter02_WelcomeMessage.cs` をエディタで開きます。
 
 ```csharp
 using UnityEngine;
@@ -76,9 +76,10 @@ using System.Collections;       // IEnumerator のための参照
 using UnityEngine.Networking;   // UnityWebRequest のための参照
 using System.Text;              // Encoding のための参照
 
-public class Scene04WelcomeMessage : MonoBehaviour
+public class Term1_2_Chapter02_WelcomeMessage : MonoBehaviour
 {
     // アクセスする URL
+    // サーバー URL + /api/post/title
     string urlGitHub = "ここにサーバーURLを入れる";
 
     void Start()
@@ -138,12 +139,13 @@ public class Scene04WelcomeMessage : MonoBehaviour
 
 ```csharp
     // アクセスする URL
+    // サーバー URL + /api/post/title
     string urlGitHub = "ここにサーバーURLを入れる";
 ```
 
 こちらをサーバー URL に `/api/post/title` というパスを加えて変更して保存します。
 
-## Scene04ClickPart.cs 変更
+## Term1_2_Chapter02_ClickPart.cs 変更
 
 
 ```csharp
@@ -154,9 +156,10 @@ using System.Collections;       // IEnumerator のための参照
 using UnityEngine.Networking;   // UnityWebRequest のための参照
 using System.Text;              // Encoding のための参照
 
-public class Scene04ClickPart : MonoBehaviour, IPointerClickHandler
+public class Term1_2_Chapter02_ClickPart : MonoBehaviour, IPointerClickHandler
 {
     // アクセスする URL
+    // サーバー URL + /api/post/add_point
     string urlGitHub = "ここにサーバーURLを入れる";
 
     // ポイント加算設定
@@ -242,13 +245,14 @@ public class Scene04ClickPart : MonoBehaviour, IPointerClickHandler
 ```
 
 ✅ポイント
-- Scene03 の POST リクエストの仕組みと同じです。
+- Term1_2_Chapter01_CubeEvent02 の POST リクエストの仕組みと同じです。
 - Start 関数で動作するので再生開始時にデータを読みに行きます
 - クリック時にポイント加算をしています
 - 受け取った加算ポイント設定を変数に記録するとき、文字列なので int.Parse で変換して数字で扱えるようにしています
 
 ```csharp
     // アクセスする URL
+    // サーバー URL + /api/post/add_point
     string urlGitHub = "ここにサーバーURLを入れる";
 ```
 
@@ -286,9 +290,10 @@ Console で動作も確認しておきましょう。
 
 サーバー修正するのでいったん終了します。ターミナルで Ctrl + C をするとプログラムが終了しサーバーが終了します。
 
-### server03.js をエディタで開く
+### term1-2-chapter02.js をエディタで開く
 
-
+TODO
+term1-2-chapter02.js をダブルクリックしてエディタを開きます。
 
 ### あいさつ変更
 
@@ -316,7 +321,7 @@ app.post('/api/post/add_point', (req, res) => {
 
 ### サーバー再起動
 
-ターミナルで再度 `node server03.js` コマンドでサーバー動かします。
+ターミナルで再度 `node term1-2-chapter02.js` コマンドでサーバー動かします。
 
 Unity をもう一度 Play ボタンを押して再生してみると、あいさつ文が変わり、クリック時の加算ポイントが 1 から 38 ポイントに変わって、増加量がアップしています。 
 

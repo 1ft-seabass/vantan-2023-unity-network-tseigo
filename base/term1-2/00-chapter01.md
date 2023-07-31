@@ -20,7 +20,7 @@ Codespaces のページです。さきほど使っていた Codespace をクリ�
 
 ![0a3a35f3418068b7713ddaa729f2c660](https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png)
 
-- ターミナルで `node server02.js` をサーバ起動
+- ターミナルで `node term1-2-chapter01.js` をサーバ起動
 - ポートタブで今回のサーバ起動を公開
 - シークレットウィンドウで今回のサーバが公開されているか確認します
 
@@ -35,7 +35,7 @@ Codespaces のページです。さきほど使っていた Codespace をクリ�
 
 ![6049726527f3133083e8ca07d1e6261c](https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png)
 
-Project タブから Assets > Scenes を選択します。Scene03 をダブルクリックして起動しましょう。
+Project タブから Assets > Scenes を選択します。Scene-Term1-2-Chapter01 をダブルクリックして起動しましょう。
 
 ## シーンの仕組みの解説
 
@@ -85,9 +85,9 @@ app.get('/api/get/sample', (req, res) => {
 
 ## Unity で GET リクエストでパスつきのアクセスを体験
 
-Unity シーンでは GET リクエストは CubeGet オブジェクトに CubeEvent03_01.cs スクリプトがコンポーネントとして加わっています。
+Unity シーンでは GET リクエストは CubeGet オブジェクトに Term1_2_Chapter01_CubeEvent01.cs スクリプトがコンポーネントとして加わっています。
 
-`Assets/Scripts/CubeEvent03_01.cs` をエディタで開きます。
+`Assets/Scripts/Term1_2_Chapter01_CubeEvent01.cs` をエディタで開きます。
 
 ```csharp
 using UnityEngine;
@@ -96,9 +96,10 @@ using UnityEngine.EventSystems;
 using System.Collections;       // IEnumerator のための参照
 using UnityEngine.Networking;   // UnityWebRequest のための参照
 
-public class CubeEvent03_01 : MonoBehaviour, IPointerClickHandler
+public class Term1_2_Chapter01_CubeEvent01 : MonoBehaviour, IPointerClickHandler
 {
     // アクセスする URL
+    // サーバー URL + /api/get/sample
     string urlGitHub = "ここにサーバーURLを入れる";
 
     public void OnPointerClick(PointerEventData eventData)
@@ -145,6 +146,7 @@ public class CubeEvent03_01 : MonoBehaviour, IPointerClickHandler
 
 ```csharp
     // アクセスする URL
+    // サーバー URL + /api/get/sample
     string urlGitHub = "ここにサーバーURLを入れる";
 ```
 
@@ -194,9 +196,9 @@ POST リクエストはこのようにブラウザでアクセスして簡単に
 
 ブラウザでは直接アクセスできませんでしたが、Unity では UnityWebRequest で POST リクエストを行うことができます。
 
-Unity シーンでは POST リクエストは CubePost オブジェクトに CubeEvent03_02.cs スクリプトがコンポーネントとして加わっています。
+Unity シーンでは POST リクエストは CubePost オブジェクトに Term1_2_Chapter01_CubeEvent02.cs スクリプトがコンポーネントとして加わっています。
 
-`Assets/Scripts/CubeEvent03_02.cs` をエディタで開きます。
+`Assets/Scripts/Term1_2_Chapter01_CubeEvent02.cs` をエディタで開きます。
 
 ```csharp
 using UnityEngine;
@@ -206,9 +208,10 @@ using System.Collections;       // IEnumerator のための参照
 using UnityEngine.Networking;   // UnityWebRequest のための参照
 using System.Text;              // Encoding のための参照
 
-public class CubeEvent03_02 : MonoBehaviour, IPointerClickHandler
+public class Term1_2_Chapter01_CubeEvent02 : MonoBehaviour, IPointerClickHandler
 {
     // アクセスする URL
+    // サーバー URL + /api/post/sample
     string urlGitHub = "ここにサーバーURLを入れる";
 
     public void OnPointerClick(PointerEventData eventData)
@@ -275,6 +278,7 @@ public class CubeEvent03_02 : MonoBehaviour, IPointerClickHandler
 
 ```csharp
     // アクセスする URL
+    // サーバー URL + /api/post/sample
     string urlGitHub = "ここにサーバーURLを入れる";
 ```
 

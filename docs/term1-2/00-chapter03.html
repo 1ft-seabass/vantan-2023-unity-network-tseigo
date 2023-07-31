@@ -649,14 +649,207 @@
 <p><img src="https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png" alt="9d2c38e6fe48e61528f6b2d34370768f"></p>
 <h2 id="この章で学ぶこと"><a name="この章で学ぶこと" class="plugin-anchor" href="#この章で学ぶこと"><i class="fa fa-link" aria-hidden="true"></i></a>この章で学ぶこと</h2>
 <p>JSON データ取得について学びます。</p>
+<h1 id="json-とは"><a name="json-とは" class="plugin-anchor" href="#json-とは"><i class="fa fa-link" aria-hidden="true"></i></a>JSON とは</h1>
+<p><img src="https://i.gyazo.com/63ab2988b4cf0591e5dd408ad473bb4e.png" alt="63ab2988b4cf0591e5dd408ad473bb4e"></p>
+<p>JSON は JavaScript Object Notation（JSON、ジェイソン）はデータ記述言語の1つです。JSON は JavaScript オブジェクトにとても似ている形式の文字列です。</p>
+<p>といっても、みなさんの中には JavaScript を知っているわけではない人も多いと思うので、Unity で使う基本データ型（文字列、数値、配列、論理型やその他のリテラル型）を使うことができて、柔軟にデータを表現することができると覚えておきましょう。</p>
+<p>たとえば、このようなデータがあるとします。プロパティ名は Unity でも使われている、オブジェクトのプロパティの名前と同じ役割です。</p>
 <ul>
-<li>データを構造的に扱うのに JSON が便利</li>
-<li>Unity での JSON</li>
+<li>プロパティ名は「number」<ul>
+<li>値は、整数の 1</li>
 </ul>
-<p>とほほのExpress入門 - とほほのWWW入門
+</li>
+<li>プロパティ名は「float」<ul>
+<li>値は、浮動小数点の 23.4</li>
+</ul>
+</li>
+<li>プロパティ名は「bool_ok」<ul>
+<li>値は、真偽値の true</li>
+</ul>
+</li>
+<li>プロパティ名は「name」<ul>
+<li>値は、文字列の MyName</li>
+</ul>
+</li>
+</ul>
+<p>こちらは JSON データでは以下で表現できます。</p>
+<p><img src="https://i.gyazo.com/3484da3d26f272ede691d421f73da1b9.png" alt="3484da3d26f272ede691d421f73da1b9"></p>
+<p>このようなデータです。これから話すために分かりやすく、少し色を付けます。</p>
+<p><img src="https://i.gyazo.com/19cea4e2d46d153eb0f9e423e98b41a5.png" alt="19cea4e2d46d153eb0f9e423e98b41a5"></p>
+<pre><code class="lang-js">{
+  <span class="hljs-string">&quot;number&quot;</span>:<span class="hljs-number">1</span>,
+  <span class="hljs-string">&quot;float&quot;</span>:<span class="hljs-number">23.4</span>,
+  <span class="hljs-string">&quot;bool_ok&quot;</span>:<span class="hljs-literal">true</span>,
+  <span class="hljs-string">&quot;name&quot;</span>:<span class="hljs-string">&quot;MyName&quot;</span>
+}
+</code></pre>
+<p>このようなルールでデータが作られています。</p>
+<p><img src="https://i.gyazo.com/30c03f890ae6f717ab9fd2effb89b3e1.png" alt="30c03f890ae6f717ab9fd2effb89b3e1"></p>
+<p>Unity で受信したときに扱える JSON は <code>{</code> と <code>}</code> で囲われたオブジェクト型ではじまっています。</p>
+<p><img src="https://i.gyazo.com/fae9f572145e6e8efad9b8056551657f.png" alt="fae9f572145e6e8efad9b8056551657f"></p>
+<p>ここでいう <code>&quot;number&quot;</code> ・ <code>&quot;float&quot;</code> ・ <code>&quot;bool_ok&quot;</code>・ <code>&quot;name&quot;</code> が、値の名前（プロパティ名）です。ダブルクォーテーションで囲んだ名称にします。Unity で読み込まれたとき、変数名として扱われます。</p>
+<p><img src="https://i.gyazo.com/715d8b39d9e5d1ed217095505da4cb91.png" alt="715d8b39d9e5d1ed217095505da4cb91"></p>
+<p>それぞれの値の名前（プロパティ名）に対応した値は <code>:</code> で区切って設定しています。</p>
+<p><img src="https://i.gyazo.com/666b08142ec856ff892179e2364b35ba.png" alt="666b08142ec856ff892179e2364b35ba"></p>
+<p>青文字の部分が、各プロパティの実際の値です。</p>
+<p>以下のような型表現ができます。ひとまず、Unity でも理解しやすい number の整数・浮動小数点, string , 理論値 boolean, 文字列が理解できていれば OK です。</p>
+<p>ちょっと array と object は、はじめは難しい。</p>
+<ul>
+<li>number 型<ul>
+<li>整数を表現。たとえば、整数の 1 は <code>1</code> と記述する。<ul>
+<li>今回の <code>&quot;number&quot;:1</code></li>
+</ul>
+</li>
+<li>浮動小数点数。たとえば、浮動小数点数の 23.4は <code>23.4</code> と記述する。<ul>
+<li>今回の <code>&quot;float&quot;:23.4</code></li>
+</ul>
+</li>
+<li>10 進法のみですが指数も表現できます。</li>
+</ul>
+</li>
+<li>string 型<ul>
+<li>文字列を表現。たとえば、文字列の MyName は <code>&quot;MyName&quot;</code> と記述する。<ul>
+<li>今回の <code>&quot;name&quot;:&quot;MyName&quot;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>null 型<ul>
+<li>null を表現。小文字で <code>null</code> と記述する。</li>
+</ul>
+</li>
+<li>true 型<ul>
+<li>理論値 true を表現。小文字で <code>true</code> と記述する。</li>
+<li>今回の <code>&quot;bool_ok&quot;:true</code></li>
+</ul>
+</li>
+<li>false 型<ul>
+<li>理論値 false を表現。小文字で <code>false</code> と記述する。</li>
+</ul>
+</li>
+<li>array 型<ul>
+<li>JavaScript でいう配列型を表現。値を <code>[]</code> でくくる。たとえば、a と b と c の文字列の入ったの配列は <code>[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</code> と記述する。</li>
+<li>Unity C# でいうと List 型に近いものです</li>
+</ul>
+</li>
+<li>object 型<ul>
+<li>JavaScript でいうオブジェクト型を表現。値を <code>{}</code> でくくる。プロパティ名はダブルクォーテーションで文字列として記述して、値は前述の各型で記述する。</li>
+<li>JSON データもオブジェクトではじまっているとも言えます。</li>
+</ul>
+</li>
+</ul>
+<p>✅参考文献</p>
+<ul>
+<li>JSON の操作 - ウェブ開発を学ぶ | MDN<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Learn/JavaScript/Objects/JSON" target="_blank">https://developer.mozilla.org/ja/docs/Learn/JavaScript/Objects/JSON</a></li>
+</ul>
+</li>
+<li>JavaScript Object Notation - Wikipedia<ul>
+<li><a href="https://ja.wikipedia.org/wiki/JavaScript_Object_Notation" target="_blank">https://ja.wikipedia.org/wiki/JavaScript_Object_Notation</a></li>
+</ul>
+</li>
+<li>JSON - JavaScript | MDN<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/JSON" target="_blank">https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/JSON</a></li>
+</ul>
+</li>
+</ul>
+<p>✅補足</p>
+<ul>
+<li><code>[</code> と <code>]</code> で配列ではじまる JSON も表現できますが Unity で受け取ったときに、ひと手間かかるデータなので、一旦ここでは割愛します。</li>
+</ul>
+<h1 id="json-データに慣れよう"><a name="json-データに慣れよう" class="plugin-anchor" href="#json-データに慣れよう"><i class="fa fa-link" aria-hidden="true"></i></a>JSON データに慣れよう</h1>
+<p><img src="https://i.gyazo.com/25365ec06cac99fdaecaf0d97df14a34.png" alt="25365ec06cac99fdaecaf0d97df14a34"></p>
+<p>✅参考文献</p>
+<ul>
+<li>JSON - JavaScript | MDN<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/JSON" target="_blank">https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/JSON</a></li>
+</ul>
+</li>
+</ul>
+<p>こちらの文献でも紹介されている JSON Parser <a href="https://jsonparser.org/" target="_blank">https://jsonparser.org/</a> というツールで、少し JSON データに慣れてみましょう。</p>
+<h2 id="例題-1"><a name="例題-1" class="plugin-anchor" href="#例題-1"><i class="fa fa-link" aria-hidden="true"></i></a>例題 1</h2>
+<pre><code class="lang-js">{
+  <span class="hljs-string">&quot;number&quot;</span>:<span class="hljs-number">1</span>,
+  <span class="hljs-string">&quot;float&quot;</span>:<span class="hljs-number">23.4</span>,
+  <span class="hljs-string">&quot;bool_ok&quot;</span>:<span class="hljs-literal">true</span>,
+  <span class="hljs-string">&quot;name&quot;</span>:<span class="hljs-string">&quot;MyName&quot;</span>
+}
+</code></pre>
+<p>こちらを左側にコピーペーストして、JSON Parse ボタンをクリックして JSON 構造を体験します。</p>
+<h2 id="例題-2"><a name="例題-2" class="plugin-anchor" href="#例題-2"><i class="fa fa-link" aria-hidden="true"></i></a>例題 2</h2>
+<p>「価格が 500 円」</p>
+<p>価格を示すプロパティ名は英語 price に置き換えて表現してみましょう。</p>
+<h2 id="例題-3"><a name="例題-3" class="plugin-anchor" href="#例題-3"><i class="fa fa-link" aria-hidden="true"></i></a>例題 3</h2>
+<p>「自分の名前」</p>
+<p>名前を示すプロパティ名は英語 name に置き換えて表現してみましょう。</p>
+<h2 id="例題-4"><a name="例題-4" class="plugin-anchor" href="#例題-4"><i class="fa fa-link" aria-hidden="true"></i></a>例題 4</h2>
+<p>「緯度が 35.681236 経度が 139.767125 の場所の名前が東京タワー」</p>
+<ul>
+<li>緯度を示すプロパティ名は latitude</li>
+<li>緯度を示すプロパティ名は longitude</li>
+<li>場所を示すプロパティ名は placeName</li>
+</ul>
+<h1 id="データ表現例"><a name="データ表現例" class="plugin-anchor" href="#データ表現例"><i class="fa fa-link" aria-hidden="true"></i></a>データ表現例</h1>
+<p>いくつかのデータ例を元に JSON でのデータ表現を把握します。</p>
+<p>JSON データの構造を、人間の生活や IoT のセンサーや住所などを例にして表現してみました。</p>
+<h2 id="日時・イベント名"><a name="日時・イベント名" class="plugin-anchor" href="#日時・イベント名"><i class="fa fa-link" aria-hidden="true"></i></a>日時・イベント名</h2>
+<pre><code class="lang-js">{
+  <span class="hljs-string">&quot;date&quot;</span>: <span class="hljs-string">&quot;2023-04-08T07:19:56+09:00&quot;</span>,
+  <span class="hljs-string">&quot;eventName&quot;</span>: <span class="hljs-string">&quot;バースデーパーティー&quot;</span>
+}
+</code></pre>
+<h2 id="たまご・ぶどう・肉などの買い物リスト"><a name="たまご・ぶどう・肉などの買い物リスト" class="plugin-anchor" href="#たまご・ぶどう・肉などの買い物リスト"><i class="fa fa-link" aria-hidden="true"></i></a>たまご・ぶどう・肉などの買い物リスト</h2>
+<pre><code class="lang-js">{
+  <span class="hljs-string">&quot;shoppingList&quot;</span>: [
+    {
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;たまご&quot;</span>,
+      <span class="hljs-string">&quot;quantity&quot;</span>: <span class="hljs-number">12</span>
+    },
+    {
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;ぶどう&quot;</span>,
+      <span class="hljs-string">&quot;quantity&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;unitPrice&quot;</span>: <span class="hljs-number">200</span>,
+      <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;JPY&quot;</span>
+    },
+    {
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;肉&quot;</span>,
+      <span class="hljs-string">&quot;quantity&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;unitPrice&quot;</span>: <span class="hljs-number">1000</span>,
+      <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;JPY&quot;</span>
+    }
+  ]
+}
+</code></pre>
+<h2 id="温度センサーの1回の値（小数点第一位まで）"><a name="温度センサーの1回の値（小数点第一位まで）" class="plugin-anchor" href="#温度センサーの1回の値（小数点第一位まで）"><i class="fa fa-link" aria-hidden="true"></i></a>温度センサーの1回の値（小数点第一位まで）</h2>
+<pre><code class="lang-js">{
+  <span class="hljs-string">&quot;temperatureSensorValue&quot;</span>: {
+    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">25.5</span>,
+    <span class="hljs-string">&quot;unitOfMeasurement&quot;</span>: <span class="hljs-string">&quot;℃&quot;</span>
+  }
+}
+</code></pre>
+<h2 id="windows-pc-商品名・メーカー名・型番・価格・消費税"><a name="windows-pc-商品名・メーカー名・型番・価格・消費税" class="plugin-anchor" href="#windows-pc-商品名・メーカー名・型番・価格・消費税"><i class="fa fa-link" aria-hidden="true"></i></a>Windows PC 商品名・メーカー名・型番・価格・消費税</h2>
+<pre><code class="lang-js">{
+  <span class="hljs-string">&quot;productDetails&quot;</span>: {
+    <span class="hljs-string">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Hyper Laptop Z 2930&quot;</span>,
+    <span class="hljs-string">&quot;manufacturerName&quot;</span>: <span class="hljs-string">&quot;PC Paradise&quot;</span>,
+    <span class="hljs-string">&quot;modelNumber&quot;</span>: <span class="hljs-string">&quot;HL-Z-2930-BK&quot;</span>,
+    <span class="hljs-string">&quot;priceDetails&quot;</span>: {
+      <span class="hljs-string">&quot;priceAmount&quot;</span>: <span class="hljs-number">200000</span>,
+      <span class="hljs-string">&quot;currencyCode&quot;</span>: <span class="hljs-string">&quot;JPY&quot;</span>,
+      <span class="hljs-string">&quot;taxDetails&quot;</span>: {
+        <span class="hljs-string">&quot;taxAmount&quot;</span>: <span class="hljs-number">20000</span>,
+        <span class="hljs-string">&quot;taxRatePercentage&quot;</span>: <span class="hljs-number">10</span>
+      }
+    }
+  }
+}
+</code></pre>
+<p>TODO
+とほほのExpress入門 - とほほのWWW入門
 <a href="https://www.tohoho-web.com/ex/express.html#express.json" target="_blank">https://www.tohoho-web.com/ex/express.html#express.json</a></p>
-<h3 id="json-データの送信や受け取ったデータの-json-解析は-jsonutility"><a name="json-データの送信や受け取ったデータの-json-解析は-jsonutility" class="plugin-anchor" href="#json-データの送信や受け取ったデータの-json-解析は-jsonutility"><i class="fa fa-link" aria-hidden="true"></i></a>JSON データの送信や受け取ったデータの JSON 解析は JsonUtility</h3>
-<p><img src="https://i.gyazo.com/3a574ce27b737832c3f94c0f9ea9dc1b.png" alt="image"></p>
+<h1 id="json-データの送信や受け取ったデータの-json-解析は-jsonutility"><a name="json-データの送信や受け取ったデータの-json-解析は-jsonutility" class="plugin-anchor" href="#json-データの送信や受け取ったデータの-json-解析は-jsonutility"><i class="fa fa-link" aria-hidden="true"></i></a>JSON データの送信や受け取ったデータの JSON 解析は JsonUtility</h1>
+<p><img src="https://i.gyazo.com/305255eea1072f3becd161d1df9a5755.png" alt="305255eea1072f3becd161d1df9a5755"></p>
 <p>JSON データの送信や受け取ったデータの JSON 解析は、Unity でビルドインされている JsonUtility が便利です。</p>
 <ul>
 <li>JSON 形式にシリアライズ - Unity マニュアル<ul>
@@ -665,12 +858,155 @@
 </li>
 <li>JsonUtility-FromJson - Unity スクリプトリファレンス<ul>
 <li><a href="https://docs.unity3d.com/ja/2018.4/ScriptReference/JsonUtility.FromJson.html" target="_blank">https://docs.unity3d.com/ja/2018.4/ScriptReference/JsonUtility.FromJson.html</a></li>
+<li>受け取った JSON データ「から」Unity での構造体に変換します</li>
 </ul>
 </li>
 <li>JsonUtility-ToJson - Unity スクリプトリファレンス<ul>
 <li><a href="https://docs.unity3d.com/ja/2018.4/ScriptReference/JsonUtility.ToJson.html" target="_blank">https://docs.unity3d.com/ja/2018.4/ScriptReference/JsonUtility.ToJson.html</a></li>
+<li>Unity での構造体を JSON データ「へ」変換します</li>
 </ul>
 </li>
+</ul>
+<p>この章では、シンプルな JSON データをサーバーから受け取って、Unity の型で使える流れを学んでみましょう。</p>
+<h2 id="codespace-の起動"><a name="codespace-の起動" class="plugin-anchor" href="#codespace-の起動"><i class="fa fa-link" aria-hidden="true"></i></a>Codespace の起動</h2>
+<p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
+<p>GitHub にログインした状態で <a href="https://github.com/codespaces" target="_blank">https://github.com/codespaces</a> にアクセスします。</p>
+<p><img src="https://i.gyazo.com/34de49185c6b28fb938519084d5b36fe.png" alt="34de49185c6b28fb938519084d5b36fe"></p>
+<p>Codespaces のページです。さきほど使っていた Codespace をクリックして起動します。</p>
+<h2 id="サーバの起動"><a name="サーバの起動" class="plugin-anchor" href="#サーバの起動"><i class="fa fa-link" aria-hidden="true"></i></a>サーバの起動</h2>
+<p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
+<ul>
+<li>ターミナルで <code>node term1-2-chapter03.js</code> をサーバ起動</li>
+<li>ポートタブで今回のサーバ起動を公開</li>
+<li>シークレットウィンドウで今回のサーバが公開されているか確認します</li>
+</ul>
+<p>こちらの手順を進めます。</p>
+<p>✅ポイント</p>
+<ul>
+<li>server02 に似た仕組みです</li>
+<li>今回は GET リクエストで 1 つの仕組みを作っています</li>
+<li><code>/api/get/json</code> というパスで GET リクエストでアクセスすると <code>{&quot;name&quot;:&quot;Box1&quot;,&quot;name2&quot;:&quot;Box2&quot;}}</code> という JSON データが取得できます<ul>
+<li>これを Unity 内の name というプロパティで扱ってシーンのテキストに反映します</li>
+</ul>
+</li>
+</ul>
+<h2 id="今回の-unity-シーンを起動"><a name="今回の-unity-シーンを起動" class="plugin-anchor" href="#今回の-unity-シーンを起動"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Unity シーンを起動</h2>
+<p><img src="https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png" alt="6049726527f3133083e8ca07d1e6261c"></p>
+<p>Project タブから Assets &gt; Scenes を選択します。Scene-Term1-2-Chapter03 をダブルクリックして起動しましょう。</p>
+<h2 id="scene05cubeeventcs-変更"><a name="scene05cubeeventcs-変更" class="plugin-anchor" href="#scene05cubeeventcs-変更"><i class="fa fa-link" aria-hidden="true"></i></a>Scene05CubeEvent.cs 変更</h2>
+<p><code>Assets/Scripts/Term1_2_Chapter03_CubeEvent.cs</code> をエディタで開きます。</p>
+<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
+<span class="hljs-keyword">using</span> UnityEngine.EventSystems;
+
+<span class="hljs-keyword">using</span> System.Collections;       <span class="hljs-comment">// IEnumerator のための参照</span>
+<span class="hljs-keyword">using</span> UnityEngine.Networking;   <span class="hljs-comment">// UnityWebRequest のための参照</span>
+<span class="hljs-keyword">using</span> System;                   <span class="hljs-comment">// Serializable のための参照</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Term1_2_Chapter03_CubeEvent</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
+{
+    <span class="hljs-comment">// JSON データ化する NameData ベースクラス</span>
+    [<span class="hljs-meta">Serializable</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">NameData</span>
+    {
+        <span class="hljs-comment">// name というプロパティ名で string 型で変換</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> name;
+        <span class="hljs-comment">// name2 というプロパティ名で string 型で変換</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> name2;
+    }
+
+    <span class="hljs-comment">// アクセスする URL</span>
+    <span class="hljs-comment">// サーバーURL + /api/get/json でアクセス</span>
+    <span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
+    {
+        <span class="hljs-comment">// マウスクリックイベント</span>
+        <span class="hljs-comment">// Debug.Log($&quot;オブジェクト {this.name} がクリックされたよ！&quot;);</span>
+
+        <span class="hljs-comment">// HTTP GET リクエストを非同期処理を待つためコルーチンとして呼び出す</span>
+        StartCoroutine(<span class="hljs-string">&quot;GetGitHubData&quot;</span>);
+    }
+
+    <span class="hljs-comment">// GET リクエストする本体</span>
+    <span class="hljs-function">IEnumerator <span class="hljs-title">GetGitHubData</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// HTTP リクエストする(GET メソッド) UnityWebRequest を呼び出し</span>
+        <span class="hljs-comment">// アクセスする先は変数 urlGitHub で設定</span>
+        UnityWebRequest request = UnityWebRequest.Get(urlGitHub);
+
+        <span class="hljs-comment">// リクエスト開始</span>
+        <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> request.SendWebRequest();
+
+        <span class="hljs-comment">// 結果によって分岐</span>
+        <span class="hljs-keyword">switch</span> (request.result)
+        {
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.InProgress:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト中&quot;</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.Success:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト成功&quot;</span>);
+
+                <span class="hljs-comment">// コンソールに表示</span>
+                Debug.Log(<span class="hljs-string">$&quot;responseData: <span class="hljs-subst">{request.downloadHandler.text}</span>&quot;</span>);
+
+                <span class="hljs-comment">// そのうえで ShibaData クラスで JSON データ化</span>
+                NameData nameData = JsonUtility.FromJson&lt;NameData&gt;(request.downloadHandler.text);
+
+                <span class="hljs-comment">// Title にテキスト割り当て</span>
+                GameObject.Find(<span class="hljs-string">&quot;Title&quot;</span>).GetComponent&lt;TextMesh&gt;().text = <span class="hljs-string">&quot;Loaded!&quot;</span>;
+
+                <span class="hljs-keyword">break</span>;
+        }
+
+
+    }
+}
+</code></pre>
+<p>以下を修正します。</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// アクセスする URL</span>
+<span class="hljs-comment">// サーバーURL + /api/get/json でアクセス</span>
+<span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
+</code></pre>
+<p>こちらをサーバー URL に <code>/api/get/json</code> というパスを加えて変更して保存します。</p>
+<p>解説していきます。</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// JSON データ化する NameData ベースクラス</span>
+[<span class="hljs-meta">Serializable</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">NameData</span>
+{
+    <span class="hljs-comment">// name というプロパティ名で string 型で変換</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> name;
+    <span class="hljs-comment">// name2 というプロパティ名で string 型で変換</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> name2;
+}
+</code></pre>
+<p>まず、JsonUtility.FromJson が JSON データ化する NameData ベースクラスを用意します。これは、このあと受け取る <code>{&quot;name&quot;:&quot;Box1&quot;,&quot;name2&quot;:&quot;Box2&quot;}}</code> に合わせたものです。</p>
+<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> System;                   <span class="hljs-comment">// Serializable のための参照</span>
+</code></pre>
+<p>また、この対応をするために、こちらの関数群も呼び出しています。</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// そのうえで ShibaData クラスで JSON データ化</span>
+NameData nameData = JsonUtility.FromJson&lt;NameData&gt;(request.downloadHandler.text);
+</code></pre>
+<p>そのうえで JsonUtility.FromJson 関数で、このように呼び出します。こうすると、ダウンロードしたテキスト <code>request.downloadHandler.text</code> を <code>&lt;NameData&gt;</code> のところで、さきほどのクラスをひな形にしながら <code>nameData</code> という変数に代入します。</p>
+<p>これ以降は、うまくロードできれば nameData は NameData 型として扱われるので、コードヒントもしっかり出ます。</p>
+<p><img src="https://i.gyazo.com/7841c12d92f8e7c2ffb4b5d743532232.png" alt="7841c12d92f8e7c2ffb4b5d743532232"></p>
+<p>キューブをクリックすると、現在は</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// Title にテキスト割り当て</span>
+GameObject.Find(<span class="hljs-string">&quot;Title&quot;</span>).GetComponent&lt;TextMesh&gt;().text = <span class="hljs-string">&quot;Loaded!&quot;</span>;
+</code></pre>
+<p>となるので <code>Loaded!</code> の固定値ですが、</p>
+<p><img src="https://i.gyazo.com/080db25e7155c27f64dccd36dd9d2c31.png" alt="080db25e7155c27f64dccd36dd9d2c31"></p>
+<p><code>nameData</code> のあとに <code>.</code> と打ち込んで <code>name</code> を打ち込んでみると、今回のクラスの値が呼び出せます。</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// Title にテキスト割り当て</span>
+GameObject.Find(<span class="hljs-string">&quot;Title&quot;</span>).GetComponent&lt;TextMesh&gt;().text = nameData.name;
+</code></pre>
+<p>と記述して保存して、</p>
+<p><img src="https://i.gyazo.com/3039cb6387befa4ab05f998ab307caa3.png" alt="3039cb6387befa4ab05f998ab307caa3"></p>
+<p>このように Box1 という値を呼び出してみましょう。</p>
+<h2 id="まとめ"><a name="まとめ" class="plugin-anchor" href="#まとめ"><i class="fa fa-link" aria-hidden="true"></i></a>まとめ</h2>
+<ul>
+<li>JSON データは、データの構造が作れるので様々なデータがやり取りできるようになります</li>
+<li>Unity では JsonUtility クラスがあるのでこれを使って JSON をあつかうことができます</li>
 </ul>
 
                                 
@@ -715,7 +1051,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"JSON データ取得について学ぼう","level":"3.1.3","depth":2,"next":{"title":"データ送信実践","level":"4.1","depth":1,"path":"term1-3/README.md","ref":"./term1-3/README.md","articles":[{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"path":"term1-3/00-chapter01.md","ref":"./term1-3/00-chapter01.md","articles":[]},{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"path":"term1-3/00-chapter02.md","ref":"./term1-3/00-chapter02.md","articles":[]}]},"previous":{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-2/00-chapter03.md","mtime":"2023-07-27T05:26:00.904Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-27T07:51:12.972Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"JSON データ取得について学ぼう","level":"3.1.3","depth":2,"next":{"title":"データ送信実践","level":"4.1","depth":1,"path":"term1-3/README.md","ref":"./term1-3/README.md","articles":[{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"path":"term1-3/00-chapter01.md","ref":"./term1-3/00-chapter01.md","articles":[]},{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"path":"term1-3/00-chapter02.md","ref":"./term1-3/00-chapter02.md","articles":[]}]},"previous":{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-2/00-chapter03.md","mtime":"2023-07-31T13:46:26.585Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-31T14:04:03.411Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -768,21 +768,21 @@
 <p>こちらの手順を進めます。</p>
 <h2 id="今回の-unity-シーンを起動"><a name="今回の-unity-シーンを起動" class="plugin-anchor" href="#今回の-unity-シーンを起動"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Unity シーンを起動</h2>
 <p><img src="https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png" alt="6049726527f3133083e8ca07d1e6261c"></p>
-<p>Project タブから Assets &gt; Scenes を選択します。Scene02 をダブルクリックして起動しましょう。</p>
+<p>Project タブから Assets &gt; Scenes を選択します。Scene-Term1-1-Chapter04 をダブルクリックして起動しましょう。</p>
 <h2 id="シーンの仕組みの解説"><a name="シーンの仕組みの解説" class="plugin-anchor" href="#シーンの仕組みの解説"><i class="fa fa-link" aria-hidden="true"></i></a>シーンの仕組みの解説</h2>
 <p><img src="https://i.gyazo.com/ae6172228f962578c4c19763b03360d2.png" alt="ae6172228f962578c4c19763b03360d2"></p>
 <p>シーンの仕組みを解説します。</p>
 <p>✅ポイント</p>
 <ul>
 <li>Scene01 と同じイベントの仕組みです</li>
-<li>Cube には CubeEvent02 というスクリプトがむずびついています<ul>
+<li>Cube には Term1_1_Chapter04_CubeEvent というスクリプトがむずびついています<ul>
 <li>Scene01 で使われた CubeEventではないです</li>
 </ul>
 </li>
-<li>CubeEvent02 に今回の URL にアクセスする</li>
+<li>Term1_1_Chapter04_CubeEvent で今回の URL にアクセスする</li>
 </ul>
-<h2 id="cubeevent02cs-の変更"><a name="cubeevent02cs-の変更" class="plugin-anchor" href="#cubeevent02cs-の変更"><i class="fa fa-link" aria-hidden="true"></i></a>CubeEvent02.cs の変更</h2>
-<p>CubeEvent02.cs のスクリプトはブラウザで表示できるデータにアクセスすることができます。</p>
+<h2 id="term11chapter04cubeeventcs-の変更"><a name="term11chapter04cubeeventcs-の変更" class="plugin-anchor" href="#term11chapter04cubeeventcs-の変更"><i class="fa fa-link" aria-hidden="true"></i></a>Term1_1_Chapter04_CubeEvent.cs の変更</h2>
+<p>Term1_1_Chapter04_CubeEvent.cs のスクリプトはブラウザで表示できるデータにアクセスすることができます。</p>
 <p><img src="https://i.gyazo.com/09b0473d51bd8a7227a41b6c08b3c32a.png" alt="09b0473d51bd8a7227a41b6c08b3c32a"></p>
 <p>今回のサーバーの行のクリップボードマークをクリックして今回の URL をコピーしましょう。</p>
 <pre><code class="lang-csharp">        <span class="hljs-comment">// HTTP リクエストする(GET メソッド) UnityWebRequest を呼び出し</span>
@@ -848,7 +848,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ゲームサンプルからサーバーの仕組みとの疎通","level":"2.1.4","depth":2,"next":{"title":"データ取得実践","level":"3.1","depth":1,"path":"term1-2/README.md","ref":"./term1-2/README.md","articles":[{"title":"サーバからデータを取得してみよう","level":"3.1.1","depth":2,"path":"term1-2/00-chapter01.md","ref":"./term1-2/00-chapter01.md","articles":[]},{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},{"title":"JSON データ取得について学ぼう","level":"3.1.3","depth":2,"path":"term1-2/00-chapter03.md","ref":"./term1-2/00-chapter03.md","articles":[]}]},"previous":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter04.md","mtime":"2023-07-27T06:30:19.074Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-27T07:51:12.972Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ゲームサンプルからサーバーの仕組みとの疎通","level":"2.1.4","depth":2,"next":{"title":"データ取得実践","level":"3.1","depth":1,"path":"term1-2/README.md","ref":"./term1-2/README.md","articles":[{"title":"サーバからデータを取得してみよう","level":"3.1.1","depth":2,"path":"term1-2/00-chapter01.md","ref":"./term1-2/00-chapter01.md","articles":[]},{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},{"title":"JSON データ取得について学ぼう","level":"3.1.3","depth":2,"path":"term1-2/00-chapter03.md","ref":"./term1-2/00-chapter03.md","articles":[]}]},"previous":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter04.md","mtime":"2023-07-31T14:02:34.667Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-07-31T14:04:03.411Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
