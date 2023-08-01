@@ -409,3 +409,9 @@ GameObject.Find("Title").GetComponent<TextMesh>().text = nameData.name;
 
 - JSON データは、データの構造が作れるので様々なデータがやり取りできるようになります
 - Unity では JsonUtility クラスがあるのでこれを使って JSON をあつかうことができます
+
+## 今回の Codespace の終了
+
+![0a8b4cfb807e57ea1382292a757c6899](https://i.gyazo.com/0a8b4cfb807e57ea1382292a757c6899.png)
+
+今回の Codespace 終了しておきましょう。

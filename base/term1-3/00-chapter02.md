@@ -428,3 +428,9 @@ Codespace 側でもターミナルで字受信できたことが確認できま�
 ## ゲームポイントの記録が成功すると記録ポイントが返ってくるのでテキストに反映してみる（ResponseData.recordPoint）
 
 ## 再起動して記録ポイントが初期化されることも確認
+
+## 今回の Codespace の終了
+
+![0a8b4cfb807e57ea1382292a757c6899](https://i.gyazo.com/0a8b4cfb807e57ea1382292a757c6899.png)
+
+今回の Codespace 終了しておきましょう。
