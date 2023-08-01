@@ -13,27 +13,9 @@ GitHub Codespace で構築したサーバーとやり取りできる基礎サン
 
 ## 当日の流れ
 
-2023/8/4 金曜日　HH:MM-HH:MM
+2023/8/4 金曜日
 
-- HH:MM-HH:MM
-  - はじめに
-- HH:MM-HH:MM
-  - 1
-  - 2
-  - 3
-- HH:MM-HH:MM
-  - 1
-  - 2
-  - 3
-- HH:MM-HH:MM
-  - 休憩
-- HH:MM-HH:MM
-  - 1
-  - 2
-  - 3
-- HH:MM-HH:MM
-  - 質疑応答
-  - おわりに
+
 
 ## はじめて行きましょう
 
