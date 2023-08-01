@@ -657,8 +657,10 @@
 <li>実は term1-2 chapter02 のデータを JSON でまとめたことを確認</li>
 <li>ゲームポイントの記録を確認（RequestData.point）</li>
 <li>ゲームポイントの記録が成功すると記録ポイントが返ってくるのでテキストに反映してみる（ResponseData.recordPoint）</li>
+<li>初期起動時の API で記録ポイントが表示されていることを確認</li>
 <li>実はサーバーが起動している間、記録ポイントは保持されていることを確認</li>
-<li>再起動してなくなることも確認</li>
+<li>初期起動時に受け取った記録ポイントを反映すれば再開できることを確認</li>
+<li>再起動して記録ポイントが初期化されることも確認</li>
 </ul>
 <h2 id="codespace-の起動"><a name="codespace-の起動" class="plugin-anchor" href="#codespace-の起動"><i class="fa fa-link" aria-hidden="true"></i></a>Codespace の起動</h2>
 <p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
@@ -676,10 +678,331 @@
 <p>✅ポイント</p>
 <ul>
 <li>今回は POST リクエストで 2 つの仕組みを作っています</li>
+<li><code>/api/post/result</code> というパスでは、現在のポイント受信して記録。さらに今記録したものを返答。</li>
+<li><code>/api/post/init</code> というパスでは、初回ロード時にいろいろな情報をもらいます。</li>
+<li><code>recordPoint</code> という現在のポイントを記録する変数もあります。<ul>
+<li>サーバープログラム内の変数なのでメモリで動いています</li>
+<li>これはサーバを再起動すると初期化されますが起動している間は記録してくれています</li>
+</ul>
+</li>
+<li>受信した現在のポイントを記録にも注目</li>
+<li>あいさつ文の値の流れにも注目</li>
 </ul>
 <h2 id="今回の-unity-シーンを起動"><a name="今回の-unity-シーンを起動" class="plugin-anchor" href="#今回の-unity-シーンを起動"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Unity シーンを起動</h2>
 <p><img src="https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png" alt="6049726527f3133083e8ca07d1e6261c"></p>
 <p>Project タブから Assets &gt; Scenes を選択します。Scene-Term1-3-Chapter02 をダブルクリックして起動しましょう。</p>
+<p>今日は、このプログラムをベースに、送る値や受け取る値を Unity に使っていきます。</p>
+<p>✅ポイント</p>
+<ul>
+<li>ClickPart が Term1-2 Chapter02 に近い仕組みでクリックしたらポイントが加算されたり、初回ロード時にいろいろな情報をサーバの <code>/api/post/init</code> から受け取っています。</li>
+<li>SendButton が Term1-3 Chapter01 とほぼ同じ仕組みで ClickPart の得たポイントをサーバの <code>/api/post/result</code> に送っています。</li>
+</ul>
+<h2 id="term13chapter02clickpartcs-変更"><a name="term13chapter02clickpartcs-変更" class="plugin-anchor" href="#term13chapter02clickpartcs-変更"><i class="fa fa-link" aria-hidden="true"></i></a>Term1_3_Chapter02_ClickPart.cs 変更</h2>
+<p><code>Assets/Scripts/Term1_3_Chapter02_ClickPart.cs</code> をエディタで開きます。</p>
+<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
+<span class="hljs-keyword">using</span> UnityEngine.EventSystems;
+
+<span class="hljs-keyword">using</span> System.Collections;       <span class="hljs-comment">// IEnumerator のための参照</span>
+<span class="hljs-keyword">using</span> UnityEngine.Networking;   <span class="hljs-comment">// UnityWebRequest のための参照</span>
+<span class="hljs-keyword">using</span> System.Text;              <span class="hljs-comment">// Encoding のための参照</span>
+<span class="hljs-keyword">using</span> System;                   <span class="hljs-comment">// Serializable のための参照</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Term1_3_Chapter02_ClickPart</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
+{
+    <span class="hljs-comment">// 受信した JSON データを Unity で扱うデータにする ResponseData ベースクラス</span>
+    [<span class="hljs-meta">Serializable</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ResponseData</span>
+    {
+        <span class="hljs-comment">// result というプロパティ名で string 型で変換</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> result;
+    }
+
+    <span class="hljs-comment">// 送信する Unity データを JSON データ化する RequestData ベースクラス</span>
+    [<span class="hljs-meta">Serializable</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">RequestData</span>
+    {   
+        <span class="hljs-comment">// 自分の名前</span>
+        <span class="hljs-comment">// name というプロパティ名で string 型で変換</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> name;
+    }
+
+    <span class="hljs-comment">// アクセスする URL</span>
+    <span class="hljs-comment">// サーバー URL + /api/post/init</span>
+    <span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
+
+    <span class="hljs-comment">// ポイント加算設定</span>
+    <span class="hljs-built_in">int</span> addPoint = <span class="hljs-number">1</span>;
+
+    <span class="hljs-comment">// 蓄積ポイント</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> currentPoint = <span class="hljs-number">0</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// 起動時にデータを読み込む</span>
+
+        <span class="hljs-comment">// HTTP リクエストを非同期処理を待つためコルーチンとして呼び出す</span>
+        StartCoroutine(<span class="hljs-string">&quot;RequestInit&quot;</span>);
+
+        <span class="hljs-comment">// 蓄積ポイントのリセット</span>
+        currentPoint = <span class="hljs-number">0</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
+    {
+        <span class="hljs-comment">// マウスクリックイベント</span>
+        <span class="hljs-comment">// Debug.Log($&quot;オブジェクト {this.name} がクリックされたよ！&quot;);</span>
+
+        <span class="hljs-comment">// ポイント加算</span>
+        currentPoint += addPoint;
+
+        <span class="hljs-comment">// テキストに反映</span>
+        <span class="hljs-built_in">string</span> infomation = currentPoint + <span class="hljs-string">&quot;pt&quot;</span>;
+        GameObject.Find(<span class="hljs-string">&quot;CurrentPointMessage&quot;</span>).GetComponent&lt;TextMesh&gt;().text = infomation;
+    }
+
+    <span class="hljs-comment">// リクエストする本体</span>
+    <span class="hljs-function">IEnumerator <span class="hljs-title">RequestInit</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// HTTP リクエストする(POST メソッド) UnityWebRequest を呼び出し</span>
+        <span class="hljs-comment">// アクセスする先は変数 urlGitHub で設定</span>
+        UnityWebRequest request = <span class="hljs-keyword">new</span> UnityWebRequest(urlGitHub, <span class="hljs-string">&quot;POST&quot;</span>);
+
+        <span class="hljs-comment">// ResponseData ベースクラスを器として呼び出す</span>
+        RequestData requestData = <span class="hljs-keyword">new</span> RequestData();
+        <span class="hljs-comment">// データを設定</span>
+        <span class="hljs-comment">// requestData.name = &quot;まいねーむ&quot;; // 自分の名前</span>
+
+        <span class="hljs-comment">// 送信データを JsonUtility.ToJson で JSON 文字列を作成</span>
+        <span class="hljs-comment">// pointRequestData の構造に基づいて変換してくれる</span>
+        <span class="hljs-built_in">string</span> strJSON = JsonUtility.ToJson(requestData);
+        Debug.Log(<span class="hljs-string">$&quot;strJSON : <span class="hljs-subst">{strJSON}</span>&quot;</span>);
+        <span class="hljs-comment">// 送信データを Encoding.UTF8.GetBytes で byte データ化</span>
+        <span class="hljs-built_in">byte</span>[] bodyRaw = Encoding.UTF8.GetBytes(strJSON);
+
+        <span class="hljs-comment">// アップロード（Unity→サーバ）のハンドラを作成</span>
+        request.uploadHandler = <span class="hljs-keyword">new</span> UploadHandlerRaw(bodyRaw);
+        <span class="hljs-comment">// ダウンロード（サーバ→Unity）のハンドラを作成</span>
+        request.downloadHandler = <span class="hljs-keyword">new</span> DownloadHandlerBuffer();
+
+        <span class="hljs-comment">// JSON で送ると HTTP ヘッダーで宣言する</span>
+        request.SetRequestHeader(<span class="hljs-string">&quot;Content-Type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+
+        <span class="hljs-comment">// リクエスト開始</span>
+        Debug.Log(<span class="hljs-string">&quot;リクエスト開始&quot;</span>);
+        <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> request.SendWebRequest();
+
+        <span class="hljs-comment">// 結果によって分岐</span>
+        <span class="hljs-keyword">switch</span> (request.result)
+        {
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.InProgress:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト中&quot;</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.Success:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト成功&quot;</span>);
+
+                <span class="hljs-comment">// コンソールに表示</span>
+                Debug.Log(<span class="hljs-string">$&quot;responseData: <span class="hljs-subst">{request.downloadHandler.text}</span>&quot;</span>);
+
+                <span class="hljs-comment">// ResponseData クラスで Unity で扱えるデータ化</span>
+                ResponseData responseData = JsonUtility.FromJson&lt;ResponseData&gt;(request.downloadHandler.text);
+
+                <span class="hljs-comment">// MessageText に結果テキスト割り当て</span>
+                GameObject.Find(<span class="hljs-string">&quot;StatusMessage&quot;</span>).GetComponent&lt;TextMesh&gt;().text = responseData.result;
+
+                <span class="hljs-keyword">break</span>;
+        }
+
+
+    }
+
+    <span class="hljs-comment">// Update is called once per frame</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)</span>
+    {
+
+    }
+}
+</code></pre>
+<p>以下を修正します。</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// アクセスする URL</span>
+<span class="hljs-comment">// サーバー URL + /api/post/init</span>
+<span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
+</code></pre>
+<p>こちらをサーバー URL に <code>/api/post/init</code> というパスを加えて変更して保存します。</p>
+<p>解説します。</p>
+<p>今回は Term1-2 Chapter02 に近い仕組みで作られています。</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// 受信した JSON データを Unity で扱うデータにする ResponseData ベースクラス</span>
+[<span class="hljs-meta">Serializable</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ResponseData</span>
+{
+    <span class="hljs-comment">// result というプロパティ名で string 型で変換</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> result;
+}
+</code></pre>
+<p>受信した JSON データを Unity で扱うデータにする ResponseData ベースクラスを用意して、「ひとまず」result 値だけ Unity の値として扱えるようにしています。「ひとまず」としたのは、</p>
+<pre><code class="lang-js">{
+    <span class="hljs-string">&quot;result&quot;</span>:<span class="hljs-string">&quot;OK&quot;</span>,
+    <span class="hljs-string">&quot;title&quot;</span>:<span class="hljs-string">&quot;こんにちは！ようこそ！&quot;</span>,  <span class="hljs-comment">// あいさつ文</span>
+    <span class="hljs-string">&quot;add_point&quot;</span>:<span class="hljs-number">1</span>,  <span class="hljs-comment">// 加算ポイント</span>
+    <span class="hljs-string">&quot;recordPoint&quot;</span>:<span class="hljs-number">0</span> <span class="hljs-comment">// 記録している現在のポイント</span>
+};
+</code></pre>
+<p>他のデータも受け取れるため、あとで拡張するためです。JsonUtility はクラスで準備した以外のデータを受け取っても、無視されるので、このようなことができます。</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// 送信する Unity データを JSON データ化する RequestData ベースクラス</span>
+[<span class="hljs-meta">Serializable</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">RequestData</span>
+{   
+    <span class="hljs-comment">// 自分の名前</span>
+    <span class="hljs-comment">// name というプロパティ名で string 型で変換</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> name;
+}
+</code></pre>
+<p>送信する Unity データを JSON データ化する RequestData ベースクラスでは、サーバに自分の名前を name という値で送れるよう準備しています。</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// ResponseData ベースクラスを器として呼び出す</span>
+RequestData requestData = <span class="hljs-keyword">new</span> RequestData();
+<span class="hljs-comment">// データを設定</span>
+<span class="hljs-comment">// requestData.name = &quot;まいねーむ&quot;; // 自分の名前</span>
+</code></pre>
+<p>最初に動かすときは name 未設定なので <code>{&quot;name&quot;:&quot;&quot;}</code> と空の文字列で動作します。コメントアウトすると <code>requestData.name = &quot;まいねーむ&quot;;</code> の部分が動作するので、サーバが出来る title の値が <code>こんにちは！ようこそ！</code> から <code>こんにちは！まいねーむさん、ようこそ！</code> と動作します。</p>
+<p>あとは、POST リクエストを行っています。</p>
+<h2 id="term13chapter02sendbuttoncs-変更"><a name="term13chapter02sendbuttoncs-変更" class="plugin-anchor" href="#term13chapter02sendbuttoncs-変更"><i class="fa fa-link" aria-hidden="true"></i></a>Term1_3_Chapter02_SendButton.cs 変更</h2>
+<p><code>Assets/Scripts/Term1_3_Chapter02_SendButton.cs</code> をエディタで開きます。</p>
+<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
+<span class="hljs-keyword">using</span> UnityEngine.EventSystems;
+
+<span class="hljs-keyword">using</span> System.Collections;       <span class="hljs-comment">// IEnumerator のための参照</span>
+<span class="hljs-keyword">using</span> UnityEngine.Networking;   <span class="hljs-comment">// UnityWebRequest のための参照</span>
+<span class="hljs-keyword">using</span> System;                   <span class="hljs-comment">// Serializable のための参照</span>
+<span class="hljs-keyword">using</span> System.Text;              <span class="hljs-comment">// Encoding のための参照</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Term1_3_Chapter02_SendButton</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
+{
+    <span class="hljs-comment">// Term1_3_Chapter01_CubeEvent とほぼ同じ</span>
+
+    <span class="hljs-comment">// 受信した JSON データを Unity で扱うデータにする ResultResponseData ベースクラス</span>
+    [<span class="hljs-meta">Serializable</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ResultResponseData</span>
+    {
+        <span class="hljs-comment">// result というプロパティ名で string 型で変換</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> result;
+    }
+
+    <span class="hljs-comment">// 送信する Unity データを JSON データ化する PointRequestData ベースクラス</span>
+    [<span class="hljs-meta">Serializable</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PointRequestData</span>
+    {
+        <span class="hljs-comment">// point というプロパティ名で int 型で変換</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> point;
+    }
+
+    <span class="hljs-comment">// アクセスする URL</span>
+    <span class="hljs-comment">// サーバーURL + /api/post/result でアクセス</span>
+    <span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
+    {
+        <span class="hljs-comment">// マウスクリックイベント</span>
+        <span class="hljs-comment">// Debug.Log($&quot;オブジェクト {this.name} がクリックされたよ！&quot;);</span>
+
+        <span class="hljs-comment">// HTTP リクエストを非同期処理を待つためコルーチンとして呼び出す</span>
+        StartCoroutine(<span class="hljs-string">&quot;PostPointData&quot;</span>);
+    }
+
+    <span class="hljs-comment">// POST リクエストする本体</span>
+    <span class="hljs-function">IEnumerator <span class="hljs-title">PostPointData</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// HTTP リクエストする(POST メソッド) UnityWebRequest を呼び出し</span>
+        <span class="hljs-comment">// アクセスする先は変数 urlGitHub で設定</span>
+        UnityWebRequest request = <span class="hljs-keyword">new</span> UnityWebRequest(urlGitHub, <span class="hljs-string">&quot;POST&quot;</span>);
+
+
+        <span class="hljs-comment">// PointRequestData ベースクラスを器として呼び出す</span>
+        PointRequestData pointRequestData = <span class="hljs-keyword">new</span> PointRequestData();
+        <span class="hljs-comment">// データを設定</span>
+        pointRequestData.point = <span class="hljs-number">1000</span>; <span class="hljs-comment">// ダミーで 1000 pt のゲーム結果を送る</span>
+        pointRequestData.point = GameObject.Find(<span class="hljs-string">&quot;ClickPart&quot;</span>).GetComponent&lt;Term1_3_Chapter02_ClickPart&gt;().currentPoint;
+
+        <span class="hljs-comment">// 送信データを JsonUtility.ToJson で JSON 文字列を作成</span>
+        <span class="hljs-comment">// pointRequestData の構造に基づいて変換してくれる</span>
+        <span class="hljs-built_in">string</span> strJSON = JsonUtility.ToJson(pointRequestData);
+        Debug.Log(<span class="hljs-string">$&quot;strJSON : <span class="hljs-subst">{strJSON}</span>&quot;</span>);
+        <span class="hljs-comment">// 送信データを Encoding.UTF8.GetBytes で byte データ化</span>
+        <span class="hljs-built_in">byte</span>[] bodyRaw = Encoding.UTF8.GetBytes(strJSON);
+
+        <span class="hljs-comment">// アップロード（Unity→サーバ）のハンドラを作成</span>
+        request.uploadHandler = <span class="hljs-keyword">new</span> UploadHandlerRaw(bodyRaw);
+        <span class="hljs-comment">// ダウンロード（サーバ→Unity）のハンドラを作成</span>
+        request.downloadHandler = <span class="hljs-keyword">new</span> DownloadHandlerBuffer();
+
+        <span class="hljs-comment">// JSON で送ると HTTP ヘッダーで宣言する</span>
+        request.SetRequestHeader(<span class="hljs-string">&quot;Content-Type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+
+        <span class="hljs-comment">// リクエスト開始</span>
+        <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> request.SendWebRequest();
+
+        <span class="hljs-comment">// 結果によって分岐</span>
+        <span class="hljs-keyword">switch</span> (request.result)
+        {
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.InProgress:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト中&quot;</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.Success:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト成功&quot;</span>);
+
+                <span class="hljs-comment">// コンソールに表示</span>
+                Debug.Log(<span class="hljs-string">$&quot;responseData: <span class="hljs-subst">{request.downloadHandler.text}</span>&quot;</span>);
+
+                <span class="hljs-comment">// ResultResponseData クラスで Unity で扱えるデータ化</span>
+                ResultResponseData resultResponse = JsonUtility.FromJson&lt;ResultResponseData&gt;(request.downloadHandler.text);
+
+                <span class="hljs-comment">// MessageText に結果テキスト割り当て</span>
+                GameObject.Find(<span class="hljs-string">&quot;StatusMessage&quot;</span>).GetComponent&lt;TextMesh&gt;().text = resultResponse.result;
+
+                <span class="hljs-keyword">break</span>;
+        }
+
+    }
+}
+</code></pre>
+<p>以下を修正します。</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// アクセスする URL</span>
+<span class="hljs-comment">// サーバーURL + /api/post/result でアクセス</span>
+<span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
+</code></pre>
+<p>こちらをサーバー URL に <code>/api/post/result</code> というパスを加えて変更して保存します。</p>
+<p>解説します。</p>
+<p>今回はTerm1_3_Chapter01_CubeEvent とほぼ同じプログラムです。SendButton をクリックすると現在のポイントを ClickPart から取得してデータ送信します。</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// データを設定</span>
+pointRequestData.point = GameObject.Find(<span class="hljs-string">&quot;ClickPart&quot;</span>).GetComponent&lt;Term1_3_Chapter02_ClickPart&gt;().currentPoint;
+</code></pre>
+<p>このように値を取得しています。あとは同じです。</p>
+<h2 id="シンプルに動かしてみる"><a name="シンプルに動かしてみる" class="plugin-anchor" href="#シンプルに動かしてみる"><i class="fa fa-link" aria-hidden="true"></i></a>シンプルに動かしてみる</h2>
+<p>まずは、サーバーへつなぐ設定ができたので動かしてみましょう。</p>
+<p><img src="https://i.gyazo.com/ad833d19086696f4841ff7d11828b4fb.png" alt="ad833d19086696f4841ff7d11828b4fb"></p>
+<p>Play ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/7d4dad403a48608db49b89293e8d58ec.png" alt="7d4dad403a48608db49b89293e8d58ec"></p>
+<p>ClickPart の上の StatusMessage にサーバからデータを受け取って JSON データを Unity で扱えるデータにしてから result 値の OK を表示できていれば、うまくつながっています。</p>
+<p><img src="https://i.gyazo.com/d687f574cde14e7f191c84470ce760a1.png" alt="d687f574cde14e7f191c84470ce760a1"></p>
+<p>コンソールでもやり取りの様子が確認できます。</p>
+<pre><code>/api/post/init 受信
+{ name: &apos;&apos; }
+</code></pre><p>Codespace 側でもターミナルで字受信できたことが確認できます。</p>
+<p><img src="https://i.gyazo.com/2d930e83bef28594da9fd7c29ea512f5.png" alt="2d930e83bef28594da9fd7c29ea512f5"></p>
+<p>続いて、ClickPart を何度かクリックしたあとに、結果送信ボタンをクリックします。</p>
+<pre><code>/api/post/result 受信
+{ point: 8 }
+8 pt 記録
+</code></pre><p>Codespace 側でもターミナルで字受信できたことが確認できます。</p>
+<p><img src="https://i.gyazo.com/99365fca16458a0ad1e75e9a731efaba.png" alt="99365fca16458a0ad1e75e9a731efaba"></p>
+<p>コンソールでもやり取りの様子が確認できます。またこの値は、サーバで受信した時点でサーバに recordPoint という値で記録されています。サーバーが起動している間、記録ポイントは保持されています。</p>
+<p><img src="https://i.gyazo.com/c8e76c52116732bee393f9e0128beb3c.png" alt="c8e76c52116732bee393f9e0128beb3c"></p>
+<p>また、こちらは初期起動時のデータ取得でも、記録ポイントが返ってきています。（再度つないでみた様子）</p>
+<h2 id="受け取ったデータをあいさつ文テキストに反映してみる（responsedatatitle）"><a name="受け取ったデータをあいさつ文テキストに反映してみる（responsedatatitle）" class="plugin-anchor" href="#受け取ったデータをあいさつ文テキストに反映してみる（responsedatatitle）"><i class="fa fa-link" aria-hidden="true"></i></a>受け取ったデータをあいさつ文テキストに反映してみる（ResponseData.title）</h2>
+<h2 id="自分の名前を送っていてサーバーであいさつ文を作っていることを確認（requestdataname）"><a name="自分の名前を送っていてサーバーであいさつ文を作っていることを確認（requestdataname）" class="plugin-anchor" href="#自分の名前を送っていてサーバーであいさつ文を作っていることを確認（requestdataname）"><i class="fa fa-link" aria-hidden="true"></i></a>自分の名前を送っていてサーバーであいさつ文を作っていることを確認（RequestData.name）</h2>
+<h2 id="受け取ったデータをポイント加算に反映してみる（responsedataaddpoint）"><a name="受け取ったデータをポイント加算に反映してみる（responsedataaddpoint）" class="plugin-anchor" href="#受け取ったデータをポイント加算に反映してみる（responsedataaddpoint）"><i class="fa fa-link" aria-hidden="true"></i></a>受け取ったデータをポイント加算に反映してみる（ResponseData.add_point）</h2>
+<h2 id="ゲームポイントの記録が成功すると記録ポイントが返ってくるのでテキストに反映してみる（responsedatarecordpoint）"><a name="ゲームポイントの記録が成功すると記録ポイントが返ってくるのでテキストに反映してみる（responsedatarecordpoint）" class="plugin-anchor" href="#ゲームポイントの記録が成功すると記録ポイントが返ってくるのでテキストに反映してみる（responsedatarecordpoint）"><i class="fa fa-link" aria-hidden="true"></i></a>ゲームポイントの記録が成功すると記録ポイントが返ってくるのでテキストに反映してみる（ResponseData.recordPoint）</h2>
+<h2 id="再起動して記録ポイントが初期化されることも確認"><a name="再起動して記録ポイントが初期化されることも確認" class="plugin-anchor" href="#再起動して記録ポイントが初期化されることも確認"><i class="fa fa-link" aria-hidden="true"></i></a>再起動して記録ポイントが初期化されることも確認</h2>
 
                                 
                                 </section>
@@ -723,7 +1046,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"next":{"title":"データ送受信発展","level":"5.1","depth":1,"path":"term1-4/README.md","ref":"./term1-4/README.md","articles":[{"title":"さまざまな API サービスの把握","level":"5.1.1","depth":2,"path":"term1-4/00-chapter01.md","ref":"./term1-4/00-chapter01.md","articles":[]},{"title":"外部の API 連携を体験","level":"5.1.2","depth":2,"path":"term1-4/00-chapter02.md","ref":"./term1-4/00-chapter02.md","articles":[]},{"title":"前半のおさらい","level":"5.1.3","depth":2,"path":"term1-4/00-chapter03.md","ref":"./term1-4/00-chapter03.md","articles":[]}]},"previous":{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"path":"term1-3/00-chapter01.md","ref":"./term1-3/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-3/00-chapter02.md","mtime":"2023-08-01T06:57:30.957Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-01T07:05:13.690Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"next":{"title":"データ送受信発展","level":"5.1","depth":1,"path":"term1-4/README.md","ref":"./term1-4/README.md","articles":[{"title":"さまざまな API サービスの把握","level":"5.1.1","depth":2,"path":"term1-4/00-chapter01.md","ref":"./term1-4/00-chapter01.md","articles":[]},{"title":"外部の API 連携を体験","level":"5.1.2","depth":2,"path":"term1-4/00-chapter02.md","ref":"./term1-4/00-chapter02.md","articles":[]},{"title":"前半のおさらい","level":"5.1.3","depth":2,"path":"term1-4/00-chapter03.md","ref":"./term1-4/00-chapter03.md","articles":[]}]},"previous":{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"path":"term1-3/00-chapter01.md","ref":"./term1-3/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-3/00-chapter02.md","mtime":"2023-08-01T08:13:43.694Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-01T08:21:04.199Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

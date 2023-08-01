@@ -264,7 +264,7 @@ Codespaces のページです。さきほど使っていた Codespace をクリ�
 
 Project タブから Assets > Scenes を選択します。Scene-Term1-2-Chapter03 をダブルクリックして起動しましょう。
 
-## Scene05CubeEvent.cs 変更
+## Term1_2_Chapter03_CubeEvent.cs 変更
 
 `Assets/Scripts/Term1_2_Chapter03_CubeEvent.cs` をエディタで開きます。
 

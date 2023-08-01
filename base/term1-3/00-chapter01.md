@@ -40,7 +40,7 @@ Codespaces のページです。さきほど使っていた Codespace をクリ�
 
 Project タブから Assets > Scenes を選択します。Scene-Term1-3-Chapter01 をダブルクリックして起動しましょう。
 
-## Scene05CubeEvent.cs 変更
+## Term1_3_Chapter01_CubeEvent.cs 変更
 
 `Assets/Scripts/Term1_3_Chapter01_CubeEvent.cs` をエディタで開きます。
 
@@ -141,7 +141,7 @@ public class Term1_3_Chapter01_CubeEvent : MonoBehaviour, IPointerClickHandler
 }
 ```
 
-下を修正します。
+以下を修正します。
 
 ```csharp
 // アクセスする URL
