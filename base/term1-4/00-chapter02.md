@@ -6,4 +6,6 @@
 
 外部の API 連携を体験します。
 
-## httpbin も試してみる
+- 柴犬画像
+- LINE Notify
+- httpbin
