@@ -104,7 +104,7 @@ Node.js は、普段はブラウザで活用されていて、ネット上で文
 
 また、Node.js と一緒にインストールされる npm は、Node.jsのパッケージ管理ツールです。npmを使うことで、パッケージの依存関係や競合関係を管理してくれるので、パッケージを追加、更新する際は基本的に npm 経由で行うことになります。
 
-また、npm には、Node.js と一緒に入ってすぐ使える便利なライブラリがたくさん登録されています。今回は Express https://expressjs.com/ という便利なサーバー構築ライブラリがインストールされています。
+また、npm には、Node.js と一緒に入ってすぐ使える便利なライブラリがたくさん登録されています。今回は Express https://expressjs.com/ という便利なサーバー構築ライブラリがインストールされています。公式のドキュメントもわかりやすいですが、とほほのExpress入門 https://www.tohoho-web.com/ex/express.html も日本語でとっつきやすいので、もしカスタマイズしくなった方は参考にするとよいでしょう。
 
 ✅ポイント
 - 今回は、Node.js サーバー側のプログラムは、起動とちょっとした設定反映が中心です。
@@ -121,6 +121,7 @@ Node.js は、普段はブラウザで活用されていて、ネット上で文
   - 今回は Express https://expressjs.com/ という便利なサーバー構築ライブラリがインストールされています。
 - 今回のリポジトリにあるコード群がすべて使える
 - ブラウザ上の Visual Studio Code で今回のリポジトリにあるコードが編集・実行できる
+- 今回の教材はほぼ変更なしで使えます。
 
 ## サンプルをターミナルから実行
 
@@ -166,9 +167,11 @@ node app01.js
 
 ## ターミナルからサーバーを起動
 
-`server01.js` というプログラムを実行してみましょう。
+`term1-1.js` というプログラムを実行してみましょう。
 
 ```js
+// path ライブラリの呼び出し
+const path = require('path');
 // Express ライブラリの呼び出し
 const express = require('express');
 // Express ライブラリからサーバーの仕組みを app 変数として呼び出す
@@ -180,7 +183,7 @@ app.use(express.static(__dirname + '/public'));
 
 // サーバーを 8080 ポートで起動してログを出力
 app.listen(process.env.PORT || 8080, () => {
-  console.log("server01 start!");
+  console.log(`${path.basename(__filename)} start!`);
   console.log(`app listening at http://localhost:${process.env.PORT || 8080}`)
 })
 ```
@@ -188,13 +191,13 @@ app.listen(process.env.PORT || 8080, () => {
 Express というライブラリでサーバーを構築できるプログラムです。
 
 ```
-node server01.js
+node term1-1.js
 ```
 
 ターミナルで以下のコマンドを入力して Enter キーを押して実行します。
 
 ```
-server01 start!
+term1-1.js start!
 app listening at http://localhost:8080
 ```
 
@@ -207,7 +210,7 @@ app listening at http://localhost:8080
 
 現在は、起動中の GitHub アカウントのみで構築されたサーバーが確認できます。
 
-![2b7eb26ecba22ee6aa0154d986935251](https://i.gyazo.com/2b7eb26ecba22ee6aa0154d986935251.png)
+![3ecdb2db08ae9c3be5134c606c63733f](https://i.gyazo.com/3ecdb2db08ae9c3be5134c606c63733f.png)
 
 ターミナルで出力された `http://localhost:8080` にマウスを乗せます。
 
@@ -224,7 +227,7 @@ Index というページが表示されます。
 アドレスバーに書いてある URL は、今回の Codespace が構築されたサーバアドレスのトップページが表示されています。
 
 ✅ポイント
-- server01.js の `app.use(express.static(__dirname + '/public'));` によって、public フォルダの中身でトップページを示す `public/index.html` の内容が、今回起動したサーバーのトップページとして表示されています。
+- term1-1.js の `app.use(express.static(__dirname + '/public'));` によって、public フォルダの中身でトップページを示す `public/index.html` の内容が、今回起動したサーバーのトップページとして表示されています。
 - 現在は、起動中の GitHub アカウントのみで構築されたサーバーが確認でき、次の授業では、Unity からもアクセスできるよう、誰でも見れる公開する対応を行います。
 
 ## プログラムの終了
@@ -233,7 +236,7 @@ Index というページが表示されます。
 
 ターミナル上で Ctrl + C を打ってプログラムを終了します。
 
-![93a99bf90eb16a44806b5bc745cdc9ec](https://i.gyazo.com/93a99bf90eb16a44806b5bc745cdc9ec.png)
+![a47229a818f685b6359ca2e32e6e1e11](https://i.gyazo.com/a47229a818f685b6359ca2e32e6e1e11.png)
 
 このように `^C` 入力とともに、ターミナルの入力待ちになれば終了成功です。
 

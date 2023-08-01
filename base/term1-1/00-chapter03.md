@@ -91,7 +91,7 @@ Console でこのようなログが出てくれば成功です！
 （時間があれば）シーンの仕組みを解説します。
 
 ✅ポイント
-- Cube には CubeEvent というスクリプトが関連づけられシンプルなクリックイベントが書かれています
+- Cube には Term1_1_Chapter03_CubeEvent というスクリプトが関連づけられシンプルなクリックイベントが書かれています
 - イベントまわりは Main Camera の Pyshics Raycaster と EventSystem の設置で対応しています
 
 ## Codespace の再起動
@@ -114,13 +114,13 @@ Codespaces のページです。
 ## サーバーの起動
 
 ```
-node server01.js
+node term1-1.js
 ```
 
 ターミナルで以下のコマンドを入力して Enter キーを押して実行します。
 
 ```
-server01 start!
+term1-1.js start!
 app listening at http://localhost:8080
 ```
 
@@ -132,11 +132,11 @@ app listening at http://localhost:8080
 
 現在この Codespace でサーバー起動している状況はポートタブから確認できます。ターミナルタブのポートをクリックしてポートタブを表示します。
 
-![55758bc0dc28422bc1dc42bd8c6ac725](https://i.gyazo.com/55758bc0dc28422bc1dc42bd8c6ac725.png)
+![778742311f48908e061f24f882e23662](https://i.gyazo.com/778742311f48908e061f24f882e23662.png)
 
 このように 8080 ポートで起動していることがわかり、表示範囲がまだ Private になっていることを確認します。
 
-![5119ac8b2b9bc81ee2dc1a5a12d479e6](https://i.gyazo.com/5119ac8b2b9bc81ee2dc1a5a12d479e6.png)
+![566b8166352dd42c1a33b18552afd2a1](https://i.gyazo.com/566b8166352dd42c1a33b18552afd2a1.png)
 
 こちらの地球儀マークをクリックすると、現在のブラウザで新しいタブが開いてサーバーが確認できます。
 
@@ -144,7 +144,7 @@ app listening at http://localhost:8080
 
 Index というページが表示されます。
 
-これは server01.js の
+これは term1-1.js の
 
 ```js
 // public フォルダ内にあるファイルはパスが一致していると呼びだせます
@@ -172,7 +172,7 @@ app.use(express.static(__dirname + '/public'));
 
 新しいシークレットウィンドウが表示されました。
 
-![09b0473d51bd8a7227a41b6c08b3c32a](https://i.gyazo.com/09b0473d51bd8a7227a41b6c08b3c32a.png)
+![461a20fc2eaba496f38d84869a218755](https://i.gyazo.com/461a20fc2eaba496f38d84869a218755.png)
 
 今回のサーバーの行のクリップボードマークをクリックして今回の URL をコピーしましょう。
 
@@ -186,7 +186,7 @@ app.use(express.static(__dirname + '/public'));
 
 ## サーバーの使っているポートを公開する
 
-![55758bc0dc28422bc1dc42bd8c6ac725](https://i.gyazo.com/55758bc0dc28422bc1dc42bd8c6ac725.png)
+![778742311f48908e061f24f882e23662](https://i.gyazo.com/778742311f48908e061f24f882e23662.png)
 
 ポートタブに戻ります。
 
@@ -198,7 +198,7 @@ app.use(express.static(__dirname + '/public'));
 
 公開範囲が Private から Public になります。これで公開は完了です。
 
-![09b0473d51bd8a7227a41b6c08b3c32a](https://i.gyazo.com/09b0473d51bd8a7227a41b6c08b3c32a.png)
+![461a20fc2eaba496f38d84869a218755](https://i.gyazo.com/461a20fc2eaba496f38d84869a218755.png)
 
 今回のサーバーの行のクリップボードマークをクリックして今回の URL をコピーしましょう。
 
@@ -215,3 +215,11 @@ app.use(express.static(__dirname + '/public'));
 今回の Codespace 終了しておきましょう。
 
 Unity は起動しっぱなしで OK です。
+
+## Unity プロジェクトは更新するかもしれません
+
+![ae6172228f962578c4c19763b03360d2](https://i.gyazo.com/ae6172228f962578c4c19763b03360d2.png)
+
+Unity プロジェクトは、1 日 1 日の授業で更新することがあります。そのときは、再ダウンロードすることになりますが、授業で学んだ内容は、基本的にこのドキュメントから追えるので、過去のものはなぞっていけば再現で来るのでご安心ください。
+
+（ただ、自分で更新して試したソースがあったら、そこだけ退避させておくのが良いでしょう。）

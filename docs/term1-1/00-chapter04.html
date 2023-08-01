@@ -761,7 +761,7 @@
 <h2 id="サーバの起動"><a name="サーバの起動" class="plugin-anchor" href="#サーバの起動"><i class="fa fa-link" aria-hidden="true"></i></a>サーバの起動</h2>
 <p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
 <ul>
-<li>ターミナルで <code>node server01.js</code> をサーバ起動</li>
+<li>ターミナルで <code>node term1-1.js</code> をサーバ起動</li>
 <li>ポートタブで今回のサーバ起動を公開</li>
 <li>シークレットウィンドウで今回のサーバが公開されているか確認します</li>
 </ul>
@@ -774,7 +774,7 @@
 <p>シーンの仕組みを解説します。</p>
 <p>✅ポイント</p>
 <ul>
-<li>Scene01 と同じイベントの仕組みです</li>
+<li>Term1_1 Chapter03 と同じイベントの仕組みです</li>
 <li>Cube には Term1_1_Chapter04_CubeEvent というスクリプトがむずびついています<ul>
 <li>Scene01 で使われた CubeEventではないです</li>
 </ul>
@@ -782,8 +782,59 @@
 <li>Term1_1_Chapter04_CubeEvent で今回の URL にアクセスする</li>
 </ul>
 <h2 id="term11chapter04cubeeventcs-の変更"><a name="term11chapter04cubeeventcs-の変更" class="plugin-anchor" href="#term11chapter04cubeeventcs-の変更"><i class="fa fa-link" aria-hidden="true"></i></a>Term1_1_Chapter04_CubeEvent.cs の変更</h2>
+<p><code>Assets/Scripts/Term1_1_Chapter04_CubeEvent.cs</code> をエディタで開きます。</p>
+<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
+<span class="hljs-keyword">using</span> UnityEngine.EventSystems;
+
+<span class="hljs-keyword">using</span> System.Collections;       <span class="hljs-comment">// IEnumerator のための参照</span>
+<span class="hljs-keyword">using</span> UnityEngine.Networking;   <span class="hljs-comment">// UnityWebRequest のための参照</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Term1_1_Chapter04_CubeEvent</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
+{
+    <span class="hljs-comment">// アクセスする URL</span>
+    <span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;ここにサーバーURLを入れる&quot;</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
+    {
+        <span class="hljs-comment">// マウスクリックイベント</span>
+        <span class="hljs-comment">// Debug.Log($&quot;オブジェクト {this.name} がクリックされたよ！&quot;);</span>
+
+        <span class="hljs-comment">// HTTP GET リクエストを非同期処理を待つためコルーチンとして呼び出す</span>
+        StartCoroutine(<span class="hljs-string">&quot;GetGitHubData&quot;</span>);
+    }
+
+    <span class="hljs-comment">// GET リクエストする本体</span>
+    <span class="hljs-function">IEnumerator <span class="hljs-title">GetGitHubData</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// HTTP リクエストする(GET メソッド) UnityWebRequest を呼び出し</span>
+        <span class="hljs-comment">// アクセスする先は変数 urlGitHub で設定</span>
+        UnityWebRequest request = UnityWebRequest.Get(urlGitHub);
+
+        <span class="hljs-comment">// リクエスト開始</span>
+        <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> request.SendWebRequest();
+
+        <span class="hljs-comment">// 結果によって分岐</span>
+        <span class="hljs-keyword">switch</span> (request.result)
+        {
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.InProgress:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト中&quot;</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.Success:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト成功&quot;</span>);
+
+                <span class="hljs-comment">// コンソールに表示</span>
+                Debug.Log(<span class="hljs-string">$&quot;responseData: <span class="hljs-subst">{request.downloadHandler.text}</span>&quot;</span>);
+
+                <span class="hljs-keyword">break</span>;
+        }
+
+
+    }
+}
+</code></pre>
 <p>Term1_1_Chapter04_CubeEvent.cs のスクリプトはブラウザで表示できるデータにアクセスすることができます。</p>
-<p><img src="https://i.gyazo.com/09b0473d51bd8a7227a41b6c08b3c32a.png" alt="09b0473d51bd8a7227a41b6c08b3c32a"></p>
+<p><img src="https://i.gyazo.com/461a20fc2eaba496f38d84869a218755.png" alt="461a20fc2eaba496f38d84869a218755"></p>
 <p>今回のサーバーの行のクリップボードマークをクリックして今回の URL をコピーしましょう。</p>
 <pre><code class="lang-csharp">        <span class="hljs-comment">// HTTP リクエストする(GET メソッド) UnityWebRequest を呼び出し</span>
         <span class="hljs-comment">// アクセスする先は変数 urlGitHub で設定</span>
@@ -848,7 +899,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ゲームサンプルからサーバーの仕組みとの疎通","level":"2.1.4","depth":2,"next":{"title":"データ取得実践","level":"3.1","depth":1,"path":"term1-2/README.md","ref":"./term1-2/README.md","articles":[{"title":"サーバからデータを取得してみよう","level":"3.1.1","depth":2,"path":"term1-2/00-chapter01.md","ref":"./term1-2/00-chapter01.md","articles":[]},{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},{"title":"JSON データ取得について学ぼう","level":"3.1.3","depth":2,"path":"term1-2/00-chapter03.md","ref":"./term1-2/00-chapter03.md","articles":[]}]},"previous":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter04.md","mtime":"2023-07-31T14:02:34.667Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-01T08:21:04.199Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ゲームサンプルからサーバーの仕組みとの疎通","level":"2.1.4","depth":2,"next":{"title":"データ取得実践","level":"3.1","depth":1,"path":"term1-2/README.md","ref":"./term1-2/README.md","articles":[{"title":"サーバからデータを取得してみよう","level":"3.1.1","depth":2,"path":"term1-2/00-chapter01.md","ref":"./term1-2/00-chapter01.md","articles":[]},{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},{"title":"JSON データ取得について学ぼう","level":"3.1.3","depth":2,"path":"term1-2/00-chapter03.md","ref":"./term1-2/00-chapter03.md","articles":[]}]},"previous":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter04.md","mtime":"2023-08-01T12:33:30.082Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-01T12:40:50.382Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

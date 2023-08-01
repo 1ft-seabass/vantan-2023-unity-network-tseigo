@@ -750,7 +750,7 @@
 </li>
 </ul>
 <p>また、Node.js と一緒にインストールされる npm は、Node.jsのパッケージ管理ツールです。npmを使うことで、パッケージの依存関係や競合関係を管理してくれるので、パッケージを追加、更新する際は基本的に npm 経由で行うことになります。</p>
-<p>また、npm には、Node.js と一緒に入ってすぐ使える便利なライブラリがたくさん登録されています。今回は Express <a href="https://expressjs.com/" target="_blank">https://expressjs.com/</a> という便利なサーバー構築ライブラリがインストールされています。</p>
+<p>また、npm には、Node.js と一緒に入ってすぐ使える便利なライブラリがたくさん登録されています。今回は Express <a href="https://expressjs.com/" target="_blank">https://expressjs.com/</a> という便利なサーバー構築ライブラリがインストールされています。公式のドキュメントもわかりやすいですが、とほほのExpress入門 <a href="https://www.tohoho-web.com/ex/express.html" target="_blank">https://www.tohoho-web.com/ex/express.html</a> も日本語でとっつきやすいので、もしカスタマイズしくなった方は参考にするとよいでしょう。</p>
 <p>✅ポイント</p>
 <ul>
 <li>今回は、Node.js サーバー側のプログラムは、起動とちょっとした設定反映が中心です。</li>
@@ -770,6 +770,7 @@
 </li>
 <li>今回のリポジトリにあるコード群がすべて使える</li>
 <li>ブラウザ上の Visual Studio Code で今回のリポジトリにあるコードが編集・実行できる</li>
+<li>今回の教材はほぼ変更なしで使えます。</li>
 </ul>
 <h2 id="サンプルをターミナルから実行"><a name="サンプルをターミナルから実行" class="plugin-anchor" href="#サンプルをターミナルから実行"><i class="fa fa-link" aria-hidden="true"></i></a>サンプルをターミナルから実行</h2>
 <p><code>app01.js</code> というプログラムを実行してみましょう。</p>
@@ -800,8 +801,10 @@
 <p><img src="https://i.gyazo.com/b537857243d0aed0c58a93e7bd0380a7.png" alt="b537857243d0aed0c58a93e7bd0380a7"></p>
 <p>これでターミナル実行のウォームアップ完了です。</p>
 <h2 id="ターミナルからサーバーを起動"><a name="ターミナルからサーバーを起動" class="plugin-anchor" href="#ターミナルからサーバーを起動"><i class="fa fa-link" aria-hidden="true"></i></a>ターミナルからサーバーを起動</h2>
-<p><code>server01.js</code> というプログラムを実行してみましょう。</p>
-<pre><code class="lang-js"><span class="hljs-comment">// Express ライブラリの呼び出し</span>
+<p><code>term1-1.js</code> というプログラムを実行してみましょう。</p>
+<pre><code class="lang-js"><span class="hljs-comment">// path ライブラリの呼び出し</span>
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;path&apos;</span>);
+<span class="hljs-comment">// Express ライブラリの呼び出し</span>
 <span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;express&apos;</span>);
 <span class="hljs-comment">// Express ライブラリからサーバーの仕組みを app 変数として呼び出す</span>
 <span class="hljs-keyword">const</span> app = express();
@@ -812,14 +815,14 @@ app.use(express.static(__dirname + <span class="hljs-string">&apos;/public&apos;
 
 <span class="hljs-comment">// サーバーを 8080 ポートで起動してログを出力</span>
 app.listen(process.env.PORT || <span class="hljs-number">8080</span>, <span class="hljs-function">() =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;server01 start!&quot;</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${path.basename(__filename)}</span> start!`</span>);
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`app listening at http://localhost:<span class="hljs-subst">${process.env.PORT || <span class="hljs-number">8080</span>}</span>`</span>)
 })
 </code></pre>
 <p>Express というライブラリでサーバーを構築できるプログラムです。</p>
-<pre><code>node server01.js
+<pre><code>node term1-1.js
 </code></pre><p>ターミナルで以下のコマンドを入力して Enter キーを押して実行します。</p>
-<pre><code>server01 start!
+<pre><code>term1-1.js start!
 app listening at http://localhost:8080
 </code></pre><p>というメッセージが次の行に出てくれば起動成功です。これで無事サーバーが起動できました。</p>
 <p>✅ポイント</p>
@@ -828,7 +831,7 @@ app listening at http://localhost:8080
 </ul>
 <h2 id="ブラウザからアクセスしてみる"><a name="ブラウザからアクセスしてみる" class="plugin-anchor" href="#ブラウザからアクセスしてみる"><i class="fa fa-link" aria-hidden="true"></i></a>ブラウザからアクセスしてみる</h2>
 <p>現在は、起動中の GitHub アカウントのみで構築されたサーバーが確認できます。</p>
-<p><img src="https://i.gyazo.com/2b7eb26ecba22ee6aa0154d986935251.png" alt="2b7eb26ecba22ee6aa0154d986935251"></p>
+<p><img src="https://i.gyazo.com/3ecdb2db08ae9c3be5134c606c63733f.png" alt="3ecdb2db08ae9c3be5134c606c63733f"></p>
 <p>ターミナルで出力された <code>http://localhost:8080</code> にマウスを乗せます。</p>
 <p><img src="https://i.gyazo.com/9fdd7fbc69e3113ed32732845a6cb9d0.png" alt="9fdd7fbc69e3113ed32732845a6cb9d0"></p>
 <p>リンクにアクセスというメッセージが出てくるのでクリックします。すると、ブラウザの別のタブでアクセスされます。</p>
@@ -838,13 +841,13 @@ app listening at http://localhost:8080
 <p>アドレスバーに書いてある URL は、今回の Codespace が構築されたサーバアドレスのトップページが表示されています。</p>
 <p>✅ポイント</p>
 <ul>
-<li>server01.js の <code>app.use(express.static(__dirname + &apos;/public&apos;));</code> によって、public フォルダの中身でトップページを示す <code>public/index.html</code> の内容が、今回起動したサーバーのトップページとして表示されています。</li>
+<li>term1-1.js の <code>app.use(express.static(__dirname + &apos;/public&apos;));</code> によって、public フォルダの中身でトップページを示す <code>public/index.html</code> の内容が、今回起動したサーバーのトップページとして表示されています。</li>
 <li>現在は、起動中の GitHub アカウントのみで構築されたサーバーが確認でき、次の授業では、Unity からもアクセスできるよう、誰でも見れる公開する対応を行います。</li>
 </ul>
 <h2 id="プログラムの終了"><a name="プログラムの終了" class="plugin-anchor" href="#プログラムの終了"><i class="fa fa-link" aria-hidden="true"></i></a>プログラムの終了</h2>
 <p>現在のプログラムは app01.js のように実行したらすぐに終わるプログラムではなく、サーバーとして動き続けています。プログラムの終了をしてみましょう。</p>
 <p>ターミナル上で Ctrl + C を打ってプログラムを終了します。</p>
-<p><img src="https://i.gyazo.com/93a99bf90eb16a44806b5bc745cdc9ec.png" alt="93a99bf90eb16a44806b5bc745cdc9ec"></p>
+<p><img src="https://i.gyazo.com/a47229a818f685b6359ca2e32e6e1e11.png" alt="a47229a818f685b6359ca2e32e6e1e11"></p>
 <p>このように <code>^C</code> 入力とともに、ターミナルの入力待ちになれば終了成功です。</p>
 <p><img src="https://i.gyazo.com/9ea2265a9d054bc697a822b8b0061bee.png" alt="9ea2265a9d054bc697a822b8b0061bee"></p>
 <p>サーバーが終了したので、さきほどの Index と書かれたページも再読み込みしてもアクセスできなくなります。</p>
@@ -914,7 +917,7 @@ app listening at http://localhost:8080
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"next":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},"previous":{"title":"全体の流れの共有","level":"2.1.1","depth":2,"path":"term1-1/00-chapter01.md","ref":"./term1-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter02.md","mtime":"2023-07-31T13:16:11.104Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-01T08:21:04.199Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"環境構築・初動サンプル動作","level":"2.1.2","depth":2,"next":{"title":"基礎となるゲームサンプルの共有と動作確認","level":"2.1.3","depth":2,"path":"term1-1/00-chapter03.md","ref":"./term1-1/00-chapter03.md","articles":[]},"previous":{"title":"全体の流れの共有","level":"2.1.1","depth":2,"path":"term1-1/00-chapter01.md","ref":"./term1-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-1/00-chapter02.md","mtime":"2023-08-01T12:37:11.648Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-01T12:40:50.382Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

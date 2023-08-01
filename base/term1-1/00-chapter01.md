@@ -34,7 +34,7 @@ Unity でのネットワークの基礎を Unity クライアント側とサー�
 
 ![aae5fcbb30bf9d55b7249a6d6bd44697](https://i.gyazo.com/aae5fcbb30bf9d55b7249a6d6bd44697.png)
 
-現場では対面授業。Slack でも質問を受け付けます。
+現場では対面授業。Slack でも質問を受け付けます！
 
 ## 講師のスキル
 

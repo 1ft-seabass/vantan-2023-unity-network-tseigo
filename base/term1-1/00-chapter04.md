@@ -124,7 +124,7 @@ Codespaces のページです。さきほど使っていた Codespace をクリ�
 
 ![0a3a35f3418068b7713ddaa729f2c660](https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png)
 
-- ターミナルで `node server01.js` をサーバ起動
+- ターミナルで `node term1-1.js` をサーバ起動
 - ポートタブで今回のサーバ起動を公開
 - シークレットウィンドウで今回のサーバが公開されているか確認します
 
@@ -143,16 +143,70 @@ Project タブから Assets > Scenes を選択します。Scene-Term1-1-Chapter0
 シーンの仕組みを解説します。
 
 ✅ポイント
-- Scene01 と同じイベントの仕組みです
+- Term1_1 Chapter03 と同じイベントの仕組みです
 - Cube には Term1_1_Chapter04_CubeEvent というスクリプトがむずびついています
   - Scene01 で使われた CubeEventではないです
 - Term1_1_Chapter04_CubeEvent で今回の URL にアクセスする
 
 ## Term1_1_Chapter04_CubeEvent.cs の変更
 
+`Assets/Scripts/Term1_1_Chapter04_CubeEvent.cs` をエディタで開きます。
+
+```csharp
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+using System.Collections;       // IEnumerator のための参照
+using UnityEngine.Networking;   // UnityWebRequest のための参照
+
+public class Term1_1_Chapter04_CubeEvent : MonoBehaviour, IPointerClickHandler
+{
+    // アクセスする URL
+    string urlGitHub = "ここにサーバーURLを入れる";
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        // マウスクリックイベント
+        // Debug.Log($"オブジェクト {this.name} がクリックされたよ！");
+
+        // HTTP GET リクエストを非同期処理を待つためコルーチンとして呼び出す
+        StartCoroutine("GetGitHubData");
+    }
+
+    // GET リクエストする本体
+    IEnumerator GetGitHubData()
+    {
+        // HTTP リクエストする(GET メソッド) UnityWebRequest を呼び出し
+        // アクセスする先は変数 urlGitHub で設定
+        UnityWebRequest request = UnityWebRequest.Get(urlGitHub);
+
+        // リクエスト開始
+        yield return request.SendWebRequest();
+
+        // 結果によって分岐
+        switch (request.result)
+        {
+            case UnityWebRequest.Result.InProgress:
+                Debug.Log("リクエスト中");
+                break;
+
+            case UnityWebRequest.Result.Success:
+                Debug.Log("リクエスト成功");
+
+                // コンソールに表示
+                Debug.Log($"responseData: {request.downloadHandler.text}");
+
+                break;
+        }
+
+
+    }
+}
+```
+
 Term1_1_Chapter04_CubeEvent.cs のスクリプトはブラウザで表示できるデータにアクセスすることができます。
 
-![09b0473d51bd8a7227a41b6c08b3c32a](https://i.gyazo.com/09b0473d51bd8a7227a41b6c08b3c32a.png)
+![461a20fc2eaba496f38d84869a218755](https://i.gyazo.com/461a20fc2eaba496f38d84869a218755.png)
 
 今回のサーバーの行のクリップボードマークをクリックして今回の URL をコピーしましょう。
 
