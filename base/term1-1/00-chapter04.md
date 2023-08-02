@@ -44,7 +44,7 @@ HTTP は Hypertext Transfer Protocol という正式名称です。 Web ブラ�
 
 - HTTP メソッド
   - リソースに対して実行したいアクションを宣言します。いろいろありますが GET と POST を使うことが多いです。
-  - https://developer.mozilla.org/ja/docs/Web/HTTP/Headers
+  - https://developer.mozilla.org/ja/docs/Web/HTTP/Methods
 - HTTP ヘッダー
   - HTTP リクエストやレスポンスでクライアントやサーバーが追加情報を渡すことができます
   - https://developer.mozilla.org/ja/docs/Web/HTTP/Headers
