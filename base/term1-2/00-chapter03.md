@@ -133,7 +133,7 @@ Unity で受信したときに扱える JSON は `{` と `}` で囲われたオ�
 
 <details>
 <summary>答え（出題中は開かないでくださいね）</summary>
-<pre style="position: relative;"><code class="lang-js">{"price":"500"}
+<pre style="position: relative;"><code class="lang-js">{"price":500}
 </code></pre>
 </details>
 
