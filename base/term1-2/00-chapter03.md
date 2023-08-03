@@ -131,11 +131,23 @@ Unity で受信したときに扱える JSON は `{` と `}` で囲われたオ�
 
 価格を示すプロパティ名は英語 price に置き換えて表現してみましょう。
 
+<details>
+<summary>答え（出題中は開かないでくださいね）</summary>
+<pre style="position: relative;"><code class="lang-js">{"price":"500"}
+</code></pre>
+</details>
+
 ### 例題 3
 
 「自分の名前」
 
 名前を示すプロパティ名は英語 name に置き換えて表現してみましょう。
+
+<details>
+<summary>答え（出題中は開かないでくださいね）</summary>
+<pre style="position: relative;"><code class="lang-js">{"name":"たなかせいご"}
+</code></pre>
+</details>
 
 ### 例題 4
 
@@ -144,6 +156,18 @@ Unity で受信したときに扱える JSON は `{` と `}` で囲われたオ�
 - 緯度を示すプロパティ名は latitude
 - 経度を示すプロパティ名は longitude
 - 場所を示すプロパティ名は placeName
+
+<details>
+<summary>答え（出題中は開かないでくださいね）</summary>
+<pre style="position: relative;"><code class="lang-js">{
+{
+  "latitude":35.681236,
+  "longitude":139.767125,
+  "placeName":"東京タワー"
+}
+</code></pre>
+</details>
+
 
 ## データ表現例
 
@@ -215,10 +239,6 @@ JSON データの構造を、人間の生活や IoT のセンサーや住所な�
   }
 }
 ```
-
-TODO
-とほほのExpress入門 - とほほのWWW入門
-https://www.tohoho-web.com/ex/express.html#express.json
 
 ## JSON データの送信や受け取ったデータの JSON 解析は JsonUtility
 

@@ -814,9 +814,21 @@
 <h3 id="例題-2"><a name="例題-2" class="plugin-anchor" href="#例題-2"><i class="fa fa-link" aria-hidden="true"></i></a>例題 2</h3>
 <p>「価格が 500 円」</p>
 <p>価格を示すプロパティ名は英語 price に置き換えて表現してみましょう。</p>
+<details>
+<summary>答え（出題中は開かないでくださいね）</summary>
+<pre style="position: relative;"><code class="lang-js">{<span class="hljs-string">&quot;price&quot;</span>:<span class="hljs-string">&quot;500&quot;</span>}
+</code></pre>
+</details>
+
 <h3 id="例題-3"><a name="例題-3" class="plugin-anchor" href="#例題-3"><i class="fa fa-link" aria-hidden="true"></i></a>例題 3</h3>
 <p>「自分の名前」</p>
 <p>名前を示すプロパティ名は英語 name に置き換えて表現してみましょう。</p>
+<details>
+<summary>答え（出題中は開かないでくださいね）</summary>
+<pre style="position: relative;"><code class="lang-js">{<span class="hljs-string">&quot;name&quot;</span>:<span class="hljs-string">&quot;たなかせいご&quot;</span>}
+</code></pre>
+</details>
+
 <h3 id="例題-4"><a name="例題-4" class="plugin-anchor" href="#例題-4"><i class="fa fa-link" aria-hidden="true"></i></a>例題 4</h3>
 <p>「緯度が 35.681236 経度が 139.767125 の場所の名前が東京タワー」</p>
 <ul>
@@ -824,6 +836,18 @@
 <li>経度を示すプロパティ名は longitude</li>
 <li>場所を示すプロパティ名は placeName</li>
 </ul>
+<details>
+<summary>答え（出題中は開かないでくださいね）</summary>
+<pre style="position: relative;"><code class="lang-js">{
+{
+  <span class="hljs-string">&quot;latitude&quot;</span>:<span class="hljs-number">35.681236</span>,
+  <span class="hljs-string">&quot;longitude&quot;</span>:<span class="hljs-number">139.767125</span>,
+  <span class="hljs-string">&quot;placeName&quot;</span>:<span class="hljs-string">&quot;東京タワー&quot;</span>
+}
+</code></pre>
+</details>
+
+
 <h2 id="データ表現例"><a name="データ表現例" class="plugin-anchor" href="#データ表現例"><i class="fa fa-link" aria-hidden="true"></i></a>データ表現例</h2>
 <p>いくつかのデータ例を元に JSON でのデータ表現を把握します。</p>
 <p>JSON データの構造を、人間の生活や IoT のセンサーや住所などを例にして表現してみました。</p>
@@ -880,9 +904,6 @@
   }
 }
 </code></pre>
-<p>TODO
-とほほのExpress入門 - とほほのWWW入門
-<a href="https://www.tohoho-web.com/ex/express.html#express.json" target="_blank">https://www.tohoho-web.com/ex/express.html#express.json</a></p>
 <h2 id="json-データの送信や受け取ったデータの-json-解析は-jsonutility"><a name="json-データの送信や受け取ったデータの-json-解析は-jsonutility" class="plugin-anchor" href="#json-データの送信や受け取ったデータの-json-解析は-jsonutility"><i class="fa fa-link" aria-hidden="true"></i></a>JSON データの送信や受け取ったデータの JSON 解析は JsonUtility</h2>
 <p><img src="https://i.gyazo.com/305255eea1072f3becd161d1df9a5755.png" alt="305255eea1072f3becd161d1df9a5755"></p>
 <p>JSON データの送信や受け取ったデータの JSON 解析は、Unity でビルドインされている JsonUtility が便利です。</p>
@@ -1088,7 +1109,7 @@ GameObject.Find(<span class="hljs-string">&quot;Title&quot;</span>).GetComponent
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"JSON データ取得について学ぼう","level":"3.1.3","depth":2,"next":{"title":"データ送信実践","level":"4.1","depth":1,"path":"term1-3/README.md","ref":"./term1-3/README.md","articles":[{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"path":"term1-3/00-chapter01.md","ref":"./term1-3/00-chapter01.md","articles":[]},{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"path":"term1-3/00-chapter02.md","ref":"./term1-3/00-chapter02.md","articles":[]}]},"previous":{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-2/00-chapter03.md","mtime":"2023-08-03T03:53:59.530Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-03T03:54:03.705Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"JSON データ取得について学ぼう","level":"3.1.3","depth":2,"next":{"title":"データ送信実践","level":"4.1","depth":1,"path":"term1-3/README.md","ref":"./term1-3/README.md","articles":[{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"path":"term1-3/00-chapter01.md","ref":"./term1-3/00-chapter01.md","articles":[]},{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"path":"term1-3/00-chapter02.md","ref":"./term1-3/00-chapter02.md","articles":[]}]},"previous":{"title":"サーバから受け取ったデータを表示してみよう","level":"3.1.2","depth":2,"path":"term1-2/00-chapter02.md","ref":"./term1-2/00-chapter02.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-2/00-chapter03.md","mtime":"2023-08-03T05:12:17.207Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-03T05:12:33.491Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
