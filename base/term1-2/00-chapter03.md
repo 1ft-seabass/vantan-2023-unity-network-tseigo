@@ -132,7 +132,7 @@ Unity で受信したときに扱える JSON は `{` と `}` で囲われたオ�
 価格を示すプロパティ名は英語 price に置き換えて表現してみましょう。
 
 <details>
-<summary>答え（出題中は開かないでくださいね）</summary>
+<summary>📋答え（出題中は開かないでくださいね）</summary>
 <pre style="position: relative;"><code class="lang-js">{"price":500}
 </code></pre>
 </details>
@@ -144,7 +144,7 @@ Unity で受信したときに扱える JSON は `{` と `}` で囲われたオ�
 名前を示すプロパティ名は英語 name に置き換えて表現してみましょう。
 
 <details>
-<summary>答え（出題中は開かないでくださいね）</summary>
+<summary>📋答え（出題中は開かないでくださいね）</summary>
 <pre style="position: relative;"><code class="lang-js">{"name":"たなかせいご"}
 </code></pre>
 </details>
@@ -158,7 +158,7 @@ Unity で受信したときに扱える JSON は `{` と `}` で囲われたオ�
 - 場所を示すプロパティ名は placeName
 
 <details>
-<summary>答え（出題中は開かないでくださいね）</summary>
+<summary>📋答え（出題中は開かないでくださいね）</summary>
 <pre style="position: relative;"><code class="lang-js">{
 {
   "latitude":35.681236,
