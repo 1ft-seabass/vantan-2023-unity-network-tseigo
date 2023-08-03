@@ -55,3 +55,8 @@
 ## 第 2 ターム 第 4 週
 
 * [成果発表会](./term2-4/README.md)
+
+## エクストラ
+
+- [LINE Notify アカウントの取得](./00-preparation/01-line-notify.md)
+- [Open AI アカウントの取得](./00-preparation/02-open-ai.md)
