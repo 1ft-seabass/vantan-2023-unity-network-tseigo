@@ -682,18 +682,51 @@
 <p><img src="https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png" alt="9d2c38e6fe48e61528f6b2d34370768f"></p>
 <h2 id="この章で学ぶこと"><a name="この章で学ぶこと" class="plugin-anchor" href="#この章で学ぶこと"><i class="fa fa-link" aria-hidden="true"></i></a>この章で学ぶこと</h2>
 <p>前半のおさらいをしましょう。</p>
-<p>（term1-1～1-3の状況を見て組み立て中）</p>
-<h2 id="予定のお品書き"><a name="予定のお品書き" class="plugin-anchor" href="#予定のお品書き"><i class="fa fa-link" aria-hidden="true"></i></a>予定のお品書き</h2>
+<h2 id="質疑応答多めで行きたいと思います"><a name="質疑応答多めで行きたいと思います" class="plugin-anchor" href="#質疑応答多めで行きたいと思います"><i class="fa fa-link" aria-hidden="true"></i></a>質疑応答多めで行きたいと思います</h2>
+<p><img src="https://i.gyazo.com/aba8ccd625e7320883851b71ebd0caf2.png" alt="image"></p>
+<p>よろしくお願いします！</p>
+<h2 id="カジュアルに試すなら-get-リクエスト"><a name="カジュアルに試すなら-get-リクエスト" class="plugin-anchor" href="#カジュアルに試すなら-get-リクエスト"><i class="fa fa-link" aria-hidden="true"></i></a>カジュアルに試すなら GET リクエスト</h2>
+<p><img src="https://i.gyazo.com/147af28193f674986f4e8f00009f1698.png" alt="147af28193f674986f4e8f00009f1698"></p>
+<p>外部 API をカジュアルに試すなら、なるべく設定の少ない GET リクエストでアクセスできる API が試すのにはおススメです。そのうえで POST リクエストで設定が必要なものにステップアップしていきましょう。</p>
+<h2 id="ひとまず、自分のゲームの仕組みのデータを、外に送ってみよう"><a name="ひとまず、自分のゲームの仕組みのデータを、外に送ってみよう" class="plugin-anchor" href="#ひとまず、自分のゲームの仕組みのデータを、外に送ってみよう"><i class="fa fa-link" aria-hidden="true"></i></a>ひとまず、自分のゲームの仕組みのデータを、外に送ってみよう</h2>
+<p><img src="https://i.gyazo.com/0cb576bcc9cda870c381adb4a43d863a.png" alt="0cb576bcc9cda870c381adb4a43d863a"></p>
+<p>自分の仕組みに、とりあえず加えていくのを試したいのであれば、ゲームポイントのサンプルのように内部のデータを外部に送ってみることを試してみましょう。</p>
+<p>また、ゲームの設定値を外部から取り込むのも、いろいろ用途が広がると思います。もちろん後半でもより深掘りしていきますが、今のうちから企画や開発方針を考えておきましょう。</p>
+<h2 id="ツールの紹介"><a name="ツールの紹介" class="plugin-anchor" href="#ツールの紹介"><i class="fa fa-link" aria-hidden="true"></i></a>ツールの紹介</h2>
+<h3 id="送ったデータを自分に折り返して確認できる-httpbin"><a name="送ったデータを自分に折り返して確認できる-httpbin" class="plugin-anchor" href="#送ったデータを自分に折り返して確認できる-httpbin"><i class="fa fa-link" aria-hidden="true"></i></a>送ったデータを自分に折り返して確認できる httpbin</h3>
+<p><img src="https://i.gyazo.com/fbe6aff58d93a80ec6ce37eff039b828.png" alt="fbe6aff58d93a80ec6ce37eff039b828"></p>
+<p>外部 API にどういうデータを送ったかを把握しづらい問題は httpbin <a href="https://httpbin.org/" target="_blank">https://httpbin.org/</a> という サービスを使ってもよいです。</p>
+<p>✅参考資料</p>
 <ul>
-<li>カジュアルに試すなら GET リクエスト</li>
-<li>ひとまず、自分のゲームの仕組みのデータを、外に送ってみよう</li>
-<li>質疑応答</li>
-<li>ツールの紹介<ul>
-<li>VSCode REST</li>
-<li>httpbin</li>
+<li>APIクライアント開発時のモックに使えるhttpbinの紹介 - Qiita<ul>
+<li><a href="https://qiita.com/sameyasu/items/adacceb8a1bee893599b" target="_blank">https://qiita.com/sameyasu/items/adacceb8a1bee893599b</a></li>
 </ul>
 </li>
 </ul>
+<p><img src="https://i.gyazo.com/27ad8b6ffa1c707d8ce8ca6bd3f1e194.png" alt="27ad8b6ffa1c707d8ce8ca6bd3f1e194"></p>
+<p>GET リクエストの場合は <a href="https://httpbin.org/get" target="_blank">https://httpbin.org/get</a> に送ります。POST リクエストの場合は <a href="https://httpbin.org/post" target="_blank">https://httpbin.org/post</a> に送ります。</p>
+<h3 id="vscode-rest-client-機能拡張"><a name="vscode-rest-client-機能拡張" class="plugin-anchor" href="#vscode-rest-client-機能拡張"><i class="fa fa-link" aria-hidden="true"></i></a>VSCode REST Client 機能拡張</h3>
+<p><img src="https://i.gyazo.com/f717cdc6603a9e727820a55cba00ed31.png" alt="f717cdc6603a9e727820a55cba00ed31"></p>
+<p>Web ブラウザでは GET リクエストしか試せないとお伝えしましたが VSCode の拡張機能で様々なデータの送り方が試せる REST Client　機能拡張というのがあります。うまくつながるか確かめるには使いやすいツールですので、ぜひ試してみましょう。</p>
+<p>✅参考資料</p>
+<ul>
+<li>VS Code上でHTTPリクエストを送信し、VS Code上でレスポンスを確認できる「REST Client」拡張の紹介 - Qiita<ul>
+<li><a href="https://qiita.com/toshi0607/items/c4440d3fbfa72eac840c" target="_blank">https://qiita.com/toshi0607/items/c4440d3fbfa72eac840c</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="codespaces-停止後の自動削除の話"><a name="codespaces-停止後の自動削除の話" class="plugin-anchor" href="#codespaces-停止後の自動削除の話"><i class="fa fa-link" aria-hidden="true"></i></a>Codespaces 停止後の自動削除の話</h2>
+<p><img src="https://i.gyazo.com/ce561ee73bcbc8a765828b73685cd7a8.png" alt="ce561ee73bcbc8a765828b73685cd7a8"></p>
+<p>くわしくはこちら。</p>
+<p><a href="https://docs.github.com/ja/codespaces/customizing-your-codespace/configuring-automatic-deletion-of-your-codespaces?tool=webui" target="_blank">https://docs.github.com/ja/codespaces/customizing-your-codespace/configuring-automatic-deletion-of-your-codespaces?tool=webui</a></p>
+<blockquote>
+<p>既定では、GitHub Codespaces は、停止して、非アクティブな状態で 30 日間が過ぎると、自動的に削除されます。</p>
+</blockquote>
+<p>ということで、よく使うものは、定期的に起動して保持しておきましょう。</p>
+<p>また、Keep codespace でも保持することができます。</p>
+<blockquote>
+<p>個人設定で定義されている保持期間よりも長く保持したい codespace がある場合があります。 それを行うには、[Keep codespace] オプションを使います。 このオプションを選択すると、codespace は無期限に、手動で削除するまで保持されます。</p>
+</blockquote>
 
                                 
                                 </section>
@@ -737,7 +770,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"前半のおさらい","level":"5.1.3","depth":2,"next":{"title":"動的なデータの取得体験","level":"6.1","depth":1,"path":"term2-1/README.md","ref":"./term2-1/README.md","articles":[{"title":"データベース外部サービス Airtable のアカウント作成","level":"6.1.1","depth":2,"path":"term2-1/00-chapter01.md","ref":"./term2-1/00-chapter01.md","articles":[]},{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"path":"term2-1/00-chapter02.md","ref":"./term2-1/00-chapter02.md","articles":[]},{"title":"サーバから動的なデータの取得してみよう","level":"6.1.3","depth":2,"path":"term2-1/00-chapter03.md","ref":"./term2-1/00-chapter03.md","articles":[]}]},"previous":{"title":"外部の API 連携を体験","level":"5.1.2","depth":2,"path":"term1-4/00-chapter02.md","ref":"./term1-4/00-chapter02.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-4/00-chapter03.md","mtime":"2023-08-02T04:18:37.081Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-03T05:21:59.381Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"前半のおさらい","level":"5.1.3","depth":2,"next":{"title":"動的なデータの取得体験","level":"6.1","depth":1,"path":"term2-1/README.md","ref":"./term2-1/README.md","articles":[{"title":"データベース外部サービス Airtable のアカウント作成","level":"6.1.1","depth":2,"path":"term2-1/00-chapter01.md","ref":"./term2-1/00-chapter01.md","articles":[]},{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"path":"term2-1/00-chapter02.md","ref":"./term2-1/00-chapter02.md","articles":[]},{"title":"サーバから動的なデータの取得してみよう","level":"6.1.3","depth":2,"path":"term2-1/00-chapter03.md","ref":"./term2-1/00-chapter03.md","articles":[]}]},"previous":{"title":"外部の API 連携を体験","level":"5.1.2","depth":2,"path":"term1-4/00-chapter02.md","ref":"./term1-4/00-chapter02.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-4/00-chapter03.md","mtime":"2023-08-03T13:55:44.621Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-03T13:56:05.614Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
