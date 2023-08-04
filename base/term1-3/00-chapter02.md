@@ -423,24 +423,110 @@ Codespace 側でもターミナルで字受信できたことが確認できま�
 
 ![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
+Term1_3_Chapter02_ClickPart の対応です。
+
 <details>
 <summary>📋答え（出題中は開かないでくださいね）</summary>
-<pre style="position: relative;"><code class="lang-csharp">{
-
+<pre style="position: relative;"><code class="lang-csharp">    // 受信した JSON データを Unity で扱うデータにする ResponseData ベースクラス
+    [Serializable]
+    public class ResponseData
+    {
+        // result というプロパティ名で string 型で変換
+        public string result;
+        // title というプロパティ名で string 型で変換
+        public string title;
+    }
 </code></pre>
+
+ResponseData に title の読み込みを加えます。
+
+<pre style="position: relative;"><code class="lang-csharp">// StatusMessage に結果テキスト割り当て
+GameObject.Find("StatusMessage").GetComponent<TextMesh>().text = responseData.title;
+</code></pre>
+
+StatusMessage のテキスト割り当てを responseData.title に変更します。
+
 </details>
 
-## 自分の名前を送っていてサーバーであいさつ文を作っていることを確認（RequestData.name）
+## 自分の名前を送っていてサーバーであいさつ文を作っていることを確認してから反映（RequestData.name）
 
 ![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
+
+Term1_3_Chapter02_ClickPart の対応です。
+
+
+```csharp
+// 初回ロード時にいろいろな情報をもらう
+// /api/post/init というパスで POST リクエストでアクセスするとデータが取得できます
+app.post('/api/post/init', (req, res) => {
+  console.log('/api/post/init 受信');
+  // 受信したデータ
+  console.log(req.body);
+  // あいさつ文の値
+  let title = "";
+  // 受信した name 値の有無で文言が変わる
+  if(req.body.name){
+    title = `こんにちは！${req.body.name}さん、ようこそ！`;
+  } else {
+    title = "こんにちは！ようこそ！";
+  }
+  // 送るデータを JavaScript のオブジェクトで作る
+  const responseData = {
+    "result":"OK",
+    "title":title,  // あいさつ文
+    "add_point":1,  // 加算ポイント
+    "recordPoint":recordPoint // 記録している現在のポイント
+  };
+  // res.json はオブジェクトを JSON 形式で返答します
+  res.json(responseData)
+});
+```
+
+このようにサーバ側では実は name 値を待っています。では name 値を反映してみましょう。
+
+<details>
+<summary>📋答え（出題中は開かないでくださいね）</summary>
+
+<pre style="position: relative;"><code class="lang-csharp">// ResponseData ベースクラスを器として呼び出す
+RequestData requestData = new RequestData();
+// データを設定
+requestData.name = "まいねーむ"; // 自分の名前
+</code></pre>
+
+このように新たな値を加えます。
+
+</details>
 
 ## 受け取ったデータをポイント加算に反映してみる（ResponseData.add_point）
 
 ![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
-## ゲームポイントの記録が成功すると記録ポイントが返ってくるのでテキストに反映してみる（ResponseData.recordPoint）
+Term1_3_Chapter02_SendButton の対応です。
 
-![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
+<details>
+<summary>📋答え（出題中は開かないでくださいね）</summary>
+<pre style="position: relative;"><code class="lang-csharp">
+    // 受信した JSON データを Unity で扱うデータにする ResultResponseData ベースクラス
+    [Serializable]
+    public class ResultResponseData
+    {
+        // result というプロパティ名で string 型で変換
+        public string result;
+        // recordPoint というプロパティ名で int 型で変換
+        public int recordPoint;
+    }
+</code></pre>
+
+PointRequestData に recordPoint の読み込みを加えます。
+
+<pre style="position: relative;"><code class="lang-csharp">
+// MessageText に結果テキスト割り当て
+GameObject.Find("StatusMessage").GetComponent<TextMesh>().text = resultResponse.recordPoint.ToString();
+</code></pre>
+
+StatusMessage のテキスト割り当てを responseData.recordPoint に文字列変換して変更します。
+
+</details>
 
 ## 再起動して記録ポイントが初期化されることも確認
 

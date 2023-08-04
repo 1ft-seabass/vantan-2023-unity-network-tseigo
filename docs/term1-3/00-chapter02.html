@@ -1046,19 +1046,100 @@ pointRequestData.point = GameObject.Find(<span class="hljs-string">&quot;ClickPa
 <p>また、こちらは初期起動時のデータ取得でも、記録ポイントが返ってきています。（再度つないでみた様子）</p>
 <h2 id="受け取ったデータをあいさつ文テキストに反映してみる（responsedatatitle）"><a name="受け取ったデータをあいさつ文テキストに反映してみる（responsedatatitle）" class="plugin-anchor" href="#受け取ったデータをあいさつ文テキストに反映してみる（responsedatatitle）"><i class="fa fa-link" aria-hidden="true"></i></a>受け取ったデータをあいさつ文テキストに反映してみる（ResponseData.title）</h2>
 <p><img src="https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png" alt="02db792fd629a56812a205234a08ae44"></p>
+<p>Term1_3_Chapter02_ClickPart の対応です。</p>
 <details>
 <summary>📋答え（出題中は開かないでくださいね）</summary>
-<pre style="position: relative;"><code class="lang-csharp">{
-
+<pre style="position: relative;"><code class="lang-csharp">    <span class="hljs-comment">// 受信した JSON データを Unity で扱うデータにする ResponseData ベースクラス</span>
+    [<span class="hljs-meta">Serializable</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ResponseData</span>
+    {
+        <span class="hljs-comment">// result というプロパティ名で string 型で変換</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> result;
+        <span class="hljs-comment">// title というプロパティ名で string 型で変換</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> title;
+    }
 </code></pre>
+
+ResponseData に title の読み込みを加えます。
+
+<pre style="position: relative;"><code class="lang-csharp"><span class="hljs-comment">// StatusMessage に結果テキスト割り当て</span>
+GameObject.Find(<span class="hljs-string">&quot;StatusMessage&quot;</span>).GetComponent().text = responseData.title;
+</code></pre>
+
+StatusMessage のテキスト割り当てを responseData.title に変更します。
+
 </details>
 
-<h2 id="自分の名前を送っていてサーバーであいさつ文を作っていることを確認（requestdataname）"><a name="自分の名前を送っていてサーバーであいさつ文を作っていることを確認（requestdataname）" class="plugin-anchor" href="#自分の名前を送っていてサーバーであいさつ文を作っていることを確認（requestdataname）"><i class="fa fa-link" aria-hidden="true"></i></a>自分の名前を送っていてサーバーであいさつ文を作っていることを確認（RequestData.name）</h2>
+<h2 id="自分の名前を送っていてサーバーであいさつ文を作っていることを確認してから反映（requestdataname）"><a name="自分の名前を送っていてサーバーであいさつ文を作っていることを確認してから反映（requestdataname）" class="plugin-anchor" href="#自分の名前を送っていてサーバーであいさつ文を作っていることを確認してから反映（requestdataname）"><i class="fa fa-link" aria-hidden="true"></i></a>自分の名前を送っていてサーバーであいさつ文を作っていることを確認してから反映（RequestData.name）</h2>
 <p><img src="https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png" alt="02db792fd629a56812a205234a08ae44"></p>
+<p>Term1_3_Chapter02_ClickPart の対応です。</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// 初回ロード時にいろいろな情報をもらう</span>
+<span class="hljs-comment">// /api/post/init というパスで POST リクエストでアクセスするとデータが取得できます</span>
+app.post(<span class="hljs-string">&apos;/api/post/init&apos;</span>, (req, res) =&gt; {
+  console.log(<span class="hljs-string">&apos;/api/post/init 受信&apos;</span>);
+  <span class="hljs-comment">// 受信したデータ</span>
+  console.log(req.body);
+  <span class="hljs-comment">// あいさつ文の値</span>
+  <span class="hljs-keyword">let</span> title = <span class="hljs-string">&quot;&quot;</span>;
+  <span class="hljs-comment">// 受信した name 値の有無で文言が変わる</span>
+  <span class="hljs-keyword">if</span>(req.body.name){
+    title = `こんにちは！${req.body.name}さん、ようこそ！`;
+  } <span class="hljs-keyword">else</span> {
+    title = <span class="hljs-string">&quot;こんにちは！ようこそ！&quot;</span>;
+  }
+  <span class="hljs-comment">// 送るデータを JavaScript のオブジェクトで作る</span>
+  <span class="hljs-keyword">const</span> responseData = {
+    <span class="hljs-string">&quot;result&quot;</span>:<span class="hljs-string">&quot;OK&quot;</span>,
+    <span class="hljs-string">&quot;title&quot;</span>:title,  <span class="hljs-comment">// あいさつ文</span>
+    <span class="hljs-string">&quot;add_point&quot;</span>:<span class="hljs-number">1</span>,  <span class="hljs-comment">// 加算ポイント</span>
+    <span class="hljs-string">&quot;recordPoint&quot;</span>:recordPoint <span class="hljs-comment">// 記録している現在のポイント</span>
+  };
+  <span class="hljs-comment">// res.json はオブジェクトを JSON 形式で返答します</span>
+  res.json(responseData)
+});
+</code></pre>
+<p>このようにサーバ側では実は name 値を待っています。では name 値を反映してみましょう。</p>
+<details>
+<summary>📋答え（出題中は開かないでくださいね）</summary>
+
+<pre style="position: relative;"><code class="lang-csharp"><span class="hljs-comment">// ResponseData ベースクラスを器として呼び出す</span>
+RequestData requestData = <span class="hljs-keyword">new</span> RequestData();
+<span class="hljs-comment">// データを設定</span>
+requestData.name = <span class="hljs-string">&quot;まいねーむ&quot;</span>; <span class="hljs-comment">// 自分の名前</span>
+</code></pre>
+
+このように新たな値を加えます。
+
+</details>
+
 <h2 id="受け取ったデータをポイント加算に反映してみる（responsedataaddpoint）"><a name="受け取ったデータをポイント加算に反映してみる（responsedataaddpoint）" class="plugin-anchor" href="#受け取ったデータをポイント加算に反映してみる（responsedataaddpoint）"><i class="fa fa-link" aria-hidden="true"></i></a>受け取ったデータをポイント加算に反映してみる（ResponseData.add_point）</h2>
 <p><img src="https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png" alt="02db792fd629a56812a205234a08ae44"></p>
-<h2 id="ゲームポイントの記録が成功すると記録ポイントが返ってくるのでテキストに反映してみる（responsedatarecordpoint）"><a name="ゲームポイントの記録が成功すると記録ポイントが返ってくるのでテキストに反映してみる（responsedatarecordpoint）" class="plugin-anchor" href="#ゲームポイントの記録が成功すると記録ポイントが返ってくるのでテキストに反映してみる（responsedatarecordpoint）"><i class="fa fa-link" aria-hidden="true"></i></a>ゲームポイントの記録が成功すると記録ポイントが返ってくるのでテキストに反映してみる（ResponseData.recordPoint）</h2>
-<p><img src="https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png" alt="02db792fd629a56812a205234a08ae44"></p>
+<p>Term1_3_Chapter02_SendButton の対応です。</p>
+<details>
+<summary>📋答え（出題中は開かないでくださいね）</summary>
+<pre style="position: relative;"><code class="lang-csharp">
+    <span class="hljs-comment">// 受信した JSON データを Unity で扱うデータにする ResultResponseData ベースクラス</span>
+    [<span class="hljs-meta">Serializable</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ResultResponseData</span>
+    {
+        <span class="hljs-comment">// result というプロパティ名で string 型で変換</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> result;
+        <span class="hljs-comment">// recordPoint というプロパティ名で int 型で変換</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> recordPoint;
+    }
+</code></pre>
+
+PointRequestData に recordPoint の読み込みを加えます。
+
+<pre style="position: relative;"><code class="lang-csharp">
+<span class="hljs-comment">// MessageText に結果テキスト割り当て</span>
+GameObject.Find(<span class="hljs-string">&quot;StatusMessage&quot;</span>).GetComponent().text = resultResponse.recordPoint.ToString();
+</code></pre>
+
+StatusMessage のテキスト割り当てを responseData.recordPoint に文字列変換して変更します。
+
+</details>
+
 <h2 id="再起動して記録ポイントが初期化されることも確認"><a name="再起動して記録ポイントが初期化されることも確認" class="plugin-anchor" href="#再起動して記録ポイントが初期化されることも確認"><i class="fa fa-link" aria-hidden="true"></i></a>再起動して記録ポイントが初期化されることも確認</h2>
 <p><img src="https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png" alt="02db792fd629a56812a205234a08ae44"></p>
 <h2 id="今回の-codespace-の終了"><a name="今回の-codespace-の終了" class="plugin-anchor" href="#今回の-codespace-の終了"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Codespace の終了</h2>
@@ -1107,7 +1188,7 @@ pointRequestData.point = GameObject.Find(<span class="hljs-string">&quot;ClickPa
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"next":{"title":"画像を読み込んでみる","level":"4.1.3","depth":2,"path":"term1-3/00-chapter02-2.md","ref":"./term1-3/00-chapter02-2.md","articles":[]},"previous":{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"path":"term1-3/00-chapter01.md","ref":"./term1-3/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-3/00-chapter02.md","mtime":"2023-08-04T01:03:30.972Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-04T01:05:03.426Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"next":{"title":"画像を読み込んでみる","level":"4.1.3","depth":2,"path":"term1-3/00-chapter02-2.md","ref":"./term1-3/00-chapter02-2.md","articles":[]},"previous":{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"path":"term1-3/00-chapter01.md","ref":"./term1-3/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-3/00-chapter02.md","mtime":"2023-08-04T01:29:29.301Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-04T01:29:35.796Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
