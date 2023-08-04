@@ -698,11 +698,306 @@
 <h2 id="今回の-unity-シーンを起動"><a name="今回の-unity-シーンを起動" class="plugin-anchor" href="#今回の-unity-シーンを起動"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Unity シーンを起動</h2>
 <p><img src="https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png" alt="6049726527f3133083e8ca07d1e6261c"></p>
 <p>Project タブから Assets &gt; Scenes を選択します。Scene-Term1-4-Chapter02 をダブルクリックして起動しましょう。</p>
-<h2 id><a name class="plugin-anchor" href="#"><i class="fa fa-link" aria-hidden="true"></i></a> </h2>
+<h2 id="わんこ画像を持ってくる-api-をつないでみる"><a name="わんこ画像を持ってくる-api-をつないでみる" class="plugin-anchor" href="#わんこ画像を持ってくる-api-をつないでみる"><i class="fa fa-link" aria-hidden="true"></i></a>わんこ画像を持ってくる API をつないでみる</h2>
+<p><img src="https://i.gyazo.com/aae5fcbb30bf9d55b7249a6d6bd44697.png" alt="aae5fcbb30bf9d55b7249a6d6bd44697"></p>
+<p><a href="https://dog.ceo/dog-api/" target="_blank">https://dog.ceo/dog-api/</a> というpublic-apis にある API からつないでみます。わんこ画像を表示してみましょう。</p>
+<p>簡単にドキュメントを読みながら、実装を想像してみましょう。</p>
+<p>✅ポイント</p>
+<ul>
+<li>GET リクエストでつなぐ URL を把握してみましょう</li>
+<li>実際に受け取る値から画像 URL を取得する JSON 取得クラスの設定を考えてみましょう</li>
+<li>そのうえで、画像を読み込んでテクスチャで貼り付けるところまで考えてみましょう</li>
+</ul>
 <h2 id="term14chapter02cubeevent01cs-を見てみる"><a name="term14chapter02cubeevent01cs-を見てみる" class="plugin-anchor" href="#term14chapter02cubeevent01cs-を見てみる"><i class="fa fa-link" aria-hidden="true"></i></a>Term1_4_Chapter02_CubeEvent01.cs を見てみる</h2>
 <p>Cube01 オブジェクトの <code>Assets/Scripts/Term1_4_Chapter02_CubeEvent01.cs</code> で実際の動作が書かれています。こちらをエディタで開きます。</p>
+<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
+<span class="hljs-keyword">using</span> UnityEngine.EventSystems;
+
+<span class="hljs-keyword">using</span> System.Collections;       <span class="hljs-comment">// IEnumerator のための参照</span>
+<span class="hljs-keyword">using</span> UnityEngine.Networking;   <span class="hljs-comment">// UnityWebRequest のための参照</span>
+<span class="hljs-keyword">using</span> System;                   <span class="hljs-comment">// Serializable のための参照</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Term1_4_Chapter02_CubeEvent01</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
+{
+    <span class="hljs-comment">// アクセスする API の URL</span>
+    <span class="hljs-comment">// https://dog.ceo/dog-api/</span>
+    <span class="hljs-built_in">string</span> urlAPI = <span class="hljs-string">&quot;&quot;</span>;
+
+    <span class="hljs-comment">// 受信した JSON データを Unity で扱うデータにする ResponseData ベースクラス</span>
+    [<span class="hljs-meta">Serializable</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ResponseData</span>
+    {
+        <span class="hljs-comment">// message というプロパティ名で string 型で変換</span>
+        <span class="hljs-comment">// message だけ取得</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> message;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
+    {
+        <span class="hljs-comment">// HTTP リクエストを非同期処理を待つためコルーチンとして呼び出す</span>
+        StartCoroutine(<span class="hljs-string">&quot;GetAPI&quot;</span>);
+    }
+
+    <span class="hljs-comment">// API 取得</span>
+    <span class="hljs-function">IEnumerator <span class="hljs-title">GetAPI</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// HTTP リクエストする(GET メソッド) UnityWebRequest を呼び出し</span>
+        <span class="hljs-comment">// アクセスする先は変数 urlGitHub で設定</span>
+        UnityWebRequest request = UnityWebRequest.Get(urlAPI);
+
+        <span class="hljs-comment">// リクエスト開始</span>
+        <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> request.SendWebRequest();
+
+        <span class="hljs-comment">// 結果によって分岐</span>
+        <span class="hljs-keyword">switch</span> (request.result)
+        {
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.InProgress:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト中&quot;</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.Success:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト成功&quot;</span>);
+
+                <span class="hljs-comment">// コンソールに表示</span>
+                Debug.Log(<span class="hljs-string">$&quot;responseData: <span class="hljs-subst">{request.downloadHandler.text}</span>&quot;</span>);
+
+                <span class="hljs-comment">// ResponseData クラスで Unity で扱えるデータ化</span>
+                ResponseData response = JsonUtility.FromJson&lt;ResponseData&gt;(request.downloadHandler.text);
+
+                <span class="hljs-comment">// 画像読み込み</span>
+                StartCoroutine(<span class="hljs-string">&quot;GetTexture&quot;</span>,response.message);
+
+                <span class="hljs-keyword">break</span>;
+        }
+
+
+    }
+
+    <span class="hljs-comment">// テクスチャ読み込みb</span>
+    <span class="hljs-function">IEnumerator <span class="hljs-title">GetTexture</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> url</span>)</span>
+    {
+        <span class="hljs-comment">// テクスチャを GET リクエストで読み込む。ブラウザでも見れる。</span>
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
+
+
+        <span class="hljs-comment">// リクエスト開始</span>
+        <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> request.SendWebRequest();
+
+        Debug.Log(<span class="hljs-string">&quot;リクエスト開始&quot;</span>);
+
+        <span class="hljs-comment">// 結果によって分岐</span>
+        <span class="hljs-keyword">switch</span> (request.result)
+        {
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.InProgress:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト中&quot;</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.Success:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト成功&quot;</span>);
+
+                <span class="hljs-comment">// テクスチャに割り当て</span>
+                Texture loadedTexture = ((DownloadHandlerTexture)request.downloadHandler).texture;
+
+                GameObject.Find(<span class="hljs-string">&quot;Tile&quot;</span>).GetComponent&lt;MeshRenderer&gt;().material.SetTexture(<span class="hljs-string">&quot;_MainTex&quot;</span>, loadedTexture);
+
+                <span class="hljs-keyword">break</span>;
+        }
+    }
+
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)</span>
+    {
+
+    }
+}
+</code></pre>
+<p>実際に動作が把握できたら、今回は API の URL を入力して保存みましょう。</p>
+<pre><code class="lang-csharp">    <span class="hljs-comment">// アクセスする API の URL</span>
+    <span class="hljs-comment">// https://dog.ceo/dog-api/</span>
+    <span class="hljs-built_in">string</span> urlAPI = <span class="hljs-string">&quot;&quot;</span>;
+</code></pre>
+<p>こちらです。</p>
+<p><img src="https://i.gyazo.com/d0cee31a104f1b4f6d4e6aabb949c468.png" alt="d0cee31a104f1b4f6d4e6aabb949c468"></p>
+<p>そして Cube01 をクリックして動かしてみましょう！</p>
+<h2 id="line-notify-につないでみましょう"><a name="line-notify-につないでみましょう" class="plugin-anchor" href="#line-notify-につないでみましょう"><i class="fa fa-link" aria-hidden="true"></i></a>LINE Notify につないでみましょう</h2>
+<p><img src="https://i.gyazo.com/0315bfabadc8442391ad415f119e63c3.png" alt="0315bfabadc8442391ad415f119e63c3"></p>
+<p><a href="../00-preparation/01-line-notify.html">LINE Notifyの API キーの取得</a> をして仕様をまず把握しましょう。そして API キーを手元にメモしておきます。</p>
+<p>ただ、今回はやや難しいデータなので、ある程度把握できたら実際のソースコードで動かしてみましょう。</p>
 <h2 id="term14chapter02cubeevent02cs-を見てみる"><a name="term14chapter02cubeevent02cs-を見てみる" class="plugin-anchor" href="#term14chapter02cubeevent02cs-を見てみる"><i class="fa fa-link" aria-hidden="true"></i></a>Term1_4_Chapter02_CubeEvent02.cs を見てみる</h2>
 <p>Cube02 オブジェクトの <code>Assets/Scripts/Term1_4_Chapter02_CubeEvent02.cs</code> で実際の動作が書かれています。こちらをエディタで開きます。</p>
+<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
+<span class="hljs-keyword">using</span> UnityEngine.EventSystems;
+
+<span class="hljs-keyword">using</span> System.Collections;       <span class="hljs-comment">// IEnumerator のための参照</span>
+<span class="hljs-keyword">using</span> UnityEngine.Networking;   <span class="hljs-comment">// UnityWebRequest のための参照</span>
+<span class="hljs-keyword">using</span> System.Collections.Generic; <span class="hljs-comment">// Listのため</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Term1_4_Chapter02_CubeEvent02</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
+{
+
+    <span class="hljs-comment">// LINE Notify のトークン</span>
+    <span class="hljs-built_in">string</span> tokenLINENotify = <span class="hljs-string">&quot;token&quot;</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
+    {
+        <span class="hljs-comment">// HTTP リクエストを非同期処理を待つためコルーチンとして呼び出す</span>
+        <span class="hljs-comment">// 第 2 引数で送りたい文言を入れる</span>
+        StartCoroutine(<span class="hljs-string">&quot;PostLINENofify&quot;</span>, <span class="hljs-string">&quot;Unityからテスト&quot;</span>);
+    }
+
+    <span class="hljs-function">IEnumerator <span class="hljs-title">PostLINENofify</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> message</span>)</span>
+    {
+        <span class="hljs-comment">// IMultipartFormSection で multipart/form-data のデータとして送れます</span>
+        <span class="hljs-comment">// https://docs.unity3d.com/ja/2018.4/Manual/UnityWebRequest-SendingForm.html</span>
+        <span class="hljs-comment">// https://docs.unity3d.com/ja/2019.4/ScriptReference/Networking.IMultipartFormSection.html</span>
+        <span class="hljs-comment">// https://docs.unity3d.com/ja/2020.3/ScriptReference/Networking.MultipartFormDataSection.html</span>
+        List&lt;IMultipartFormSection&gt; formData = <span class="hljs-keyword">new</span> List&lt;IMultipartFormSection&gt;();
+        formData.Add(<span class="hljs-keyword">new</span> MultipartFormDataSection(<span class="hljs-string">&quot;message&quot;</span>, message));
+
+        <span class="hljs-comment">// HTTP リクエストする(POST メソッド) UnityWebRequest を呼び出し</span>
+        <span class="hljs-comment">// アクセスする先は変数 urlGitHub で設定</span>
+        <span class="hljs-comment">// 第 2 引数で上記のフォームデータを割り当てて multipart/form-data のデータとして送ります</span>
+        UnityWebRequest request = UnityWebRequest.Post(<span class="hljs-string">&quot;https://notify-api.line.me/api/notify&quot;</span>, formData);
+
+        <span class="hljs-comment">// LINE Notify の認証は Authorization ヘッダーで Bearer のあとに API トークンを入れる</span>
+        request.SetRequestHeader(<span class="hljs-string">&quot;Authorization&quot;</span>, <span class="hljs-string">$&quot;Bearer <span class="hljs-subst">{tokenLINENotify}</span>&quot;</span>);
+
+        <span class="hljs-comment">// ダウンロード（サーバ→Unity）のハンドラを作成</span>
+        request.downloadHandler = <span class="hljs-keyword">new</span> DownloadHandlerBuffer();
+
+        <span class="hljs-comment">// リクエスト開始</span>
+        <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> request.SendWebRequest();
+
+        <span class="hljs-comment">// 結果によって分岐</span>
+        <span class="hljs-keyword">switch</span> (request.result)
+        {
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.InProgress:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト中&quot;</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.Success:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト成功&quot;</span>);
+
+                <span class="hljs-comment">// コンソールに表示</span>
+                Debug.Log(<span class="hljs-string">$&quot;responseData: <span class="hljs-subst">{request.downloadHandler.text}</span>&quot;</span>);
+
+                <span class="hljs-keyword">break</span>;
+        }
+
+
+    }
+
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)</span>
+    {
+
+    }
+}
+</code></pre>
+<p>LINE Notify のトークンを入力します。</p>
+<pre><code class="lang-csharp">    <span class="hljs-comment">// LINE Notify のトークン</span>
+    <span class="hljs-built_in">string</span> tokenLINENotify = <span class="hljs-string">&quot;token&quot;</span>;
+</code></pre>
+<p>こちらです。</p>
+<p><img src="https://i.gyazo.com/d0cee31a104f1b4f6d4e6aabb949c468.png" alt="d0cee31a104f1b4f6d4e6aabb949c468"></p>
+<p>そして Cube02 をクリックして動かしてみましょう！</p>
+<p><img src="https://i.gyazo.com/381021c8feeb23b82f9271e0b7c5d896.png" alt="381021c8feeb23b82f9271e0b7c5d896"></p>
+<p>このようにコンソールでログが出ると成功です！</p>
+<p><img src="https://i.gyazo.com/39080780da95e20e9a32ab13c9ea2df3.jpg" alt="39080780da95e20e9a32ab13c9ea2df3"></p>
+<p>そして、このように LINE Notify にメッセージがきます。</p>
+<h2 id="手軽に使えるお天気-api-にチャレンジ"><a name="手軽に使えるお天気-api-にチャレンジ" class="plugin-anchor" href="#手軽に使えるお天気-api-にチャレンジ"><i class="fa fa-link" aria-hidden="true"></i></a>手軽に使えるお天気 API にチャレンジ</h2>
+<p><img src="https://i.gyazo.com/aae5fcbb30bf9d55b7249a6d6bd44697.png" alt="aae5fcbb30bf9d55b7249a6d6bd44697"></p>
+<p><a href="https://github.com/robertoduessmann/weather-api" target="_blank">https://github.com/robertoduessmann/weather-api</a> という public-apis にある手軽に使えるお天気 API にチャレンジしてみましょう。</p>
+<p>Cube03 にある GET リクエストベースのソースコードを使ってつないでみましょう。</p>
+<p>✅ポイント</p>
+<ul>
+<li>GET リクエストでつなぐ URL を Tokyo の場合で考えてみましょう。</li>
+<li>実際に受け取る値から temperature , description を取得してみましょう。</li>
+<li>なお、しっかり POST リクエストでより情報を取得したいときは OpenWeatherMap API <a href="https://openweathermap.org/api" target="_blank">https://openweathermap.org/api</a> もおススメです</li>
+</ul>
+<p>Cube03 オブジェクトの <code>Assets/Scripts/Term1_4_Chapter02_CubeEvent03.cs</code> で実際の動作が書かれています。こちらをエディタで開きます。</p>
+<p>ソースはこちらです。</p>
+<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
+<span class="hljs-keyword">using</span> UnityEngine.EventSystems;
+
+<span class="hljs-keyword">using</span> System.Collections;       <span class="hljs-comment">// IEnumerator のための参照</span>
+<span class="hljs-keyword">using</span> UnityEngine.Networking;   <span class="hljs-comment">// UnityWebRequest のための参照</span>
+<span class="hljs-keyword">using</span> System;                   <span class="hljs-comment">// Serializable のための参照</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Term1_4_Chapter02_CubeEvent03</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
+{
+    <span class="hljs-comment">// API の接続先</span>
+    <span class="hljs-built_in">string</span> urlAPI = <span class="hljs-string">&quot;&quot;</span>;
+
+    <span class="hljs-comment">// 受信した JSON データを Unity で扱うデータにする ResponseData ベースクラス</span>
+    [<span class="hljs-meta">Serializable</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ResponseData</span>
+    {
+
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)</span>
+    {
+
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
+    {
+        <span class="hljs-comment">// マウスクリックイベント</span>
+
+        <span class="hljs-comment">// HTTP リクエストを非同期処理を待つためコルーチンとして呼び出す</span>
+        StartCoroutine(<span class="hljs-string">&quot;GetData&quot;</span>);
+    }
+
+    <span class="hljs-function">IEnumerator <span class="hljs-title">GetData</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// HTTP リクエストする(GET メソッド) UnityWebRequest を呼び出し</span>
+        <span class="hljs-comment">// アクセスする先は変数 urlGitHub で設定</span>
+        UnityWebRequest request = UnityWebRequest.Get(urlAPI);
+
+        <span class="hljs-comment">// リクエスト開始</span>
+        <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> request.SendWebRequest();
+
+        <span class="hljs-comment">// 結果によって分岐</span>
+        <span class="hljs-keyword">switch</span> (request.result)
+        {
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.InProgress:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト中&quot;</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.Success:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト成功&quot;</span>);
+
+                <span class="hljs-comment">// コンソールに表示</span>
+                Debug.Log(<span class="hljs-string">$&quot;responseData: <span class="hljs-subst">{request.downloadHandler.text}</span>&quot;</span>);
+
+                <span class="hljs-comment">// ResponseData クラスで Unity で扱えるデータ化</span>
+                ResponseData response = JsonUtility.FromJson&lt;ResponseData&gt;(request.downloadHandler.text);
+
+                <span class="hljs-comment">// MessageText に結果テキスト割り当て</span>
+                <span class="hljs-keyword">this</span>.transform.Find(<span class="hljs-string">&quot;MessageText&quot;</span>).GetComponent&lt;TextMesh&gt;().text = <span class="hljs-string">&quot;&quot;</span>;
+
+                <span class="hljs-keyword">break</span>;
+        }
+
+
+    }
+}
+</code></pre>
 
                                 
                                 </section>
@@ -746,7 +1041,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"外部の API 連携を体験","level":"5.1.2","depth":2,"next":{"title":"前半のおさらい","level":"5.1.3","depth":2,"path":"term1-4/00-chapter03.md","ref":"./term1-4/00-chapter03.md","articles":[]},"previous":{"title":"さまざまな API サービスの把握","level":"5.1.1","depth":2,"path":"term1-4/00-chapter01.md","ref":"./term1-4/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-4/00-chapter02.md","mtime":"2023-08-04T10:58:18.619Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-04T10:58:40.060Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"外部の API 連携を体験","level":"5.1.2","depth":2,"next":{"title":"前半のおさらい","level":"5.1.3","depth":2,"path":"term1-4/00-chapter03.md","ref":"./term1-4/00-chapter03.md","articles":[]},"previous":{"title":"さまざまな API サービスの把握","level":"5.1.1","depth":2,"path":"term1-4/00-chapter01.md","ref":"./term1-4/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-4/00-chapter02.md","mtime":"2023-08-04T13:57:46.169Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-04T13:58:13.923Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
