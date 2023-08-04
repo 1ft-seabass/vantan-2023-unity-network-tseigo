@@ -501,6 +501,38 @@ requestData.name = "まいねーむ"; // 自分の名前
 
 ![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
+Term1_3_Chapter02_ClickPart の対応です。
+
+<details>
+<summary>📋答え（出題中は開かないでくださいね）</summary>
+<pre style="position: relative;"><code class="lang-csharp">
+// 受信した JSON データを Unity で扱うデータにする ResponseData ベースクラス
+[Serializable]
+public class ResponseData
+{
+    // result というプロパティ名で string 型で変換
+    public string result;
+    // title というプロパティ名で string 型で変換
+    public string title;
+    // add_point というプロパティ名で int 型で変換
+    public int add_point;
+}
+</code></pre>
+
+ResponseData に add_point の読み込みを加えます。
+
+<pre style="position: relative;"><code class="lang-csharp">
+    // StatusMessage に結果テキスト割り当て
+    GameObject.Find("StatusMessage").GetComponent<TextMesh>().text = "～～～～～";
+
+    // ポイント加算を反映
+    addPoint = responseData.add_point;
+</code></pre>
+
+読み込み後に addPoint に値を反映します。
+
+</details>
+
 ## ポイント送信時に実は記録ほやほやの値が返ってくるので、それをOK と表示されてる StatusMessage に表示してみる（ResultResponseData.recordPoint）
 
 ![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
@@ -536,6 +568,18 @@ StatusMessage のテキスト割り当てを responseData.recordPoint に文字�
 
 ![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
+Term1_3_Chapter02_SendButton の対応です。
+
+<details>
+<summary>📋答え（出題中は開かないでくださいね）</summary>
+<pre style="position: relative;"><code class="lang-csharp">
+pointRequestData.point = GameObject.Find("ClickPart").GetComponent<Term1_3_Chapter02_ClickPart>().currentPoint;}
+</code></pre>
+
+ClickPart の Term1_3_Chapter02_ClickPart から currentPoint 値を読み込みます。
+
+</details>
+
 ## 再起動して記録ポイントが初期化されることも確認
 
 ![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
@@ -544,11 +588,15 @@ StatusMessage のテキスト割り当てを responseData.recordPoint に文字�
 
 ![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
+Term1_3_Chapter02_ClickPart の対応です。
+
 ## 以前記録したポイントで再開してみる
 
 ![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
-## JSONUtility の文献紹介
+Term1_3_Chapter02_ClickPart の対応です。
+
+## JsonUtility の文献紹介
 
 ![9d2c38e6fe48e61528f6b2d34370768f](https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png)
 
