@@ -501,6 +501,10 @@ requestData.name = "まいねーむ"; // 自分の名前
 
 ![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
+## ポイント送信時に実は記録ほやほやの値が返ってくるので、それをOK と表示されてる StatusMessage に表示してみる（ResultResponseData.recordPoint）
+
+![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
+
 Term1_3_Chapter02_SendButton の対応です。
 
 <details>
