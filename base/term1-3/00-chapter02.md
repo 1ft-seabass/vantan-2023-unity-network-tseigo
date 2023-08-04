@@ -421,13 +421,30 @@ Codespace 側でもターミナルで字受信できたことが確認できま�
 
 ## 受け取ったデータをあいさつ文テキストに反映してみる（ResponseData.title）
 
+![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
+
+<details>
+<summary>📋答え（出題中は開かないでくださいね）</summary>
+<pre style="position: relative;"><code class="lang-csharp">{
+
+</code></pre>
+</details>
+
 ## 自分の名前を送っていてサーバーであいさつ文を作っていることを確認（RequestData.name）
+
+![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
 ## 受け取ったデータをポイント加算に反映してみる（ResponseData.add_point）
 
+![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
+
 ## ゲームポイントの記録が成功すると記録ポイントが返ってくるのでテキストに反映してみる（ResponseData.recordPoint）
 
+![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
+
 ## 再起動して記録ポイントが初期化されることも確認
+
+![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
 ## 今回の Codespace の終了
 

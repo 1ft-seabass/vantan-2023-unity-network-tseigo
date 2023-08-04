@@ -315,6 +315,19 @@
             
         </li>
     
+        <li class="chapter " data-level="4.1.3" data-path="00-chapter02-2.html">
+            
+                <a href="00-chapter02-2.html">
+            
+                    
+                    画像を読み込んでみる
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -683,11 +696,71 @@
 <h2 id="この章で学ぶこと"><a name="この章で学ぶこと" class="plugin-anchor" href="#この章で学ぶこと"><i class="fa fa-link" aria-hidden="true"></i></a>この章で学ぶこと</h2>
 <p>ゲーム結果のデータを送ってみよう</p>
 <p>この章では、Unity からシンプルなゲーム結果ポイント 1000 pt をJsonUtility を使って JSON データを作成してサーバに送ってみます。</p>
-<h2 id="codespace-の起動"><a name="codespace-の起動" class="plugin-anchor" href="#codespace-の起動"><i class="fa fa-link" aria-hidden="true"></i></a>Codespace の起動</h2>
+<h2 id="授業をはじめる前に教材の更新"><a name="授業をはじめる前に教材の更新" class="plugin-anchor" href="#授業をはじめる前に教材の更新"><i class="fa fa-link" aria-hidden="true"></i></a>授業をはじめる前に教材の更新</h2>
+<p>Codespace と Unity プロジェクトを更新します。</p>
+<ul>
+<li>Codespace<ul>
+<li>Codespace 削除の体験</li>
+<li>再度リポジトリにアクセスして最新コードで Codespace 起動</li>
+</ul>
+</li>
+<li>Unity プロジェクト<ul>
+<li>手元のソースコードフォルダを削除</li>
+<li>再度リポジトリにアクセスして最新コードをダウンロード</li>
+<li>Unity Hub で起動</li>
+</ul>
+</li>
+</ul>
+<p>を行います。</p>
+<h2 id="codespace-削除"><a name="codespace-削除" class="plugin-anchor" href="#codespace-削除"><i class="fa fa-link" aria-hidden="true"></i></a>Codespace 削除</h2>
 <p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
 <p>GitHub にログインした状態で <a href="https://github.com/codespaces" target="_blank">https://github.com/codespaces</a> にアクセスします。</p>
-<p><img src="https://i.gyazo.com/34de49185c6b28fb938519084d5b36fe.png" alt="34de49185c6b28fb938519084d5b36fe"></p>
-<p>Codespaces のページです。さきほど使っていた Codespace をクリックして起動します。</p>
+<p><img src="https://i.gyazo.com/016de554e3ab779c598ac69607955af2.png" alt="016de554e3ab779c598ac69607955af2"></p>
+<p>今回使っている Codespace を探します。</p>
+<p><img src="https://i.gyazo.com/abd033cda989bfdd5a094d922bb6cfbc.png" alt="abd033cda989bfdd5a094d922bb6cfbc"></p>
+<p>Delete をクリックして削除します。</p>
+<h2 id="今回の-github-codespaces-リポジトリにアクセス"><a name="今回の-github-codespaces-リポジトリにアクセス" class="plugin-anchor" href="#今回の-github-codespaces-リポジトリにアクセス"><i class="fa fa-link" aria-hidden="true"></i></a>今回の GitHub Codespaces リポジトリにアクセス</h2>
+<p>今回の GitHub Codespaces リポジトリに Chrome ブラウザでアクセスします。</p>
+<p><img src="https://i.gyazo.com/1d4fe9d0e6c86377c17828a2ff26fd0d.png" alt="1d4fe9d0e6c86377c17828a2ff26fd0d"></p>
+<p><a href="https://github.com/1ft-seabass/vantan-unity-network-server-base" target="_blank">https://github.com/1ft-seabass/vantan-unity-network-server-base</a> にアクセスします。</p>
+<h2 id="github-codespaces-としてリポジトリを開く"><a name="github-codespaces-としてリポジトリを開く" class="plugin-anchor" href="#github-codespaces-としてリポジトリを開く"><i class="fa fa-link" aria-hidden="true"></i></a>GitHub Codespaces としてリポジトリを開く</h2>
+<p><img src="https://i.gyazo.com/6ebad95a052d8a2d37d889399e120424.png" alt="6ebad95a052d8a2d37d889399e120424"></p>
+<p>Code ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/8f6a286108378103ac8d30df6f811ef4.png" alt="8f6a286108378103ac8d30df6f811ef4"></p>
+<p>Codespaces タブをクリックします。Create codespace on main をクリックします。</p>
+<p><img src="https://i.gyazo.com/47b24d3be5b687f60383455a75898788.png" alt="47b24d3be5b687f60383455a75898788"></p>
+<p>Setting up your codespace という画面が出て構築されます。</p>
+<p><img src="https://i.gyazo.com/28ea2b9aece0957b5bb7292427889a10.png" alt="28ea2b9aece0957b5bb7292427889a10"></p>
+<p>ブラウザ上で Visual Studio Code が起動し、今回の仕組みを反映した環境が起動しました。</p>
+<h2 id="unity-プロジェクトを削除"><a name="unity-プロジェクトを削除" class="plugin-anchor" href="#unity-プロジェクトを削除"><i class="fa fa-link" aria-hidden="true"></i></a>Unity プロジェクトを削除</h2>
+<p><img src="https://i.gyazo.com/5a66450b5365263705111d3910b4c08b.png" alt="5a66450b5365263705111d3910b4c08b"></p>
+<p>現在作業しているフォルダを削除します。この場所を覚えておいて再度置けるようにしましょう。</p>
+<h2 id="unity-プロジェクトをダウンロード"><a name="unity-プロジェクトをダウンロード" class="plugin-anchor" href="#unity-プロジェクトをダウンロード"><i class="fa fa-link" aria-hidden="true"></i></a>Unity プロジェクトをダウンロード</h2>
+<p><img src="https://i.gyazo.com/d2e14eaab7e66332b09a2086fa5b767e.png" alt="d2e14eaab7e66332b09a2086fa5b767e"></p>
+<p>今回の教材の Unity プロジェクトを <a href="https://github.com/1ft-seabass/vantan-unity-network-project-01" target="_blank">https://github.com/1ft-seabass/vantan-unity-network-project-01</a> にブラウザからアクセスします。</p>
+<p><img src="https://i.gyazo.com/c21bb001f1a904122fa2bd6065f2e437.png" alt="c21bb001f1a904122fa2bd6065f2e437"></p>
+<p>Code ボタンをクリックして Local タブから Download ZIP をクリックしてダウンロードします。</p>
+<p><img src="https://i.gyazo.com/acd4f7e6c79f434770632f77b16f34b3.png" alt="acd4f7e6c79f434770632f77b16f34b3"></p>
+<p>ダウンロードできたら ZIP ファイルを、ダブルクリックして ZIP の中身をエクスプローラで表示します。</p>
+<p><img src="https://i.gyazo.com/9fd6e42489c174d3aa6b44eb4c196bb8.png" alt="9fd6e42489c174d3aa6b44eb4c196bb8"></p>
+<p>ZIP ファイル直下に vantan-unity-network-project-01-main というフォルダがあります。</p>
+<p><img src="https://i.gyazo.com/8bb21ae532d5de43c4dc20cdeb932efc.png" alt="8bb21ae532d5de43c4dc20cdeb932efc"></p>
+<p>このフォルダを選択して、作業フォルダにドラッグアンドドロップしましょう。</p>
+<p><img src="https://i.gyazo.com/40f366c8c40c7154f475820f5da0d16f.png" alt="40f366c8c40c7154f475820f5da0d16f"></p>
+<p>フォルダの中身はには、このように Unity プロジェクトそのものがあり Assets や Packages などのファイルがある状況です。</p>
+<h2 id="unity-プロジェクトを-unity-hub-から開く"><a name="unity-プロジェクトを-unity-hub-から開く" class="plugin-anchor" href="#unity-プロジェクトを-unity-hub-から開く"><i class="fa fa-link" aria-hidden="true"></i></a>Unity プロジェクトを Unity Hub から開く</h2>
+<p><img src="https://i.gyazo.com/204afd35cc70224251ca41321b6c1e31.png" alt="204afd35cc70224251ca41321b6c1e31"></p>
+<p>Unity Hub を開きます。</p>
+<p><img src="https://i.gyazo.com/38284ca9eeeb4b4b85b1d4717acc716f.png" alt="38284ca9eeeb4b4b85b1d4717acc716f"></p>
+<p>Open ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/1e463774b96f38951a39ac5ba5135d2f.png" alt="1e463774b96f38951a39ac5ba5135d2f"></p>
+<p>フォルダ選択で vantan-unity-network-project-01-main フォルダを選択して Open ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/6085e7572e7f03a32f88c6e49c8792b0.png" alt="6085e7572e7f03a32f88c6e49c8792b0"></p>
+<p>プロジェクトが読み込まれます。</p>
+<p><img src="https://i.gyazo.com/2b745e107ff5991957e1a4ad5d86fff4.png" alt="2b745e107ff5991957e1a4ad5d86fff4"></p>
+<p>プロジェクトが表示されました。現時点で、授業用のシーンではなく Untitled になっているのは問題ないです。</p>
+<p><img src="https://i.gyazo.com/930d6df890c0e10f92ad28c4fc3e4987.png" alt="930d6df890c0e10f92ad28c4fc3e4987"></p>
+<p>コンソールでこのようなエラーが出るのも問題ないです。</p>
 <h2 id="サーバの起動"><a name="サーバの起動" class="plugin-anchor" href="#サーバの起動"><i class="fa fa-link" aria-hidden="true"></i></a>サーバの起動</h2>
 <p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
 <ul>
@@ -922,7 +995,7 @@ GameObject.Find(<span class="hljs-string">&quot;MessageText&quot;</span>).GetCom
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"next":{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"path":"term1-3/00-chapter02.md","ref":"./term1-3/00-chapter02.md","articles":[]},"previous":{"title":"データ送信実践","level":"4.1","depth":1,"path":"term1-3/README.md","ref":"./term1-3/README.md","articles":[{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"path":"term1-3/00-chapter01.md","ref":"./term1-3/00-chapter01.md","articles":[]},{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"path":"term1-3/00-chapter02.md","ref":"./term1-3/00-chapter02.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-3/00-chapter01.md","mtime":"2023-08-01T12:45:19.801Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-03T14:52:41.461Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"next":{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"path":"term1-3/00-chapter02.md","ref":"./term1-3/00-chapter02.md","articles":[]},"previous":{"title":"データ送信実践","level":"4.1","depth":1,"path":"term1-3/README.md","ref":"./term1-3/README.md","articles":[{"title":"ゲーム結果のデータを送ってみよう","level":"4.1.1","depth":2,"path":"term1-3/00-chapter01.md","ref":"./term1-3/00-chapter01.md","articles":[]},{"title":"いろいろとデータを調整する","level":"4.1.2","depth":2,"path":"term1-3/00-chapter02.md","ref":"./term1-3/00-chapter02.md","articles":[]},{"title":"画像を読み込んでみる","level":"4.1.3","depth":2,"path":"term1-3/00-chapter02-2.md","ref":"./term1-3/00-chapter02-2.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-3/00-chapter01.md","mtime":"2023-08-04T00:39:13.766Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-04T01:05:03.426Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
