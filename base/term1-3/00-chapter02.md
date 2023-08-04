@@ -540,6 +540,18 @@ StatusMessage のテキスト割り当てを responseData.recordPoint に文字�
 
 ![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
+## 以前記録したポイントで再開してみる
+
+![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
+
+## 現在何点獲得していますという実装をする
+
+![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
+
+## JSONUtilityの文献紹介
+
+![9d2c38e6fe48e61528f6b2d34370768f](https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png)
+
 ## 今回の Codespace の終了
 
 ![0a8b4cfb807e57ea1382292a757c6899](https://i.gyazo.com/0a8b4cfb807e57ea1382292a757c6899.png)
