@@ -35,7 +35,7 @@
 ## 第 2 ターム 第 1 週 
 
 * [動的なデータの取得体験](./term2-1/README.md)
-  * [データベース外部サービス Airtable のアカウント作成](./term2-1/00-chapter01.md)
+  * [データベース外部サービス Airtable の体験](./term2-1/00-chapter01.md)
   * [Airtable をサーバに反映して動かす](./term2-1/00-chapter02.md)
   * [サーバから動的なデータの取得してみよう](./term2-1/00-chapter03.md)
 
