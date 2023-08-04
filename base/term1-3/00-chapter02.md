@@ -540,17 +540,26 @@ StatusMessage のテキスト割り当てを responseData.recordPoint に文字�
 
 ![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
-## 以前記録したポイントで再開してみる
-
-![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
-
 ## 現在何点獲得していますという実装をする
 
 ![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
-## JSONUtilityの文献紹介
+## 以前記録したポイントで再開してみる
+
+![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
+
+## JSONUtility の文献紹介
 
 ![9d2c38e6fe48e61528f6b2d34370768f](https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png)
+
+- JsonUtility をつかって Unity で JSON を取り扱う方法 - Qiita
+  - https://qiita.com/sea_mountain/items/6513b330983ffa003959
+- JsonUtilityでVector2, Vector3をシリアライズする - Qiita
+  - https://qiita.com/nkjzm/items/770dae999f2978de94ff
+- UnityのJsonUtilityの細かい10の疑問をいまさら検証した - Qiita
+  - https://qiita.com/keidroid/items/24e03f82d74560dc557a
+- JsonUtilityでオブジェクトをシリアライズしたりデシリアライズしたりする | Yucchiy's Note
+  - https://blog.yucchiy.com/2022/06/jsonutility-serialize-deserialize-unity-object/
 
 ## 今回の Codespace の終了
 
