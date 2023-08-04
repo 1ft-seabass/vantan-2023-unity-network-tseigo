@@ -780,6 +780,138 @@
 <p><img src="https://i.gyazo.com/72e0eee127c60dc5d51544f642d70b7b.png" alt="image"></p>
 <p>いろいろな API を紹介していきます！</p>
 <p>今回紹介した API たちのように、すぐに作れるツールやアプローチを知っていることで、よりつくるためのアイデアが増えていくので、手を動かしつつ技術に触れつつ、鍛えていきましょう。</p>
+<p>✅ポイント</p>
+<ul>
+<li>ひとまず試すなら Auth なしで GET リクエストだとデータが取り出しやすかったりします</li>
+</ul>
+<h2 id="今回は-codespaces-は起動しません"><a name="今回は-codespaces-は起動しません" class="plugin-anchor" href="#今回は-codespaces-は起動しません"><i class="fa fa-link" aria-hidden="true"></i></a>今回は CodeSpaces は起動しません</h2>
+<p><img src="https://i.gyazo.com/13de54927bc6437f8b51d6a60e676a6a.png" alt="13de54927bc6437f8b51d6a60e676a6a"></p>
+<p>外部の API にいよいよつなげるので、起動しません。もちろん、後半のほうで、また学ぶために使います。</p>
+<h2 id="unity-プロジェクトを削除"><a name="unity-プロジェクトを削除" class="plugin-anchor" href="#unity-プロジェクトを削除"><i class="fa fa-link" aria-hidden="true"></i></a>Unity プロジェクトを削除</h2>
+<p><img src="https://i.gyazo.com/5a66450b5365263705111d3910b4c08b.png" alt="5a66450b5365263705111d3910b4c08b"></p>
+<p>現在作業しているフォルダを削除します。この場所を覚えておいて再度置けるようにしましょう。</p>
+<h2 id="unity-プロジェクトをダウンロード"><a name="unity-プロジェクトをダウンロード" class="plugin-anchor" href="#unity-プロジェクトをダウンロード"><i class="fa fa-link" aria-hidden="true"></i></a>Unity プロジェクトをダウンロード</h2>
+<p><img src="https://i.gyazo.com/d2e14eaab7e66332b09a2086fa5b767e.png" alt="d2e14eaab7e66332b09a2086fa5b767e"></p>
+<p>今回の教材の Unity プロジェクトを <a href="https://github.com/1ft-seabass/vantan-unity-network-project-01" target="_blank">https://github.com/1ft-seabass/vantan-unity-network-project-01</a> にブラウザからアクセスします。</p>
+<p><img src="https://i.gyazo.com/c21bb001f1a904122fa2bd6065f2e437.png" alt="c21bb001f1a904122fa2bd6065f2e437"></p>
+<p>Code ボタンをクリックして Local タブから Download ZIP をクリックしてダウンロードします。</p>
+<p><img src="https://i.gyazo.com/acd4f7e6c79f434770632f77b16f34b3.png" alt="acd4f7e6c79f434770632f77b16f34b3"></p>
+<p>ダウンロードできたら ZIP ファイルを、ダブルクリックして ZIP の中身をエクスプローラで表示します。</p>
+<p><img src="https://i.gyazo.com/9fd6e42489c174d3aa6b44eb4c196bb8.png" alt="9fd6e42489c174d3aa6b44eb4c196bb8"></p>
+<p>ZIP ファイル直下に vantan-unity-network-project-01-main というフォルダがあります。</p>
+<p><img src="https://i.gyazo.com/8bb21ae532d5de43c4dc20cdeb932efc.png" alt="8bb21ae532d5de43c4dc20cdeb932efc"></p>
+<p>このフォルダを選択して、作業フォルダにドラッグアンドドロップしましょう。</p>
+<p><img src="https://i.gyazo.com/40f366c8c40c7154f475820f5da0d16f.png" alt="40f366c8c40c7154f475820f5da0d16f"></p>
+<p>フォルダの中身はには、このように Unity プロジェクトそのものがあり Assets や Packages などのファイルがある状況です。</p>
+<h2 id="unity-プロジェクトを-unity-hub-から開く"><a name="unity-プロジェクトを-unity-hub-から開く" class="plugin-anchor" href="#unity-プロジェクトを-unity-hub-から開く"><i class="fa fa-link" aria-hidden="true"></i></a>Unity プロジェクトを Unity Hub から開く</h2>
+<p><img src="https://i.gyazo.com/204afd35cc70224251ca41321b6c1e31.png" alt="204afd35cc70224251ca41321b6c1e31"></p>
+<p>Unity Hub を開きます。</p>
+<p><img src="https://i.gyazo.com/38284ca9eeeb4b4b85b1d4717acc716f.png" alt="38284ca9eeeb4b4b85b1d4717acc716f"></p>
+<p>Open ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/1e463774b96f38951a39ac5ba5135d2f.png" alt="1e463774b96f38951a39ac5ba5135d2f"></p>
+<p>フォルダ選択で vantan-unity-network-project-01-main フォルダを選択して Open ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/6085e7572e7f03a32f88c6e49c8792b0.png" alt="6085e7572e7f03a32f88c6e49c8792b0"></p>
+<p>プロジェクトが読み込まれます。</p>
+<p><img src="https://i.gyazo.com/2b745e107ff5991957e1a4ad5d86fff4.png" alt="2b745e107ff5991957e1a4ad5d86fff4"></p>
+<p>プロジェクトが表示されました。現時点で、授業用のシーンではなく Untitled になっているのは問題ないです。</p>
+<p><img src="https://i.gyazo.com/930d6df890c0e10f92ad28c4fc3e4987.png" alt="930d6df890c0e10f92ad28c4fc3e4987"></p>
+<p>コンソールでこのようなエラーが出るのも問題ないです。</p>
+<h2 id="ひま-api-bored-api-につなげてみましょう"><a name="ひま-api-bored-api-につなげてみましょう" class="plugin-anchor" href="#ひま-api-bored-api-につなげてみましょう"><i class="fa fa-link" aria-hidden="true"></i></a>ひま API (Bored API) につなげてみましょう</h2>
+<p><img src="https://i.gyazo.com/aae5fcbb30bf9d55b7249a6d6bd44697.png" alt="aae5fcbb30bf9d55b7249a6d6bd44697"></p>
+<p><a href="https://www.boredapi.com/" target="_blank">https://www.boredapi.com/</a> という「ひまなときに、何かしてみようという」ものを英語ですがテキストを返してくれる面白い API です。</p>
+<p>ドキュメント <a href="https://www.boredapi.com/" target="_blank">https://www.boredapi.com/</a> を見てみると GET リクエストで <code>https://www.boredapi.com/api/activity?participants=1</code> でアクセスすると、</p>
+<pre><code class="lang-js">{
+  <span class="hljs-string">&quot;activity&quot;</span>: <span class="hljs-string">&quot;Learn about a distributed version control system such as Git&quot;</span>,
+  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;education&quot;</span>,
+  <span class="hljs-string">&quot;participants&quot;</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;link&quot;</span>: <span class="hljs-string">&quot;https://en.wikipedia.org/wiki/Distributed_version_control&quot;</span>,
+  <span class="hljs-string">&quot;key&quot;</span>: <span class="hljs-string">&quot;9303608&quot;</span>,
+  <span class="hljs-string">&quot;accessibility&quot;</span>: <span class="hljs-number">0</span>
+}
+</code></pre>
+<p>といった値が返ってくることがわかります。今回は、実際に暇のつぶし方のテキストである activity 値だけを読み込んでみましょう。</p>
+<h2 id="今回の-unity-シーンを起動"><a name="今回の-unity-シーンを起動" class="plugin-anchor" href="#今回の-unity-シーンを起動"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Unity シーンを起動</h2>
+<p><img src="https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png" alt="6049726527f3133083e8ca07d1e6261c"></p>
+<p>Project タブから Assets &gt; Scenes を選択します。Scene-Term1-4-Chapter01 をダブルクリックして起動しましょう。</p>
+<h2 id="term14chapter01cubeevent01cs-を見てみる"><a name="term14chapter01cubeevent01cs-を見てみる" class="plugin-anchor" href="#term14chapter01cubeevent01cs-を見てみる"><i class="fa fa-link" aria-hidden="true"></i></a>Term1_4_Chapter01_CubeEvent01.cs を見てみる</h2>
+<p>Cube オブジェクトの <code>Assets/Scripts/Term1_4_Chapter01_CubeEvent01.cs</code> で実際の動作が書かれています。こちらをエディタで開きます。</p>
+<pre><code class="lang-csharp"><span class="hljs-keyword">using</span> UnityEngine;
+<span class="hljs-keyword">using</span> UnityEngine.EventSystems;
+
+<span class="hljs-keyword">using</span> System.Collections;       <span class="hljs-comment">// IEnumerator のための参照</span>
+<span class="hljs-keyword">using</span> UnityEngine.Networking;   <span class="hljs-comment">// UnityWebRequest のための参照</span>
+<span class="hljs-keyword">using</span> System;                   <span class="hljs-comment">// Serializable のための参照</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Term1_4_Chapter01_CubeEvent01</span> : <span class="hljs-title">MonoBehaviour</span>, <span class="hljs-title">IPointerClickHandler</span>
+{
+    <span class="hljs-comment">// アクセスする API の URL</span>
+    <span class="hljs-comment">// https://www.boredapi.com/</span>
+    <span class="hljs-built_in">string</span> urlAPI = <span class="hljs-string">&quot;https://www.boredapi.com/api/activity?participants=1&quot;</span>;
+
+    <span class="hljs-comment">// 受信した JSON データを Unity で扱うデータにする ResponseData ベースクラス</span>
+    [<span class="hljs-meta">Serializable</span>]
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ResponseData</span>
+    {
+        <span class="hljs-comment">// activity というプロパティ名で string 型で変換</span>
+        <span class="hljs-comment">// activity だけ取得</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> activity;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnPointerClick</span>(<span class="hljs-params">PointerEventData eventData</span>)</span>
+    {
+        <span class="hljs-comment">// マウスクリックイベント</span>
+
+        <span class="hljs-comment">// HTTP リクエストを非同期処理を待つためコルーチンとして呼び出す</span>
+        StartCoroutine(<span class="hljs-string">&quot;GetData&quot;</span>);
+    }
+
+    <span class="hljs-comment">// GET リクエストする本体</span>
+    <span class="hljs-function">IEnumerator <span class="hljs-title">GetData</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// HTTP リクエストする(GET メソッド) UnityWebRequest を呼び出し</span>
+        <span class="hljs-comment">// アクセスする先は変数 urlGitHub で設定</span>
+        UnityWebRequest request = UnityWebRequest.Get(urlAPI);
+
+        <span class="hljs-comment">// リクエスト開始</span>
+        <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> request.SendWebRequest();
+
+        <span class="hljs-comment">// 結果によって分岐</span>
+        <span class="hljs-keyword">switch</span> (request.result)
+        {
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.InProgress:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト中&quot;</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> UnityWebRequest.Result.Success:
+                Debug.Log(<span class="hljs-string">&quot;リクエスト成功&quot;</span>);
+
+                <span class="hljs-comment">// コンソールに表示</span>
+                Debug.Log(<span class="hljs-string">$&quot;responseData: <span class="hljs-subst">{request.downloadHandler.text}</span>&quot;</span>);
+
+                <span class="hljs-comment">// ResponseData クラスで Unity で扱えるデータ化</span>
+                ResponseData response = JsonUtility.FromJson&lt;ResponseData&gt;(request.downloadHandler.text);
+
+                <span class="hljs-comment">// MessageText に結果テキスト割り当て</span>
+                <span class="hljs-keyword">this</span>.transform.Find(<span class="hljs-string">&quot;MessageText&quot;</span>).GetComponent&lt;TextMesh&gt;().text = response.activity;
+
+                <span class="hljs-keyword">break</span>;
+        }
+
+
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)</span>
+    {
+
+    }
+}
+</code></pre>
 <h2 id="質疑応答"><a name="質疑応答" class="plugin-anchor" href="#質疑応答"><i class="fa fa-link" aria-hidden="true"></i></a>質疑応答</h2>
 <p><img src="https://i.gyazo.com/aba8ccd625e7320883851b71ebd0caf2.png" alt="image"></p>
 <p>ここまでで質問があればどうぞ！</p>
@@ -826,7 +958,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"さまざまな API サービスの把握","level":"5.1.1","depth":2,"next":{"title":"外部の API 連携を体験","level":"5.1.2","depth":2,"path":"term1-4/00-chapter02.md","ref":"./term1-4/00-chapter02.md","articles":[]},"previous":{"title":"データ送受信発展","level":"5.1","depth":1,"path":"term1-4/README.md","ref":"./term1-4/README.md","articles":[{"title":"さまざまな API サービスの把握","level":"5.1.1","depth":2,"path":"term1-4/00-chapter01.md","ref":"./term1-4/00-chapter01.md","articles":[]},{"title":"外部の API 連携を体験","level":"5.1.2","depth":2,"path":"term1-4/00-chapter02.md","ref":"./term1-4/00-chapter02.md","articles":[]},{"title":"前半のおさらい","level":"5.1.3","depth":2,"path":"term1-4/00-chapter03.md","ref":"./term1-4/00-chapter03.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-4/00-chapter01.md","mtime":"2023-08-01T07:27:07.847Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-04T05:22:32.201Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"さまざまな API サービスの把握","level":"5.1.1","depth":2,"next":{"title":"外部の API 連携を体験","level":"5.1.2","depth":2,"path":"term1-4/00-chapter02.md","ref":"./term1-4/00-chapter02.md","articles":[]},"previous":{"title":"データ送受信発展","level":"5.1","depth":1,"path":"term1-4/README.md","ref":"./term1-4/README.md","articles":[{"title":"さまざまな API サービスの把握","level":"5.1.1","depth":2,"path":"term1-4/00-chapter01.md","ref":"./term1-4/00-chapter01.md","articles":[]},{"title":"外部の API 連携を体験","level":"5.1.2","depth":2,"path":"term1-4/00-chapter02.md","ref":"./term1-4/00-chapter02.md","articles":[]},{"title":"前半のおさらい","level":"5.1.3","depth":2,"path":"term1-4/00-chapter03.md","ref":"./term1-4/00-chapter03.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term1-4/00-chapter01.md","mtime":"2023-08-04T10:56:59.772Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-04T10:58:40.060Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
