@@ -6,7 +6,11 @@
 
 Airtable をサーバに反映して動かします。
 
-## CodeSpace の起動
+## CodeSpace の削除
+
+airtable を反映したい
+
+## Codespace の起動
 
 ## API キーの入力
 
