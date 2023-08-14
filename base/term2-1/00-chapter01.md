@@ -46,9 +46,15 @@ Untitled Base という Base が作成されます。（今回は青ですがテ
 
 - 新規作成
 - 表示
+- Data と ID 設定
+- いろいろな値が設定できる
 
 ## Base を作ってみる
 
 ## API キーの設定
 
+（enebular のサンプルを使う）
+
 ## API キーの取得
+
+（enebular のサンプルを使う）
