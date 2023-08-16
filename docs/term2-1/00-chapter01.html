@@ -712,15 +712,206 @@
 <p>タイトルを my Unity project と変更します。そしてタイトル横の Airtable アイコンをクリックして Workspace ページに戻ります。</p>
 <p><img src="https://i.gyazo.com/db0671ea6b0f57a055654ddcd88a0e32.png" alt="db0671ea6b0f57a055654ddcd88a0e32"></p>
 <p>戻りました。</p>
-<h2 id="ダッシュボード操作の流れ"><a name="ダッシュボード操作の流れ" class="plugin-anchor" href="#ダッシュボード操作の流れ"><i class="fa fa-link" aria-hidden="true"></i></a>ダッシュボード操作の流れ</h2>
-<h2 id="base-操作の流れ"><a name="base-操作の流れ" class="plugin-anchor" href="#base-操作の流れ"><i class="fa fa-link" aria-hidden="true"></i></a>Base 操作の流れ</h2>
+<h2 id="base-と-table"><a name="base-と-table" class="plugin-anchor" href="#base-と-table"><i class="fa fa-link" aria-hidden="true"></i></a>Base と Table</h2>
+<p><img src="https://i.gyazo.com/db0671ea6b0f57a055654ddcd88a0e32.png" alt="db0671ea6b0f57a055654ddcd88a0e32"></p>
+<p>Airtable においての Base は、今回でいうと my Unity project というかたまりです。このかたまり（単位）で Airtable API からデータを取得することができます。</p>
+<p><img src="https://i.gyazo.com/585f1daace67a5feab16826a919e167b.png" alt="585f1daace67a5feab16826a919e167b"></p>
+<p>Base の中に、複数の Table が格納されています。</p>
+<p><img src="https://i.gyazo.com/46b7f4c16d2b64d7aea1417451bbe851.png" alt="46b7f4c16d2b64d7aea1417451bbe851"></p>
+<p>Table は表形式でデータが保管される仕組みです。表とは、行と列で構成されます。</p>
+<p><img src="https://i.gyazo.com/84cfec06a6690446dd60486cd23b24af.png" alt="84cfec06a6690446dd60486cd23b24af"></p>
+<p>複数の列でデータの種類が列ごとに決められて格納されます。Airtable の場合、列はフィールドとも呼びます。データの種類は、フィールドタイプと呼びます。</p>
+<p><img src="https://i.gyazo.com/ed2109772b58243841e7f131ef858b02.png" alt="ed2109772b58243841e7f131ef858b02"></p>
+<p>行は列で決められたデータの種類に基づいて、データが格納されて 1 行 1 行のかたまりで記録されていきます。</p>
+<p><img src="https://i.gyazo.com/68d2b7d3e8913d6824129d0f062c9dae.png" alt="68d2b7d3e8913d6824129d0f062c9dae"></p>
+<p>そして Airtable においての Table は、この Table 1 と書かれた部分です。</p>
+<p>さまざまなデータを記録することができます。 1 つの Table ではデータをどういった形式でためていけるかを設定できます。たとえば、この Table は、Airtable の初期設定で作られるものです。</p>
 <ul>
-<li>新規作成</li>
-<li>表示</li>
+<li>Name<ul>
+<li>フィールド名<ul>
+<li>Name</li>
 </ul>
-<h2 id="base-を作ってみる"><a name="base-を作ってみる" class="plugin-anchor" href="#base-を作ってみる"><i class="fa fa-link" aria-hidden="true"></i></a>Base を作ってみる</h2>
-<h2 id="api-キーの設定"><a name="api-キーの設定" class="plugin-anchor" href="#api-キーの設定"><i class="fa fa-link" aria-hidden="true"></i></a>API キーの設定</h2>
-<h2 id="api-キーの取得"><a name="api-キーの取得" class="plugin-anchor" href="#api-キーの取得"><i class="fa fa-link" aria-hidden="true"></i></a>API キーの取得</h2>
+</li>
+<li>フィールドタイプ<ul>
+<li>Single line text</li>
+<li>単一行という意味</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Notes<ul>
+<li>フィールド名<ul>
+<li>Notes</li>
+</ul>
+</li>
+<li>フィールドタイプ<ul>
+<li>Long text</li>
+<li>長いテキスト　複数行という意味</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Assignee<ul>
+<li>フィールド名<ul>
+<li>Assignee</li>
+</ul>
+</li>
+<li>フィールドタイプ<ul>
+<li>User</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Status<ul>
+<li>フィールド名<ul>
+<li>Status</li>
+</ul>
+</li>
+<li>フィールドタイプ<ul>
+<li>Single select</li>
+<li>あらかじめ決めた選択肢を 1 つ選択できるデータタイプ</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>フィールドタイプは、いろいろなタイプがあります。</p>
+<p><img src="https://i.gyazo.com/381f395ceffe89e16237b5496408966c.png" alt="381f395ceffe89e16237b5496408966c"></p>
+<ul>
+<li>Supported field types in Airtable overview<ul>
+<li><a href="https://support.airtable.com/docs/supported-field-types-in-airtable-overview" target="_blank">https://support.airtable.com/docs/supported-field-types-in-airtable-overview</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="base-を新しく作ってみる"><a name="base-を新しく作ってみる" class="plugin-anchor" href="#base-を新しく作ってみる"><i class="fa fa-link" aria-hidden="true"></i></a>Base を新しく作ってみる</h2>
+<p>それでは、今回のためのデータを新しく作ってみましょう。</p>
+<p><img src="https://i.gyazo.com/21da4fe910a699e692b1ffda35d73f64.png" alt="21da4fe910a699e692b1ffda35d73f64"></p>
+<p><code>+ Add or import</code> ボタンをクリックして Create blank table ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/6d54b1921708f7be23d8718eccc3c4da.png" alt="6d54b1921708f7be23d8718eccc3c4da"></p>
+<p>テーブル名を聞かれるので <code>Sample01</code> として Save ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/95b4d3c2c8b96dddebf256cbb53761c3.png" alt="95b4d3c2c8b96dddebf256cbb53761c3"></p>
+<p>最初にフィールドタイプが 4 つ設定された Table が作られました。</p>
+<h2 id="フィールドを設定してみる"><a name="フィールドを設定してみる" class="plugin-anchor" href="#フィールドを設定してみる"><i class="fa fa-link" aria-hidden="true"></i></a>フィールドを設定してみる</h2>
+<p>Table ができあがったら、フィールドを設定してみましょう。</p>
+<h2 id="フィールドの削除"><a name="フィールドの削除" class="plugin-anchor" href="#フィールドの削除"><i class="fa fa-link" aria-hidden="true"></i></a>フィールドの削除</h2>
+<p>まず、最初に作られているフィールドを削除しましょう。Notes, Assignee, Status を削除します。</p>
+<p><img src="https://i.gyazo.com/bd7e8e660e0df560afcc552b86216eba.png" alt="bd7e8e660e0df560afcc552b86216eba"></p>
+<p>Notes の列のタイトルのこちらのボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/115e16e642a5fa2e022acfb0a93c8c09.png" alt="115e16e642a5fa2e022acfb0a93c8c09"></p>
+<p>フィールドのいろいろな設定ができるメニューが出てくるので Delete field をクリックして列を削除します。</p>
+<p><img src="https://i.gyazo.com/f23b39ed4665b84c7b6a9726cb8db75f.png" alt="f23b39ed4665b84c7b6a9726cb8db75f"></p>
+<p>Notes と同じく Assignee, Status も削除します。</p>
+<h3 id="フィールド名の変更"><a name="フィールド名の変更" class="plugin-anchor" href="#フィールド名の変更"><i class="fa fa-link" aria-hidden="true"></i></a>フィールド名の変更</h3>
+<p><img src="https://i.gyazo.com/e321681b77e603e5aa500ee2963728c5.png" alt="e321681b77e603e5aa500ee2963728c5"></p>
+<p>Name でもメニューを表示させて Edit field をクリックします。</p>
+<p><img src="https://i.gyazo.com/ce0cb96f5454bdc146e983a05e63d0d9.png" alt="ce0cb96f5454bdc146e983a05e63d0d9"></p>
+<p>フィールド名を Data にして Save をクリックします。フィールドタイプは Single line text のままでよいです。</p>
+<p><img src="https://i.gyazo.com/d5dec7b47234fb39f76e65e8cdc0db20.png" alt="d5dec7b47234fb39f76e65e8cdc0db20"></p>
+<p>つづいて、フィールドの＋ボタンをクリックしてフィールドをひとつ加えます。</p>
+<p><img src="https://i.gyazo.com/e94141996a302bff89e421bf5f33530e.png" alt="e94141996a302bff89e421bf5f33530e"></p>
+<p>設定は</p>
+<ul>
+<li>フィールド名<ul>
+<li>ID</li>
+</ul>
+</li>
+<li>データタイプ<ul>
+<li>Formula</li>
+<li>Airtable であらかじめ設定された計算式やフィールドの値を「式（Formula）」として扱えるフィールドタイプ</li>
+</ul>
+</li>
+</ul>
+<p>とします。</p>
+<p><img src="https://i.gyazo.com/3ba57896cf87f903e59f64b53449937b.png" alt="3ba57896cf87f903e59f64b53449937b"></p>
+<p>実際の Formula の値は <code>RECORD_ID()</code> とします。RECORD_ID 関数とは各行で自動で設定されるレコード ID を表示してくれる便利な Airtable 関数です。</p>
+<p>レコード ID は API での呼び出しでも名指しで指定の行を読みだすために使えたり、他のデータをあつかうきっかけとしても利用しやすいので、設定しておきます。</p>
+<p>設定できたら Create field をクリックします。</p>
+<p><img src="https://i.gyazo.com/46e36f159c5623ca034ee6e56618ac31.png" alt="46e36f159c5623ca034ee6e56618ac31"></p>
+<p>このように ID のフィールドも設定されて、各行のレコード ID も表示されました。</p>
+<h3 id="各行のデータを設定する"><a name="各行のデータを設定する" class="plugin-anchor" href="#各行のデータを設定する"><i class="fa fa-link" aria-hidden="true"></i></a>各行のデータを設定する</h3>
+<p><img src="https://i.gyazo.com/65a1675018a57f09e4b07dc73940296e.png" alt="65a1675018a57f09e4b07dc73940296e"></p>
+<p>Data の列のデータを、以下のように入力します。</p>
+<ul>
+<li>1 番目の行<ul>
+<li>A</li>
+</ul>
+</li>
+<li>2 番目の行<ul>
+<li>B</li>
+</ul>
+</li>
+<li>3 番目の行<ul>
+<li>C</li>
+</ul>
+</li>
+</ul>
+<p>設定できたらこのようになります。</p>
+<p><img src="https://i.gyazo.com/ea196a0dbcf8d3579c386437dd6ff83e.png" alt="ea196a0dbcf8d3579c386437dd6ff83e"></p>
+<h3 id="1-行データを加える"><a name="1-行データを加える" class="plugin-anchor" href="#1-行データを加える"><i class="fa fa-link" aria-hidden="true"></i></a>1 行データを加える</h3>
+<p><img src="https://i.gyazo.com/18dcadfda5bcc81db22432e2e71834bc.png" alt="18dcadfda5bcc81db22432e2e71834bc"></p>
+<p>データを加えるのも体験しましょう。</p>
+<p>行の最下部の＋ボタンをクリックしてデータを 1 行加えます。</p>
+<p><img src="https://i.gyazo.com/3f43d3e8024c933c23c66ed87b80608d.png" alt="3f43d3e8024c933c23c66ed87b80608d"></p>
+<p>ID は <code>RECORD_ID</code> 関数によって自動表示されます。Data の列に D と入力します。</p>
+<p><img src="https://i.gyazo.com/ccd150ca7fc2f08608714fcd75f84c2f.png" alt="ccd150ca7fc2f08608714fcd75f84c2f"></p>
+<p>これで Airtable で Sample01 の Table の設定が完了です。</p>
+<h2 id="他にも便利なフィールド紹介"><a name="他にも便利なフィールド紹介" class="plugin-anchor" href="#他にも便利なフィールド紹介"><i class="fa fa-link" aria-hidden="true"></i></a>他にも便利なフィールド紹介</h2>
+<p><img src="https://i.gyazo.com/0315bfabadc8442391ad415f119e63c3.png" alt="0315bfabadc8442391ad415f119e63c3"></p>
+<p>フィールドタイプは、いろいろなタイプがあります。</p>
+<p><img src="https://i.gyazo.com/381f395ceffe89e16237b5496408966c.png" alt="381f395ceffe89e16237b5496408966c"></p>
+<ul>
+<li>Supported field types in Airtable overview<ul>
+<li><a href="https://support.airtable.com/docs/supported-field-types-in-airtable-overview" target="_blank">https://support.airtable.com/docs/supported-field-types-in-airtable-overview</a></li>
+</ul>
+</li>
+</ul>
+<p>こちらをベースにいくつか紹介していきます。</p>
+<h3 id="フィールドタイプ紹介"><a name="フィールドタイプ紹介" class="plugin-anchor" href="#フィールドタイプ紹介"><i class="fa fa-link" aria-hidden="true"></i></a>フィールドタイプ紹介</h3>
+<ul>
+<li>Number<ul>
+<li>数字で揃えられる</li>
+</ul>
+</li>
+<li>Single select<ul>
+<li>入力時にデータをそろえられる</li>
+</ul>
+</li>
+<li>Multi select<ul>
+<li>複数のデータを決めた値で入力できる（Sta）</li>
+</ul>
+</li>
+<li>Checkbox<ul>
+<li>チェックされているかいないかの 2 つの値で管理できる</li>
+<li>Unity の bool に近い</li>
+</ul>
+</li>
+<li>Date<ul>
+<li>日付入力がしやすい</li>
+<li>API 側から入力するときは ISO 8601 フォーマットに合わせる必要がある<ul>
+<li><a href="https://ja.wikipedia.org/wiki/ISO_8601" target="_blank">https://ja.wikipedia.org/wiki/ISO_8601</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="自動入力系フィールドタイプ紹介"><a name="自動入力系フィールドタイプ紹介" class="plugin-anchor" href="#自動入力系フィールドタイプ紹介"><i class="fa fa-link" aria-hidden="true"></i></a>自動入力系フィールドタイプ紹介</h3>
+<ul>
+<li>Formula<ul>
+<li>色々な式が使える</li>
+<li><a href="https://support.airtable.com/docs/formula-field-reference#introduction" target="_blank">https://support.airtable.com/docs/formula-field-reference#introduction</a></li>
+</ul>
+</li>
+<li>Created time<ul>
+<li>行が作られたとき自動で作成日時を作ってくれる</li>
+<li>自前で作るときはひと手間必要なので重宝</li>
+</ul>
+</li>
+<li>Last modified time<ul>
+<li>データが変更されたとき自動で更新日時を更新してくれる</li>
+<li>自前で作るときはひと手間必要なので重宝</li>
+</ul>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -764,7 +955,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"データベース外部サービス Airtable の体験","level":"6.1.1","depth":2,"next":{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"path":"term2-1/00-chapter02.md","ref":"./term2-1/00-chapter02.md","articles":[]},"previous":{"title":"動的なデータの取得体験","level":"6.1","depth":1,"path":"term2-1/README.md","ref":"./term2-1/README.md","articles":[{"title":"データベース外部サービス Airtable の体験","level":"6.1.1","depth":2,"path":"term2-1/00-chapter01.md","ref":"./term2-1/00-chapter01.md","articles":[]},{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"path":"term2-1/00-chapter02.md","ref":"./term2-1/00-chapter02.md","articles":[]},{"title":"サーバから動的なデータの取得してみよう","level":"6.1.3","depth":2,"path":"term2-1/00-chapter03.md","ref":"./term2-1/00-chapter03.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-1/00-chapter01.md","mtime":"2023-08-07T06:47:23.624Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-07T06:47:45.067Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"データベース外部サービス Airtable の体験","level":"6.1.1","depth":2,"next":{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"path":"term2-1/00-chapter02.md","ref":"./term2-1/00-chapter02.md","articles":[]},"previous":{"title":"動的なデータの取得体験","level":"6.1","depth":1,"path":"term2-1/README.md","ref":"./term2-1/README.md","articles":[{"title":"データベース外部サービス Airtable の体験","level":"6.1.1","depth":2,"path":"term2-1/00-chapter01.md","ref":"./term2-1/00-chapter01.md","articles":[]},{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"path":"term2-1/00-chapter02.md","ref":"./term2-1/00-chapter02.md","articles":[]},{"title":"サーバから動的なデータの取得してみよう","level":"6.1.3","depth":2,"path":"term2-1/00-chapter03.md","ref":"./term2-1/00-chapter03.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-1/00-chapter01.md","mtime":"2023-08-16T06:57:42.174Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-16T06:57:58.827Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

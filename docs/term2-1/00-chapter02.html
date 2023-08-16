@@ -695,10 +695,78 @@
 <p><img src="https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png" alt="9d2c38e6fe48e61528f6b2d34370768f"></p>
 <h2 id="この章で学ぶこと"><a name="この章で学ぶこと" class="plugin-anchor" href="#この章で学ぶこと"><i class="fa fa-link" aria-hidden="true"></i></a>この章で学ぶこと</h2>
 <p>Airtable をサーバに反映して動かします。</p>
-<h2 id="codespace-の起動"><a name="codespace-の起動" class="plugin-anchor" href="#codespace-の起動"><i class="fa fa-link" aria-hidden="true"></i></a>CodeSpace の起動</h2>
+<h2 id="base-からデータを取得するために必要な設定"><a name="base-からデータを取得するために必要な設定" class="plugin-anchor" href="#base-からデータを取得するために必要な設定"><i class="fa fa-link" aria-hidden="true"></i></a>Base からデータを取得するために必要な設定</h2>
+<p>Base からデータを取得するためは Airtable API をあつかう必要があります。そして狙った Base から取得する Base ID と API キーが必要になります。</p>
+<h2 id="base-id-の取得"><a name="base-id-の取得" class="plugin-anchor" href="#base-id-の取得"><i class="fa fa-link" aria-hidden="true"></i></a>Base ID の取得</h2>
+<p><img src="https://i.gyazo.com/59e025e8ef9495c56ac93382f684e6f3.png" alt="59e025e8ef9495c56ac93382f684e6f3"></p>
+<p><a href="https://airtable.com/developers/web/api/introduction" target="_blank">https://airtable.com/developers/web/api/introduction</a> をクリックして API のドキュメントに移動します。</p>
+<p><img src="https://i.gyazo.com/41a222a868c0e8881d73f2b55b6c0fd3.png" alt="41a222a868c0e8881d73f2b55b6c0fd3"></p>
+<p>API Reference ページが表示されているので、その下部に Base の一覧があるので、今回の Base をクリックします。</p>
+<p><img src="https://i.gyazo.com/531c6a425920b683528b5963f880aed8.png" alt="531c6a425920b683528b5963f880aed8"></p>
+<p>今回の Base を取得するために特化した API ドキュメントに移動するので、<code>The ID of this base is</code> ではじまる文章を探します。</p>
+<p><img src="https://i.gyazo.com/3e6db650699a2898b5f7502dc72cd885.png" alt="3e6db650699a2898b5f7502dc72cd885"></p>
+<p>appからピリオドの手前までが今回の Base Id です。テキストエディタにコピーしてメモしておきましょう。</p>
+<h3 id="もう一つの-base-id-の確認方法"><a name="もう一つの-base-id-の確認方法" class="plugin-anchor" href="#もう一つの-base-id-の確認方法"><i class="fa fa-link" aria-hidden="true"></i></a>もう一つの Base Id の確認方法</h3>
+<p><img src="https://i.gyazo.com/e83fbbaac0f5dc509f2d16503cea76fe.png" alt="e83fbbaac0f5dc509f2d16503cea76fe"></p>
+<p>実は Base Id は Base ページの URL でも分かります。今回の Base ページを表示します。</p>
+<p><img src="https://i.gyazo.com/1f623bf099c2c4ac9857907f030f5998.png" alt="1f623bf099c2c4ac9857907f030f5998"></p>
+<p>Base ページの URL のは <a href="https://airtable.com/" target="_blank">https://airtable.com/</a> 以降にある次のスラッシュまで app～～～～～～ が Base Id です。</p>
+<p>コピーしたものと、こちらが合っているかも確認しておくとより確実です。</p>
+<p>Airtable の扱いに慣れてくれば、こちらのやりかたで Base Id を把握するのもよいでしょう。</p>
+<h2 id="api-キーの取得"><a name="api-キーの取得" class="plugin-anchor" href="#api-キーの取得"><i class="fa fa-link" aria-hidden="true"></i></a>API キーの取得</h2>
+<p>Airtable にログインした状態で、Airtable Developers のトークン管理画面 <a href="https://airtable.com/create/tokens" target="_blank">https://airtable.com/create/tokens</a> にアクセスします。</p>
+<p><img src="https://i.gyazo.com/48a456f3303bb8273ce07b544a69a1ea.png" alt="48a456f3303bb8273ce07b544a69a1ea"></p>
+<p>Personal access token ページが表示されます。 Create token ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/474f4398fe432867af92ce329d9f0a1a.png" alt="474f4398fe432867af92ce329d9f0a1a"></p>
+<p>Create personal access token が表示されます。</p>
+<p><img src="https://i.gyazo.com/590490ff2f15502a2c4bef7119396da7.png" alt="590490ff2f15502a2c4bef7119396da7"></p>
+<p>今回、 Name は <code>unity test</code> とします。</p>
+<p><img src="https://i.gyazo.com/7917693b3084603d66f40967a6a52b6b.png" alt="7917693b3084603d66f40967a6a52b6b"></p>
+<p>Scopes では、この API Key で解放する権限を決めます。 Add a scope をクリックしましょう。</p>
+<p><img src="https://i.gyazo.com/7b10655e6b5d639d7fca99ceb2b139ba.png" alt="7b10655e6b5d639d7fca99ceb2b139ba"></p>
+<p>data.records:read と data.records:write を 1 つずつ選択します。結果、Scopes に 2 つの権限が設定されました。</p>
+<p><img src="https://i.gyazo.com/b9974d0ce91eb08750b6c8755e407aab.png" alt="b9974d0ce91eb08750b6c8755e407aab"></p>
+<p>Access ではアクセス可能なデータ（Base や Workspace）を設定します。Add a base をクリックしましょう。</p>
+<p><img src="https://i.gyazo.com/595555c5dc05dd5fa83eaeb02cf0fb65.png" alt="595555c5dc05dd5fa83eaeb02cf0fb65"></p>
+<p>今回は <code>All current and future bases in all current and future workspaces</code> を選択します。</p>
+<p><img src="https://i.gyazo.com/50d76ae0c0898b71d0df19a477b5dd7e.png" alt="50d76ae0c0898b71d0df19a477b5dd7e"></p>
+<p>作成できたら Create token ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/925f00ce09b18711bf013f9f8f4128e5.png" alt="925f00ce09b18711bf013f9f8f4128e5"></p>
+<p>今回の API Key が作成されます。こちらは 1 度かぎりしか出てこないウィンドウです。閉じてしまうと、もう見ることができないので注意しましょう。</p>
+<p>これをコピーして保管しておけば新しい Airtable API Key 作成は完了です。</p>
+<p><img src="https://i.gyazo.com/d203b07aff01ff9ec1b297c335f0dd9f.png" alt="d203b07aff01ff9ec1b297c335f0dd9f"></p>
+<p>x ボタンをクリックして閉じて、一覧に今回の API Key が出来ているか確認しましょう。</p>
+<h2 id="codespace-削除"><a name="codespace-削除" class="plugin-anchor" href="#codespace-削除"><i class="fa fa-link" aria-hidden="true"></i></a>Codespace 削除</h2>
+<p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
+<p>GitHub にログインした状態で <a href="https://github.com/codespaces" target="_blank">https://github.com/codespaces</a> にアクセスします。</p>
+<p><img src="https://i.gyazo.com/016de554e3ab779c598ac69607955af2.png" alt="016de554e3ab779c598ac69607955af2"></p>
+<p>今回使っている Codespace を探します。</p>
+<p><img src="https://i.gyazo.com/abd033cda989bfdd5a094d922bb6cfbc.png" alt="abd033cda989bfdd5a094d922bb6cfbc"></p>
+<p>Delete をクリックして削除します。</p>
+<h2 id="今回の-github-codespaces-リポジトリにアクセス"><a name="今回の-github-codespaces-リポジトリにアクセス" class="plugin-anchor" href="#今回の-github-codespaces-リポジトリにアクセス"><i class="fa fa-link" aria-hidden="true"></i></a>今回の GitHub Codespaces リポジトリにアクセス</h2>
+<p>今回の GitHub Codespaces リポジトリに Chrome ブラウザでアクセスします。</p>
+<p><img src="https://i.gyazo.com/1d4fe9d0e6c86377c17828a2ff26fd0d.png" alt="1d4fe9d0e6c86377c17828a2ff26fd0d"></p>
+<p><a href="https://github.com/1ft-seabass/vantan-unity-network-server-base" target="_blank">https://github.com/1ft-seabass/vantan-unity-network-server-base</a> にアクセスします。</p>
+<h2 id="github-codespaces-としてリポジトリを開く"><a name="github-codespaces-としてリポジトリを開く" class="plugin-anchor" href="#github-codespaces-としてリポジトリを開く"><i class="fa fa-link" aria-hidden="true"></i></a>GitHub Codespaces としてリポジトリを開く</h2>
+<p><img src="https://i.gyazo.com/6ebad95a052d8a2d37d889399e120424.png" alt="6ebad95a052d8a2d37d889399e120424"></p>
+<p>Code ボタンをクリックします。</p>
+<p><img src="https://i.gyazo.com/8f6a286108378103ac8d30df6f811ef4.png" alt="8f6a286108378103ac8d30df6f811ef4"></p>
+<p>Codespaces タブをクリックします。Create codespace on main をクリックします。</p>
+<p><img src="https://i.gyazo.com/47b24d3be5b687f60383455a75898788.png" alt="47b24d3be5b687f60383455a75898788"></p>
+<p>Setting up your codespace という画面が出て構築されます。</p>
+<p><img src="https://i.gyazo.com/28ea2b9aece0957b5bb7292427889a10.png" alt="28ea2b9aece0957b5bb7292427889a10"></p>
+<p>ブラウザ上で Visual Studio Code が起動し、今回の仕組みを反映した環境が起動しました。</p>
+<h2 id="サーバの起動"><a name="サーバの起動" class="plugin-anchor" href="#サーバの起動"><i class="fa fa-link" aria-hidden="true"></i></a>サーバの起動</h2>
+<p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
+<ul>
+<li>ターミナルで <code>node term2-1-chapter02.js</code> をサーバ起動</li>
+<li>ポートタブで今回のサーバ起動を公開</li>
+<li>シークレットウィンドウで今回のサーバが公開されているか確認します</li>
+</ul>
 <h2 id="api-キーの入力"><a name="api-キーの入力" class="plugin-anchor" href="#api-キーの入力"><i class="fa fa-link" aria-hidden="true"></i></a>API キーの入力</h2>
-<h2 id="動かしてみる1（データ取得）"><a name="動かしてみる1（データ取得）" class="plugin-anchor" href="#動かしてみる1（データ取得）"><i class="fa fa-link" aria-hidden="true"></i></a>動かしてみる1（データ取得）</h2>
-<h2 id="動かしてみる2（url-アクセスで、データ登録）"><a name="動かしてみる2（url-アクセスで、データ登録）" class="plugin-anchor" href="#動かしてみる2（url-アクセスで、データ登録）"><i class="fa fa-link" aria-hidden="true"></i></a>動かしてみる2（URL アクセスで、データ登録）</h2>
+<h2 id="動かしてみる1（url-アクセスで、データ取得）"><a name="動かしてみる1（url-アクセスで、データ取得）" class="plugin-anchor" href="#動かしてみる1（url-アクセスで、データ取得）"><i class="fa fa-link" aria-hidden="true"></i></a>動かしてみる1（URL アクセスで、データ取得）</h2>
+<h2 id="動かしてみる2（データ変更して確認）"><a name="動かしてみる2（データ変更して確認）" class="plugin-anchor" href="#動かしてみる2（データ変更して確認）"><i class="fa fa-link" aria-hidden="true"></i></a>動かしてみる2（データ変更して確認）</h2>
+<h2 id="動かしてみる2（url-アクセスで、データ変更）"><a name="動かしてみる2（url-アクセスで、データ変更）" class="plugin-anchor" href="#動かしてみる2（url-アクセスで、データ変更）"><i class="fa fa-link" aria-hidden="true"></i></a>動かしてみる2（URL アクセスで、データ変更）</h2>
 <h2 id="そのほかのメソッド"><a name="そのほかのメソッド" class="plugin-anchor" href="#そのほかのメソッド"><i class="fa fa-link" aria-hidden="true"></i></a>そのほかのメソッド</h2>
 <p>JavaScript だけど</p>
 
@@ -744,7 +812,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"next":{"title":"サーバから動的なデータの取得してみよう","level":"6.1.3","depth":2,"path":"term2-1/00-chapter03.md","ref":"./term2-1/00-chapter03.md","articles":[]},"previous":{"title":"データベース外部サービス Airtable の体験","level":"6.1.1","depth":2,"path":"term2-1/00-chapter01.md","ref":"./term2-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-1/00-chapter02.md","mtime":"2023-08-07T06:16:56.093Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-07T06:47:45.067Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"next":{"title":"サーバから動的なデータの取得してみよう","level":"6.1.3","depth":2,"path":"term2-1/00-chapter03.md","ref":"./term2-1/00-chapter03.md","articles":[]},"previous":{"title":"データベース外部サービス Airtable の体験","level":"6.1.1","depth":2,"path":"term2-1/00-chapter01.md","ref":"./term2-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-1/00-chapter02.md","mtime":"2023-08-16T06:44:54.210Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-16T06:57:58.827Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
