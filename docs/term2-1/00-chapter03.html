@@ -702,16 +702,82 @@
 <p>Codespaces のページです。さきほど使っていた Codespace をクリックして起動します。</p>
 <h2 id="サーバ側の仕組みの説明"><a name="サーバ側の仕組みの説明" class="plugin-anchor" href="#サーバ側の仕組みの説明"><i class="fa fa-link" aria-hidden="true"></i></a>サーバ側の仕組みの説明</h2>
 <p>今回起動するプログラム <code>term2-1-chapter03.js</code> の仕組みを説明します。</p>
-<pre><code class="lang-js"><span class="hljs-string">``</span><span class="hljs-string">`
+<pre><code class="lang-js"><span class="hljs-comment">// path ライブラリ</span>
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;path&apos;</span>);
 
-✅ポイント
-- 前回の `</span>term2-<span class="hljs-number">1</span>-chapter02.js<span class="hljs-string">` と同じ仕組みで `</span>/api/get<span class="hljs-string">` でのデータ取得だけにしています。
-- Airtable の Base ID や API キーの設定に慣れるようシンプルにしてます
+<span class="hljs-comment">// Airtable 設定 /////////////////////////////////////////////////////</span>
 
-## Base ID や API キーの入力
+<span class="hljs-comment">// Airtable ライブラリ</span>
+<span class="hljs-keyword">const</span> Airtable = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;airtable&apos;</span>);
 
-`</span><span class="hljs-string">``</span>js
 <span class="hljs-comment">// Airtable API キー</span>
+<span class="hljs-keyword">const</span> AIRTABLE_API_KEY = <span class="hljs-string">&apos;AIRTABLE_API_KEY&apos;</span>;
+<span class="hljs-comment">// Airtable BASE ID</span>
+<span class="hljs-keyword">const</span> AIRTABLE_BASE_ID = <span class="hljs-string">&apos;AIRTABLE_BASE_ID&apos;</span>;
+<span class="hljs-comment">// Airtable Table 名</span>
+<span class="hljs-keyword">const</span> AIRTABLE_TABLE_NAME = <span class="hljs-string">&apos;Sample01&apos;</span>;
+
+<span class="hljs-comment">// 今回 Base を読み込む設定</span>
+<span class="hljs-keyword">const</span> base = <span class="hljs-keyword">new</span> Airtable({ <span class="hljs-attr">apiKey</span>: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID);
+
+<span class="hljs-comment">// サーバー設定 ///////////////////////////////////////////////////////</span>
+
+<span class="hljs-comment">// Express ライブラリの呼び出し</span>
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;express&apos;</span>);
+<span class="hljs-comment">// Express ライブラリからサーバーの仕組みを app 変数として呼び出す</span>
+<span class="hljs-keyword">const</span> app = express();
+
+<span class="hljs-comment">// public フォルダ内にあるファイルはパスが一致していると呼びだせます</span>
+<span class="hljs-comment">// /index.html や / の場合は public フォルダ内の index.html が表示されます</span>
+app.use(express.static(__dirname + <span class="hljs-string">&apos;/public&apos;</span>));
+
+<span class="hljs-comment">// POST データを受け取る際に必要な処理</span>
+app.use(express.urlencoded({ <span class="hljs-attr">extended</span>: <span class="hljs-literal">true</span> }));
+<span class="hljs-comment">// データを JSON データとして受け取る処理</span>
+app.use(express.json())
+
+<span class="hljs-comment">// /api/get というパスで GET リクエストでアクセスするとデータが取得できます</span>
+app.get(<span class="hljs-string">&apos;/api/get&apos;</span>, <span class="hljs-keyword">async</span> (req, res) =&gt; {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;/api/get 受信&apos;</span>);
+  <span class="hljs-comment">// 受信したデータを表示</span>
+  <span class="hljs-built_in">console</span>.log(req.query);
+
+  <span class="hljs-comment">// Airtable からデータを取得</span>
+  <span class="hljs-keyword">let</span> records;
+  <span class="hljs-keyword">try</span> {
+    records = <span class="hljs-keyword">await</span> base(AIRTABLE_TABLE_NAME).select({
+      <span class="hljs-comment">// ビューはデータの見せ方のこと今回は最初に作られた Grid view で OK</span>
+      <span class="hljs-attr">view</span>: <span class="hljs-string">&quot;Grid view&quot;</span>
+    }).all();
+    <span class="hljs-comment">// console.log(records);</span>
+  } <span class="hljs-keyword">catch</span> (e) {
+    <span class="hljs-built_in">console</span>.log(e);
+  }
+
+  <span class="hljs-comment">// 返答データ作成</span>
+  <span class="hljs-keyword">let</span> responseData = { <span class="hljs-string">&quot;data&quot;</span>: [] };
+  records.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">record</span>) </span>{
+    <span class="hljs-comment">// 今回は Data 列を取得</span>
+    responseData.data.push(record.get(<span class="hljs-string">&apos;Data&apos;</span>));
+  });
+
+  <span class="hljs-comment">// res.json はオブジェクトを JSON 形式で返答します</span>
+  res.json(responseData)
+});
+
+<span class="hljs-comment">// サーバーを 8080 ポートで起動してログを出力</span>
+app.listen(process.env.PORT || <span class="hljs-number">8080</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${path.basename(__filename)}</span> start!`</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`app listening at http://localhost:<span class="hljs-subst">${process.env.PORT || <span class="hljs-number">8080</span>}</span>`</span>)
+})
+</code></pre>
+<p>✅ポイント</p>
+<ul>
+<li>前回の <code>term2-1-chapter02.js</code> と同じ仕組みで <code>/api/get</code> でのデータ取得だけにしています。</li>
+<li>Airtable の Base ID や API キーの設定に慣れるようシンプルにしてます</li>
+</ul>
+<h2 id="base-id-や-api-キーの入力"><a name="base-id-や-api-キーの入力" class="plugin-anchor" href="#base-id-や-api-キーの入力"><i class="fa fa-link" aria-hidden="true"></i></a>Base ID や API キーの入力</h2>
+<pre><code class="lang-js"><span class="hljs-comment">// Airtable API キー</span>
 <span class="hljs-keyword">const</span> AIRTABLE_API_KEY = <span class="hljs-string">&apos;AIRTABLE_API_KEY&apos;</span>;
 <span class="hljs-comment">// Airtable BASE ID</span>
 <span class="hljs-keyword">const</span> AIRTABLE_BASE_ID = <span class="hljs-string">&apos;AIRTABLE_BASE_ID&apos;</span>;
@@ -769,6 +835,7 @@
 <p><img src="https://i.gyazo.com/ab0a5d229a906401ca2458c5afb42397.png" alt="ab0a5d229a906401ca2458c5afb42397"></p>
 <p>授業も久々なのでおさらいもかねて、プログラムを書いていく形でウォームアップしてみましょう。</p>
 <h2 id="まず-api-につないでみましょう"><a name="まず-api-につないでみましょう" class="plugin-anchor" href="#まず-api-につないでみましょう"><i class="fa fa-link" aria-hidden="true"></i></a>まず API につないでみましょう</h2>
+<p><img src="https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png" alt="02db792fd629a56812a205234a08ae44"></p>
 <p>JSON データは気にせず、まずつないでみましょう。</p>
 <pre><code class="lang-csharp"><span class="hljs-function">IEnumerator <span class="hljs-title">GetData</span>(<span class="hljs-params"></span>)</span>
 {
@@ -778,6 +845,7 @@
 </code></pre>
 <p>今回は サーバーURL + /api/get を読み込みます。urlAPI 変数をうまく変更してつないでみましょう。</p>
 <h2 id="データの内容を見つつ-json-データを取り出せるようにする"><a name="データの内容を見つつ-json-データを取り出せるようにする" class="plugin-anchor" href="#データの内容を見つつ-json-データを取り出せるようにする"><i class="fa fa-link" aria-hidden="true"></i></a>データの内容を見つつ JSON データを取り出せるようにする</h2>
+<p><img src="https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png" alt="02db792fd629a56812a205234a08ae44"></p>
 <p>うまくつながるとコンソールでデータが見ることができます。</p>
 <p>今回は <code>{&quot;data&quot;:[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;]}</code> という data のオブジェクトの中に配列が入っています。</p>
 <p>JSON データでの配列は Unity では List 型で変換できます。</p>
@@ -791,6 +859,7 @@
 </code></pre>
 <p>こちらの内容を変更してみましょう。</p>
 <h2 id="データをリストアップしてみる"><a name="データをリストアップしてみる" class="plugin-anchor" href="#データをリストアップしてみる"><i class="fa fa-link" aria-hidden="true"></i></a>データをリストアップしてみる</h2>
+<p><img src="https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png" alt="02db792fd629a56812a205234a08ae44"></p>
 <pre><code class="lang-csharp"><span class="hljs-comment">// ResponseData クラスで Unity で扱えるデータ化</span>
 ResponseData response = JsonUtility.FromJson&lt;ResponseData&gt;(request.downloadHandler.text);
 
@@ -850,7 +919,7 @@ ResponseData response = JsonUtility.FromJson&lt;ResponseData&gt;(request.downloa
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"サーバから動的なデータの取得してみよう","level":"6.1.3","depth":2,"next":{"title":"動的なデータ表示実践","level":"7.1","depth":1,"path":"term2-2/README.md","ref":"./term2-2/README.md","articles":[{"title":"サーバから動的なデータを表示してみよう","level":"7.1.1","depth":2,"path":"term2-2/00-chapter01.md","ref":"./term2-2/00-chapter01.md","articles":[]},{"title":"他のデータも色々と記録してみよう","level":"7.1.2","depth":2,"path":"term2-2/00-chapter02.md","ref":"./term2-2/00-chapter02.md","articles":[]},{"title":"データ活用例を体験 : ユーザー情報","level":"7.1.3","depth":2,"path":"term2-2/00-chapter03.md","ref":"./term2-2/00-chapter03.md","articles":[]}]},"previous":{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"path":"term2-1/00-chapter02.md","ref":"./term2-1/00-chapter02.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-1/00-chapter03.md","mtime":"2023-08-17T06:30:26.040Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-17T06:33:17.442Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"サーバから動的なデータの取得してみよう","level":"6.1.3","depth":2,"next":{"title":"動的なデータ表示実践","level":"7.1","depth":1,"path":"term2-2/README.md","ref":"./term2-2/README.md","articles":[{"title":"サーバから動的なデータを表示してみよう","level":"7.1.1","depth":2,"path":"term2-2/00-chapter01.md","ref":"./term2-2/00-chapter01.md","articles":[]},{"title":"他のデータも色々と記録してみよう","level":"7.1.2","depth":2,"path":"term2-2/00-chapter02.md","ref":"./term2-2/00-chapter02.md","articles":[]},{"title":"データ活用例を体験 : ユーザー情報","level":"7.1.3","depth":2,"path":"term2-2/00-chapter03.md","ref":"./term2-2/00-chapter03.md","articles":[]}]},"previous":{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"path":"term2-1/00-chapter02.md","ref":"./term2-1/00-chapter02.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-1/00-chapter03.md","mtime":"2023-08-17T07:55:59.397Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-17T08:19:25.559Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

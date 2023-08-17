@@ -21,6 +21,74 @@ Codespaces のページです。さきほど使っていた Codespace をクリ�
 今回起動するプログラム `term2-1-chapter03.js` の仕組みを説明します。
 
 ```js
+// path ライブラリ
+const path = require('path');
+
+// Airtable 設定 /////////////////////////////////////////////////////
+
+// Airtable ライブラリ
+const Airtable = require('airtable');
+
+// Airtable API キー
+const AIRTABLE_API_KEY = 'AIRTABLE_API_KEY';
+// Airtable BASE ID
+const AIRTABLE_BASE_ID = 'AIRTABLE_BASE_ID';
+// Airtable Table 名
+const AIRTABLE_TABLE_NAME = 'Sample01';
+
+// 今回 Base を読み込む設定
+const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID);
+
+// サーバー設定 ///////////////////////////////////////////////////////
+
+// Express ライブラリの呼び出し
+const express = require('express');
+// Express ライブラリからサーバーの仕組みを app 変数として呼び出す
+const app = express();
+
+// public フォルダ内にあるファイルはパスが一致していると呼びだせます
+// /index.html や / の場合は public フォルダ内の index.html が表示されます
+app.use(express.static(__dirname + '/public'));
+
+// POST データを受け取る際に必要な処理
+app.use(express.urlencoded({ extended: true }));
+// データを JSON データとして受け取る処理
+app.use(express.json())
+
+// /api/get というパスで GET リクエストでアクセスするとデータが取得できます
+app.get('/api/get', async (req, res) => {
+  console.log('/api/get 受信');
+  // 受信したデータを表示
+  console.log(req.query);
+
+  // Airtable からデータを取得
+  let records;
+  try {
+    records = await base(AIRTABLE_TABLE_NAME).select({
+      // ビューはデータの見せ方のこと今回は最初に作られた Grid view で OK
+      view: "Grid view"
+    }).all();
+    // console.log(records);
+  } catch (e) {
+    console.log(e);
+  }
+
+  // 返答データ作成
+  let responseData = { "data": [] };
+  records.forEach(function (record) {
+    // 今回は Data 列を取得
+    responseData.data.push(record.get('Data'));
+  });
+
+  // res.json はオブジェクトを JSON 形式で返答します
+  res.json(responseData)
+});
+
+// サーバーを 8080 ポートで起動してログを出力
+app.listen(process.env.PORT || 8080, () => {
+  console.log(`${path.basename(__filename)} start!`);
+  console.log(`app listening at http://localhost:${process.env.PORT || 8080}`)
+})
 ```
 
 ✅ポイント
@@ -128,6 +196,8 @@ Project タブから Assets > Scenes を選択します。Scene-Term2-1-Chapter0
 
 ## まず API につないでみましょう
 
+![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
+
 JSON データは気にせず、まずつないでみましょう。
 
 ```csharp
@@ -141,6 +211,8 @@ IEnumerator GetData()
 今回は サーバーURL + /api/get を読み込みます。urlAPI 変数をうまく変更してつないでみましょう。
 
 ## データの内容を見つつ JSON データを取り出せるようにする
+
+![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
 うまくつながるとコンソールでデータが見ることができます。
 
@@ -161,6 +233,8 @@ public class ResponseData
 こちらの内容を変更してみましょう。
 
 ## データをリストアップしてみる
+
+![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
 ```csharp
 // ResponseData クラスで Unity で扱えるデータ化

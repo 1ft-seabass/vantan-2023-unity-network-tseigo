@@ -99,7 +99,7 @@ Table は表形式でデータが保管される仕組みです。表とは、�
 - Supported field types in Airtable overview
   - https://support.airtable.com/docs/supported-field-types-in-airtable-overview
 
-## Base を新しく作ってみる
+## Table を新しく作ってみる
 
 それでは、今回のためのデータを新しく作ってみましょう。
 
@@ -144,6 +144,8 @@ Name でもメニューを表示させて Edit field をクリックします。
 ![ce0cb96f5454bdc146e983a05e63d0d9](https://i.gyazo.com/ce0cb96f5454bdc146e983a05e63d0d9.png)
 
 フィールド名を Data にして Save をクリックします。フィールドタイプは Single line text のままでよいです。
+
+## フィールド ID を表示する ID フィールドを追加
 
 ![d5dec7b47234fb39f76e65e8cdc0db20](https://i.gyazo.com/d5dec7b47234fb39f76e65e8cdc0db20.png)
 
