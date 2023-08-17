@@ -255,6 +255,8 @@ app.listen(process.env.PORT || 8080, () => {
 
 ✅ポイント
 - `const Airtable = require('airtable');` で Airtable のライブラリを読み込んでいます。
+  - このライブラリは Airtable が公式でメンテナンスしているライブラリです
+    - https://github.com/Airtable/airtable.js
 - `AIRTABLE_API_KEY` や `AIRTABLE_BASE_ID` の変数で Base ID や API キーを準備します。
 - `const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID);` で今回の Base が使えるようになります。
 - `/api/create` というパスで GET リクエストでアクセスすると data パラメータがある場合、データが保存できます。
@@ -309,6 +311,27 @@ Base に入っている Sample01 の Table 内容に新しい行が加わって�
 
 ## データ変更を体験してみる
 
-## そのほかのメソッド
+![a05d5d50f448f135154610177daab9e7](https://i.gyazo.com/a05d5d50f448f135154610177daab9e7.png)
 
-JavaScript だけど
+たとえば `A` の部分を `てすと` と変更して Base のデータを変更します。
+
+![f4eae1d1353434b85cb1614445bb8387](https://i.gyazo.com/f4eae1d1353434b85cb1614445bb8387.png)
+
+`/api/get` でアクセスしてみて、サーバ側で変更されることを確認してみましょう。
+
+![e28a698e4680da20b73ff7a6904c28d9](https://i.gyazo.com/e28a698e4680da20b73ff7a6904c28d9.png)
+
+Test の行で右クリックして Delete sample をクリックして削除も体験してみましょう。
+
+## そのほかの使い方
+
+![7b5c8cf2b481d875f5f4c7bdf4c60cda](https://i.gyazo.com/7b5c8cf2b481d875f5f4c7bdf4c60cda.png)
+
+Base ID を取得したときにアクセスした API ページ https://airtable.com/developers/web/api/introduction から、各 Base での JavaScript でのアクセスの仕方を確認できます。
+
+![dee00e7a902116f5c1edee747811ed7f](https://i.gyazo.com/dee00e7a902116f5c1edee747811ed7f.png)
+
+✅ポイント
+- 更新 Update や 削除 Delete もできます
+- RECORD ID が分かれば、検索しなくても名指しで特定データが呼べます
+- List で filterByFormula で検索内容を頑張ると特定のデータが呼べます
