@@ -6,9 +6,19 @@
 
 Airtable をサーバに反映して動かします。
 
+## おさらい
+
+![c2469d996dc803b8a13c286342e01942](https://i.gyazo.com/c2469d996dc803b8a13c286342e01942.png)
+
+サーバのプログラム内で記録すると再起動時になくなってしまいます。データを記録する Airtable サービスを使って、サーバの外にデータを記録して、サーバーが再起動してもデータが保持されるようにしてみましょう。
+
 ## Base からデータを取得するために必要な設定
 
+![0d324902d7e79943fcc93826cba1f871](https://i.gyazo.com/0d324902d7e79943fcc93826cba1f871.png)
+
 Base からデータを取得するためは Airtable API をあつかう必要があります。そして狙った Base から取得する Base ID と API キーが必要になります。
+
+その他に、テーブル名も必要ですが、これは、そのままの名前で呼び出せばいいので割愛します。
 
 ## Base ID の取得
 
@@ -82,7 +92,9 @@ Access ではアクセス可能なデータ（Base や Workspace）を設定し�
 
 今回の API Key が作成されます。こちらは 1 度かぎりしか出てこないウィンドウです。閉じてしまうと、もう見ることができないので注意しましょう。
 
-これをコピーして保管しておけば新しい Airtable API Key 作成は完了です。
+![0315bfabadc8442391ad415f119e63c3](https://i.gyazo.com/0315bfabadc8442391ad415f119e63c3.png)
+
+これをテキストエディタにコピーして保管しておけば新しい Airtable API Key 作成は完了です。
 
 ![d203b07aff01ff9ec1b297c335f0dd9f](https://i.gyazo.com/d203b07aff01ff9ec1b297c335f0dd9f.png)
 
@@ -128,6 +140,141 @@ Setting up your codespace という画面が出て構築されます。
 
 ブラウザ上で Visual Studio Code が起動し、今回の仕組みを反映した環境が起動しました。
 
+## 仕組みの説明
+
+今回起動するプログラム `term2-1-chapter02.js` の仕組みを説明します。
+
+```js
+// path ライブラリ
+const path = require('path');
+// Express ライブラリの呼び出し
+const express = require('express');
+// Express ライブラリからサーバーの仕組みを app 変数として呼び出す
+const app = express();
+
+// Airtable 設定 ///////////////////////////////////////////////////////////////
+// Airtable ライブラリ
+const Airtable = require('airtable');
+
+// Airtable API キー
+const AIRTABLE_API_KEY = 'AIRTABLE_API_KEY';
+// Airtable BASE ID
+const AIRTABLE_BASE_ID = 'AIRTABLE_BASE_ID';
+// Airtable Table 名
+const AIRTABLE_TABLE_NAME = 'Sample01';
+
+// 今回 Base を読み込む設定
+const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID);
+
+// public フォルダ内にあるファイルはパスが一致していると呼びだせます
+// /index.html や / の場合は public フォルダ内の index.html が表示されます
+app.use(express.static(__dirname + '/public'));
+
+// POST データを受け取る際に必要な処理
+app.use(express.urlencoded({ extended: true }));
+// データを JSON データとして受け取る処理
+app.use(express.json())
+
+// 現在のポイントを記録する変数
+// サーバープログラム内の変数なのでメモリで動いているので再起動すると初期化されますが起動している間は記録してくれています
+let recordPoint = 0;
+
+// /api/get というパスで GET リクエストでアクセスするとデータが取得できます
+app.get('/api/get', async (req, res) => {
+  console.log('/api/get 受信');
+  // 受信したデータを表示
+  console.log(req.query);
+
+  // Airtable からデータを取得
+  let records;
+  try {
+    records = await base(AIRTABLE_TABLE_NAME).select({
+      // ビューはデータの見せ方のこと今回は最初に作られた Grid view で OK
+      view: "Grid view"
+    }).all();
+    // console.log(records);
+  } catch (e) {
+    console.log(e);
+  }
+
+  // 返答データ作成
+  let responseData = { "data": [] };
+  records.forEach(function (record) {
+    // 今回は Data 列を取得
+    responseData.data.push(record.get('Data'));
+  });
+
+  // res.json はオブジェクトを JSON 形式で返答します
+  res.json(responseData)
+});
+
+// /api/create というパスで GET リクエストでアクセスすると data パラメータがある場合、データが保存できます
+// /api/create?data=A の場合、A が保存されます
+app.get('/api/create', async (req, res) => {
+  console.log('/api/create 受信');
+  // 受信したデータを表示
+  // /api/set?data=1
+  console.log('受信したデータを表示');
+  console.log(req.query);
+
+  // Airtable にデータを保存
+  if(req.query.data){
+    console.log('データあり');
+
+    const currentData = req.query.data;
+
+    let result;
+    try {
+      const fields = [
+        {
+          "fields": {
+            "Data": currentData
+          }
+        }
+      ];
+
+      result = await base(AIRTABLE_TABLE_NAME).create(fields);
+    } catch (e) {
+      console.log(e);
+    }
+  } else {
+    console.log('データなし');
+  }
+  
+  // res.json はオブジェクトを JSON 形式で返答します
+  let responseData = { "result": "OK" };
+  res.json(responseData)
+});
+
+// サーバーを 8080 ポートで起動してログを出力
+app.listen(process.env.PORT || 8080, () => {
+  console.log(`${path.basename(__filename)} start!`);
+  console.log(`app listening at http://localhost:${process.env.PORT || 8080}`)
+})
+```
+
+✅ポイント
+- `const Airtable = require('airtable');` で Airtable のライブラリを読み込んでいます。
+- `AIRTABLE_API_KEY` や `AIRTABLE_BASE_ID` の変数で Base ID や API キーを準備します。
+- `const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID);` で今回の Base が使えるようになります。
+- `/api/create` というパスで GET リクエストでアクセスすると data パラメータがある場合、データが保存できます。
+- `/api/get` というパスで GET リクエストでアクセスするとデータが取得できます。
+
+## Base ID や API キーの入力
+
+```js
+// Airtable API キー
+const AIRTABLE_API_KEY = 'AIRTABLE_API_KEY';
+// Airtable BASE ID
+const AIRTABLE_BASE_ID = 'AIRTABLE_BASE_ID';
+// Airtable Table 名
+const AIRTABLE_TABLE_NAME = 'Sample01';
+```
+
+こちらに Base ID や API キーの入力をします。AIRTABLE_API_KEY には API キー、AIRTABLE_BASE_ID には Base ID を入力しましょう。Airtable Table 名については、すでに今回アクセスする Table 名 `Sample01` が入っています。
+
+設定ができたらサーバの起動です。
+
 ## サーバの起動
 
 ![0a3a35f3418068b7713ddaa729f2c660](https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png)
@@ -136,13 +283,31 @@ Setting up your codespace という画面が出て構築されます。
 - ポートタブで今回のサーバ起動を公開
 - シークレットウィンドウで今回のサーバが公開されているか確認します
 
-## API キーの入力
+## データ取得を体験してみる
 
-## 動かしてみる1（URL アクセスで、データ取得）
+`/api/get` というパスで GET リクエストでアクセスするとデータが取得できます。
 
-## 動かしてみる2（データ変更して確認）
+![3d5acaeddc15f2185ddeb90dc7120345](https://i.gyazo.com/3d5acaeddc15f2185ddeb90dc7120345.png)
 
-## 動かしてみる2（URL アクセスで、データ変更）
+実際にブラウザでアクセスしてみましょう。このように `{"data":["A","B","C","D"]}` と data というオブジェクトの中に配列でデータが入っています。
+
+![30a0789ab27846655472da09e4e76489](https://i.gyazo.com/30a0789ab27846655472da09e4e76489.png)
+
+Base に入っている Sample01 の Table 内容が表示されています。
+
+## データ追加を体験してみる
+
+`/api/create` というパスで GET リクエストでアクセスすると data パラメータがある場合、データが保存できます。
+
+![7f83b7aa74438e8a067125defa2f23b9](https://i.gyazo.com/7f83b7aa74438e8a067125defa2f23b9.png)
+
+実際に `/api/create?data=Test` でブラウザからアクセスしてみましょう。このように `{"result":"OK"}` と返答が来ます。
+
+![dab681cc1c59529a2bfd055b9f748d76](https://i.gyazo.com/dab681cc1c59529a2bfd055b9f748d76.png)
+
+Base に入っている Sample01 の Table 内容に新しい行が加わっています。
+
+## データ変更を体験してみる
 
 ## そのほかのメソッド
 
