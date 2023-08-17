@@ -695,8 +695,13 @@
 <p><img src="https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png" alt="9d2c38e6fe48e61528f6b2d34370768f"></p>
 <h2 id="この章で学ぶこと"><a name="この章で学ぶこと" class="plugin-anchor" href="#この章で学ぶこと"><i class="fa fa-link" aria-hidden="true"></i></a>この章で学ぶこと</h2>
 <p>Airtable をサーバに反映して動かします。</p>
+<h2 id="おさらい"><a name="おさらい" class="plugin-anchor" href="#おさらい"><i class="fa fa-link" aria-hidden="true"></i></a>おさらい</h2>
+<p><img src="https://i.gyazo.com/c2469d996dc803b8a13c286342e01942.png" alt="c2469d996dc803b8a13c286342e01942"></p>
+<p>サーバのプログラム内で記録すると再起動時になくなってしまいます。データを記録する Airtable サービスを使って、サーバの外にデータを記録して、サーバーが再起動してもデータが保持されるようにしてみましょう。</p>
 <h2 id="base-からデータを取得するために必要な設定"><a name="base-からデータを取得するために必要な設定" class="plugin-anchor" href="#base-からデータを取得するために必要な設定"><i class="fa fa-link" aria-hidden="true"></i></a>Base からデータを取得するために必要な設定</h2>
+<p><img src="https://i.gyazo.com/0d324902d7e79943fcc93826cba1f871.png" alt="0d324902d7e79943fcc93826cba1f871"></p>
 <p>Base からデータを取得するためは Airtable API をあつかう必要があります。そして狙った Base から取得する Base ID と API キーが必要になります。</p>
+<p>その他に、テーブル名も必要ですが、これは、そのままの名前で呼び出せばいいので割愛します。</p>
 <h2 id="base-id-の取得"><a name="base-id-の取得" class="plugin-anchor" href="#base-id-の取得"><i class="fa fa-link" aria-hidden="true"></i></a>Base ID の取得</h2>
 <p><img src="https://i.gyazo.com/59e025e8ef9495c56ac93382f684e6f3.png" alt="59e025e8ef9495c56ac93382f684e6f3"></p>
 <p><a href="https://airtable.com/developers/web/api/introduction" target="_blank">https://airtable.com/developers/web/api/introduction</a> をクリックして API のドキュメントに移動します。</p>
@@ -733,7 +738,8 @@
 <p>作成できたら Create token ボタンをクリックします。</p>
 <p><img src="https://i.gyazo.com/925f00ce09b18711bf013f9f8f4128e5.png" alt="925f00ce09b18711bf013f9f8f4128e5"></p>
 <p>今回の API Key が作成されます。こちらは 1 度かぎりしか出てこないウィンドウです。閉じてしまうと、もう見ることができないので注意しましょう。</p>
-<p>これをコピーして保管しておけば新しい Airtable API Key 作成は完了です。</p>
+<p><img src="https://i.gyazo.com/0315bfabadc8442391ad415f119e63c3.png" alt="0315bfabadc8442391ad415f119e63c3"></p>
+<p>これをテキストエディタにコピーして保管しておけば新しい Airtable API Key 作成は完了です。</p>
 <p><img src="https://i.gyazo.com/d203b07aff01ff9ec1b297c335f0dd9f.png" alt="d203b07aff01ff9ec1b297c335f0dd9f"></p>
 <p>x ボタンをクリックして閉じて、一覧に今回の API Key が出来ているか確認しましょう。</p>
 <h2 id="codespace-削除"><a name="codespace-削除" class="plugin-anchor" href="#codespace-削除"><i class="fa fa-link" aria-hidden="true"></i></a>Codespace 削除</h2>
@@ -756,6 +762,133 @@
 <p>Setting up your codespace という画面が出て構築されます。</p>
 <p><img src="https://i.gyazo.com/28ea2b9aece0957b5bb7292427889a10.png" alt="28ea2b9aece0957b5bb7292427889a10"></p>
 <p>ブラウザ上で Visual Studio Code が起動し、今回の仕組みを反映した環境が起動しました。</p>
+<h2 id="仕組みの説明"><a name="仕組みの説明" class="plugin-anchor" href="#仕組みの説明"><i class="fa fa-link" aria-hidden="true"></i></a>仕組みの説明</h2>
+<p>今回起動するプログラム <code>term2-1-chapter02.js</code> の仕組みを説明します。</p>
+<pre><code class="lang-js"><span class="hljs-comment">// path ライブラリ</span>
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;path&apos;</span>);
+<span class="hljs-comment">// Express ライブラリの呼び出し</span>
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;express&apos;</span>);
+<span class="hljs-comment">// Express ライブラリからサーバーの仕組みを app 変数として呼び出す</span>
+<span class="hljs-keyword">const</span> app = express();
+
+<span class="hljs-comment">// Airtable 設定 ///////////////////////////////////////////////////////////////</span>
+<span class="hljs-comment">// Airtable ライブラリ</span>
+<span class="hljs-keyword">const</span> Airtable = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;airtable&apos;</span>);
+
+<span class="hljs-comment">// Airtable API キー</span>
+<span class="hljs-keyword">const</span> AIRTABLE_API_KEY = <span class="hljs-string">&apos;AIRTABLE_API_KEY&apos;</span>;
+<span class="hljs-comment">// Airtable BASE ID</span>
+<span class="hljs-keyword">const</span> AIRTABLE_BASE_ID = <span class="hljs-string">&apos;AIRTABLE_BASE_ID&apos;</span>;
+<span class="hljs-comment">// Airtable Table 名</span>
+<span class="hljs-keyword">const</span> AIRTABLE_TABLE_NAME = <span class="hljs-string">&apos;Sample01&apos;</span>;
+
+<span class="hljs-comment">// 今回 Base を読み込む設定</span>
+<span class="hljs-keyword">const</span> base = <span class="hljs-keyword">new</span> Airtable({ <span class="hljs-attr">apiKey</span>: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID);
+
+<span class="hljs-comment">// public フォルダ内にあるファイルはパスが一致していると呼びだせます</span>
+<span class="hljs-comment">// /index.html や / の場合は public フォルダ内の index.html が表示されます</span>
+app.use(express.static(__dirname + <span class="hljs-string">&apos;/public&apos;</span>));
+
+<span class="hljs-comment">// POST データを受け取る際に必要な処理</span>
+app.use(express.urlencoded({ <span class="hljs-attr">extended</span>: <span class="hljs-literal">true</span> }));
+<span class="hljs-comment">// データを JSON データとして受け取る処理</span>
+app.use(express.json())
+
+<span class="hljs-comment">// 現在のポイントを記録する変数</span>
+<span class="hljs-comment">// サーバープログラム内の変数なのでメモリで動いているので再起動すると初期化されますが起動している間は記録してくれています</span>
+<span class="hljs-keyword">let</span> recordPoint = <span class="hljs-number">0</span>;
+
+<span class="hljs-comment">// /api/get というパスで GET リクエストでアクセスするとデータが取得できます</span>
+app.get(<span class="hljs-string">&apos;/api/get&apos;</span>, <span class="hljs-keyword">async</span> (req, res) =&gt; {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;/api/get 受信&apos;</span>);
+  <span class="hljs-comment">// 受信したデータを表示</span>
+  <span class="hljs-built_in">console</span>.log(req.query);
+
+  <span class="hljs-comment">// Airtable からデータを取得</span>
+  <span class="hljs-keyword">let</span> records;
+  <span class="hljs-keyword">try</span> {
+    records = <span class="hljs-keyword">await</span> base(AIRTABLE_TABLE_NAME).select({
+      <span class="hljs-comment">// ビューはデータの見せ方のこと今回は最初に作られた Grid view で OK</span>
+      <span class="hljs-attr">view</span>: <span class="hljs-string">&quot;Grid view&quot;</span>
+    }).all();
+    <span class="hljs-comment">// console.log(records);</span>
+  } <span class="hljs-keyword">catch</span> (e) {
+    <span class="hljs-built_in">console</span>.log(e);
+  }
+
+  <span class="hljs-comment">// 返答データ作成</span>
+  <span class="hljs-keyword">let</span> responseData = { <span class="hljs-string">&quot;data&quot;</span>: [] };
+  records.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">record</span>) </span>{
+    <span class="hljs-comment">// 今回は Data 列を取得</span>
+    responseData.data.push(record.get(<span class="hljs-string">&apos;Data&apos;</span>));
+  });
+
+  <span class="hljs-comment">// res.json はオブジェクトを JSON 形式で返答します</span>
+  res.json(responseData)
+});
+
+<span class="hljs-comment">// /api/create というパスで GET リクエストでアクセスすると data パラメータがある場合、データが保存できます</span>
+<span class="hljs-comment">// /api/create?data=A の場合、A が保存されます</span>
+app.get(<span class="hljs-string">&apos;/api/create&apos;</span>, <span class="hljs-keyword">async</span> (req, res) =&gt; {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;/api/create 受信&apos;</span>);
+  <span class="hljs-comment">// 受信したデータを表示</span>
+  <span class="hljs-comment">// /api/set?data=1</span>
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;受信したデータを表示&apos;</span>);
+  <span class="hljs-built_in">console</span>.log(req.query);
+
+  <span class="hljs-comment">// Airtable にデータを保存</span>
+  <span class="hljs-keyword">if</span>(req.query.data){
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;データあり&apos;</span>);
+
+    <span class="hljs-keyword">const</span> currentData = req.query.data;
+
+    <span class="hljs-keyword">let</span> result;
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> fields = [
+        {
+          <span class="hljs-string">&quot;fields&quot;</span>: {
+            <span class="hljs-string">&quot;Data&quot;</span>: currentData
+          }
+        }
+      ];
+
+      result = <span class="hljs-keyword">await</span> base(AIRTABLE_TABLE_NAME).create(fields);
+    } <span class="hljs-keyword">catch</span> (e) {
+      <span class="hljs-built_in">console</span>.log(e);
+    }
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;データなし&apos;</span>);
+  }
+
+  <span class="hljs-comment">// res.json はオブジェクトを JSON 形式で返答します</span>
+  <span class="hljs-keyword">let</span> responseData = { <span class="hljs-string">&quot;result&quot;</span>: <span class="hljs-string">&quot;OK&quot;</span> };
+  res.json(responseData)
+});
+
+<span class="hljs-comment">// サーバーを 8080 ポートで起動してログを出力</span>
+app.listen(process.env.PORT || <span class="hljs-number">8080</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${path.basename(__filename)}</span> start!`</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`app listening at http://localhost:<span class="hljs-subst">${process.env.PORT || <span class="hljs-number">8080</span>}</span>`</span>)
+})
+</code></pre>
+<p>✅ポイント</p>
+<ul>
+<li><code>const Airtable = require(&apos;airtable&apos;);</code> で Airtable のライブラリを読み込んでいます。</li>
+<li><code>AIRTABLE_API_KEY</code> や <code>AIRTABLE_BASE_ID</code> の変数で Base ID や API キーを準備します。</li>
+<li><code>const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID);</code> で今回の Base が使えるようになります。</li>
+<li><code>/api/create</code> というパスで GET リクエストでアクセスすると data パラメータがある場合、データが保存できます。</li>
+<li><code>/api/get</code> というパスで GET リクエストでアクセスするとデータが取得できます。</li>
+</ul>
+<h2 id="base-id-や-api-キーの入力"><a name="base-id-や-api-キーの入力" class="plugin-anchor" href="#base-id-や-api-キーの入力"><i class="fa fa-link" aria-hidden="true"></i></a>Base ID や API キーの入力</h2>
+<pre><code class="lang-js"><span class="hljs-comment">// Airtable API キー</span>
+<span class="hljs-keyword">const</span> AIRTABLE_API_KEY = <span class="hljs-string">&apos;AIRTABLE_API_KEY&apos;</span>;
+<span class="hljs-comment">// Airtable BASE ID</span>
+<span class="hljs-keyword">const</span> AIRTABLE_BASE_ID = <span class="hljs-string">&apos;AIRTABLE_BASE_ID&apos;</span>;
+<span class="hljs-comment">// Airtable Table 名</span>
+<span class="hljs-keyword">const</span> AIRTABLE_TABLE_NAME = <span class="hljs-string">&apos;Sample01&apos;</span>;
+</code></pre>
+<p>こちらに Base ID や API キーの入力をします。AIRTABLE_API_KEY には API キー、AIRTABLE_BASE_ID には Base ID を入力しましょう。Airtable Table 名については、すでに今回アクセスする Table 名 <code>Sample01</code> が入っています。</p>
+<p>設定ができたらサーバの起動です。</p>
 <h2 id="サーバの起動"><a name="サーバの起動" class="plugin-anchor" href="#サーバの起動"><i class="fa fa-link" aria-hidden="true"></i></a>サーバの起動</h2>
 <p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
 <ul>
@@ -763,10 +896,19 @@
 <li>ポートタブで今回のサーバ起動を公開</li>
 <li>シークレットウィンドウで今回のサーバが公開されているか確認します</li>
 </ul>
-<h2 id="api-キーの入力"><a name="api-キーの入力" class="plugin-anchor" href="#api-キーの入力"><i class="fa fa-link" aria-hidden="true"></i></a>API キーの入力</h2>
-<h2 id="動かしてみる1（url-アクセスで、データ取得）"><a name="動かしてみる1（url-アクセスで、データ取得）" class="plugin-anchor" href="#動かしてみる1（url-アクセスで、データ取得）"><i class="fa fa-link" aria-hidden="true"></i></a>動かしてみる1（URL アクセスで、データ取得）</h2>
-<h2 id="動かしてみる2（データ変更して確認）"><a name="動かしてみる2（データ変更して確認）" class="plugin-anchor" href="#動かしてみる2（データ変更して確認）"><i class="fa fa-link" aria-hidden="true"></i></a>動かしてみる2（データ変更して確認）</h2>
-<h2 id="動かしてみる2（url-アクセスで、データ変更）"><a name="動かしてみる2（url-アクセスで、データ変更）" class="plugin-anchor" href="#動かしてみる2（url-アクセスで、データ変更）"><i class="fa fa-link" aria-hidden="true"></i></a>動かしてみる2（URL アクセスで、データ変更）</h2>
+<h2 id="データ取得を体験してみる"><a name="データ取得を体験してみる" class="plugin-anchor" href="#データ取得を体験してみる"><i class="fa fa-link" aria-hidden="true"></i></a>データ取得を体験してみる</h2>
+<p><code>/api/get</code> というパスで GET リクエストでアクセスするとデータが取得できます。</p>
+<p><img src="https://i.gyazo.com/3d5acaeddc15f2185ddeb90dc7120345.png" alt="3d5acaeddc15f2185ddeb90dc7120345"></p>
+<p>実際にブラウザでアクセスしてみましょう。このように <code>{&quot;data&quot;:[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;]}</code> と data というオブジェクトの中に配列でデータが入っています。</p>
+<p><img src="https://i.gyazo.com/30a0789ab27846655472da09e4e76489.png" alt="30a0789ab27846655472da09e4e76489"></p>
+<p>Base に入っている Sample01 の Table 内容が表示されています。</p>
+<h2 id="データ追加を体験してみる"><a name="データ追加を体験してみる" class="plugin-anchor" href="#データ追加を体験してみる"><i class="fa fa-link" aria-hidden="true"></i></a>データ追加を体験してみる</h2>
+<p><code>/api/create</code> というパスで GET リクエストでアクセスすると data パラメータがある場合、データが保存できます。</p>
+<p><img src="https://i.gyazo.com/7f83b7aa74438e8a067125defa2f23b9.png" alt="7f83b7aa74438e8a067125defa2f23b9"></p>
+<p>実際に <code>/api/create?data=Test</code> でブラウザからアクセスしてみましょう。このように <code>{&quot;result&quot;:&quot;OK&quot;}</code> と返答が来ます。</p>
+<p><img src="https://i.gyazo.com/dab681cc1c59529a2bfd055b9f748d76.png" alt="dab681cc1c59529a2bfd055b9f748d76"></p>
+<p>Base に入っている Sample01 の Table 内容に新しい行が加わっています。</p>
+<h2 id="データ変更を体験してみる"><a name="データ変更を体験してみる" class="plugin-anchor" href="#データ変更を体験してみる"><i class="fa fa-link" aria-hidden="true"></i></a>データ変更を体験してみる</h2>
 <h2 id="そのほかのメソッド"><a name="そのほかのメソッド" class="plugin-anchor" href="#そのほかのメソッド"><i class="fa fa-link" aria-hidden="true"></i></a>そのほかのメソッド</h2>
 <p>JavaScript だけど</p>
 
@@ -812,7 +954,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"next":{"title":"サーバから動的なデータの取得してみよう","level":"6.1.3","depth":2,"path":"term2-1/00-chapter03.md","ref":"./term2-1/00-chapter03.md","articles":[]},"previous":{"title":"データベース外部サービス Airtable の体験","level":"6.1.1","depth":2,"path":"term2-1/00-chapter01.md","ref":"./term2-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-1/00-chapter02.md","mtime":"2023-08-16T06:44:54.210Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-16T06:57:58.827Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"next":{"title":"サーバから動的なデータの取得してみよう","level":"6.1.3","depth":2,"path":"term2-1/00-chapter03.md","ref":"./term2-1/00-chapter03.md","articles":[]},"previous":{"title":"データベース外部サービス Airtable の体験","level":"6.1.1","depth":2,"path":"term2-1/00-chapter01.md","ref":"./term2-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-1/00-chapter02.md","mtime":"2023-08-17T03:23:28.249Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-17T03:23:42.464Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
