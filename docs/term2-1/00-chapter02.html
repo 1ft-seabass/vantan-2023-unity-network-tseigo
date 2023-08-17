@@ -762,16 +762,13 @@
 <p>Setting up your codespace という画面が出て構築されます。</p>
 <p><img src="https://i.gyazo.com/28ea2b9aece0957b5bb7292427889a10.png" alt="28ea2b9aece0957b5bb7292427889a10"></p>
 <p>ブラウザ上で Visual Studio Code が起動し、今回の仕組みを反映した環境が起動しました。</p>
-<h2 id="仕組みの説明"><a name="仕組みの説明" class="plugin-anchor" href="#仕組みの説明"><i class="fa fa-link" aria-hidden="true"></i></a>仕組みの説明</h2>
+<h2 id="サーバ側の仕組みの説明"><a name="サーバ側の仕組みの説明" class="plugin-anchor" href="#サーバ側の仕組みの説明"><i class="fa fa-link" aria-hidden="true"></i></a>サーバ側の仕組みの説明</h2>
 <p>今回起動するプログラム <code>term2-1-chapter02.js</code> の仕組みを説明します。</p>
 <pre><code class="lang-js"><span class="hljs-comment">// path ライブラリ</span>
 <span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;path&apos;</span>);
-<span class="hljs-comment">// Express ライブラリの呼び出し</span>
-<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;express&apos;</span>);
-<span class="hljs-comment">// Express ライブラリからサーバーの仕組みを app 変数として呼び出す</span>
-<span class="hljs-keyword">const</span> app = express();
 
-<span class="hljs-comment">// Airtable 設定 ///////////////////////////////////////////////////////////////</span>
+<span class="hljs-comment">// Airtable 設定 /////////////////////////////////////////////////////</span>
+
 <span class="hljs-comment">// Airtable ライブラリ</span>
 <span class="hljs-keyword">const</span> Airtable = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;airtable&apos;</span>);
 
@@ -785,6 +782,13 @@
 <span class="hljs-comment">// 今回 Base を読み込む設定</span>
 <span class="hljs-keyword">const</span> base = <span class="hljs-keyword">new</span> Airtable({ <span class="hljs-attr">apiKey</span>: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID);
 
+<span class="hljs-comment">// サーバー設定 ///////////////////////////////////////////////////////</span>
+
+<span class="hljs-comment">// Express ライブラリの呼び出し</span>
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;express&apos;</span>);
+<span class="hljs-comment">// Express ライブラリからサーバーの仕組みを app 変数として呼び出す</span>
+<span class="hljs-keyword">const</span> app = express();
+
 <span class="hljs-comment">// public フォルダ内にあるファイルはパスが一致していると呼びだせます</span>
 <span class="hljs-comment">// /index.html や / の場合は public フォルダ内の index.html が表示されます</span>
 app.use(express.static(__dirname + <span class="hljs-string">&apos;/public&apos;</span>));
@@ -793,10 +797,6 @@ app.use(express.static(__dirname + <span class="hljs-string">&apos;/public&apos;
 app.use(express.urlencoded({ <span class="hljs-attr">extended</span>: <span class="hljs-literal">true</span> }));
 <span class="hljs-comment">// データを JSON データとして受け取る処理</span>
 app.use(express.json())
-
-<span class="hljs-comment">// 現在のポイントを記録する変数</span>
-<span class="hljs-comment">// サーバープログラム内の変数なのでメモリで動いているので再起動すると初期化されますが起動している間は記録してくれています</span>
-<span class="hljs-keyword">let</span> recordPoint = <span class="hljs-number">0</span>;
 
 <span class="hljs-comment">// /api/get というパスで GET リクエストでアクセスするとデータが取得できます</span>
 app.get(<span class="hljs-string">&apos;/api/get&apos;</span>, <span class="hljs-keyword">async</span> (req, res) =&gt; {
@@ -974,7 +974,7 @@ app.listen(process.env.PORT || <span class="hljs-number">8080</span>, <span clas
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"next":{"title":"サーバから動的なデータの取得してみよう","level":"6.1.3","depth":2,"path":"term2-1/00-chapter03.md","ref":"./term2-1/00-chapter03.md","articles":[]},"previous":{"title":"データベース外部サービス Airtable の体験","level":"6.1.1","depth":2,"path":"term2-1/00-chapter01.md","ref":"./term2-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-1/00-chapter02.md","mtime":"2023-08-17T04:52:33.964Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-17T04:52:37.076Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Airtable をサーバに反映して動かす","level":"6.1.2","depth":2,"next":{"title":"サーバから動的なデータの取得してみよう","level":"6.1.3","depth":2,"path":"term2-1/00-chapter03.md","ref":"./term2-1/00-chapter03.md","articles":[]},"previous":{"title":"データベース外部サービス Airtable の体験","level":"6.1.1","depth":2,"path":"term2-1/00-chapter01.md","ref":"./term2-1/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-1/00-chapter02.md","mtime":"2023-08-17T05:41:49.007Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-17T06:30:41.020Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

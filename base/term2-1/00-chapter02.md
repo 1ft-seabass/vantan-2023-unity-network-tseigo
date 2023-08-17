@@ -140,19 +140,16 @@ Setting up your codespace という画面が出て構築されます。
 
 ブラウザ上で Visual Studio Code が起動し、今回の仕組みを反映した環境が起動しました。
 
-## 仕組みの説明
+## サーバ側の仕組みの説明
 
 今回起動するプログラム `term2-1-chapter02.js` の仕組みを説明します。
 
 ```js
 // path ライブラリ
 const path = require('path');
-// Express ライブラリの呼び出し
-const express = require('express');
-// Express ライブラリからサーバーの仕組みを app 変数として呼び出す
-const app = express();
 
-// Airtable 設定 ///////////////////////////////////////////////////////////////
+// Airtable 設定 /////////////////////////////////////////////////////
+
 // Airtable ライブラリ
 const Airtable = require('airtable');
 
@@ -166,6 +163,13 @@ const AIRTABLE_TABLE_NAME = 'Sample01';
 // 今回 Base を読み込む設定
 const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID);
 
+// サーバー設定 ///////////////////////////////////////////////////////
+
+// Express ライブラリの呼び出し
+const express = require('express');
+// Express ライブラリからサーバーの仕組みを app 変数として呼び出す
+const app = express();
+
 // public フォルダ内にあるファイルはパスが一致していると呼びだせます
 // /index.html や / の場合は public フォルダ内の index.html が表示されます
 app.use(express.static(__dirname + '/public'));
@@ -174,10 +178,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 // データを JSON データとして受け取る処理
 app.use(express.json())
-
-// 現在のポイントを記録する変数
-// サーバープログラム内の変数なのでメモリで動いているので再起動すると初期化されますが起動している間は記録してくれています
-let recordPoint = 0;
 
 // /api/get というパスで GET リクエストでアクセスするとデータが取得できます
 app.get('/api/get', async (req, res) => {
