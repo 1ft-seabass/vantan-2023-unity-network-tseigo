@@ -695,8 +695,191 @@
 <p><img src="https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png" alt="9d2c38e6fe48e61528f6b2d34370768f"></p>
 <h2 id="この章で学ぶこと"><a name="この章で学ぶこと" class="plugin-anchor" href="#この章で学ぶこと"><i class="fa fa-link" aria-hidden="true"></i></a>この章で学ぶこと</h2>
 <p>他のデータも色々と記録してみます。</p>
-<p>クッキークリッカー</p>
-<h2 id="unity-codespace-起動"><a name="unity-codespace-起動" class="plugin-anchor" href="#unity-codespace-起動"><i class="fa fa-link" aria-hidden="true"></i></a>Unity CodeSpace 起動</h2>
+<h2 id="airtable-に新しい-table-を作る"><a name="airtable-に新しい-table-を作る" class="plugin-anchor" href="#airtable-に新しい-table-を作る"><i class="fa fa-link" aria-hidden="true"></i></a>Airtable に新しい Table を作る</h2>
+<p>今回はクリックしたポイントを記録する Table を作ります。</p>
+<p>以下の手順で新しい　Table を作りましょう。</p>
+<ul>
+<li><code>+ Add or import</code> ボタンをクリックして Create blank table ボタンをクリックします。</li>
+<li>テーブル名を聞かれるので <code>PointList</code> として Save ボタンをクリックします。</li>
+<li>Table ができあがったら、最初に作られているフィールド Notes, Assignee, Status を削除します。</li>
+</ul>
+<p><img src="https://i.gyazo.com/c6e123eceef7d6efb0023be9472f207b.png" alt="c6e123eceef7d6efb0023be9472f207b"></p>
+<p>フィールド名 Name はそのまま使います。</p>
+<p><img src="https://i.gyazo.com/e0f5b71d7dd01bcbd7e88c0dae923b5a.png" alt="e0f5b71d7dd01bcbd7e88c0dae923b5a"></p>
+<ul>
+<li>フィールドの＋ボタンをクリックしてフィールドをひとつ加えます。</li>
+<li>フィールド名は Point 、フィールドタイプは Number にします。</li>
+<li>Formatting は Integer にします。</li>
+</ul>
+<p><img src="https://i.gyazo.com/b19a1dd998ce04587a9a31fad161a4cb.png" alt="b19a1dd998ce04587a9a31fad161a4cb"></p>
+<ul>
+<li>フィールドの＋ボタンをクリックしてフィールドをひとつ加えます。</li>
+<li>フィールド名は ID 、フィールドタイプは Formula 、式は <code>RECORD_ID()</code> を入力します。</li>
+</ul>
+<p><img src="https://i.gyazo.com/47d008ed4db43c6a297c973a1f50e595.png" alt="47d008ed4db43c6a297c973a1f50e595"></p>
+<ul>
+<li>フィールドの＋ボタンをクリックしてフィールドをひとつ加えます。</li>
+<li>フィールド名は CreatedTime 、フィールドタイプは Created time にします。</li>
+</ul>
+<p><img src="https://i.gyazo.com/9f71fcde11e0a8d46513e481b7288959.png" alt="9f71fcde11e0a8d46513e481b7288959"></p>
+<p>Date format や Time format はそのままで Create field をクリックします。</p>
+<p><img src="https://i.gyazo.com/a0e77608c2d441751cd1f9ddabf12d81.png" alt="a0e77608c2d441751cd1f9ddabf12d81"></p>
+<p>このような Table ができました。</p>
+<h2 id="codespace-の起動"><a name="codespace-の起動" class="plugin-anchor" href="#codespace-の起動"><i class="fa fa-link" aria-hidden="true"></i></a>Codespace の起動</h2>
+<p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
+<p>GitHub にログインした状態で <a href="https://github.com/codespaces" target="_blank">https://github.com/codespaces</a> にアクセスします。</p>
+<p><img src="https://i.gyazo.com/34de49185c6b28fb938519084d5b36fe.png" alt="34de49185c6b28fb938519084d5b36fe"></p>
+<p>Codespaces のページです。さきほど使っていた Codespace をクリックして起動します。</p>
+<h2 id="サーバ側の仕組みの説明"><a name="サーバ側の仕組みの説明" class="plugin-anchor" href="#サーバ側の仕組みの説明"><i class="fa fa-link" aria-hidden="true"></i></a>サーバ側の仕組みの説明</h2>
+<p>今回起動するプログラム <code>term2-2-chapter02.js</code> の仕組みを説明します。</p>
+<pre><code class="lang-js"><span class="hljs-comment">// path ライブラリ</span>
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;path&apos;</span>);
+
+<span class="hljs-comment">// Airtable 設定 /////////////////////////////////////////////////////</span>
+
+<span class="hljs-comment">// Airtable ライブラリ</span>
+<span class="hljs-keyword">const</span> Airtable = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;airtable&apos;</span>);
+
+<span class="hljs-comment">// Airtable API キー</span>
+<span class="hljs-keyword">const</span> AIRTABLE_API_KEY = <span class="hljs-string">&apos;AIRTABLE_API_KEY&apos;</span>;
+<span class="hljs-comment">// Airtable BASE ID</span>
+<span class="hljs-keyword">const</span> AIRTABLE_BASE_ID = <span class="hljs-string">&apos;AIRTABLE_BASE_ID&apos;</span>;
+
+<span class="hljs-comment">// 今回 Base を読み込む設定</span>
+<span class="hljs-keyword">const</span> base = <span class="hljs-keyword">new</span> Airtable({ <span class="hljs-attr">apiKey</span>: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID);
+
+<span class="hljs-comment">// サーバー設定 ///////////////////////////////////////////////////////</span>
+
+<span class="hljs-comment">// Express ライブラリの呼び出し</span>
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;express&apos;</span>);
+<span class="hljs-comment">// Express ライブラリからサーバーの仕組みを app 変数として呼び出す</span>
+<span class="hljs-keyword">const</span> app = express();
+
+<span class="hljs-comment">// public フォルダ内にあるファイルはパスが一致していると呼びだせます</span>
+<span class="hljs-comment">// /index.html や / の場合は public フォルダ内の index.html が表示されます</span>
+app.use(express.static(__dirname + <span class="hljs-string">&apos;/public&apos;</span>));
+
+<span class="hljs-comment">// POST データを受け取る際に必要な処理</span>
+app.use(express.urlencoded({ <span class="hljs-attr">extended</span>: <span class="hljs-literal">true</span> }));
+<span class="hljs-comment">// データを JSON データとして受け取る処理</span>
+app.use(express.json())
+
+<span class="hljs-comment">// /api/post/result というパスで POST リクエストでアクセスするとデータが取得できます</span>
+app.post(<span class="hljs-string">&apos;/api/post/result&apos;</span>, <span class="hljs-keyword">async</span> (req, res) =&gt; {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;/api/post/result 受信&apos;</span>);
+  <span class="hljs-comment">// 受信したデータを表示</span>
+  <span class="hljs-built_in">console</span>.log(req.body);
+
+  <span class="hljs-comment">// Airtable にデータを保存</span>
+  <span class="hljs-keyword">const</span> currentName = req.body.name;
+  <span class="hljs-keyword">const</span> currentData = req.body.point;
+
+  <span class="hljs-keyword">let</span> result;
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> fields = [
+      {
+        <span class="hljs-string">&quot;fields&quot;</span>: {
+          <span class="hljs-string">&quot;Name&quot;</span>:currentName,
+          <span class="hljs-string">&quot;Point&quot;</span>: currentData
+        }
+      }
+    ];
+
+    result = <span class="hljs-keyword">await</span> base(<span class="hljs-string">&apos;PointList&apos;</span>).create(fields);
+  } <span class="hljs-keyword">catch</span> (e) {
+    <span class="hljs-built_in">console</span>.log(e);
+  }
+
+  <span class="hljs-comment">// res.json はオブジェクトを JSON 形式で返答します</span>
+  <span class="hljs-keyword">let</span> responseData = { <span class="hljs-string">&quot;result&quot;</span>: <span class="hljs-string">&quot;OK&quot;</span> };
+  res.json(responseData)
+});
+
+<span class="hljs-comment">// サーバーを 8080 ポートで起動してログを出力</span>
+app.listen(process.env.PORT || <span class="hljs-number">8080</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${path.basename(__filename)}</span> start!`</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`app listening at http://localhost:<span class="hljs-subst">${process.env.PORT || <span class="hljs-number">8080</span>}</span>`</span>)
+})
+</code></pre>
+<p>✅ポイント TODO</p>
+<ul>
+<li>1</li>
+<li>2</li>
+<li>3</li>
+</ul>
+<h2 id="base-id-や-api-キーの入力"><a name="base-id-や-api-キーの入力" class="plugin-anchor" href="#base-id-や-api-キーの入力"><i class="fa fa-link" aria-hidden="true"></i></a>Base ID や API キーの入力</h2>
+<pre><code class="lang-js"><span class="hljs-comment">// Airtable API キー</span>
+<span class="hljs-keyword">const</span> AIRTABLE_API_KEY = <span class="hljs-string">&apos;AIRTABLE_API_KEY&apos;</span>;
+<span class="hljs-comment">// Airtable BASE ID</span>
+<span class="hljs-keyword">const</span> AIRTABLE_BASE_ID = <span class="hljs-string">&apos;AIRTABLE_BASE_ID&apos;</span>;
+</code></pre>
+<p>こちらに Base ID や API キーの入力をします。AIRTABLE_API_KEY には API キー、AIRTABLE_BASE_ID には Base ID を入力しましょう。</p>
+<h2 id="サーバの起動"><a name="サーバの起動" class="plugin-anchor" href="#サーバの起動"><i class="fa fa-link" aria-hidden="true"></i></a>サーバの起動</h2>
+<p><img src="https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png" alt="0a3a35f3418068b7713ddaa729f2c660"></p>
+<ul>
+<li>ターミナルで <code>node term2-2-chapter02.js</code> をサーバ起動</li>
+<li>ポートタブで今回のサーバ起動を公開</li>
+<li>シークレットウィンドウで今回のサーバが公開されているか確認します</li>
+</ul>
+<h2 id="今回の-unity-シーンを起動"><a name="今回の-unity-シーンを起動" class="plugin-anchor" href="#今回の-unity-シーンを起動"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Unity シーンを起動</h2>
+<p><img src="https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png" alt="6049726527f3133083e8ca07d1e6261c"></p>
+<p>Project タブから Assets &gt; Scenes を選択します。Scene-Term2-2-Chapter01 をダブルクリックして起動しましょう。</p>
+<p>今日は、このプログラムをベースに、送る値や受け取る値を Unity に設定していきます。</p>
+<p>✅ポイント</p>
+<ul>
+<li>SendButton に Term2_2_Chapter02_SendButton が割り当てられているのでこちらでつないでみましょう</li>
+<li>今回は POST リクエストで API とやり取りするサンプルです。</li>
+<li>Term2_2_Chapter02_SendButton_OK_Sample に正解が入っていますが、どうしてもうまくいかないときに見てみましょう。</li>
+</ul>
+<h2 id="api-の-url-を設定する"><a name="api-の-url-を設定する" class="plugin-anchor" href="#api-の-url-を設定する"><i class="fa fa-link" aria-hidden="true"></i></a>API の URL を設定する</h2>
+<pre><code class="lang-csharp"><span class="hljs-comment">// アクセスする URL</span>
+<span class="hljs-comment">// サーバーURL + /api/post/result でアクセス</span>
+<span class="hljs-built_in">string</span> urlGitHub = <span class="hljs-string">&quot;&quot;</span>;
+</code></pre>
+<p>今回は POST 送信をしています。API の URL を設定しましょう。</p>
+<h2 id="現在のポイントを送れるようにする"><a name="現在のポイントを送れるようにする" class="plugin-anchor" href="#現在のポイントを送れるようにする"><i class="fa fa-link" aria-hidden="true"></i></a>現在のポイントを送れるようにする</h2>
+<p>PointRequestData に追記して現在のポイントを int 型で point 値に割り当てて送信できるようにしましょう。</p>
+<p><img src="https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png" alt="02db792fd629a56812a205234a08ae44"></p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// 送信する Unity データを JSON データ化する PointRequestData ベースクラス</span>
+[<span class="hljs-meta">Serializable</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PointRequestData</span>
+{
+
+}
+</code></pre>
+<p>こちらに準備しつつ</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// PointRequestData ベースクラスを器として呼び出す</span>
+PointRequestData pointRequestData = <span class="hljs-keyword">new</span> PointRequestData();
+<span class="hljs-comment">// データを設定</span>
+<span class="hljs-comment">// 現在のポイントを得る</span>
+
+<span class="hljs-comment">// 自分の名前を登録</span>
+</code></pre>
+<p>に、値の設定をするようにします。</p>
+<h2 id="自分の名前を送れるようにする"><a name="自分の名前を送れるようにする" class="plugin-anchor" href="#自分の名前を送れるようにする"><i class="fa fa-link" aria-hidden="true"></i></a>自分の名前を送れるようにする</h2>
+<p>PointRequestData に追記して現在のポイントを string 型で name 値に割り当てて送信できるようにしましょう。今回は固定値で自分の名前にします。</p>
+<p><img src="https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png" alt="02db792fd629a56812a205234a08ae44"></p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// 送信する Unity データを JSON データ化する PointRequestData ベースクラス</span>
+[<span class="hljs-meta">Serializable</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PointRequestData</span>
+{
+
+}
+</code></pre>
+<p>こちらに準備しつつ</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// PointRequestData ベースクラスを器として呼び出す</span>
+PointRequestData pointRequestData = <span class="hljs-keyword">new</span> PointRequestData();
+<span class="hljs-comment">// データを設定</span>
+<span class="hljs-comment">// 現在のポイントを得る</span>
+
+<span class="hljs-comment">// 自分の名前を登録</span>
+</code></pre>
+<p>に、値の設定をするようにします。</p>
+<h2 id="実際に送ってみて確認する"><a name="実際に送ってみて確認する" class="plugin-anchor" href="#実際に送ってみて確認する"><i class="fa fa-link" aria-hidden="true"></i></a>実際に送ってみて確認する</h2>
+<p><img src="https://i.gyazo.com/cdc6617c072b939cb86336decc3fc433.png" alt="cdc6617c072b939cb86336decc3fc433"></p>
+<p>クリックしてポイントを増やして結果を送信してみましょう。</p>
+<p><img src="https://i.gyazo.com/e9e40a1928a4f49ef2af153b83268020.png" alt="e9e40a1928a4f49ef2af153b83268020"></p>
+<p>このようにデータがどんどん記録されていることを確認しましょう。</p>
 
                                 
                                 </section>
@@ -740,7 +923,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"他のデータも色々と記録してみよう","level":"7.1.2","depth":2,"next":{"title":"データ活用例を体験 : ユーザー情報","level":"7.1.3","depth":2,"path":"term2-2/00-chapter03.md","ref":"./term2-2/00-chapter03.md","articles":[]},"previous":{"title":"サーバから動的なデータを表示してみよう","level":"7.1.1","depth":2,"path":"term2-2/00-chapter01.md","ref":"./term2-2/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-2/00-chapter02.md","mtime":"2023-08-17T07:05:47.444Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-18T01:02:34.158Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"他のデータも色々と記録してみよう","level":"7.1.2","depth":2,"next":{"title":"データ活用例を体験 : ユーザー情報","level":"7.1.3","depth":2,"path":"term2-2/00-chapter03.md","ref":"./term2-2/00-chapter03.md","articles":[]},"previous":{"title":"サーバから動的なデータを表示してみよう","level":"7.1.1","depth":2,"path":"term2-2/00-chapter01.md","ref":"./term2-2/00-chapter01.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-2/00-chapter02.md","mtime":"2023-08-18T02:34:18.378Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-18T02:34:30.464Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

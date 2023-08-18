@@ -154,7 +154,7 @@ const AIRTABLE_TABLE_NAME = 'Sample02';
 
 ![6049726527f3133083e8ca07d1e6261c](https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png)
 
-Project タブから Assets > Scenes を選択します。Scene-Term2-2-Chapter01-1 をダブルクリックして起動しましょう。
+Project タブから Assets > Scenes を選択します。Scene-Term2-2-Chapter01 をダブルクリックして起動しましょう。
 
 今日は、このプログラムをベースに、送る値や受け取る値を Unity に使っていきます。
 
