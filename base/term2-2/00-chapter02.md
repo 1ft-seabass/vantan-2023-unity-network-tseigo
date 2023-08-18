@@ -91,7 +91,7 @@ app.use(express.urlencoded({ extended: true }));
 // データを JSON データとして受け取る処理
 app.use(express.json())
 
-// /api/post/result というパスで POST リクエストでアクセスするとデータが取得できます
+// /api/post/result というパスで POST リクエストでアクセスするとポイントデータが保存できます
 app.post('/api/post/result', async (req, res) => {
   console.log('/api/post/result 受信');
   // 受信したデータを表示
@@ -130,9 +130,8 @@ app.listen(process.env.PORT || 8080, () => {
 ```
 
 ✅ポイント TODO
-- 1
-- 2
-- 3
+- 今回は `await base('PointList').create(fields)` の部分で PointList を名指しでデータを呼び出しています。AIRTABLE_TABLE_NAME のような固定値を用意してません。
+- `/api/post/result` というパスで POST リクエストでアクセスするとポイントデータが保存できます
 
 ## Base ID や API キーの入力
 
@@ -157,7 +156,7 @@ const AIRTABLE_BASE_ID = 'AIRTABLE_BASE_ID';
 
 ![6049726527f3133083e8ca07d1e6261c](https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png)
 
-Project タブから Assets > Scenes を選択します。Scene-Term2-2-Chapter01 をダブルクリックして起動しましょう。
+Project タブから Assets > Scenes を選択します。Scene-Term2-2-Chapter02 をダブルクリックして起動しましょう。
 
 今日は、このプログラムをベースに、送る値や受け取る値を Unity に設定していきます。
 
@@ -167,6 +166,8 @@ Project タブから Assets > Scenes を選択します。Scene-Term2-2-Chapter0
 - Term2_2_Chapter02_SendButton_OK_Sample に正解が入っていますが、どうしてもうまくいかないときに見てみましょう。
 
 ## API の URL を設定する
+
+![02db792fd629a56812a205234a08ae44](https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png)
 
 ```csharp
 // アクセスする URL

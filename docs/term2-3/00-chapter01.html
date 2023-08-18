@@ -694,7 +694,27 @@
                                 <h1 id="データ活用例の体験"><a name="データ活用例の体験" class="plugin-anchor" href="#データ活用例の体験"><i class="fa fa-link" aria-hidden="true"></i></a>データ活用例の体験</h1>
 <p><img src="https://i.gyazo.com/9d2c38e6fe48e61528f6b2d34370768f.png" alt="9d2c38e6fe48e61528f6b2d34370768f"></p>
 <h2 id="この章で学ぶこと"><a name="この章で学ぶこと" class="plugin-anchor" href="#この章で学ぶこと"><i class="fa fa-link" aria-hidden="true"></i></a>この章で学ぶこと</h2>
-<p>データ活用例の体験として、データをみんなでシェアします。</p>
+<ul>
+<li>データ活用例の体験として、データをみんなでシェアします。</li>
+<li>OpenAI 社の ChatGPT API を試してみます</li>
+</ul>
+<h2 id="データ活用例の体験として、データをみんなでシェアします"><a name="データ活用例の体験として、データをみんなでシェアします" class="plugin-anchor" href="#データ活用例の体験として、データをみんなでシェアします"><i class="fa fa-link" aria-hidden="true"></i></a>データ活用例の体験として、データをみんなでシェアします</h2>
+<p><img src="https://i.gyazo.com/02db792fd629a56812a205234a08ae44.png" alt="02db792fd629a56812a205234a08ae44"></p>
+<p><a href="../term2-2/00-chapter03.html">前章の chapter03 のサンプル</a> を動かしてみて、サーバーを講師の起動した URL でみんな設定してみて「みんなでデータをシェア」を体験します。</p>
+<h2 id="今回の-unity-シーンを起動"><a name="今回の-unity-シーンを起動" class="plugin-anchor" href="#今回の-unity-シーンを起動"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Unity シーンを起動</h2>
+<p><img src="https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png" alt="6049726527f3133083e8ca07d1e6261c"></p>
+<p>Project タブから Assets &gt; Scenes を選択します。Scene-Term2-3-Chapter01 をダブルクリックして起動しましょう。</p>
+<h2 id="chatgpt-の-api-キーを設定"><a name="chatgpt-の-api-キーを設定" class="plugin-anchor" href="#chatgpt-の-api-キーを設定"><i class="fa fa-link" aria-hidden="true"></i></a>ChatGPT の API キーを設定</h2>
+<pre><code class="lang-csharp"><span class="hljs-comment">// ChatGPT の API キーを入力</span>
+<span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> tokenCHatGPT = <span class="hljs-string">&quot;tokenCHatGPT&quot;</span>;
+</code></pre>
+<p>こちらで自分の取得した ChatGPT の API キーを設定 を入力して保存しましょう。</p>
+<h2 id="動かしてみる"><a name="動かしてみる" class="plugin-anchor" href="#動かしてみる"><i class="fa fa-link" aria-hidden="true"></i></a>動かしてみる</h2>
+<p><img src="https://i.gyazo.com/fb6deee20969f2b1e41528b8276d1be2.png" alt="fb6deee20969f2b1e41528b8276d1be2"></p>
+<p>クリックして動かしてみましょう！</p>
+<h2 id="ざっくり解説"><a name="ざっくり解説" class="plugin-anchor" href="#ざっくり解説"><i class="fa fa-link" aria-hidden="true"></i></a>ざっくり解説</h2>
+<p><img src="https://i.gyazo.com/aba8ccd625e7320883851b71ebd0caf2.png" alt="image"></p>
+<p>時間の許す限り、ソースコードや API 仕様を解説します。</p>
 
                                 
                                 </section>
@@ -738,7 +758,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"データ活用事例の把握・実践","level":"8.1.1","depth":2,"next":{"title":"成果発表会についての詳細説明","level":"8.1.2","depth":2,"path":"term2-3/00-chapter02.md","ref":"./term2-3/00-chapter02.md","articles":[]},"previous":{"title":"動的なデータの取得体験","level":"8.1","depth":1,"path":"term2-3/README.md","ref":"./term2-3/README.md","articles":[{"title":"データ活用事例の把握・実践","level":"8.1.1","depth":2,"path":"term2-3/00-chapter01.md","ref":"./term2-3/00-chapter01.md","articles":[]},{"title":"成果発表会についての詳細説明","level":"8.1.2","depth":2,"path":"term2-3/00-chapter02.md","ref":"./term2-3/00-chapter02.md","articles":[]},{"title":"後半のおさらい","level":"8.1.3","depth":2,"path":"term2-3/00-chapter03.md","ref":"./term2-3/00-chapter03.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-3/00-chapter01.md","mtime":"2023-07-13T06:17:49.985Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-18T02:34:30.464Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"データ活用事例の把握・実践","level":"8.1.1","depth":2,"next":{"title":"成果発表会についての詳細説明","level":"8.1.2","depth":2,"path":"term2-3/00-chapter02.md","ref":"./term2-3/00-chapter02.md","articles":[]},"previous":{"title":"動的なデータの取得体験","level":"8.1","depth":1,"path":"term2-3/README.md","ref":"./term2-3/README.md","articles":[{"title":"データ活用事例の把握・実践","level":"8.1.1","depth":2,"path":"term2-3/00-chapter01.md","ref":"./term2-3/00-chapter01.md","articles":[]},{"title":"成果発表会についての詳細説明","level":"8.1.2","depth":2,"path":"term2-3/00-chapter02.md","ref":"./term2-3/00-chapter02.md","articles":[]},{"title":"後半のおさらい","level":"8.1.3","depth":2,"path":"term2-3/00-chapter03.md","ref":"./term2-3/00-chapter03.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"term2-3/00-chapter01.md","mtime":"2023-08-18T08:45:52.504Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-18T08:47:11.169Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
