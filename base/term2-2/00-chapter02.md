@@ -129,7 +129,7 @@ app.listen(process.env.PORT || 8080, () => {
 })
 ```
 
-✅ポイント TODO
+✅ポイント
 - 今回は `await base('PointList').create(fields)` の部分で PointList を名指しでデータを呼び出しています。AIRTABLE_TABLE_NAME のような固定値を用意してません。
 - `/api/post/result` というパスで POST リクエストでアクセスするとポイントデータが保存できます
 

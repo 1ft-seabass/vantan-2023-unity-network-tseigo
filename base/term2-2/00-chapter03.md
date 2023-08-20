@@ -157,7 +157,7 @@ Project タブから Assets > Scenes を選択します。Scene-Term2-2-Chapter0
 
 今日は、このプログラムをベースに、送る値や受け取る値を Unity に設定していきます。
 
-✅ポイント TODO
+✅ポイント
 - ClickPart には、すでに Term2_2_Chapter03_ClickPart が割り当てられてポイントの加算やリセットを担当しています
 - RankingMessage は Term2_2_Chapter03_RankingMessage が割り当てられて、これから書いていきます。出来上がったサンプルは Term2_2_Chapter03_RankingMessage_OK_Sample がありますが、どうしてもわからないときに確認しましょう。
 - SendButton は Term2_2_Chapter03_SendButton が割り当てられて、これから書いていきます。出来上がったサンプルは Term2_2_Chapter03_SendButton_OK_Sample がありますが、どうしてもわからないときに確認しましょう。
