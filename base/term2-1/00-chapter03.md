@@ -114,7 +114,7 @@ const AIRTABLE_TABLE_NAME = 'Sample01';
 
 ![0a3a35f3418068b7713ddaa729f2c660](https://i.gyazo.com/0a3a35f3418068b7713ddaa729f2c660.png)
 
-- ターミナルで `node term2-1-chapter02.js` をサーバ起動
+- ターミナルで `node term2-1-chapter03.js` をサーバ起動
 - ポートタブで今回のサーバ起動を公開
 - シークレットウィンドウで今回のサーバが公開されているか確認します
 
