@@ -291,7 +291,7 @@ GameObject InputField から `.GetComponent<InputField>().text` という形で�
 
 ```
 
-のところで RankingMessage から Term2_2_Chapter03_RankingMessage クラスにある GetDataCore を実行してみましょう。
+のところで SendButton から Term2_2_Chapter03_RankingMessage クラスにある GetDataCore を実行してみましょう。
 
 ## 何度か動かしてみましょう
 
