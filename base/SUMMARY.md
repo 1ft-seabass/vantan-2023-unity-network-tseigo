@@ -65,3 +65,4 @@
 ## サンプル
 
 - [Airtable 画像サンプル](./sample/sample01.md)
+- [Airtable クイズサンプル](./sample/sample02.md)

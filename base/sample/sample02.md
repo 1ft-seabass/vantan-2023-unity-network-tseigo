@@ -1,4 +1,4 @@
-# Airtable クイズンプル
+# Airtable クイズサンプル
 
 （画像）
 
