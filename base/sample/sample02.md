@@ -85,4 +85,4 @@ Project タブから Assets > Scenes を選択します。Sample02 をダブル�
 
 このようになります。
 
-![5f751c5902104b2364bf23166c27250e](https://i.gyazo.com/5f751c5902104b2364bf23166c27250e.png)
+（画像）
