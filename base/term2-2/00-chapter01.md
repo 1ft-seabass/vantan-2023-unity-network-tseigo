@@ -159,8 +159,8 @@ Project タブから Assets > Scenes を選択します。Scene-Term2-2-Chapter0
 今日は、このプログラムをベースに、送る値や受け取る値を Unity に使っていきます。
 
 ✅ポイント
-- GetAPI に Term2_1_Chapter03_GetAPI が割り当てられているのでこちらでつないでみましょう
-- Term2_1_Chapter03_GetAPI_OK_Sample に正解が入っていますが、どうしてもうまくいかないときに見てみましょう。
+- GetAPI に Term2_2_Chapter01_GetAPI が割り当てられているのでこちらでつないでみましょう
+- Term2_2_Chapter01_GetAPI_OK_Sample に正解が入っていますが、どうしてもうまくいかないときに見てみましょう。
 
 ## JSON データを受け取って Unity で使えるようにしましょう
 
