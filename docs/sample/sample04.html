@@ -749,10 +749,152 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="airtable-に-unity-から直接アクセスする"><a name="airtable-に-unity-から直接アクセスする" class="plugin-anchor" href="#airtable-に-unity-から直接アクセスする"><i class="fa fa-link" aria-hidden="true"></i></a>Airtable に Unity から直接アクセスする</h1>
+<h2 id="table-の準備"><a name="table-の準備" class="plugin-anchor" href="#table-の準備"><i class="fa fa-link" aria-hidden="true"></i></a>Table の準備</h2>
+<p><img src="https://i.gyazo.com/ccd150ca7fc2f08608714fcd75f84c2f.png" alt="ccd150ca7fc2f08608714fcd75f84c2f"></p>
+<p><a href="../term2-1/00-chapter01.html">こちらで作った Sample01 の Table </a> を使います。</p>
+<h2 id="今回の-unity-シーンを起動"><a name="今回の-unity-シーンを起動" class="plugin-anchor" href="#今回の-unity-シーンを起動"><i class="fa fa-link" aria-hidden="true"></i></a>今回の Unity シーンを起動</h2>
+<p><img src="https://i.gyazo.com/6049726527f3133083e8ca07d1e6261c.png" alt="6049726527f3133083e8ca07d1e6261c"></p>
+<p>Project タブから Assets &gt; Scenes を選択します。Sample04 をダブルクリックして起動しましょう。</p>
+<p>Cube にある Sample04_GetAPI_Direct_Airtable スクリプトを開きます。</p>
+<pre><code class="lang-csharp">    <span class="hljs-comment">// Airtable の Base ID</span>
+    <span class="hljs-built_in">string</span> settingAirtableBaseID = <span class="hljs-string">&quot;settingAirtableBaseID&quot;</span>;
+
+    <span class="hljs-comment">// Airtable の API キー</span>
+    <span class="hljs-built_in">string</span> settingAirtableAPIKey = <span class="hljs-string">&quot;settingAirtableAPIKey&quot;</span>;
+</code></pre>
+<p>settingAirtableBaseID には今回動かしたい Airtable の Base ID を入力します。settingAirtableAPIKey には Airtable の API キー を入力します。</p>
+<h2 id="動かしてみる"><a name="動かしてみる" class="plugin-anchor" href="#動かしてみる"><i class="fa fa-link" aria-hidden="true"></i></a>動かしてみる</h2>
+<p>Unity を動かしてみると、以下のように Data と ID の各値が表示されます。</p>
+<p><img src="https://i.gyazo.com/bfbb107cc2c6694c16afedf0aff9558c.png" alt="bfbb107cc2c6694c16afedf0aff9558c"></p>
+<h2 id="今回の仕組み"><a name="今回の仕組み" class="plugin-anchor" href="#今回の仕組み"><i class="fa fa-link" aria-hidden="true"></i></a>今回の仕組み</h2>
+<h3 id="url-作成"><a name="url-作成" class="plugin-anchor" href="#url-作成"><i class="fa fa-link" aria-hidden="true"></i></a>URL 作成</h3>
+<pre><code class="lang-csharp"><span class="hljs-comment">// API URL 作成</span>
+<span class="hljs-built_in">string</span> urlAirtableAPI = <span class="hljs-string">&quot;https://api.airtable.com/v0/&quot;</span> + settingAirtableBaseID + <span class="hljs-string">&quot;/&quot;</span> + settingAirtableTable + <span class="hljs-string">&quot;?view=&quot;</span> + settingAirtableView;
+<span class="hljs-comment">// API URL を Uri.AbsoluteUri と通して URL パラメータ調整</span>
+<span class="hljs-comment">// 例 ?view=Grid view が ?view=Grid%20view になる</span>
+urlAirtableAPI = <span class="hljs-keyword">new</span> Uri(urlAirtableAPI).AbsoluteUri;
+
+<span class="hljs-comment">// HTTP リクエストする(GET メソッド) UnityWebRequest を呼び出し</span>
+UnityWebRequest request = UnityWebRequest.Get(urlAirtableAPI);
+</code></pre>
+<p>view の名前 <code>Grid view</code> を GET リクエストで送るために <code>view=Grid view</code> が <code>view=Grid%20view</code> になる必要があるため Uri クラス <a href="https://learn.microsoft.com/ja-jp/dotnet/api/system.uri?view=net-7.0" target="_blank">https://learn.microsoft.com/ja-jp/dotnet/api/system.uri?view=net-7.0</a> を利用して AbsoluteUri で変換しています。</p>
+<h3 id="api-キーはヘッダーに設定"><a name="api-キーはヘッダーに設定" class="plugin-anchor" href="#api-キーはヘッダーに設定"><i class="fa fa-link" aria-hidden="true"></i></a>API キーはヘッダーに設定</h3>
+<pre><code class="lang-csharp"><span class="hljs-comment">// API キーを HTTP ヘッダーに設定</span>
+request.SetRequestHeader(<span class="hljs-string">&quot;Authorization&quot;</span>, <span class="hljs-string">&quot;Bearer &quot;</span> + settingAirtableAPIKey);
+</code></pre>
+<p>API キーはこのように設定しています。</p>
+<h3 id="受信したデータを"><a name="受信したデータを" class="plugin-anchor" href="#受信したデータを"><i class="fa fa-link" aria-hidden="true"></i></a>受信したデータを</h3>
+<p>受信したデータは以下のようになっています。各行が records に配列で入っていて、その中に id , createdTime , fields があります。fields の中身が、各列の情報になっています。今回は Data 列と ID 列があります。</p>
+<pre><code class="lang-csharp">{
+    <span class="hljs-string">&quot;records&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;recsZHOU2F0hqdD8G&quot;</span>,
+            <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2023-08-21T06:01:47.000Z&quot;</span>,
+            <span class="hljs-string">&quot;fields&quot;</span>: {
+                <span class="hljs-string">&quot;Data&quot;</span>: <span class="hljs-string">&quot;A&quot;</span>,
+                <span class="hljs-string">&quot;ID&quot;</span>: <span class="hljs-string">&quot;recsZHOU2F0hqdD8G&quot;</span>
+            }
+        },
+        {
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;recaLn7uEszYsBLPE&quot;</span>,
+            <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2023-08-21T06:01:47.000Z&quot;</span>,
+            <span class="hljs-string">&quot;fields&quot;</span>: {
+                <span class="hljs-string">&quot;Data&quot;</span>: <span class="hljs-string">&quot;B&quot;</span>,
+                <span class="hljs-string">&quot;ID&quot;</span>: <span class="hljs-string">&quot;recaLn7uEszYsBLPE&quot;</span>
+            }
+        },
+        {
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;recSn4R2oxR46P6VA&quot;</span>,
+            <span class="hljs-string">&quot;createdTime&quot;</span>: <span class="hljs-string">&quot;2023-08-21T06:01:47.000Z&quot;</span>,
+            <span class="hljs-string">&quot;fields&quot;</span>: {
+                <span class="hljs-string">&quot;Data&quot;</span>: <span class="hljs-string">&quot;C&quot;</span>,
+                <span class="hljs-string">&quot;ID&quot;</span>: <span class="hljs-string">&quot;recSn4R2oxR46P6VA&quot;</span>
+            }
+        }
+    ],
+    <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-string">&quot;itrfiG2tfH2TjwE5y/recSn4R2oxR46P6VA&quot;</span>
+}
+</code></pre>
+<p>こちらを踏まえて受信した JSON データを Unity で扱うデータにする ResponseData ベースクラスが以下です。</p>
+<pre><code class="lang-csharp"><span class="hljs-comment">// 受信した JSON データを Unity で扱うデータにする ResponseData ベースクラス</span>
+[<span class="hljs-meta">Serializable</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ResponseData</span>
+{
+    <span class="hljs-keyword">public</span> List&lt;ResponseDataRecord&gt; records;
+}
+
+[<span class="hljs-meta">Serializable</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ResponseDataRecord</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> id;
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> createdTime;
+    <span class="hljs-keyword">public</span> ResponseDataRecordField fields;
+}
+
+<span class="hljs-comment">// ResponseDataRecordField は Table の列の内容によって変更します</span>
+[<span class="hljs-meta">Serializable</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ResponseDataRecordField</span>
+{
+    <span class="hljs-comment">// フィールド名 Data が string 型</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> Data;
+    <span class="hljs-comment">// フィールド名 Image には画像関連の情報が入っている</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> ID;
+}
+</code></pre>
+<p>今回は Sample01 の列ですが、ResponseDataRecordField は Table の列の内容によって変更します。</p>
 <h2 id="覚えておいてほしいこと"><a name="覚えておいてほしいこと" class="plugin-anchor" href="#覚えておいてほしいこと"><i class="fa fa-link" aria-hidden="true"></i></a>覚えておいてほしいこと</h2>
 <p><img src="https://i.gyazo.com/40ee748630dfef0b75f3f18414363382.png" alt="40ee748630dfef0b75f3f18414363382"></p>
 <p>プログラムを広く配布する形の場合は Airtable の API キーや Base ID がプログラムに入ったままだと漏洩の可能性はあります。</p>
-<p>ですが、今回のように、プログラムを配布せず、個人の制作の範疇で自分の PC や固有の VR 機器で動く形であれば、やや軽減されるので Unity のプログラムから直接 Airtable にアクセスするのもアリ。という視点を忘れず、組み込んでみてください！</p>
+<p>ですが、今回のように、プログラムを配布せず、個人の制作の範疇で自分の PC や固有の VR 機器で動く形であれば、やや軽減されるので Unity のプログラムから直接 Airtable にアクセスするのもアリです。</p>
+<p>という視点を忘れず、組み込んでみてください！</p>
+<h2 id="以前のプログラムもサンプル用意しました"><a name="以前のプログラムもサンプル用意しました" class="plugin-anchor" href="#以前のプログラムもサンプル用意しました"><i class="fa fa-link" aria-hidden="true"></i></a>以前のプログラムもサンプル用意しました</h2>
+<p>以前のプログラムでの Airtable 直接アクセスのプログラムを用意しました。</p>
+<h3 id="scene-term2-1-chapter03-シーン"><a name="scene-term2-1-chapter03-シーン" class="plugin-anchor" href="#scene-term2-1-chapter03-シーン"><i class="fa fa-link" aria-hidden="true"></i></a>Scene-Term2-1-Chapter03 シーン</h3>
+<ul>
+<li>Cube にある Term2_1_Chapter03_CubeEvent01 のコンポーネントを削除します</li>
+<li>Cube に Term2_1_Chapter03_CubeEvent01_Direct_Airtable をコンポーネントに割り当てます。</li>
+<li>Term2_1_Chapter03_CubeEvent01_Direct_Airtable 内の settingAirtableBaseID には今回動かしたい Airtable の Base ID を入力し settingAirtableAPIKey には Airtable の API キー を入力します。</li>
+<li>実行して動かしてみましょう</li>
+</ul>
+<h3 id="scene-term2-2-chapter01-シーン"><a name="scene-term2-2-chapter01-シーン" class="plugin-anchor" href="#scene-term2-2-chapter01-シーン"><i class="fa fa-link" aria-hidden="true"></i></a>Scene-Term2-2-Chapter01 シーン</h3>
+<ul>
+<li>GetAPI にある Term2_2_Chapter01_GetAPI のコンポーネントを削除します</li>
+<li>GetAPI に Term2_2_Chapter01_GetAPI_Direct_Airtable をコンポーネントに割り当てます。</li>
+<li>Term2_2_Chapter01_GetAPI_Direct_Airtable 内の settingAirtableBaseID には今回動かしたい Airtable の Base ID を入力し settingAirtableAPIKey には Airtable の API キー を入力します。</li>
+<li>実行して動かしてみましょう</li>
+</ul>
+<h2 id="scene-term2-2-chapter02-シーン"><a name="scene-term2-2-chapter02-シーン" class="plugin-anchor" href="#scene-term2-2-chapter02-シーン"><i class="fa fa-link" aria-hidden="true"></i></a>Scene-Term2-2-Chapter02 シーン</h2>
+<p>Airtable に書き込むプログラムが確認できるのでおススメです。</p>
+<ul>
+<li>SendButton にある Term2_2_Chapter02_SendButton のコンポーネントを削除します</li>
+<li>SendButton に Term2_2_Chapter02_SendButton_Direct_Airtable をコンポーネントに割り当てます。</li>
+<li>Term2_2_Chapter02_SendButton_Direct_Airtable 内の settingAirtableBaseID には今回動かしたい Airtable の Base ID を入力し settingAirtableAPIKey には Airtable の API キー を入力します。</li>
+<li>実行して動かしてみましょう</li>
+</ul>
+<h2 id="scene-term2-2-chapter03-シーン"><a name="scene-term2-2-chapter03-シーン" class="plugin-anchor" href="#scene-term2-2-chapter03-シーン"><i class="fa fa-link" aria-hidden="true"></i></a>Scene-Term2-2-Chapter03 シーン</h2>
+<ul>
+<li>SendButton にある Term2_2_Chapter03_SendButton のコンポーネントを削除します</li>
+<li>SendButton に Term2_2_Chapter03_SendButton_Direct_Airtable をコンポーネントに割り当てます。</li>
+<li>Term2_2_Chapter03_SendButton_Direct_Airtable 内の settingAirtableBaseID には今回動かしたい Airtable の Base ID を入力し settingAirtableAPIKey には Airtable の API キー を入力します。</li>
+<li>RankingMessage にある Term2_2_Chapter03_RankingMessage のコンポーネントを削除します</li>
+<li>RankingMessage に Term2_2_Chapter03_RankingMessage_Direct_Airtable をコンポーネントに割り当てます。</li>
+<li>Term2_2_Chapter03_RankingMessage_Direct_Airtable 内の settingAirtableBaseID には今回動かしたい Airtable の Base ID を入力し settingAirtableAPIKey には Airtable の API キー を入力します。</li>
+<li>実行して動かしてみましょう</li>
+</ul>
+<h2 id="sample01-シーン"><a name="sample01-シーン" class="plugin-anchor" href="#sample01-シーン"><i class="fa fa-link" aria-hidden="true"></i></a>Sample01 シーン</h2>
+<ul>
+<li>GetAPI にある Sample01_GetAPI のコンポーネントを削除します</li>
+<li>GetAPI に Sample01_GetAPI_Direct_Airtable をコンポーネントに割り当てます。</li>
+<li>Sample01_GetAPI_Direct_Airtable 内の settingAirtableBaseID には今回動かしたい Airtable の Base ID を入力し settingAirtableAPIKey には Airtable の API キー を入力します。</li>
+<li>実行して動かしてみましょう</li>
+</ul>
+<h2 id="sample02シーン"><a name="sample02シーン" class="plugin-anchor" href="#sample02シーン"><i class="fa fa-link" aria-hidden="true"></i></a>Sample02シーン</h2>
+<ul>
+<li>NextButton にある Sample02_NextButton のコンポーネントを削除します</li>
+<li>NextButton に Sample02_NextButton_Direct_Airtable をコンポーネントに割り当てます。</li>
+<li>Sample02_NextButton_Direct_Airtable 内の settingAirtableBaseID には今回動かしたい Airtable の Base ID を入力し settingAirtableAPIKey には Airtable の API キー を入力します。</li>
+<li>実行して動かしてみましょう</li>
+</ul>
 
                                 
                                 </section>
@@ -792,7 +934,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Airtable に Unity から直接アクセスする","level":"11.4","depth":1,"previous":{"title":"LINE Notify スクリーンショット送信","level":"11.3","depth":1,"path":"sample/sample03.md","ref":"./sample/sample03.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"sample/sample04.md","mtime":"2023-08-25T04:22:01.368Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-25T04:22:32.147Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Airtable に Unity から直接アクセスする","level":"11.4","depth":1,"previous":{"title":"LINE Notify スクリーンショット送信","level":"11.3","depth":1,"path":"sample/sample03.md","ref":"./sample/sample03.md","articles":[]},"dir":"ltr"},"config":{"plugins":["anchors","hide-published-with","copy-code-button","intopic-toc","back-to-top-button"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"intopic-toc":{"selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6","mode":"nested","maxDepth":6,"isCollapsed":true,"isScrollspyActive":true,"visible":true,"label":"In this article"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業","language":"ja","gitbook":"*","description":"バンタンゲームアカデミー 2023 年度 Unity ネットワーク授業の教材ページです。"},"file":{"path":"sample/sample04.md","mtime":"2023-08-28T06:21:42.178Z","type":"markdown"},"gitbook":{"version":"3.7.4","time":"2023-08-28T06:22:43.574Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
