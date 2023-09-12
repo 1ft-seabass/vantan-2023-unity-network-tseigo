@@ -8,24 +8,4 @@
 
 ## 当日の流れ
 
-2023/9/12-14　HH:MM-HH:MM
-
-- HH:MM-HH:MM
-  - はじめに
-- HH:MM-HH:MM
-  - 1
-  - 2
-  - 3
-- HH:MM-HH:MM
-  - 1
-  - 2
-  - 3
-- HH:MM-HH:MM
-  - 休憩
-- HH:MM-HH:MM
-  - 1
-  - 2
-  - 3
-- HH:MM-HH:MM
-  - 質疑応答
-  - おわりに
+- [成果発表会についての詳細説明](../term2-3/00-chapter02.md)
